@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>iZ³ Smart contract builder</title>
+    <title>iZ³ BigNet network. Wallets</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
     <link rel="stylesheet" href="assets/components/bootstrap/bootstrap.min.css">
@@ -63,8 +63,8 @@
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header"></li>
                 <li class="">
-                    <a href="tokenContract.html">
-                        <i class="fas fa-coins"></i> <span data-i18n="eth_tkn_contract:menu.create"></span>
+                    <a href="walletLoad.html">
+                        <i class="fas fa-wallet"></i></i> <span data-i18n="wallet_load:menu.create"></span>
                         <span class="pull-right-container">
                         </span>
                     </a>
@@ -75,19 +75,17 @@
 
     <div class="content-wrapper">
         <section class="content-header">
-            <h1>Select contract</h1>
+            <h1 data-i18n="[html]wallet_manage:header.main"></h1>
         </section>
 
         <section class="content">
             <div class="col-md-12">
                 <div class="jumbotron panel col-md-3" style="text-align: center">
-                    <h1><i class="fas fa-coins"></i></h1>
-                    <h2>Token contract</h2>
-                    <p>The token contract allows you to release your token for transfer and storage on the wallet. A
-                        token can be issued in any quantities, set any suitable name for it, freeze the release of
-                        tokens for different classes until a certain event occurs.</p>
-                    <p><a class="btn btn-primary btn-lg" href="tokenContract.html" role="button">Build token
-                        contract</a></p>
+                    <h1><i class="fas fa-wallet"></i></h1>
+                    <h2 data-i18n="[html]wallet_manage:block_main.header"></h2>
+                    <p>
+                        <a class="btn btn-primary btn-lg" href="walletLoad.html" role="button" data-i18n="[html]wallet_manage:block_main.btn"></a>
+                    </p>
                 </div>
             </div>
         </section>
@@ -111,10 +109,6 @@
 <script src="assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <script src="assets/js/langs.js"></script>
 <script src="assets/js/main.js"></script>
-<script src="assets/js/chart.js"></script>
-
-<script src="assets/js/generatorMain.js"></script>
-<script src="assets/js/generatorContract.js"></script>
 
 <script src="assets/plugins/jquery-validation/jquery.validate.min.js"></script>
 <script src="assets/plugins/jquery-validation/additional-methods.min.js"></script>
@@ -122,7 +116,6 @@
 <script src="assets/plugins/bootstrap-toggle/js/bootstrap-toggle.min.js"></script>
 <script src="assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 <script src="assets/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.ru.min.js"></script>
-<script src="assets/plugins/chartjs/chart.min.js"></script>
 <script src="assets/plugins/moment/min/moment.min.js"></script>
 
 </body>

@@ -14,20 +14,30 @@ $(function () {
         debug: false,
         lng: 'en',
         ns: {
-            namespaces: ['eth_tkn_contract', 'page'],
-            defaultNS: 'eth_tkn_contract'
+            namespaces: ['wallet_load', 'wallet_manage'],
+            defaultNS: 'wallet_load'
         },
         resources: {
             en: {
                 page: {
                     logo: {
-                        big: "<b>iZ³</b> Contracts Builder"
+                        big: "<b>iZ³</b> BigNet Wallets"
                     },
                     copyrights: "All rights reserved."
                 },
-                eth_tkn_contract: {
+                wallet_manage: {
+                    header: {
+                        main: "Select wallet",
+                        description: ""
+                    },
+                    block_main: {
+                        header: 'Wallets',
+                        btn: 'Load my wallet'
+                    }
+                },
+                wallet_load: {
                     menu: {
-                        create: "Token contract"
+                        create: "Wallet load"
                     },
                     header: {
                         main: "Token contract",
