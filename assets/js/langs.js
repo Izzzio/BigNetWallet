@@ -14,8 +14,8 @@ $(function () {
         debug: false,
         lng: 'en',
         ns: {
-            namespaces: ['wallet_load', 'wallet_manage'],
-            defaultNS: 'wallet_load'
+            namespaces: ['wallet_create', 'wallet_manage'],
+            defaultNS: 'wallet_create'
         },
         resources: {
             en: {
@@ -27,20 +27,20 @@ $(function () {
                 },
                 wallet_manage: {
                     header: {
-                        main: "Select wallet",
+                        main: "Home",
                         description: ""
                     },
                     block_main: {
                         header: 'Wallets',
-                        btn: 'Load my wallet'
+                        btn: 'Create wallet'
                     }
                 },
-                wallet_load: {
+                wallet_create: {
                     menu: {
-                        create: "Wallet load"
+                        create: "Wallet create"
                     },
                     header: {
-                        main: "Token contract",
+                        main: "Create New Wallet",
                         description: ""
                     },
                     fields: {
@@ -108,12 +108,7 @@ $(function () {
                         label: "Define address for tokens (after minting it will be sent to this address)"
                     },
                     button: {
-                        create: "Create",
-                        clean: "<i class='far fa-times-circle'></i>&nbsp;&nbsp;Clean",
-                        save: "Download",
-                    },
-                    chart: {
-                        title: "Total supply: "
+                        create: "Create New Wallet",
                     },
                     preview: {
                         label: "Result: contract token code",

@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>iZ³ BigNet network. Home</title>
+    <title>iZ³ Bignet Wallet - Create wallet</title>
     <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
     <!-- Bootstrap 3.3.7 -->
     <link rel="stylesheet" href="assets/components/bootstrap/bootstrap.min.css">
@@ -41,7 +41,7 @@
     <header class="main-header">
 
         <!-- Logo -->
-        <a href="" class="logo">
+        <a href="index.html" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>iZ³</b></span>
             <!-- logo for regular state and mobile devices -->
@@ -62,8 +62,8 @@
         <section class="sidebar">
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header"></li>
-                <li class="">
-                    <a href="wallet_create.html">
+                <li class="active">
+                    <a href="">
                         <i class="fas fa-wallet"></i>&nbsp;&nbsp;<span data-i18n="wallet_create:menu.create"></span>
                     </a>
                 </li>
@@ -73,17 +73,22 @@
 
     <div class="content-wrapper">
         <section class="content-header">
-            <h1 data-i18n="[html]wallet_manage:header.main"></h1>
+            <h1 data-i18n="wallet_create:header.main"></h1>
         </section>
 
         <section class="content">
-            <div class="row col-md-12">
-                <div class="jumbotron panel col-md-3" style="text-align: center">
-                    <h1><i class="fas fa-wallet"></i></h1>
-                    <h2 data-i18n="[html]wallet_manage:block_main.header"></h2>
-                    <p>
-                        <a class="btn btn-primary btn-lg" href="wallet_create.html" role="button" data-i18n="[html]wallet_manage:block_main.btn"></a>
-                    </p>
+            <div class="row">
+                <div class="col-lg-8 col-md-10 col-sm-8 col-xs-12">
+                    <div class="box text-center">
+                        <div class="box-header">
+                        </div>
+                        <form role="form">
+                            <div class="box-body">
+                                <button type="button" data-i18n="wallet_create:button.create"
+                                        class="btn btn-lg btn-primary" id="create"></button>
+                            </div>
+                        </form>
+                    </div>
                 </div>
             </div>
         </section>
@@ -94,7 +99,6 @@
         <span data-i18n="page:copyrights"></span>
     </footer>
 </div>
-
 
 <!-- jQuery 3 -->
 <script src="assets/components/jquery/jquery.min.js"></script>
@@ -114,7 +118,6 @@
 <script src="assets/plugins/bootstrap-toggle/js/bootstrap-toggle.min.js"></script>
 <script src="assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 <script src="assets/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.ru.min.js"></script>
-<script src="assets/plugins/moment/min/moment.min.js"></script>
 
 </body>
 </html>
