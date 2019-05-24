@@ -41,7 +41,16 @@ $(function () {
                     },
                     header: {
                         main: "Create New Wallet",
-                        description: ""
+                        description1: "A wallet will be created - to manage tokens",
+                        description2: "and a key - to access the wallet."
+                    },
+                    header2: {
+                        main: "Save file",
+                        description1: "Save your <span class='label label-danger'>Keystore</span> file."
+                    },
+                    header3: {
+                        main: "Save key",
+                        description1: "Save your <span class='label label-danger'>Private Key</span>."
                     },
                     fields: {
                         name: {
@@ -109,6 +118,10 @@ $(function () {
                     },
                     button: {
                         create: "Create New Wallet",
+                        save: "Download Keystore File (UTC / JSON)",
+                        continue: "I understand. Continue.",
+                        print_wallet: "Print Paper Wallet",
+                        save_address: "Save Your Address"
                     },
                     preview: {
                         label: "Result: contract token code",

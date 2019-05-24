@@ -6,4 +6,14 @@ if(!String.prototype.trim) {
 
 $(function () {
     'use strict';
+
+    $('#create').on('click', function () {
+        $('.wallet').hide();
+        $('.file').show();
+    });
+
+    $('#continue').on('click', function () {
+        $('.file').hide();
+        $('.key').show();
+    });
 });
