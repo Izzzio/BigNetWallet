@@ -126,6 +126,11 @@ $(function () {
                     preview: {
                         label: "Result: contract token code",
                     },
+                },
+                addresses:{
+                    menu: {
+                        list: "Addresses"
+                    }
                 }
             },
             ru: {
