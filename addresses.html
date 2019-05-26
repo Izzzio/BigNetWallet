@@ -1,0 +1,320 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>iZ³ Bignet Wallet - Open wallet</title>
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.7 -->
+    <link rel="stylesheet" href="assets/components/bootstrap/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
+          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    <link rel="stylesheet" href="assets/css/custom.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="assets/lte/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. Choose a skin from the css/skins
+         folder instead of downloading all of them to reduce the load. -->
+    <link rel="stylesheet" href="assets/lte/css/skins/all-skins.min.css">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" href="assets/plugins/icheck/skins/flat/blue.css">
+    <link rel="stylesheet" href="assets/plugins/bootstrap-toggle/css/bootstrap-toggle.min.css">
+
+    <script src="assets/plugins/jquery-i18next/jquery-i18next.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/15.0.5/i18next.min.js"></script>
+
+    <link rel="stylesheet" href="assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css">
+
+    <!-- Google Font -->
+    <link rel="stylesheet"
+          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
+</head>
+<body class="hold-transition skin-green sidebar-mini">
+<div class="wrapper">
+
+    <header class="main-header">
+
+        <!-- Logo -->
+        <a href="index.html" class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini"><b>iZ³</b></span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg" data-i18n="[html]page:logo.big"></span>
+        </a>
+
+        <!-- Header Navbar: style can be found in header.less -->
+        <nav class="navbar navbar-static-top">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                <i class="fas fa-bars"></i>
+                <span class="sr-only">Toggle navigation</span>
+            </a>
+        </nav>
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+        <section class="sidebar">
+            <ul class="sidebar-menu" data-widget="tree">
+                <li class="header"></li>
+                <li>
+                    <a href="wallet_create.html">
+                        <i class="fas fa-wallet"></i>
+                        &nbsp;
+                        <span data-i18n="wallet_create:menu.create"></span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a href="">
+                        <i class="fas fa-money-check-alt"></i>
+                        &nbsp;
+                        <span data-i18n="addresses:menu.list"></span>
+                    </a>
+                </li>
+            </ul>
+        </section>
+    </aside>
+
+    <div class="content-wrapper wallet-unlock">
+        <section class="content-header">
+            <h1 data-i18n="wallet_unlock:header.main"></h1>
+            <p class="text-muted" data-i18n="wallet_unlock:header.description1"></p>
+        </section>
+        <section class="content">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 col-sm-8 col-xs-12">
+                    <div class="box text-center">
+                        <div class="box-body">
+                            <form role="form">
+                                <h4 data-i18n="[html]wallet_unlock:header.description2"></h4>
+                                <h4 data-i18n="[html]wallet_unlock:header.description3"></h4>
+                                <br />
+                                <button type="button" data-i18n="wallet_unlock:button.select" class="btn btn-lg btn-primary" id="select"></button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="content-wrapper file" style="display: none;">
+        <section class="content-header">
+            <h1 data-i18n="wallet_create:header2.main"></h1>
+        </section>
+        <section class="content">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 col-sm-8 col-xs-12">
+                    <div class="box text-center">
+                        <div class="box-body">
+                            <h4 data-i18n="[html]wallet_create:header2.description1"></h4>
+                            <br />
+
+                            <div class="row">
+                                <div class="col-md-2">
+                                </div>
+                                <div class="col-md-8">
+                                    <button type="button" data-i18n="wallet_create:button.save" class="btn btn-lg btn-primary" id="save_file"></button>
+                                </div>
+                                <div class="col-md-2">
+                                </div>
+                            </div>
+                            <br />
+
+                            <div class="row" style="margin-top: 15px;">
+                                <div class="col-md-3">
+                                </div>
+                                <div class="col-md-6" style="background-color: #eeeeee70;">
+                                    <div class="col-md-3 col-xs-3 text-center" style="color: #3c8dbc80;">
+                                        <i class="fas fa-shield-alt fa-3x fa-border"></i>
+                                    </div>
+                                    <div class="col-md-9 col-xs-9 text-left">
+                                        <h4>Do not lose it</h4>
+                                        <p class="text-muted">It cannot be recovered if you lose it.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 15px;">
+                                <div class="col-md-3">
+                                </div>
+                                <div class="col-md-6" style="background-color: #eeeeee70;">
+                                    <div class="col-md-3 col-xs-3 text-center" style="color: #3c8dbc80;">
+                                        <i class="fas fa-user-secret fa-3x fa-border"></i>
+                                    </div>
+                                    <div class="col-md-9 col-xs-9 text-left">
+                                        <h4>Do not share it.</h4>
+                                        <p class="text-muted">Your funds will be stolen if you use this file on a malicious/phishing site.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 15px;">
+                                <div class="col-md-3">
+                                </div>
+                                <div class="col-md-6" style="background-color: #eeeeee70;">
+                                    <div class="col-md-3 col-xs-3 text-center" style="color: #3c8dbc80;">
+                                        <i class="fas fa-archive fa-3x fa-border"></i>
+                                    </div>
+                                    <div class="col-md-9 col-xs-9 text-left">
+                                        <h4>Make a backup.</h4>
+                                        <p class="text-muted">Secure it like the millions of dollars it may one day be worth.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                </div>
+                            </div>
+
+                            <br />
+                            <br />
+                            <div class="row">
+                                <div class="col-md-4">
+                                </div>
+                                <div class="col-md-4">
+                                    <button type="button" data-i18n="wallet_create:button.continue" class="btn btn-lg btn-danger" id="continue"></button>
+                                </div>
+                                <div class="col-md-4">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="content-wrapper key" style="display: none;">
+        <section class="content-header">
+            <h1 data-i18n="wallet_create:header3.main"></h1>
+        </section>
+        <section class="content">
+            <div class="row">
+                <div class="col-lg-8 col-md-10 col-sm-8 col-xs-12">
+                    <div class="box text-center">
+                        <div class="box-body">
+                            <h4 data-i18n="[html]wallet_create:header3.description1"></h4>
+                            <br />
+
+                            <div class="row">
+                                <div class="col-md-1">
+                                </div>
+                                <div class="col-md-10">
+                                    <textarea readonly="readonly" rows="3" style="width: 100%; max-width: 100%; min-width: 100%; height: auto; font-size: 18px; background-color: #ececec;">eaac6d27efc0dcd02dbfb1ff371ce049f5537f113f421980cdef64994196434f
+                                    </textarea>
+                                </div>
+                                <div class="col-md-1">
+                                </div>
+                            </div>
+                            <br />
+
+                            <div class="row">
+                                <div class="col-md-2">
+                                </div>
+                                <div class="col-md-8">
+                                    <button type="button" data-i18n="wallet_create:button.print_wallet" class="btn btn-lg btn-primary" id="print_wallet"></button>
+                                </div>
+                                <div class="col-md-2">
+                                </div>
+                            </div>
+                            <br />
+
+                            <div class="row" style="margin-top: 15px;">
+                                <div class="col-md-3">
+                                </div>
+                                <div class="col-md-6" style="background-color: #eeeeee70;">
+                                    <div class="col-md-3 col-xs-3 text-center" style="color: #3c8dbc80;">
+                                        <i class="fas fa-shield-alt fa-3x fa-border"></i>
+                                    </div>
+                                    <div class="col-md-9 col-xs-9 text-left">
+                                        <h4>Do not lose it</h4>
+                                        <p class="text-muted">It cannot be recovered if you lose it.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 15px;">
+                                <div class="col-md-3">
+                                </div>
+                                <div class="col-md-6" style="background-color: #eeeeee70;">
+                                    <div class="col-md-3 col-xs-3 text-center" style="color: #3c8dbc80;">
+                                        <i class="fas fa-user-secret fa-3x fa-border"></i>
+                                    </div>
+                                    <div class="col-md-9 col-xs-9 text-left">
+                                        <h4>Do not share it.</h4>
+                                        <p class="text-muted">Your funds will be stolen if you use this file on a malicious/phishing site.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                </div>
+                            </div>
+                            <div class="row" style="margin-top: 15px;">
+                                <div class="col-md-3">
+                                </div>
+                                <div class="col-md-6" style="background-color: #eeeeee70;">
+                                    <div class="col-md-3 col-xs-3 text-center" style="color: #3c8dbc80;">
+                                        <i class="fas fa-archive fa-3x fa-border"></i>
+                                    </div>
+                                    <div class="col-md-9 col-xs-9 text-left">
+                                        <h4>Make a backup.</h4>
+                                        <p class="text-muted">Secure it like the millions of dollars it may one day be worth.</p>
+                                    </div>
+                                </div>
+                                <div class="col-md-3">
+                                </div>
+                            </div>
+
+                            <br />
+                            <br />
+                            <div class="row">
+                                <div class="col-md-4">
+                                </div>
+                                <div class="col-md-4">
+                                    <a href="addresses.html" data-i18n="wallet_create:button.save_address" class="btn btn-lg btn-danger disabled" id="save_address"></a>
+                                </div>
+                                <div class="col-md-4">
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="main-footer">
+        <strong>Copyright &copy; 2019 <a href="//izzz.io">iZ³</a>.</strong>
+        <span data-i18n="page:copyrights"></span>
+    </footer>
+</div>
+
+<!-- jQuery 3 -->
+<script src="assets/components/jquery/jquery.min.js"></script>
+<script src="assets/components/bootstrap/bootstrap.min.js"></script>
+<!-- FastClick -->
+<script src="assets/components/fastclick/fastclick.js"></script>
+<!-- AdminLTE App -->
+<script src="assets/lte/js/adminlte.min.js"></script>
+<!-- SlimScroll -->
+<script src="assets/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="assets/js/langs.js"></script>
+<script src="assets/js/main.js"></script>
+
+<script src="assets/plugins/jquery-validation/jquery.validate.min.js"></script>
+<script src="assets/plugins/jquery-validation/additional-methods.min.js"></script>
+<script src="assets/plugins/icheck/icheck.min.js"></script>
+<script src="assets/plugins/bootstrap-toggle/js/bootstrap-toggle.min.js"></script>
+<script src="assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script src="assets/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.ru.min.js"></script>
+
+</body>
+</html>
