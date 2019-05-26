@@ -127,11 +127,22 @@ $(function () {
                         label: "Result: contract token code",
                     },
                 },
-                addresses:{
+                addresses: {
                     menu: {
-                        list: "Addresses"
+                        list: "Address"
                     }
-                }
+                },
+                wallet_unlock: {
+                    header: {
+                        main: "Unlock your wallet",
+                        description1: "Unlock your wallet to see your address",
+                        description2: "Your Address can also be known as you <strong><span class='text-danger'>Account #</span></strong> or your <strong><span class='text-danger'>Public Key</span></strong>. <br />It is what you share with people so they can send you Tokens. <br />Find the colorful address icon. Make sure it matches your paper wallet & whenever you enter your address somewhere.",
+                        description3: "Select Your Wallet File",
+                    },
+                    button: {
+                        select: "Select Wallet File",
+                    },
+                },
             },
             ru: {
                 eth_tkn_contract: {
