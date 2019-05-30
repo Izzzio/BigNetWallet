@@ -143,6 +143,9 @@ $(function () {
                         select: "Select Wallet File",
                     },
                 },
+                interface: {
+
+                },
             },
             ru: {
                 eth_tkn_contract: {

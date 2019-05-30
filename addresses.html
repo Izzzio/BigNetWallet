@@ -29,8 +29,6 @@
     <script src="assets/plugins/jquery-i18next/jquery-i18next.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/15.0.5/i18next.min.js"></script>
 
-    <link rel="stylesheet" href="assets/plugins/bootstrap-datepicker/css/bootstrap-datepicker3.min.css">
-
     <!-- Google Font -->
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -80,6 +78,7 @@
         </section>
     </aside>
 
+
     <div class="content-wrapper wallet-unlock">
         <section class="content-header">
             <h1 data-i18n="wallet_unlock:header.main"></h1>
@@ -91,15 +90,30 @@
                     <div class="box text-center">
                         <div class="box-body">
                             <form role="form">
-                                <h4 data-i18n="[html]wallet_unlock:header.description2"></h4>
+                                <h4 data-i18n="[html]wallet_unlock:header.description2" style="line-height: 2em;"></h4>
                                 <h4 data-i18n="[html]wallet_unlock:header.description3"></h4>
                                 <br />
+
+                                <!--
                                 <button type="button" data-i18n="wallet_unlock:button.select" class="btn btn-lg btn-primary" id="select"></button>
+                                -->
+                                <a href="interface/index.html" data-i18n="wallet_unlock:button.select" class="btn btn-lg btn-primary" id="select"></a>
+
                             </form>
                         </div>
                     </div>
                 </div>
             </div>
+
+            <!--
+            <div class="row">
+                <div class="col-lg-8 col-md-10 col-sm-8 col-xs-12">
+                    <iframe src="test.html" frameborder="0" style="width: 100%; border: none;" sandbox="allow-same-origin allow-scripts">
+                    </iframe>
+                </div>
+            </div>
+            -->
+
         </section>
     </div>
 
@@ -313,8 +327,6 @@
 <script src="assets/plugins/jquery-validation/additional-methods.min.js"></script>
 <script src="assets/plugins/icheck/icheck.min.js"></script>
 <script src="assets/plugins/bootstrap-toggle/js/bootstrap-toggle.min.js"></script>
-<script src="assets/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
-<script src="assets/plugins/bootstrap-datepicker/locales/bootstrap-datepicker.ru.min.js"></script>
 
 </body>
 </html>
