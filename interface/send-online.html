@@ -60,7 +60,7 @@
         <section class="sidebar">
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header"></li>
-                <li class="treeview">
+                <li class="active treeview menu-open">
                     <a href="#">
                         <i class="fas fa-link"></i>
                         &nbsp;&nbsp;
@@ -70,7 +70,7 @@
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li>
+                        <li class="active">
                             <a href="#">
                                 <i class="far fa-sm fa-circle"></i>
                                 &nbsp;&nbsp;
@@ -156,11 +156,62 @@
         </section>
     </aside>
 
-    <div class="content-wrapper">
-        <section class="content-header">
-            <h1 data-i18n="[html]wallet_manage:header.main"></h1>
+    <section class="content-wrapper">
+        <section>
+            <br />
+            <div class="row col-md-12">
+                <div class="col-md-4">
+                    <div class="info-box bg-purple">
+                        <span class="info-box-icon"><i class="ion ion-ios-pricetag-outline"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-number">Address</span>
+                            <span class="info-box-text">0x9f5457694611261B987EdD0763843ce3FC5A8dbe</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="info-box bg-blue">
+                        <span class="info-box-icon"><i class="ion ion-ios-pricetag-outline"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-number">Balance</span>
+                            <span class="info-box-text">0 ETH</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="info-box bg-light-blue ">
+                        <span class="info-box-icon"><i class="ion ion-ios-pricetag-outline"></i></span>
+
+                        <div class="info-box-content">
+                            <span class="info-box-number">Network</span>
+                            <div>bignet.izzz.io (ETH)</div>
+                            <div>Last block# : 7882452</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </section>
-    </div>
+
+        <div class="row col-md-12">
+            <div class="col-md-8">
+                <div class="box box-success">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"><strong>Send transaction</strong></h3>
+                    </div>
+                    <div class="box-body">
+                        <input class="form-control input-lg" type="text" placeholder=".input-lg">
+                        <br>
+                        <input class="form-control" type="text" placeholder="Default input">
+                        <br>
+                        <input class="form-control input-sm" type="text" placeholder=".input-sm">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
 
     <footer class="main-footer">
         <strong>Copyright &copy; 2019 <a href="//izzz.io">iZ³</a>.</strong>
