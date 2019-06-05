@@ -16,4 +16,6 @@ $(function () {
         $('.file').hide();
         $('.key').show();
     });
+
+    $('[data-toggle="popover"]').popover();
 });
