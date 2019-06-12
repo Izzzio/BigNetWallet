@@ -1,0 +1,407 @@
+msgid "Admin"
+msgstr "管理者"
+
+msgid "Log out"
+msgstr "ログアウト"
+
+msgid "Wallet"
+msgstr "ウォレット"
+
+msgid "Deposit"
+msgstr "入金"
+
+msgid "Send to Wallet"
+msgstr "ウォレットに送金"
+
+msgid "How to buy"
+msgstr "購入方法"
+
+msgid "Buy tokens from deposit"
+msgstr "デポジットからトークンを購入する"
+
+msgid "Token count"
+msgstr "トークン数"
+
+msgid "Bonus"
+msgstr "ボーナス"
+
+msgid "Total"
+msgstr "合計"
+
+msgid "Spend all funds in your account to buy tokens"
+msgstr "アカウントのすべての資金を使ってトークンを購入する"
+
+msgid "Buy"
+msgstr "購入"
+
+msgid "Tokens amount"
+msgstr "トークン量"
+
+msgid "Payment currency"
+msgstr "支払い通貨"
+
+msgid "Get payment information"
+msgstr "支払い情報を取得する"
+
+msgid "Make a deposit"
+msgstr "入金する"
+
+msgid "Buy tokens"
+msgstr "トークンを購入する"
+
+msgid "Get payment address"
+msgstr "支払い先住所を取得する"
+
+msgid "Referal link"
+msgstr "紹介リンク"
+
+msgid "Referral link"
+msgstr "紹介リンク"
+
+msgid "Copy"
+msgstr "コピーする"
+
+msgid "Token sale starts in"
+msgstr "トークンセールが始まります"
+
+msgid "Show"
+msgstr "示す"
+
+msgid "Your reward amounts to {0}% of all tokens purchased by your referrals."
+msgstr "あなたの報酬はあなたの紹介によって購入されたすべてのトークンの{0}％になります。"
+
+msgid "Deposit will appear on your account only after a few block confirmations. It can take from 10 minutes to 2 hours or more, depending on your payment method."
+msgstr "入金は、数回のブロック確認後にのみあなたの口座に表示されます。 お支払い方法によっては10分から2時間以上かかる場合があります。"
+
+msgid "Go to your wallet account and send money to the showed address. Please make sure that your deposit exceeds the minimum purchase amount."
+msgstr "あなたのウォレットのアカウントに行き、表示された住所に送金してください。 預金金額が最低購入金額を超えていることを確認してください。"
+
+msgid "The subsequent change of wallet address is possible only through the administrator."
+msgstr "その後のウォレットアドレスの変更は、管理者のみが可能です。"
+
+msgid "Sign in"
+msgstr "サインイン"
+
+msgid "Enter wallet address"
+msgstr "ウォレットアドレスを入力する"
+
+msgid "Password"
+msgstr "パスワード"
+
+msgid "Unknown"
+msgstr "不明"
+
+msgid "Forgot password"
+msgstr "パスワードをお忘れですか"
+
+msgid "Sign up"
+msgstr "サインアップ"
+
+msgid "Phone"
+msgstr "電話"
+
+msgid "Full name"
+msgstr "氏名"
+
+msgid "Age"
+msgstr "年齢"
+
+msgid "Country"
+msgstr "国"
+
+msgid "Repeat password"
+msgstr "パスワードを再度入力してください。"
+
+msgid "I am not USA or Singapore citizen"
+msgstr "私はアメリカ人でもシンガポール人でもありません。"
+
+msgid "Password restore"
+msgstr "パスワードの復元"
+
+msgid "Restore"
+msgstr "復元"
+
+msgid "Remember the password?"
+msgstr "パスワードを覚えていますか？"
+
+msgid "Goodbye"
+msgstr "さようなら"
+
+msgid "Hello."
+msgstr "こんにちは。"
+
+msgid "You have been registered on the"
+msgstr "あなたはサイトに登録されています"
+
+msgid "To recover the password, click on this link"
+msgstr "パスワードを回復するには、このリンクをクリックしてください"
+
+msgid "Your login"
+msgstr "あなたのログイン"
+
+msgid "You was request password restore at"
+msgstr "サイトのパスワードの回復を要求しました。"
+
+msgid "You new password"
+msgstr "あなたの新しいパスワード"
+
+msgid "Check you email for verification code"
+msgstr "確認コードを電子メールで確認してください"
+
+msgid "Ooops! User already exists"
+msgstr "おっと！ このユーザーは既に存在します"
+
+msgid "verification email"
+msgstr "確認メール"
+
+msgid "User with same email already registred"
+msgstr "同じメールアドレスを持つユーザーが既に登録されています"
+
+msgid "Password confirmation doesn't match Password"
+msgstr "確認用パスワードとパスワードが一致しません"
+
+msgid "Account verified. Use you login data for sign in"
+msgstr "アカウントが確認されました。 サインインのためにログインデータを使用します。"
+
+msgid "Incorrect email or password"
+msgstr "不正確な電子メールまたはパスワード"
+
+msgid "User not verified. Check you email."
+msgstr "ユーザーが確認されません。 メールをチェックしてください。"
+
+msgid "restore email"
+msgstr "メールを復元する"
+
+msgid "Restore code sended to Email"
+msgstr "電子メールに送信された復元コード"
+
+msgid "new password"
+msgstr "新しいパスワード"
+
+msgid "We send you new password to email"
+msgstr "あなたのメールアドレスに新しいパスワードを送信しました"
+
+msgid "To confirm the registration, click on this link"
+msgstr "登録を確認するには、このリンクをクリックしてください"
+
+msgid "Accept"
+msgstr "同意する"
+
+msgid "User"
+msgstr "あなたの紹介"
+
+msgid "Registration date"
+msgstr "登録日"
+
+msgid "Tokens"
+msgstr "トークン"
+
+msgid "Empty"
+msgstr "空にする"
+
+msgid "Save"
+msgstr "保存する"
+
+msgid "Name"
+msgstr "名前"
+
+msgid "Profile"
+msgstr "プロフィール"
+
+msgid "Old password"
+msgstr "以前のパスワード"
+
+msgid "Repeat password"
+msgstr "パスワードを再度入力してください。"
+
+msgid "Save new password"
+msgstr "新しいパスワードを保存する"
+
+msgid "Account"
+msgstr "アカウント"
+
+msgid "My"
+msgstr "私の"
+
+msgid "Password updated"
+msgstr "パスワードを更新しました"
+
+msgid "Account updated"
+msgstr "アカウントを更新しました"
+
+msgid "New password"
+msgstr "新しいパスワード"
+
+msgid "Your referals"
+msgstr "あなたの紹介"
+
+msgid "Your referrals"
+msgstr "あなたの紹介"
+
+msgid "Current time"
+msgstr "現在の時刻"
+
+msgid "The end of the stage in"
+msgstr "ステージの終わりは"
+
+msgid "The balance is indicated in conventional units equal to the US dollar"
+msgstr "残高は、米ドルに等しい従来の単位で表示されます。"
+
+msgid "Incoming transactions"
+msgstr "インカミングトランザクション"
+
+msgid "Amount"
+msgstr "量"
+
+msgid "Date"
+msgstr "日付"
+
+msgid "Currency"
+msgstr "通貨"
+
+msgid "Email"
+msgstr "電子メール"
+
+msgid "Sign in with"
+msgstr "にログインする"
+
+msgid "Bad email"
+msgstr "間違った電子メール"
+
+msgid "Please enter your email to continue"
+msgstr "続行するにはメールを入力してください"
+
+msgid "Continue"
+msgstr "続行する"
+
+msgid "Invalid email"
+msgstr "無効なメール"
+
+msgid "Two-factor Authentication"
+msgstr "二要素認証"
+
+msgid "This code will be used to sign in to your account."
+msgstr "このコードは、あなたのアカウントにサインインするために使用されます。"
+
+msgid "Activate"
+msgstr "有効化する"
+
+msgid "Deactivate"
+msgstr "無効化する"
+
+msgid "Please, input code from app for continue."
+msgstr "続行するには、アプリからコードを入力してください。"
+
+msgid "Code wrong. Try again with new correct code."
+msgstr "コードが間違っています。 新たな正しいコードで再試行してください。"
+
+msgid "Two-factor Authentication successfully enabled."
+msgstr "二要素認証が有効になりました。"
+
+msgid "Error while activating two-factor authentication. Please contact us."
+msgstr "二要素認証を有効にする際にエラーが発生しました。 お問い合わせください。"
+
+msgid "Two-factor Authentication successfully disabled."
+msgstr "二要素認証が無効になりました。"
+
+msgid "IError while deactivating two-factor authentication. Please contact us."
+msgstr "二要素認証を無効にする際にエラーが発生しました。 お問い合わせください。"
+
+msgid "Please, input you password for continue"
+msgstr "続行するにはパスワードを入力してください"
+
+msgid "Please enter 2FA security code"
+msgstr "2FAのセキュリティコードを入力してください"
+
+msgid "Send"
+msgstr "送信する"
+
+msgid "Wrong password"
+msgstr "間違ったパスワード"
+
+msgid "Code wrong. Try login again."
+msgstr "コードが間違っています。 もう一度ログインしてみてください。"
+
+msgid "User not exist."
+msgstr "ユーザーが存在しません。"
+
+msgid "Login error. Try again later."
+msgstr "ログインエラーです。 あとでもう一度試してみてください。"
+
+msgid "Code wrong. Try again letter with new correct code."
+msgstr "コードが間違っています。 新たな正しいコードで後で再試行してください。"
+
+msgid "Enable two factor"
+msgstr "二要素認証を有効にする"
+
+msgid "Scan this QR code with you Google Authenticator app on you mobile phone (download for {0} or {1}). Once scanned you will be presented with a random 6 digit number. Enter that number below to finish the setup process."
+msgstr "携帯電話のGoogle認証システムアプリでこのQRコードをスキャンします（{0}または{1}用にダウンロード）。 スキャンされるとランダムに6桁の数字が表示されます。 セットアッププロセスを終了するには、その番号を入力します。"
+
+msgid "If your phone does not support reading of QR codes, enter the code in the application, which you see below."
+msgstr "お使いの携帯電話でQRコードの読み取りがサポートされていない場合は、アプリケーションにコードを入力します（下記参照）。"
+
+msgid "Very important!"
+msgstr "非常に重要です！"
+
+msgid "Keep this code: write it on a piece of paper or remember it. Only with this code will you be able to restore access if you lose your phone or remove the application from your phone."
+msgstr "このコードを保管してください：コードを紙に書き留めておくか、暗記しておいてください。 このコードでのみ、電話を紛失した場合や電話からアプリケーションを削除した場合にアクセス権を復元することができます。"
+
+msgid "Code from app"
+msgstr "アプリからのコード"
+
+msgid "Login attempts history"
+msgstr "ログイン試行履歴"
+
+msgid "IP"
+msgstr "IP"
+
+msgid "User Agent"
+msgstr "ユーザーエージェント"
+
+msgid "Successful"
+msgstr "成功しました"
+
+msgid "Yes"
+msgstr "はい"
+
+msgid "No"
+msgstr "いいえ"
+
+msgid "Currencies rate"
+msgstr "為替レート"
+
+msgid "Name"
+msgstr "名前"
+
+msgid "Symbol"
+msgstr "シンボル"
+
+msgid "Price, usd"
+msgstr "価格、USD"
+
+msgid "from CoinMarketCap"
+msgstr "CoinMarketCapから"
+
+msgid "KYC"
+msgstr "KYC"
+
+msgid "Start"
+msgstr "開始する"
+
+msgid "KYC successfully passed"
+msgstr "成功しました。"
+
+msgid "Previous attempt KYC failed: "
+msgstr "以前の試みは失敗しました： "
+
+msgid "Pending KYC status."
+msgstr "保留中のKYCステータス。"
+
+msgid "Unable to start identification. Please contact us."
+msgstr "本人確認を開始できません。 お問い合わせください。"
+
+msgid "Editing account data is not available after KYC passing"
+msgstr "KYCの後にアカウントデータを編集することはできません"
+
+msgid "Back"
+msgstr "戻る"

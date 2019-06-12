@@ -1,0 +1,30 @@
+{
+    "name": "orken/mandrill-transport-cakephp3",
+    "description": "MandrillTransport plugin for CakePHP 3+",
+    "homepage": "https://github.com/Orken/mandrill-transport-cakephp3",
+    "keywords": ["cakephp", "mandrill","email"],
+    "type": "cakephp-plugin",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "orken",
+            "email": "subotm@free.fr",
+            "homepage": "http://lbc2rss.superfetatoire.com/"
+        }
+    ],
+    "require": {
+        "php": ">=5.5.9",
+        "cakephp/cakephp": ">=3.0.0 <4.0.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "MandrillTransport\\": "src"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "MandrillTransport\\Test\\": "tests",
+            "Cake\\Test\\": "./vendor/cakephp/cakephp/tests"
+        }
+    }
+}

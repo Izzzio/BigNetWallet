@@ -1,0 +1,8 @@
+INFO -- 127.0.0.1 -- 2019-06-12T13:18:24+00:00 -- Enter Hybrid_Auth::initialize()
+INFO -- 127.0.0.1 -- 2019-06-12T13:18:24+00:00 -- Hybrid_Auth::initialize(). PHP version: 7.1.12
+INFO -- 127.0.0.1 -- 2019-06-12T13:18:24+00:00 -- Hybrid_Auth::initialize(). Hybrid_Auth version: 2.14.0
+INFO -- 127.0.0.1 -- 2019-06-12T13:18:24+00:00 -- Hybrid_Auth::initialize(). Hybrid_Auth called from: http://big-net-wallets.lc/cabinet/home
+DEBUG -- 127.0.0.1 -- 2019-06-12T13:18:24+00:00 -- Hybrid_Auth initialize. dump used config:  -- a:8:{s:9:"providers";a:1:{s:6:"OpenID";a:1:{s:7:"enabled";b:1;}}s:10:"debug_mode";b:1;s:10:"debug_file";s:69:"G:\OSPanel\domains\big-net-wallets.lc\public_html\logs\hybridauth.log";s:8:"base_url";s:46:"http://big-net-wallets.lc/hybrid-auth/endpoint";s:9:"path_base";s:97:"G:\OSPanel\domains\big-net-wallets.lc\public_html\vendor\hybridauth\hybridauth\hybridauth\Hybrid/";s:14:"path_libraries";s:108:"G:\OSPanel\domains\big-net-wallets.lc\public_html\vendor\hybridauth\hybridauth\hybridauth\Hybrid/thirdparty/";s:14:"path_resources";s:107:"G:\OSPanel\domains\big-net-wallets.lc\public_html\vendor\hybridauth\hybridauth\hybridauth\Hybrid/resources/";s:14:"path_providers";s:107:"G:\OSPanel\domains\big-net-wallets.lc\public_html\vendor\hybridauth\hybridauth\hybridauth\Hybrid/Providers/";}
+DEBUG -- 127.0.0.1 -- 2019-06-12T13:18:24+00:00 -- Hybrid_Auth initialize. dump current session:  -- 
+INFO -- 127.0.0.1 -- 2019-06-12T13:18:24+00:00 -- Hybrid_Auth initialize: check if any error is stored on the endpoint...
+INFO -- 127.0.0.1 -- 2019-06-12T13:18:24+00:00 -- Hybrid_Auth initialize: no error found. initialization succeed.

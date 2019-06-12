@@ -1,0 +1,410 @@
+msgid "Admin"
+msgstr "管理员"
+
+msgid "Log out"
+msgstr "注销"
+
+msgid "Wallet"
+msgstr "钱包"
+
+msgid "Deposit"
+msgstr "存款"
+
+msgid "My BENs"
+msgstr "我的BEN"
+
+msgid "Send to Wallet"
+msgstr "转移到钱包"
+
+msgid "How to buy"
+msgstr "如何购买"
+
+msgid "Buy tokens from deposit"
+msgstr "从存款处购买代币"
+
+msgid "Token count"
+msgstr "代币总数"
+
+msgid "Bonus"
+msgstr "奖金"
+
+msgid "Total"
+msgstr "总计"
+
+msgid "Spend all funds in your account to buy tokens"
+msgstr "用您账户中的所有资金购买代币"
+
+msgid "Buy"
+msgstr "购买"
+
+msgid "Tokens amount"
+msgstr "代币数量"
+
+msgid "Payment currency"
+msgstr "支付货币"
+
+msgid "Get payment information"
+msgstr "获取付款信息"
+
+msgid "Make a deposit"
+msgstr "存款"
+
+msgid "Buy tokens"
+msgstr "购买代币"
+
+msgid "Get payment address"
+msgstr "获取付款地址"
+
+msgid "Referal link"
+msgstr "推荐链接"
+
+msgid "Referral link"
+msgstr "推荐链接"
+
+msgid "Copy"
+msgstr "复制"
+
+msgid "Token sale starts in"
+msgstr "代币销售开始于"
+
+msgid "Show"
+msgstr "说明"
+
+msgid "Your reward amounts to {0}% of all tokens purchased by your referrals."
+msgstr "您的奖励相当于您的推荐人所购买的所有代币的{0}％。"
+
+msgid "Deposit will appear on your account only after a few block confirmations. It can take from 10 minutes to 2 hours or more, depending on your payment method."
+msgstr "只有经过几次确认后，存款才会显示在您的帐户上。根据您的付款方式，可能会需要10分钟到2小时甚至更长时间。"
+
+msgid "Go to your wallet account and send money to the showed address. Please make sure that your deposit exceeds the minimum purchase amount."
+msgstr "打开您的钱包帐户，并将资金汇到显示的地址。请确保您的存款超过最低购买金额。"
+
+msgid "The subsequent change of wallet address is possible only through the administrator."
+msgstr "更改钱包地址只能通过管理员进行更改。"
+
+msgid "Sign in"
+msgstr "注册"
+
+msgid "Enter wallet address"
+msgstr "输入钱包地址"
+
+msgid "Password"
+msgstr "密码"
+
+msgid "Unknown"
+msgstr "未知"
+
+msgid "Forgot password"
+msgstr "忘记密码"
+
+msgid "Sign up"
+msgstr "注册"
+
+msgid "Phone"
+msgstr "电话号码"
+
+msgid "Full name"
+msgstr "姓名"
+
+msgid "Age"
+msgstr "年龄"
+
+msgid "Country"
+msgstr "国籍"
+
+msgid "Repeat password"
+msgstr "再次输入密码"
+
+msgid "I am not USA or Singapore citizen"
+msgstr "我不是美国公民或新加坡公民"
+
+msgid "Password restore"
+msgstr "恢复密码"
+
+msgid "Restore"
+msgstr "恢复"
+
+msgid "Remember the password?"
+msgstr "记住密码？"
+
+msgid "Goodbye"
+msgstr "再见"
+
+msgid "Hello."
+msgstr "您好"
+
+msgid "You have been registered on the"
+msgstr "您已经完成注册了"
+
+msgid "To recover the password, click on this link"
+msgstr "如要恢复密码，请单击此链接"
+
+msgid "Your login"
+msgstr "用户名"
+
+msgid "You was request password restore at"
+msgstr "您在请求密码恢复"
+
+msgid "You new password"
+msgstr "您的新密码"
+
+msgid "Check you email for verification code"
+msgstr "检查下您电子邮件的验证码"
+
+msgid "Ooops! User already exists"
+msgstr "抱歉!用户已存在"
+
+msgid "verification email"
+msgstr "邮件验证"
+
+msgid "User with same email already registred"
+msgstr "相同的电子邮件用户已注册"
+
+msgid "Password confirmation doesn't match Password"
+msgstr "确认密码与密码不匹配"
+
+msgid "Account verified. Use you login data for sign in"
+msgstr "帐户已验证。使用登录数据登录"
+
+msgid "Incorrect email or password"
+msgstr "邮箱帐号或密码错误"
+
+msgid "User not verified. Check you email."
+msgstr "用户未验证。检查下您的电子邮件。"
+
+msgid "restore email"
+msgstr "恢复邮件"
+
+msgid "Restore code sended to Email"
+msgstr "恢复发送至您邮箱的代码。"
+
+msgid "new password"
+msgstr "新密码"
+
+msgid "We send you new password to email"
+msgstr "我们已经给您的邮箱发送了一个新的密码"
+
+msgid "To confirm the registration, click on this link"
+msgstr "如要确认注册，请单击此链接"
+
+msgid "Deposit"
+msgstr "存款"
+
+msgid "Accept"
+msgstr "同意"
+
+msgid "User"
+msgstr "您的推荐"
+
+msgid "Registration date"
+msgstr "注册日期"
+
+msgid "Tokens"
+msgstr "代币"
+
+msgid "Empty"
+msgstr "空白"
+
+msgid "Save"
+msgstr "保存"
+
+msgid "Name"
+msgstr "姓名"
+
+msgid "Profile"
+msgstr "简介"
+
+msgid "Old password"
+msgstr "原密码"
+
+msgid "Save new password"
+msgstr "保存新密码"
+
+msgid "Account"
+msgstr "账户"
+
+msgid "My"
+msgstr "我的"
+
+msgid "Password updated"
+msgstr "密码更新"
+
+msgid "Account updated"
+msgstr "账户更新"
+
+msgid "New password"
+msgstr "新密码"
+
+msgid "Your referals"
+msgstr "您的推荐"
+
+msgid "Your referrals"
+msgstr "您的推荐"
+
+msgid "Current time"
+msgstr "当前时间"
+
+msgid "The end of the stage in"
+msgstr "正处于结束阶段"
+
+msgid "The balance is indicated in conventional units equal to the US dollar"
+msgstr "余额用常用货币单位表示，与美元相等"
+
+msgid "Incoming transactions"
+msgstr "收入交易"
+
+msgid "Amount"
+msgstr "总计"
+
+msgid "Date"
+msgstr "日期"
+
+msgid "Currency"
+msgstr "货币"
+
+msgid "Email"
+msgstr "邮件"
+
+msgid "Sign in with"
+msgstr "登录"
+
+msgid "Bad email"
+msgstr "错误邮件"
+
+msgid "Please enter your email to continue"
+msgstr "请输入您的邮箱后继续"
+
+msgid "Continue"
+msgstr "继续"
+
+msgid "Invalid email"
+msgstr "无效邮件"
+
+msgid "Two-factor Authentication"
+msgstr "双重认证"
+
+msgid "This code will be used to sign in to your account."
+msgstr "此代码将用于登录您的帐户。"
+
+msgid "Activate"
+msgstr "激活"
+
+msgid "Deactivate"
+msgstr "停用"
+
+msgid "Please, input code from app for continue."
+msgstr "请从app中输入代码然后继续。"
+
+msgid "Code wrong. Try again with new correct code."
+msgstr "代码错误。请用新的正确代码再试一次。"
+
+msgid "Two-factor Authentication successfully enabled."
+msgstr "双重认证已成功启用。"
+
+msgid "Error while activating two-factor authentication. Please contact us."
+msgstr "激活双重认证时出错。请与我们联系。"
+
+msgid "Two-factor Authentication successfully disabled."
+msgstr "双重认证已被完全禁用。"
+
+msgid "IError while deactivating two-factor authentication. Please contact us."
+msgstr "停用双重验证时出错。请与我们联系。"
+
+msgid "Please, input you password for continue"
+msgstr "请输入密码然后继续"
+
+msgid "Please enter 2FA security code"
+msgstr "请输入双重验证安全码"
+
+msgid "Send"
+msgstr "发送"
+
+msgid "Wrong password"
+msgstr "密码错误"
+
+msgid "Code wrong. Try login again."
+msgstr "安全码错误。尝试再次登录。"
+
+msgid "User not exist."
+msgstr "无此用户。"
+
+msgid "Login error. Try again later."
+msgstr "登录错误。稍后再试。"
+
+msgid "Code wrong. Try again letter with new correct code."
+msgstr "代码错误。稍后使用新的正确代码再试。"
+
+msgid "Enable two factor"
+msgstr "开启双重认证"
+
+msgid "Scan this QR code with you Google Authenticator app on you mobile phone (download for {0} or {1}). Once scanned you will be presented with a random 6 digit number. Enter that number below to finish the setup process."
+msgstr "使用手机上的谷歌验证app扫描此二维码（下载{0}或{1}）。一旦扫描成功，您将会看到一个随机的6位数字。在下面输入该数字以完成安装过程。"
+
+msgid "If your phone does not support reading of QR codes, enter the code in the application, which you see below."
+msgstr "如果您的手机不支持读取二维码，请在应用程序中输入二维码，如下所示。"
+
+msgid "Very important!"
+msgstr "非常重要！"
+
+msgid "Keep this code: write it on a piece of paper or remember it. Only with this code will you be able to restore access if you lose your phone or remove the application from your phone."
+msgstr "保留此代码：将其写在一张纸上或记住它。只有使用此代码，您才能够在丢失手机时或从手机中删除应用程序时恢复访问。"
+
+msgid "Code from app"
+msgstr "app代码"
+
+msgid "Login attempts history"
+msgstr "登陆历史"
+
+msgid "IP"
+msgstr "IP地址"
+
+msgid "User Agent"
+msgstr "用户代理"
+
+msgid "Successful"
+msgstr "成功"
+
+msgid "Yes"
+msgstr "是"
+
+msgid "No"
+msgstr "否"
+
+msgid "Currencies rate"
+msgstr "兑换率"
+
+msgid "Name"
+msgstr "姓名"
+
+msgid "Symbol"
+msgstr "符号"
+
+msgid "Price, usd"
+msgstr "价格，美元"
+
+msgid "from CoinMarketCap"
+msgstr "来自 CoinMarketCap"
+
+msgid "KYC"
+msgstr "了解你的客户（KYC）"
+
+msgid "Start"
+msgstr "开始"
+
+msgid "KYC successfully passed"
+msgstr "成功通过。"
+
+msgid "Previous attempt KYC failed: "
+msgstr "之前的尝试失败： "
+
+msgid "Pending KYC status."
+msgstr "KYC正在审核"
+
+msgid "Unable to start identification. Please contact us."
+msgstr "如无法识别。请与我们联系。"
+
+msgid "Editing account data is not available after KYC passing"
+msgstr "KYC通过后，不可编辑帐户数据"
+
+msgid "Back"
+msgstr "返回"

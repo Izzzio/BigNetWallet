@@ -1,0 +1,407 @@
+msgid "Admin"
+msgstr "관리자"
+
+msgid "Log out"
+msgstr "로그아웃"
+
+msgid "Wallet"
+msgstr "지갑"
+
+msgid "Deposit"
+msgstr "예치금"
+
+msgid "Send to Wallet"
+msgstr "지갑으로 전송"
+
+msgid "How to buy"
+msgstr "구매 방법"
+
+msgid "Buy tokens from deposit"
+msgstr "예치금에서 토큰 구입"
+
+msgid "Token count"
+msgstr "토큰 수"
+
+msgid "Bonus"
+msgstr "보너스"
+
+msgid "Total"
+msgstr "합계"
+
+msgid "Spend all funds in your account to buy tokens"
+msgstr "계정의 모든 자금을 사용하여 토큰을 구매하십시오."
+
+msgid "Buy"
+msgstr "구매"
+
+msgid "Tokens amount"
+msgstr "토큰 금액"
+
+msgid "Payment currency"
+msgstr "결제 통화"
+
+msgid "Get payment information"
+msgstr "결제 정보 얻기"
+
+msgid "Make a deposit"
+msgstr "예치금 입금"
+
+msgid "Buy tokens"
+msgstr "토큰 구매"
+
+msgid "Get payment address"
+msgstr "결제 주소 받기"
+
+msgid "Referal link"
+msgstr "추천 링크"
+
+msgid "Referral link"
+msgstr "추천 링크"
+
+msgid "Copy"
+msgstr "복사"
+
+msgid "Token sale starts in"
+msgstr "토큰 판매 시작 날짜"
+
+msgid "Show"
+msgstr "표시"
+
+msgid "Your reward amounts to {0}% of all tokens purchased by your referrals."
+msgstr "귀하가 보상 받을 금액은 귀하의 추천으로 구매된 모든 토큰의 {0}%입니다."
+
+msgid "Deposit will appear on your account only after a few block confirmations. It can take from 10 minutes to 2 hours or more, depending on your payment method."
+msgstr "예치금은 블록확인을 거친 후 계정에 표시됩니다. 결제 방법에 따라 10분에서 2시간 이상 걸릴 수 있습니다."
+
+msgid "Go to your wallet account and send money to the showed address. Please make sure that your deposit exceeds the minimum purchase amount."
+msgstr "지갑 계정으로 이동하여 표시된 주소로 송금하십시오. 예치금이 최소 구매 금액을 초과하는지 확인하십시오."
+
+msgid "The subsequent change of wallet address is possible only through the administrator."
+msgstr "이후의 지갑 주소 변경은 관리자를 통해서만 가능합니다."
+
+msgid "Sign in"
+msgstr "로그인"
+
+msgid "Enter wallet address"
+msgstr "지갑 주소 입력"
+
+msgid "Password"
+msgstr "비밀번호"
+
+msgid "Unknown"
+msgstr "알 수 없음"
+
+msgid "Forgot password"
+msgstr "비밀번호 분실"
+
+msgid "Sign up"
+msgstr "등록"
+
+msgid "Phone"
+msgstr "전화"
+
+msgid "Full name"
+msgstr "전체 이름"
+
+msgid "Age"
+msgstr "나이"
+
+msgid "Country"
+msgstr "국가"
+
+msgid "Repeat password"
+msgstr "비밀번호 반복"
+
+msgid "I am not USA or Singapore citizen"
+msgstr "미국 또는 싱가포르 시민이 아닙니다"
+
+msgid "Password restore"
+msgstr "비밀번호 반복"
+
+msgid "Restore"
+msgstr "복원"
+
+msgid "Remember the password?"
+msgstr "비밀번호를 기억하십니까?"
+
+msgid "Goodbye"
+msgstr "안녕히가십시오"
+
+msgid "Hello."
+msgstr "안녕하세요."
+
+msgid "You have been registered on the"
+msgstr "귀하는 등록되어 있습니다"
+
+msgid "To recover the password, click on this link"
+msgstr "비밀번호를 복구하려면 이 링크를 클릭하십시오"
+
+msgid "Your login"
+msgstr "귀하의 로그인"
+
+msgid "You was request password restore at"
+msgstr "비밀번호를 요청했습니다"
+
+msgid "You new password"
+msgstr "새로운 비밀번호"
+
+msgid "Check you email for verification code"
+msgstr "이메일에서 인증 코드를 확인하십시오"
+
+msgid "Ooops! User already exists"
+msgstr "죄송합니다! 사용자가 이미 존재합니다"
+
+msgid "verification email"
+msgstr "확인 이메일"
+
+msgid "User with same email already registred"
+msgstr "동일한 이메일을 가진 사용자가 이미 등록되어 있습니다"
+
+msgid "Password confirmation doesn't match Password"
+msgstr "비밀번호 확인이 비밀번호와 일치하지 않습니다"
+
+msgid "Account verified. Use you login data for sign in"
+msgstr "계정이 확인되었습니다. 로그인을 위해 로그인 데이터 사용"
+
+msgid "Incorrect email or password"
+msgstr "유효하지 않은 이메일 또는 비밀번호"
+
+msgid "User not verified. Check you email."
+msgstr "사용자가 확인되지 않았습니다. 이메일을 확인하십시오."
+
+msgid "restore email"
+msgstr "이메일 복원"
+
+msgid "Restore code sended to Email"
+msgstr "이메일로 복원 코드가 전송되었습니다"
+
+msgid "new password"
+msgstr "새 비밀번호"
+
+msgid "We send you new password to email"
+msgstr "귀하의 이메일에 새로운 비밀번호를 보냈습니다"
+
+msgid "To confirm the registration, click on this link"
+msgstr "등록을 확인하려면 이 링크를 클릭하십시오"
+
+msgid "Accept"
+msgstr "수락"
+
+msgid "User"
+msgstr "귀하의 추천"
+
+msgid "Registration date"
+msgstr "등록 날짜"
+
+msgid "Tokens"
+msgstr "토큰"
+
+msgid "Empty"
+msgstr "비어 있습니다"
+
+msgid "Save"
+msgstr "저장"
+
+msgid "Name"
+msgstr "이름"
+
+msgid "Profile"
+msgstr "프로필"
+
+msgid "Old password"
+msgstr "이전 비밀번호"
+
+msgid "Repeat password"
+msgstr "비밀번호 반복"
+
+msgid "Save new password"
+msgstr "새 비밀번호 저장"
+
+msgid "Account"
+msgstr "계정"
+
+msgid "My"
+msgstr "나의"
+
+msgid "Password updated"
+msgstr "비밀번호가 업데이트되었습니다"
+
+msgid "Account updated"
+msgstr "계정이 업데이트되었습니다"
+
+msgid "New password"
+msgstr "새 비밀번호"
+
+msgid "Your referals"
+msgstr "귀하의 추천"
+
+msgid "Your referrals"
+msgstr "귀하의 추천"
+
+msgid "Current time"
+msgstr "현재 시간"
+
+msgid "The end of the stage in"
+msgstr "단계 마지막"
+
+msgid "The balance is indicated in conventional units equal to the US dollar"
+msgstr "잔액은 미국 달러와 같은 기존 단위로 표시됩니다"
+
+msgid "Incoming transactions"
+msgstr "수신 거래"
+
+msgid "Amount"
+msgstr "금액"
+
+msgid "Date"
+msgstr "날짜"
+
+msgid "Currency"
+msgstr "통화"
+
+msgid "Email"
+msgstr "이메일"
+
+msgid "Sign in with"
+msgstr "로그인"
+
+msgid "Bad email"
+msgstr "잘못된 이메일"
+
+msgid "Please enter your email to continue"
+msgstr "계속하려면 이메일을 입력하십시오"
+
+msgid "Continue"
+msgstr "계속"
+
+msgid "Invalid email"
+msgstr "유효하지 않은 이메일"
+
+msgid "Two-factor Authentication"
+msgstr "이중 인증"
+
+msgid "This code will be used to sign in to your account."
+msgstr "이 코드는 귀하의 계정에 로그인하는 데 사용됩니다."
+
+msgid "Activate"
+msgstr "활성화"
+
+msgid "Deactivate"
+msgstr "비활성화"
+
+msgid "Please, input code from app for continue."
+msgstr "계속하려면 앱에서 코드를 입력하십시오"
+
+msgid "Code wrong. Try again with new correct code."
+msgstr "코드가 잘못되었습니다. 새로운 올바른 코드로 다시 시도하십시오."
+
+msgid "Two-factor Authentication successfully enabled."
+msgstr "이중 인증이 성공적으로 활성화되었습니다."
+
+msgid "Error while activating two-factor authentication. Please contact us."
+msgstr "이중 인증을 활성화하는 동안 오류가 발생했습니다. 문의하시기 바랍니다."
+
+msgid "Two-factor Authentication successfully disabled."
+msgstr "이중 인증이 성공적으로 비활성화되었습니다."
+
+msgid "IError while deactivating two-factor authentication. Please contact us."
+msgstr "이중 인증을 비활성화하는 동안 오류가 발생했습니다. 문의하시기 바랍니다."
+
+msgid "Please, input you password for continue"
+msgstr "계속하려면 비밀번호를 입력하십시오"
+
+msgid "Please enter 2FA security code"
+msgstr "2FA 보안 코드를 입력하십시오"
+
+msgid "Send"
+msgstr "전송"
+
+msgid "Wrong password"
+msgstr "잘못된 비밀번호"
+
+msgid "Code wrong. Try login again."
+msgstr "코드가 잘못되었습니다. 다시 로그인하십시오."
+
+msgid "User not exist."
+msgstr "그런 사용자가 없습니다."
+
+msgid "Login error. Try again later."
+msgstr "로그인 오류. 나중에 다시 시도하십시오."
+
+msgid "Code wrong. Try again letter with new correct code."
+msgstr "코드가 잘못되었습니다. 새로운 올바른 코드로 나중에 다시 시도하십시오."
+
+msgid "Enable two factor"
+msgstr "이중 인증 활성화"
+
+msgid "Scan this QR code with you Google Authenticator app on you mobile phone (download for {0} or {1}). Once scanned you will be presented with a random 6 digit number. Enter that number below to finish the setup process."
+msgstr "휴대 전화에서 Google Authenticator 앱으로 이 QR 코드를 스캔하세요 ({0} 또는 {1} 용 다운로드). 스캔하면 임의의 6자리 숫자가 표시됩니다. 이 번호를 입력하면 설치 과정이 완료됩니다."
+
+msgid "If your phone does not support reading of QR codes, enter the code in the application, which you see below."
+msgstr "휴대 전화에서 QR 코드를 읽을 수 없는 경우, 아래에 표시된 코드를 애플리케이션에 입력하십시오."
+
+msgid "Very important!"
+msgstr "매우 중요합니다!"
+
+msgid "Keep this code: write it on a piece of paper or remember it. Only with this code will you be able to restore access if you lose your phone or remove the application from your phone."
+msgstr "이 코드는 종이에 적어 두거나 기억해두십시오. 이 코드만 사용하면 휴대 전화를 분실하거나 휴대 전화에서 애플리케이션을 제거한 경우 액세스 권한을 복원할 수 있습니다."
+
+msgid "Code from app"
+msgstr "앱 코드"
+
+msgid "Login attempts history"
+msgstr "로그인 시도 기록"
+
+msgid "IP"
+msgstr "IP"
+
+msgid "User Agent"
+msgstr "사용자 에이전트"
+
+msgid "Successful"
+msgstr "성공"
+
+msgid "Yes"
+msgstr "예"
+
+msgid "No"
+msgstr "아니오"
+
+msgid "Currencies rate"
+msgstr "환율"
+
+msgid "Name"
+msgstr "이름"
+
+msgid "Symbol"
+msgstr "기호"
+
+msgid "Price, usd"
+msgstr "가격, 달러"
+
+msgid "from CoinMarketCap"
+msgstr "CoinMarketCap에서"
+
+msgid "KYC"
+msgstr "KYC"
+
+msgid "Start"
+msgstr "시작"
+
+msgid "KYC successfully passed"
+msgstr "성공적으로 전달됩니다."
+
+msgid "Previous attempt KYC failed: "
+msgstr "이전 시도를 실패했습니다."
+
+msgid "Pending KYC status."
+msgstr "대기 중인 KYC 상태."
+
+msgid "Unable to start identification. Please contact us."
+msgstr "신원을 확인할 수 없습니다. 문의하시기 바랍니다."
+
+msgid "Editing account data is not available after KYC passing"
+msgstr "KYC 전달 후에는 계정 데이터 편집이 불가합니다"
+
+msgid "Back"
+msgstr "뒤로"

@@ -1,0 +1,20 @@
+msgid "Email"
+msgstr "Email"
+
+msgid "Password"
+msgstr "Password"
+
+msgid "Repeat password"
+msgstr "Repeat password"
+
+msgid "Please fill in this field"
+msgstr "Please fill in this field"
+
+msgid "At least 8 characters, one lowercase letter, one uppercase letter"
+msgstr "At least 8 characters, one lowercase letter, one uppercase letter"
+
+msgid "Passwords do not match"
+msgstr "Passwords do not match"
+
+msgid "Continue"
+msgstr "Continue"
