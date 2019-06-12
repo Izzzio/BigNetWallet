@@ -3,7 +3,7 @@ define('URL_PREFIX', '');
 define('CORE_VERSION', rand());
 
 //define('TPL_THEME_NAME', 'cryptoindex');
-define('TPL_THEME_NAME', 'backmoon');
+define('TPL_THEME_NAME', 'default');
 define('TPL_THEME_NAME_ADMIN', 'lte');
 
 return [
