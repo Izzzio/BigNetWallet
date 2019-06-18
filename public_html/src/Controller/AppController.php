@@ -252,7 +252,8 @@ class AppController extends Controller
         $this->set('crmLeftMenu', $this->crmLeftMenu);
         $this->set('wikiHelpUrl', $this->wikiHelpUrl);
 
-        // $this->set('isAdmin', $this->currentUser['type'] == self::USER_TYPES['admin']);
+        $this->set('activeMenu', $this->_hilightActiveMenuItem());
+
         parent::beforeRender($event);
 
         if (!empty($this->currentUser)) {
@@ -264,6 +265,35 @@ class AppController extends Controller
             }
         }
         $this->_updateGa();
+    }
+
+
+
+    private function _hilightActiveMenuItem()
+    {
+        $allMenuItems = [
+            'index' => '',
+            'wallet_create'  => '',
+            'addresses'      => '',
+        ];
+
+        $action = $this->request->action;
+        switch ($action) {
+            case 'index':
+                $menuItem = 'index';
+                break;
+            case 'walletCreate':
+                $menuItem = 'wallet_create';
+                break;
+            case 'addresses':
+                $menuItem = 'addresses';
+                break;
+            default:
+                $menuItem = 'index';
+        }
+        $allMenuItems[$menuItem] = 'active';
+
+        return $allMenuItems;
     }
 
     private function _updateGa($userId = '')
@@ -338,6 +368,7 @@ class AppController extends Controller
      */
     public function login()
     {
+
         $this->checkCsrf();
 
         /*if (!$this->checkRefer()) {
@@ -687,6 +718,7 @@ class AppController extends Controller
         $this->Flash->success(__('Goodbye'));
 
         //return $this->redirect('/');
+
         return $this->redirect(['controller' => 'app', 'action' => 'login']);
     }
 

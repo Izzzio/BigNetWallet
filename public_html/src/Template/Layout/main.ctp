@@ -1,8 +1,3 @@
-<?php
-/**
- * @var \App\Model\Entity\User $user
- */
-?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -20,7 +15,7 @@
     <!-- Font Awesome -->
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
           integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    <link rel="stylesheet" href="<?= URL_PREFIX . APP_THEME_BASE ?>/css/custom.css">
+    <link rel="stylesheet" href="<?= URL_PREFIX . APP_THEME_BASE ?>/css/custom.css?_=<?= CORE_VERSION ?>">
     <!-- Theme style -->
     <link rel="stylesheet" href="<?= URL_PREFIX . APP_THEME_BASE ?>/lte/css/AdminLTE.min.css">
     <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -43,11 +38,6 @@
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
 
-
-
-
-
-
 </head>
 <body class="hold-transition skin-green sidebar-mini">
 <div class="wrapper">
@@ -55,133 +45,47 @@
     <header class="main-header">
 
         <!-- Logo -->
-        <a href="/" class="logo">
+        <a href="" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>iZ³</b></span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg"><b>iZ³</b> Tokensale platform</span>
+            <span class="logo-lg" data-i18n="[html]page:logo.big"></span>
         </a>
 
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top">
             <!-- Sidebar toggle button-->
             <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                <i class="fas fa-bars"></i>
                 <span class="sr-only">Toggle navigation</span>
             </a>
-            <!-- Navbar Right Menu -->
-            <div class="navbar-custom-menu">
-                <ul class="nav navbar-nav">
-                    <!-- User Account: style can be found in dropdown.less -->
-                    <?php
-                    $name = '';
-                    $email = '';
-                    if (isset($user) && $user) {
-                        $name = $user->name;
-                    $email = $user->email;
-                    }
-                    ?>
-                    <li class="dropdown user user-menu">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                            <span class="hidden-lg hidden-md hidden-sm">
-                                <i class="fa fa-lg fa-user-circle-o" aria-hidden="true"></i>
-                            </span>
-                            <span class="hidden-xs"><?= h($name) ?>&nbsp</span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <!-- User image -->
-                            <li class="user-header">
-                                <p>
-                                    <?= h($name) ?>
-                                    <small><?= h($email) ?></small>
-                                </p>
-                            </li>
-                            <!-- Menu Footer-->
-                            <li class="user-footer">
-                                <div class="pull-right">
-                                    <a href="<?= URL_PREFIX ?>/app/logout" class="btn btn-success btn-flat" style="background: #00a65a;">Sign out</a>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                    <!--
-                    <li>
-                        <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
-                    </li>
-                    -->
-                </ul>
-            </div>
-
         </nav>
+
     </header>
+
     <!-- Left side column. contains the logo and sidebar -->
     <aside class="main-sidebar">
-        <!-- sidebar: style can be found in sidebar.less -->
         <section class="sidebar">
-            <!-- Sidebar user panel -->
-            <!-- sidebar menu: : style can be found in sidebar.less -->
             <ul class="sidebar-menu" data-widget="tree">
-                <li class="header">MAIN NAVIGATION</li>
+                <li class="header"></li>
 
-                <li>
-                    <a href="<?= URL_PREFIX ?>/">
-                        <i class="fa fa-arrow-left"></i> <span>Back to main page</span>
-                    </a>
-                </li>
-                <li class="<?= $activeMenu['dashboard'] ?>">
-                    <a href="<?= URL_PREFIX ?>/admin">
-                        <i class="fa fa-dashboard"></i> <span>Dashboard</span>
+                <li class="<?= $activeMenu['wallet_create'] ?>">
+                    <a href="<?= URL_PREFIX ?>/wallet/create">
+                        <i class="fas fa-wallet"></i>
+                        &nbsp;
+                        <span data-i18n="wallet_create:menu.create"></span>
                     </a>
                 </li>
 
-                <li class="<?= $activeMenu['users'] ?>">
-                    <a href="<?= URL_PREFIX ?>/admin/users">
-                        <i class="fa fa-users"></i> <span>Users</span>
+                <li class="<?= $activeMenu['addresses'] ?>">
+                    <a href="<?= URL_PREFIX ?>/addresses">
+                        <i class="fas fa-money-check-alt"></i>
+                        &nbsp;
+                        <span data-i18n="addresses:menu.list"></span>
                     </a>
                 </li>
-
-                <li class="treeview <?= $activeMenu['txn_list'].$activeMenu['txn_stat'] ?>">
-                    <a href="#">
-                        <i class="fa fa-link"></i>
-                        <span>Transactions</span>
-                        <span class="pull-right-container">
-                            <i class="fa fa-angle-left pull-right"></i>
-                        </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li class="<?= $activeMenu['txn_list'] ?>"><a href="<?= URL_PREFIX ?>/admin/transactions"><i class="fa fa-circle-o"></i> List all</a></li>
-                        <li class="<?= $activeMenu['txn_stat'] ?>"><a href="<?= URL_PREFIX ?>/admin/transactionsstats"><i class="fa fa-circle-o"></i> Statistics</a></li>
-                    </ul>
-                </li>
-
-                <?php if(\App\Controller\AclController::isUserRole(['ROLE_SYSTEM', 'ROLE_ADMIN'])) {?>
-                <?php if (!\App\Lib\Misc::tcfg('disableScripts')) { ?>
-                <li class="treeview <?= $activeMenu['dev_script'].$activeMenu['dev_page'] ?>">
-                    <a href="#">
-                        <i class="fa fa-code"></i>
-                        <span>System</span>
-                        <span class="pull-right-container">
-                                <i class="fa fa-angle-left pull-right"></i>
-                            </span>
-                    </a>
-                    <ul class="treeview-menu">
-                        <li class="<?= $activeMenu['dev_script'] ?>"><a href="<?= URL_PREFIX ?>/admin/scripts"><i class="fa fa-circle-o"></i> Scripts</a></li>
-                        <li class="<?= $activeMenu['dev_page'] ?>"><a href="<?= URL_PREFIX ?>/admin/customPages"><i class="fa fa-circle-o"></i> Custom pages</a></li>
-                        <li class="<?= $activeMenu['dev_logs'] ?>"><a href="<?= URL_PREFIX ?>/admin/logs"><i class="fa fa-circle-o"></i> Info logs</a></li>
-                    </ul>
-                </li>
-                <?php }
-                }
-                ?>
-
-                <li class="<?= $activeMenu['faq'] ?>">
-                    <a href="<?= URL_PREFIX ?>/admin/faq">
-                        <i class="fa fa-question-circle"></i> <span>Manage FAQ</span>
-                    </a>
-                </li>
-
             </ul>
         </section>
-        <!-- /.sidebar -->
     </aside>
 
     <!-- Content Wrapper. Contains page content -->
@@ -194,10 +98,8 @@
     <!-- /.content-wrapper -->
 
     <footer class="main-footer">
-        <div class="pull-right">
-            <a target="_blank" href="https://izzz.io/en/cabinet/?client=<?=urlencode(\App\Lib\Misc::projectName())?>">About iZ³ Tokensale platform</a>
-        </div>
-        <strong>Copyright &copy; <?= date('Y');?> iZ³ - IZZZIO crowdsale platform.</strong>
+        <strong>Copyright &copy; <?= date('Y');?> <a href="//izzz.io">iZ³</a>.</strong>
+        <span data-i18n="page:copyrights"></span>
     </footer>
 
     <!-- Add the sidebar's background. This div must be placed
@@ -207,54 +109,23 @@
 </div>
 <!-- ./wrapper -->
 
-<!-- Bootstrap 3.3.7 -->
-<script src="<?= URL_PREFIX . ADMIN_THEME_BASE ?>/plugins/bootstrap/dist/js/bootstrap.min.js"></script>
+<!-- jQuery 3 -->
+<script src="<?= URL_PREFIX . APP_THEME_BASE ?>/components/jquery/jquery.min.js"></script>
+<script src="<?= URL_PREFIX . APP_THEME_BASE ?>/components/bootstrap/bootstrap.min.js"></script>
 <!-- FastClick -->
-<script src="<?= URL_PREFIX . ADMIN_THEME_BASE ?>/plugins/fastclick/lib/fastclick.js"></script>
+<script src="<?= URL_PREFIX . APP_THEME_BASE ?>/components/fastclick/fastclick.js"></script>
 <!-- AdminLTE App -->
-<script src="<?= URL_PREFIX . ADMIN_THEME_BASE ?>/js/adminlte.min.js"></script>
-<!-- Sparkline -->
-<script src="<?= URL_PREFIX . ADMIN_THEME_BASE ?>/plugins/jquery-sparkline/dist/jquery.sparkline.min.js"></script>
+<script src="<?= URL_PREFIX . APP_THEME_BASE ?>/lte/js/adminlte.min.js"></script>
 <!-- SlimScroll -->
-<script src="<?= URL_PREFIX . ADMIN_THEME_BASE ?>/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-<script src="<?= URL_PREFIX . ADMIN_THEME_BASE ?>/js/main.js"></script>
+<script src="<?= URL_PREFIX . APP_THEME_BASE ?>/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="<?= URL_PREFIX . APP_THEME_BASE ?>/js/langs.js?_=<?= CORE_VERSION ?>"></script>
+<script src="<?= URL_PREFIX . APP_THEME_BASE ?>/js/main.js?_=<?= CORE_VERSION ?>"></script>
 
-<script>
-    console.log("%cDon't Panic!", 'color: red; font-size: 48px');
-    console.log("%c   " + " %cTokensale Platform", 'color: black; background: url(<?= URL_PREFIX ?>/images/logo-white.svg) no-repeat black; font-size: 48px', 'font-size: 48px; background-color:black; color:white');
-    console.log("%cwill do all the hard work itself!", 'background-color:black; color:white; font-size: 30px');
-    console.log("%cMore at " + $('#about').attr('href'), 'background-color:black; color:white; font-size: 30px');
-</script>
-
-<!-- Yandex.Metrika counter -->
-<script type="text/javascript" >
-    (function (d, w, c) {
-        (w[c] = w[c] || []).push(function() {
-            try {
-                w.yaCounter47787229 = new Ya.Metrika2({
-                    id:47787229,
-                    clickmap:true,
-                    trackLinks:true,
-                    accurateTrackBounce:true,
-                    webvisor:true
-                });
-            } catch(e) { }
-        });
-
-        var n = d.getElementsByTagName("script")[0],
-            s = d.createElement("script"),
-            f = function () { n.parentNode.insertBefore(s, n); };
-        s.type = "text/javascript";
-        s.async = true;
-        s.src = "https://mc.yandex.ru/metrika/tag.js";
-
-        if (w.opera == "[object Opera]") {
-            d.addEventListener("DOMContentLoaded", f, false);
-        } else { f(); }
-    })(document, window, "yandex_metrika_callbacks2");
-</script>
-<noscript><div><img src="https://mc.yandex.ru/watch/47787229" style="position:absolute; left:-9999px;" alt="" /></div></noscript>
-<!-- /Yandex.Metrika counter -->
+<script src="<?= URL_PREFIX . APP_THEME_BASE ?>/plugins/jquery-validation/jquery.validate.min.js"></script>
+<script src="<?= URL_PREFIX . APP_THEME_BASE ?>/plugins/jquery-validation/additional-methods.min.js"></script>
+<script src="<?= URL_PREFIX . APP_THEME_BASE ?>/plugins/icheck/icheck.min.js"></script>
+<script src="<?= URL_PREFIX . APP_THEME_BASE ?>/plugins/bootstrap-toggle/js/bootstrap-toggle.min.js"></script>
+<script src="<?= URL_PREFIX . APP_THEME_BASE ?>/plugins/moment/min/moment.min.js"></script>
 
 </body>
 </html>
