@@ -45,7 +45,7 @@
     <header class="main-header">
 
         <!-- Logo -->
-        <a href="" class="logo">
+        <a href="<?= URL_PREFIX ?>/" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
             <span class="logo-mini"><b>iZ³</b></span>
             <!-- logo for regular state and mobile devices -->
@@ -55,7 +55,7 @@
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top">
             <!-- Sidebar toggle button-->
-            <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+            <a href="<?= URL_PREFIX ?>/" class="sidebar-toggle" data-toggle="push-menu" role="button">
                 <i class="fas fa-bars"></i>
                 <span class="sr-only">Toggle navigation</span>
             </a>
@@ -89,12 +89,8 @@
     </aside>
 
     <!-- Content Wrapper. Contains page content -->
-    <div class="content-wrapper">
-
-        <?= $this->Flash->render() ?>
-        <?= $this->fetch('content') ?>
-
-    </div>
+    <?= $this->Flash->render() ?>
+    <?= $this->fetch('content') ?>
     <!-- /.content-wrapper -->
 
     <footer class="main-footer">

@@ -24,6 +24,8 @@ class IndexController extends AppController
     {
         parent::beforeFilter($event);
 
+        $this->viewBuilder()->layout('main');
+
         $this->IndianAuth->allow(['index'], 'all');
 
         $this->set('user', false);
@@ -45,6 +47,5 @@ class IndexController extends AppController
      */
     public function index()
     {
-        $this->viewBuilder()->layout('main');
     }
 }

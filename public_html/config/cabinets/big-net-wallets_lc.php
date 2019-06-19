@@ -169,8 +169,8 @@ return [
      * API config
      */
     'Api'   => [
-        'key'   => '111',
-        'tokenLifeTime' => 180, //in minutes
+        'host'  => 'http://localhost:3001/',
+        'pass'   => 'usdkblcyqyzoypi',
     ],
 
     /**

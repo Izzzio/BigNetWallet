@@ -32,7 +32,9 @@ class WalletController extends AppController
         $this->set('langs', $langs);
         parent::beforeFilter($event);
 
-        $this->IndianAuth->allow(['result'], 'all');
+        $this->viewBuilder()->layout('main');
+
+        $this->IndianAuth->allow(['create'], 'all');
     }
 
     /**
@@ -51,6 +53,11 @@ class WalletController extends AppController
      */
     public function create()
     {
-        die("1");
+        require_once 'Api/V1/php/NodeRPC.php';
+        $izNode = new NodeRPC(Configure::read('Api.host'), Configure::read('Api.pass'));
+
+        $wallet = $izNode->createWallet();
+
+        print_r($wallet);
     }
 }
