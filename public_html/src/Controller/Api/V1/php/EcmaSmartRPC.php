@@ -16,11 +16,6 @@ class EcmaSmartRPC extends NodeRPC
         'contracts/ecma/deployContract'      => ['httpMethod' => 'post'],
     ];
 
-    public function __construct($RPCUrl = 'http://localhost:3001/', $password = '')
-    {
-        parent::__construct($RPCUrl, $password);
-    }
-
     /**
      * Get ECMAScript Smart Contracts subsystem info
      * @return array|mixed
