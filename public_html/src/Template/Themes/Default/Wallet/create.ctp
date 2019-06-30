@@ -199,7 +199,7 @@
                             <div class="col-md-4">
                             </div>
                             <div class="col-md-4">
-                                <a href="/addresses" data-i18n="wallet_create:button.save_address" class="btn btn-lg btn-danger" id="save_address"></a>
+                                <a href="<?= URL_PREFIX ?>/interface" data-i18n="wallet_create:button.save_address" class="btn btn-lg btn-danger" id="save_address"></a>
                             </div>
                             <div class="col-md-4">
                             </div>

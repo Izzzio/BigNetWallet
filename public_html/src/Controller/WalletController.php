@@ -6,11 +6,6 @@ use App\Lib\Emails;
 use App\Lib\Sandbox;
 use App\Lib\KYC;
 use App\Lib\Misc;
-use App\Model\Entity\KycAttempts;
-use App\Model\Table\CountriesTable;
-use App\Model\Table\KycAttemptsTable;
-use App\Model\Table\LogTable;
-use App\Model\Table\UsersTable;
 
 use Cake\Event\Event;
 use Cake\Filesystem\Folder;
@@ -33,8 +28,7 @@ class WalletController extends AppController
         parent::beforeFilter($event);
 
         $this->viewBuilder()->layout('main');
-
-        $this->IndianAuth->allow(['create'], 'all');
+        $this->IndianAuth->allow(['create'], $this->IndianAuth::PERMISSION_ALL);
     }
 
     /**
