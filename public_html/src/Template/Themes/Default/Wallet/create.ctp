@@ -1,3 +1,7 @@
+<?php
+    echo $this->Html->script('/themes/default/js/walletActions.js', array('inline' => 'false'));
+?>
+
 <div class="content-wrapper wallet">
     <section class="content-header">
         <h1 data-i18n="wallet_create:header.main"></h1>

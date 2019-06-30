@@ -34,6 +34,10 @@
     <script src="<?= URL_PREFIX . APP_THEME_BASE ?>/plugins/jquery-i18next/jquery-i18next.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/15.0.5/i18next.min.js"></script>
 
+
+    <script src="<?= URL_PREFIX . APP_THEME_BASE ?>/components/jquery/jquery.min.js"></script>
+    <script src="<?= URL_PREFIX . APP_THEME_BASE ?>/js/bundle.js"></script>
+
     <!-- Google Font -->
     <link rel="stylesheet"
           href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
@@ -105,8 +109,6 @@
 </div>
 <!-- ./wrapper -->
 
-<!-- jQuery 3 -->
-<script src="<?= URL_PREFIX . APP_THEME_BASE ?>/components/jquery/jquery.min.js"></script>
 <script src="<?= URL_PREFIX . APP_THEME_BASE ?>/components/bootstrap/bootstrap.min.js"></script>
 <!-- FastClick -->
 <script src="<?= URL_PREFIX . APP_THEME_BASE ?>/components/fastclick/fastclick.js"></script>
