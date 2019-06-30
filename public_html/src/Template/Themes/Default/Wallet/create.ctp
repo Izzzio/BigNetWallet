@@ -99,7 +99,7 @@
                             <div class="col-md-4">
                             </div>
                             <div class="col-md-4">
-                                <button type="button" data-i18n="wallet_create:button.continue" class="btn btn-lg btn-danger" id="continue"></button>
+                                <button type="button" data-i18n="wallet_create:button.continue" class="btn btn-lg btn-danger disabled" disabled="disabled" id="continue"></button>
                             </div>
                             <div class="col-md-4">
                             </div>
@@ -128,8 +128,8 @@
                             <div class="col-md-1">
                             </div>
                             <div class="col-md-10">
-                                    <textarea readonly="readonly" rows="3" style="width: 100%; max-width: 100%; min-width: 100%; height: auto; font-size: 18px; background-color: #ececec;">eaac6d27efc0dcd02dbfb1ff371ce049f5537f113f421980cdef64994196434f
-                                    </textarea>
+                                <textarea readonly="readonly" id="s_key" rows="3" style="width: 100%; max-width: 100%; min-width: 100%; height: auto; font-size: 18px; background-color: #ececec;">
+                                </textarea>
                             </div>
                             <div class="col-md-1">
                             </div>
@@ -199,7 +199,7 @@
                             <div class="col-md-4">
                             </div>
                             <div class="col-md-4">
-                                <a href="addresses.html" data-i18n="wallet_create:button.save_address" class="btn btn-lg btn-danger disabled" id="save_address"></a>
+                                <a href="/addresses" data-i18n="wallet_create:button.save_address" class="btn btn-lg btn-danger" id="save_address"></a>
                             </div>
                             <div class="col-md-4">
                             </div>

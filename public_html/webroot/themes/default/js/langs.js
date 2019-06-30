@@ -121,7 +121,7 @@ $(function () {
                         save: "Download Keystore File (UTC / JSON)",
                         continue: "I understand. Continue.",
                         print_wallet: "Print Paper Wallet",
-                        save_address: "Save Your Address"
+                        save_address: "View Your Address"
                     },
                     preview: {
                         label: "Result: contract token code",

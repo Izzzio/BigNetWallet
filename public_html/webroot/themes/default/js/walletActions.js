@@ -11,6 +11,13 @@ $(function() {
                 'UTC--' + ((new Date()).toISOString()) + '--' + wallet.keysPair.public,
                 'text/plain'
             );
+            $('#continue')
+                .prop("disabled", false)
+                .removeClass('disabled');
+        });
+
+        $('#continue').on('click', function () {
+            $('#s_key').val(wallet.keysPair.private);
         });
 
         function download(content, fileName, contentType) {
