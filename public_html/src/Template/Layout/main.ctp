@@ -21,6 +21,7 @@
     <!-- AdminLTE Skins. Choose a skin from the css/skins
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="<?= URL_PREFIX . APP_THEME_BASE ?>/lte/css/skins/all-skins.min.css">
+    <link rel="stylesheet" href="<?= URL_PREFIX . APP_THEME_BASE ?>/plugins/bootstrap-dialog/css/bootstrap-dialog.min.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -28,14 +29,11 @@
     <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <link rel="stylesheet" href="<?= URL_PREFIX . APP_THEME_BASE ?>/plugins/icheck/skins/flat/blue.css">
-    <link rel="stylesheet" href="<?= URL_PREFIX . APP_THEME_BASE ?>/plugins/bootstrap-toggle/css/bootstrap-toggle.min.css">
+    <script src="<?= URL_PREFIX . APP_THEME_BASE ?>/components/jquery/jquery.min.js"></script>
 
     <script src="<?= URL_PREFIX . APP_THEME_BASE ?>/plugins/jquery-i18next/jquery-i18next.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/15.0.5/i18next.min.js"></script>
 
-
-    <script src="<?= URL_PREFIX . APP_THEME_BASE ?>/components/jquery/jquery.min.js"></script>
     <script src="<?= URL_PREFIX . APP_THEME_BASE ?>/js/bundle.js"></script>
 
     <!-- Google Font -->
@@ -82,7 +80,7 @@
                 </li>
 
                 <li class="<?= $activeMenu['addresses'] ?>">
-                    <a href="<?= URL_PREFIX ?>/interface">
+                    <a href="<?= URL_PREFIX ?>/wallet/login">
                         <i class="fas fa-money-check-alt"></i>
                         &nbsp;
                         <span data-i18n="addresses:menu.list"></span>
@@ -116,14 +114,9 @@
 <script src="<?= URL_PREFIX . APP_THEME_BASE ?>/lte/js/adminlte.min.js"></script>
 <!-- SlimScroll -->
 <script src="<?= URL_PREFIX . APP_THEME_BASE ?>/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
+<script src="<?= URL_PREFIX . APP_THEME_BASE ?>/plugins/bootstrap-dialog/js/bootstrap-dialog.min.js"></script>
 <script src="<?= URL_PREFIX . APP_THEME_BASE ?>/js/langs.js?_=<?= CORE_VERSION ?>"></script>
 <script src="<?= URL_PREFIX . APP_THEME_BASE ?>/js/main.js?_=<?= CORE_VERSION ?>"></script>
-
-<script src="<?= URL_PREFIX . APP_THEME_BASE ?>/plugins/jquery-validation/jquery.validate.min.js"></script>
-<script src="<?= URL_PREFIX . APP_THEME_BASE ?>/plugins/jquery-validation/additional-methods.min.js"></script>
-<script src="<?= URL_PREFIX . APP_THEME_BASE ?>/plugins/icheck/icheck.min.js"></script>
-<script src="<?= URL_PREFIX . APP_THEME_BASE ?>/plugins/bootstrap-toggle/js/bootstrap-toggle.min.js"></script>
-<script src="<?= URL_PREFIX . APP_THEME_BASE ?>/plugins/moment/min/moment.min.js"></script>
-
+<script src="<?= URL_PREFIX . APP_THEME_BASE ?>/js/walletActions.js?_=<?= CORE_VERSION ?>"></script>
 </body>
 </html>

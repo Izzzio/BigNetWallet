@@ -1,5 +1,5 @@
 <?php
-    echo $this->Html->script('/themes/default/js/walletActions.js', array('inline' => 'false'));
+    //echo $this->Html->script('/themes/default/js/walletActions.js', array('inline' => 'false'));
 ?>
 
 <div class="content-wrapper wallet">
@@ -199,7 +199,7 @@
                             <div class="col-md-4">
                             </div>
                             <div class="col-md-4">
-                                <a href="<?= URL_PREFIX ?>/interface" data-i18n="wallet_create:button.save_address" class="btn btn-lg btn-danger" id="save_address"></a>
+                                <a href="<?= URL_PREFIX ?>/wallet/login" data-i18n="wallet_create:button.save_address" class="btn btn-lg btn-danger" id="save_address"></a>
                             </div>
                             <div class="col-md-4">
                             </div>

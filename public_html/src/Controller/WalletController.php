@@ -28,7 +28,7 @@ class WalletController extends AppController
         parent::beforeFilter($event);
 
         $this->viewBuilder()->layout('main');
-        $this->IndianAuth->allow(['create'], $this->IndianAuth::PERMISSION_ALL);
+        $this->IndianAuth->allow(['create', 'login'], $this->IndianAuth::PERMISSION_ALL);
     }
 
     /**
@@ -82,5 +82,9 @@ class WalletController extends AppController
         }
         */
 
+    }
+
+    public function login()
+    {
     }
 }

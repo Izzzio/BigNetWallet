@@ -31,12 +31,9 @@
     <link rel="stylesheet" href="<?= URL_PREFIX . APP_THEME_BASE ?>/plugins/icheck/skins/flat/blue.css">
     <link rel="stylesheet" href="<?= URL_PREFIX . APP_THEME_BASE ?>/plugins/bootstrap-toggle/css/bootstrap-toggle.min.css">
 
+    <script src="<?= URL_PREFIX . APP_THEME_BASE ?>/components/jquery/jquery.min.js"></script>
     <script src="<?= URL_PREFIX . APP_THEME_BASE ?>/plugins/jquery-i18next/jquery-i18next.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/15.0.5/i18next.min.js"></script>
-
-
-    <script src="<?= URL_PREFIX . APP_THEME_BASE ?>/components/jquery/jquery.min.js"></script>
-    <script src="<?= URL_PREFIX . APP_THEME_BASE ?>/js/bundle.js"></script>
 
     <!-- Google Font -->
     <link rel="stylesheet"
@@ -195,11 +192,7 @@
 <script src="<?= URL_PREFIX . APP_THEME_BASE ?>/js/langs.js?_=<?= CORE_VERSION ?>"></script>
 <script src="<?= URL_PREFIX . APP_THEME_BASE ?>/js/main.js?_=<?= CORE_VERSION ?>"></script>
 
-<script src="<?= URL_PREFIX . APP_THEME_BASE ?>/plugins/jquery-validation/jquery.validate.min.js"></script>
-<script src="<?= URL_PREFIX . APP_THEME_BASE ?>/plugins/jquery-validation/additional-methods.min.js"></script>
 <script src="<?= URL_PREFIX . APP_THEME_BASE ?>/plugins/icheck/icheck.min.js"></script>
 <script src="<?= URL_PREFIX . APP_THEME_BASE ?>/plugins/bootstrap-toggle/js/bootstrap-toggle.min.js"></script>
-<script src="<?= URL_PREFIX . APP_THEME_BASE ?>/plugins/moment/min/moment.min.js"></script>
-
 </body>
 </html>

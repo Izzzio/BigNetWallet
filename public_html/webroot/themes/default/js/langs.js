@@ -26,10 +26,6 @@ $(function () {
                     copyrights: "All rights reserved."
                 },
                 wallet_manage: {
-                    header: {
-                        main: "Home",
-                        description: ""
-                    },
                     block_main: {
                         header: 'Wallets',
                         btn: 'Create wallet'

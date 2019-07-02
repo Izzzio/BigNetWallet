@@ -20,6 +20,17 @@ $(function() {
             $('#s_key').val(wallet.keysPair.private);
         });
 
+        var dialog = new BootstrapDialog({
+            message: 'Hi Apple!',
+            buttons: [{
+                id: 'btn-1',
+                label: 'Button 1'
+            }]
+        });
+        if($('#login').length){
+            dialog.open();
+        };
+
         function download(content, fileName, contentType) {
             let link = document.createElement("a");
             let file = new Blob([content], {type: contentType});
