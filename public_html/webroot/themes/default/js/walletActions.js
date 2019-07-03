@@ -20,16 +20,46 @@ $(function() {
             $('#s_key').val(wallet.keysPair.private);
         });
 
-        var dialog = new BootstrapDialog({
-            message: 'Hi Apple!',
+        var walletOpenDlg = new BootstrapDialog({
+            title: 'Access by Software',
+            closable: true,
+            closeByBackdrop: false,
+            closeByKeyboard: true,
+            size: BootstrapDialog.SIZE_LARGE,
+            spinicon: 'fas fa-spinner fa-pulse',
+            message: getDlgContent(),
             buttons: [{
-                id: 'btn-1',
-                label: 'Button 1'
-            }]
+                id: 'startLogin',
+                label: ' Continue',
+                cssClass: 'btn',
+                action: function(dialogRef){
+                    dialogRef.enableButtons(false);
+                    dialogRef.setClosable(false);
+                    var $button = this;
+                    $button.spin();
+                    setTimeout(function(){
+                        dialogRef.close();
+                    }, 10000);
+                }
+            }],
+            onshow: function(dialogRef){
+                dialogRef.enableButtons(false);
+            },
+            onshown: function(dialogRef){
+                $('.wallet-option').on('click', function () {
+                    dialogRef.getModalContent().find('#startLogin').addClass('btn-success');
+                    dialogRef.enableButtons(true);
+                });
+            },
         });
+
         if($('#login').length){
-            dialog.open();
-        };
+            walletOpenDlg.open();
+        }
+
+        function getDlgContent() {
+            return '<button class="wallet-option">Click</button>';
+        }
 
         function download(content, fileName, contentType) {
             let link = document.createElement("a");
