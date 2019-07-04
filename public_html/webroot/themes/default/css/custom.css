@@ -1,44 +1,16 @@
-label {
+.wallet-option {
+    padding: 12px;
+    border: 1px solid #cecece;
+    border-radius: 3px;
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+.wallet-option:hover {
+    border: 1px #00a65a solid;
+}
+
+.wallet-option.selected {
+    border: 1px #00a65a solid;
     font-weight: 600;
-    font-size: 16px;
-}
-
-.error {
-    border: 1px solid #f00 !important;
-}
-
-.m-top-15 {
-    margin-top: 15px;
-}
-
-.fa-times-circle {
-    cursor: pointer;
-}
-
-#mint_new_main {
-    margin-bottom: 0px;
-}
-
-canvas {
-    -moz-user-select: none;
-    -webkit-user-select: none;
-    -ms-user-select: none;
-}
-
-@media (min-width: 992px) {
-    .help-block {
-        /*
-        min-height: 70px;
-        */
-    }
-
-    .help-mini {
-        height: auto;
-    }
-
-    .vcenter {
-        display: inline-block;
-        vertical-align: middle;
-        float: none;
-    }
 }

@@ -47,6 +47,10 @@ $(function() {
             },
             onshown: function(dialogRef){
                 $('.wallet-option').on('click', function () {
+                    dialogRef.getModalContent().find('.wallet-option').removeClass('selected');
+                    dialogRef.getModalContent().find('.sign-selected').addClass('hidden');
+                    $(this).addClass('selected');
+                    $('.sign-selected', $(this)).removeClass('hidden');
                     dialogRef.getModalContent().find('#startLogin').addClass('btn-success');
                     dialogRef.enableButtons(true);
                 });
@@ -58,7 +62,29 @@ $(function() {
         }
 
         function getDlgContent() {
-            return '<button class="wallet-option">Click</button>';
+            return '' +
+                '<div class="col-md-12 col-xs-12 wallet-option">' +
+                '<div class="col-md-2 col-xs-2 text-right">' +
+                '<i class="far fa-file-code fa-2x" style="color: #00a65a;"></i>' +
+                '</div>' +
+                '<div class="col-md-8 col-xs-8" style="margin-top: 5px;">' +
+                'Keystore File' +
+                '</div>' +
+                '<div class="col-md-2 col-xs-2 sign-selected hidden" style="margin-top: 7px;">' +
+                '<i class="fas fa-check-circle" style="color: #00a65a;"></i>' +
+                '</div>' +
+                '</div>' +
+                '<div class="col-md-12 col-xs-12 wallet-option">' +
+                '<div class="col-md-2 col-xs-2 text-right">' +
+                '<i class="fas fa-key fa-2x" style="color: #00a65a;"></i>' +
+                '</div>' +
+                '<div class="col-md-8 col-xs-8" style="margin-top: 5px;">' +
+                'Private Key' +
+                '</div>' +
+                '<div class="col-md-2 col-xs-2 sign-selected hidden" style="margin-top: 7px;">' +
+                '<i class="fas fa-check-circle" style="color: #00a65a;"></i>' +
+                '</div>' +
+                '</div>';
         }
 
         function download(content, fileName, contentType) {
