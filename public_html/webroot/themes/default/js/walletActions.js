@@ -47,12 +47,23 @@ $(function() {
             },
             onshown: function(dialogRef){
                 $('.wallet-option').on('click', function () {
-                    dialogRef.getModalContent().find('.wallet-option').removeClass('selected');
-                    dialogRef.getModalContent().find('.sign-selected').addClass('hidden');
-                    $(this).addClass('selected');
-                    $('.sign-selected', $(this)).removeClass('hidden');
-                    dialogRef.getModalContent().find('#startLogin').addClass('btn-success');
-                    dialogRef.enableButtons(true);
+                    let alreadySelected = false;
+                    let modalContent = dialogRef.getModalContent();
+                    if($(this).hasClass('selected')){
+                        alreadySelected = true;
+                    }
+                    modalContent.find('.wallet-option').removeClass('selected');
+                    modalContent.find('.sign-selected').addClass('hidden');
+                    if(alreadySelected){
+                        modalContent.find('#startLogin').removeClass('btn-success');
+                        dialogRef.enableButtons(false);
+                    } else {
+                        $(this).addClass('selected');
+                        $('.sign-selected', $(this)).removeClass('hidden');
+
+                        modalContent.find('#startLogin').addClass('btn-success');
+                        dialogRef.enableButtons(true);
+                    }
                 });
             },
         });
