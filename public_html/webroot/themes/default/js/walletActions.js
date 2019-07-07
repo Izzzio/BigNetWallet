@@ -20,16 +20,16 @@ $(function() {
             $('#s_key').val(wallet.keysPair.private);
         });
 
-        var walletOpenDlg = new BootstrapDialog({
+        var selectLoginWayDlg = new BootstrapDialog({
             title: 'Access by Software',
             closable: true,
             closeByBackdrop: false,
             closeByKeyboard: true,
             size: BootstrapDialog.SIZE_LARGE,
             spinicon: 'fas fa-spinner fa-pulse',
-            message: getDlgContent(),
+            message: getLoginWayDlgContent(),
             buttons: [{
-                id: 'startLogin',
+                id: 'setWaySeleted',
                 label: ' Continue',
                 cssClass: 'btn',
                 action: function(dialogRef){
@@ -37,13 +37,22 @@ $(function() {
                     dialogRef.setClosable(false);
                     var $button = this;
                     $button.spin();
-                    setTimeout(function(){
-                        dialogRef.close();
-                    }, 10000);
+                    let loginWay = dialogRef.getModalContent().find('.wallet-option.selected').data('option-login') || 0;
+                    dialogRef.close();
+                    switch (loginWay) {
+                        case 1:
+                            //askLoginFileDlg.open();
+                            break;
+                        case 2:
+                            askLoginKeyDlg.open();
+                            break;
+                        default:
+                    }
                 }
             }],
             onshow: function(dialogRef){
                 dialogRef.enableButtons(false);
+                dialogRef.getModalFooter().css('text-align', 'center')
             },
             onshown: function(dialogRef){
                 $('.wallet-option').on('click', function () {
@@ -55,13 +64,13 @@ $(function() {
                     modalContent.find('.wallet-option').removeClass('selected');
                     modalContent.find('.sign-selected').addClass('hidden');
                     if(alreadySelected){
-                        modalContent.find('#startLogin').removeClass('btn-success');
+                        modalContent.find('#setWaySeleted').removeClass('btn-success');
                         dialogRef.enableButtons(false);
                     } else {
                         $(this).addClass('selected');
                         $('.sign-selected', $(this)).removeClass('hidden');
 
-                        modalContent.find('#startLogin').addClass('btn-success');
+                        modalContent.find('#setWaySeleted').addClass('btn-success');
                         dialogRef.enableButtons(true);
                     }
                 });
@@ -69,12 +78,12 @@ $(function() {
         });
 
         if($('#login').length){
-            walletOpenDlg.open();
+            selectLoginWayDlg.open();
         }
 
-        function getDlgContent() {
+        function getLoginWayDlgContent() {
             return '' +
-                '<div class="col-md-12 col-xs-12 wallet-option">' +
+                '<div class="col-md-12 col-xs-12 wallet-option" data-option-login="1">' +
                 '<div class="col-md-2 col-xs-2 text-right">' +
                 '<i class="far fa-file-code fa-2x" style="color: #00a65a;"></i>' +
                 '</div>' +
@@ -85,7 +94,7 @@ $(function() {
                 '<i class="fas fa-check-circle" style="color: #00a65a;"></i>' +
                 '</div>' +
                 '</div>' +
-                '<div class="col-md-12 col-xs-12 wallet-option">' +
+                '<div class="col-md-12 col-xs-12 wallet-option" data-option-login="2">' +
                 '<div class="col-md-2 col-xs-2 text-right">' +
                 '<i class="fas fa-key fa-2x" style="color: #00a65a;"></i>' +
                 '</div>' +
@@ -105,6 +114,52 @@ $(function() {
             link.download = fileName;
             link.click();
         }
+
+        var askLoginKeyDlg = new BootstrapDialog({
+            title: 'Access by Private Key',
+            closable: true,
+            closeByBackdrop: false,
+            closeByKeyboard: true,
+            size: BootstrapDialog.SIZE_LARGE,
+            spinicon: 'fas fa-spinner fa-pulse',
+            message: getLoginKeyDlgContent(),
+            buttons: [{
+                id: 'login',
+                label: ' Access Wallet',
+                cssClass: 'btn',
+                action: function(dialogRef){
+                    dialogRef.enableButtons(false);
+                    dialogRef.setClosable(false);
+                    var $button = this;
+                    $button.spin();
+                }
+            }],
+            onshow: function(dialogRef){
+                dialogRef.enableButtons(false);
+                dialogRef.getModalFooter().css('text-align', 'center')
+            },
+            onshown: function(dialogRef){
+                let modalContent = dialogRef.getModalContent();
+                $('#key').on('keyup', function () {
+                    if($(this).val().length >= 1){
+                        modalContent.find('#login').addClass('btn-success');
+                        dialogRef.enableButtons(true);
+                    }
+                });
+            },
+        });
+
+        function getLoginKeyDlgContent() {
+            return '' +
+                '<div class="col-md-1 hidden-xs">' +
+                '</div>' +
+                '<div class="col-md-10 col-xs-12 form-group">' +
+                '<input type="text" id="key" placeholder="Enter Private Key" class="form-control input-lg">' +
+                '</div>' +
+                '<div class="col-md-1 hidden-xs">' +
+                '</div>';
+        }
+
     })();
 
     /*
