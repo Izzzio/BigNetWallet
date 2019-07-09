@@ -128,10 +128,25 @@ $(function() {
                 label: ' Access Wallet',
                 cssClass: 'btn',
                 action: function(dialogRef){
+                    /*
                     dialogRef.enableButtons(false);
                     dialogRef.setClosable(false);
                     var $button = this;
                     $button.spin();
+                    */
+                    let key = String(dialogRef.getModalContent().find('#key').val() || false);
+                    let error = false;
+                    let address = false;
+                    try {
+                        address = iz3BitcoreCrypto.private2address(key);
+                    } catch (e) {
+                        error = 'Wrong private key. Recheck key ant try again.';
+                    }
+                    if(error){
+                        alert(error);
+                    } else {
+                        alert('OK = '+address);
+                    }
                 }
             }],
             onshow: function(dialogRef){
@@ -139,18 +154,28 @@ $(function() {
                 dialogRef.getModalFooter().css('text-align', 'center')
             },
             onshown: function(dialogRef){
-                let modalContent = dialogRef.getModalContent();
-                $('#key').on('keyup', function () {
-                    if($(this).val().length >= 1){
-                        modalContent.find('#login').addClass('btn-success');
-                        dialogRef.enableButtons(true);
-                    }
-                });
+                let btn = dialogRef.getModalContent().find('#login') || false;
+                if(btn){
+                    $('#key').on('keyup', function () {
+                        if($(this).val().length >= 1){
+                            if(!btn.hasClass('btn-success')){
+                                btn.addClass('btn-success');
+                                dialogRef.enableButtons(true);
+                            }
+                        } else {
+                            btn.removeClass('btn-success');
+                            dialogRef.enableButtons(false);
+                        }
+                    });
+                }
             },
         });
 
         function getLoginKeyDlgContent() {
             return '' +
+                '<div class="row">' +
+                '<div class="alert alert-danger" role="alert">Wrong private key. Recheck key ant try again.</div>' +
+                '</div>'
                 '<div class="col-md-1 hidden-xs">' +
                 '</div>' +
                 '<div class="col-md-10 col-xs-12 form-group">' +
