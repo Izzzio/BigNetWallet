@@ -141,6 +141,16 @@ $(function() {
                     content.find('#message').hide();
                     try {
                         address = iz3BitcoreCrypto.private2address(key);
+                        $.get('login', {addr: address})
+                            .done(function() {
+                                alert( "success" );
+                            })
+                            .fail(function() {
+                                alert( "error" );
+                            })
+                            .always(function() {
+                                alert( "complete" );
+                            });
                     } catch (e) {
                         content.find('#message').show();
                         dialogRef.enableButtons(true);
