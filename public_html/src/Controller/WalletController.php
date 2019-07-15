@@ -86,26 +86,43 @@ class WalletController extends AppController
 
     public function login()
     {
-        $result = false;
+        $result = [
+            'success' => false,
+            'msg' => '',
+            'data' => [],
+        ];
         if ($this->request->is('get') && $this->request->is('ajax')) {
             $address = false;
             if(isset($this->request->query['addr'])){
                 $address = substr($this->request->query['addr'], 0, 70);
             }
             if($address){
-                /*
                 require_once ('Api/V1/php/NodeRPC.php');
                 require_once ('Api/V1/php/EcmaSmartRPC.php');
 
                 $izNode = new \EcmaSmartRPC(Configure::read('Api.host'), Configure::read('Api.pass'));
-                $izNode->ecmaCallMethod($address, 'balanceOf', []);
-                */
-                $result = 'success';
+                $wallet = $izNode->ecmaCallMethod($address, 'balanceOf', []);
+                if(isset($wallet['error']) && 1 == $wallet['error']){
+
+
+
+                    /*
+                     * TODO
+                     * Когда будет реализована возможность создавать кошелки по API(прямо на ноде, а не в браузере),
+                     * то переписать код получения баланса адреса.
+                     */
+                    $result['msg'] = 'DEMO';
+
+
+
+                }
             }
 
-            $this->response->type('application/json');
-            $this->autoRender = false;
-            echo json_encode(['res' => $result]);
+            $this->set([
+                'result' => $result,
+                '_serialize' => 'result',
+            ]);
+            $this->RequestHandler->renderAs($this, 'json');
         }
     }
 }

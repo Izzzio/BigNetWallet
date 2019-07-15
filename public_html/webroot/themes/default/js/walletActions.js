@@ -132,30 +132,48 @@ $(function() {
                 label: ' Access Wallet',
                 cssClass: 'btn',
                 action: function(dialogRef){
-                    dialogRef.enableButtons(false);
-                    dialogRef.setClosable(false);
-                    this.spin();
+                    dialogRef
+                        .enableButtons(false)
+                        .setClosable(false);
                     let content = dialogRef.getModalContent();
                     let key = String(content.find('#key').val() || false);
                     let address = false;
+                    let $button = this;
+                    $button.spin();
                     content.find('#message').hide();
                     try {
                         address = iz3BitcoreCrypto.private2address(key);
-                        $.get('login', {addr: address})
-                            .done(function() {
-                                alert( "success" );
+                        $.getJSON('login', {addr: address})
+                            .done(function(resp) {
+                                if(resp.success){
+                                    window.location.replace("/interface");
+                                } else if('DEMO' === resp.msg){
+                                    window.location.replace("/interface");
+                                } else {
+                                    content.find('#message')
+                                        .html(resp.msg)
+                                        .show();
+                                }
                             })
-                            .fail(function() {
-                                alert( "error" );
+                            .fail(function(resp) {
+                                content.find('#message')
+                                    .html(resp.msg)
+                                    .show();
                             })
-                            .always(function() {
-                                alert( "complete" );
+                            .always(function(resp) {
+                                dialogRef
+                                    .enableButtons(true)
+                                    .setClosable(true);
+                                $button.stopSpin();
                             });
                     } catch (e) {
-                        content.find('#message').show();
-                        dialogRef.enableButtons(true);
-                        dialogRef.setClosable(true);
-                        this.stopSpin();
+                        content.find('#message')
+                            .html('Wrong private key. Re-check key ant try again.')
+                            .show();
+                        dialogRef
+                            .enableButtons(true)
+                            .setClosable(true);
+                        $button.stopSpin();
                     }
                 }
             }],
@@ -184,7 +202,6 @@ $(function() {
         function getLoginKeyDlgContent() {
             return '' +
                 '<div id="message" class="row alert alert-danger" role="alert" style="border-radius: 0px; display: none;">' +
-                'Wrong private key. Re-check key ant try again.' +
                 '</div>' +
                 '<div class="container-fluid">' +
                 '<div class="col-md-1 hidden-xs">' +
