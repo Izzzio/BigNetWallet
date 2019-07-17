@@ -146,9 +146,29 @@ $(function() {
                         $.getJSON('login', {addr: address})
                             .done(function(resp) {
                                 if(resp.success){
-                                    window.location.replace("/interface");
+
+                                    //document.body.innerHTML = resp.data;
+
+                                    //document.write(resp.data);
+                                    //document.open();
+
+                                    document.documentElement.innerHTML = resp.data;
+
+                                    window.history.pushState({"html":resp.data,"pageTitle":'TITLE 1'},"", '/interface/send-online');
+                                    //window.location.replace("/send/online");
+
                                 } else if('DEMO' === resp.msg){
-                                    window.location.replace("/interface");
+
+                                    //document.body.innerHTML = resp.data;
+
+                                    //document.write(resp.data);
+                                    //document.open();
+
+                                    document.documentElement.innerHTML = resp.data;
+
+                                    //window.history.pushState({"html":resp.data,"pageTitle":'TITLE 2'},"", '/interface/send-online');
+                                    //window.location.replace("/send/online");
+
                                 } else {
                                     content.find('#message')
                                         .html(resp.msg)

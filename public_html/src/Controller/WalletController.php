@@ -118,11 +118,44 @@ class WalletController extends AppController
                 }
             }
 
+
+            //$this->set('activeMenu', $this->_hilightActiveMenuItem());
+
+
+            // you can have view variables.
+            $data = 'A view variable';
+
+            // create a builder (hint: new ViewBuilder() constructor works too)
+            $builder = $this->viewBuilder();
+
+            // configure as needed
+            $builder
+                //->layoutPath('Admin')
+                ->layout('interface')
+                ->templatePath('Interface')
+                ->template('login');
+
+            // create a view instance
+            $view = $builder->build(compact('data'));
+
+            // render to a variable
+            $result['data'] = $view->render();
+
             $this->set([
                 'result' => $result,
                 '_serialize' => 'result',
             ]);
             $this->RequestHandler->renderAs($this, 'json');
+
+
+
+
+
+
+
+
+
+
         }
     }
 }

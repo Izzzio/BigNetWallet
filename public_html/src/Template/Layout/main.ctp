@@ -90,6 +90,8 @@
         </section>
     </aside>
 
+    <?= $this->fetch('menu') ?>
+
     <!-- Content Wrapper. Contains page content -->
     <?= $this->Flash->render() ?>
     <?= $this->fetch('content') ?>
