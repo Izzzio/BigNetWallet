@@ -100,24 +100,29 @@ class WalletController extends AppController
                 require_once ('Api/V1/php/NodeRPC.php');
                 require_once ('Api/V1/php/EcmaSmartRPC.php');
 
-                $izNode = new \EcmaSmartRPC(Configure::read('Api.host'), Configure::read('Api.pass'));
-                $wallet = $izNode->ecmaCallMethod($address, 'balanceOf', []);
-                if(isset($wallet['error']) && 1 == $wallet['error']){
+                try{
+                    $izNode = new \EcmaSmartRPC(Configure::read('Api.host'), Configure::read('Api.pass'));
+                    $wallet = $izNode->ecmaCallMethod($address, 'balanceOf', []);
+                    if(isset($wallet['error']) && 1 == $wallet['error']){
 
 
 
-                    /*
-                     * TODO
-                     * Когда будет реализована возможность создавать кошелки по API(прямо на ноде, а не в браузере),
-                     * то переписать код получения баланса адреса.
-                     */
-                    $result['msg'] = 'DEMO';
+                        /*
+                         * TODO
+                         * Когда будет реализована возможность создавать кошелки по API(прямо на ноде, а не в браузере),
+                         * то переписать код получения баланса адреса.
+                         */
+                        $result['msg'] = 'DEMO';
 
 
 
+                    }
+                } catch (\Exception $e){
+                    $result['msg'] = 'Unable connect to wallet';
                 }
+            } else {
+                $result['msg'] = 'Enter your key, please';
             }
-
 
             //$this->set('activeMenu', $this->_hilightActiveMenuItem());
 

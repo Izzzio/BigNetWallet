@@ -90,8 +90,6 @@
         </section>
     </aside>
 
-    <?= $this->fetch('menu') ?>
-
     <!-- Content Wrapper. Contains page content -->
     <?= $this->Flash->render() ?>
     <?= $this->fetch('content') ?>
@@ -109,6 +107,8 @@
 </div>
 <!-- ./wrapper -->
 
+</body>
+
 <script src="<?= URL_PREFIX . APP_THEME_BASE ?>/components/bootstrap/bootstrap.min.js"></script>
 <!-- FastClick -->
 <script src="<?= URL_PREFIX . APP_THEME_BASE ?>/components/fastclick/fastclick.js"></script>
@@ -120,5 +120,5 @@
 <script src="<?= URL_PREFIX . APP_THEME_BASE ?>/js/langs.js?_=<?= CORE_VERSION ?>"></script>
 <script src="<?= URL_PREFIX . APP_THEME_BASE ?>/js/main.js?_=<?= CORE_VERSION ?>"></script>
 <script src="<?= URL_PREFIX . APP_THEME_BASE ?>/js/walletActions.js?_=<?= CORE_VERSION ?>"></script>
-</body>
+
 </html>

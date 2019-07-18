@@ -147,27 +147,25 @@ $(function() {
                             .done(function(resp) {
                                 if(resp.success){
 
-                                    //document.body.innerHTML = resp.data;
+                                    document.body.innerHTML = resp.data;
 
-                                    //document.write(resp.data);
-                                    //document.open();
+                                    //document.documentElement.innerHTML = resp.data;
 
-                                    document.documentElement.innerHTML = resp.data;
-
-                                    window.history.pushState({"html":resp.data,"pageTitle":'TITLE 1'},"", '/interface/send-online');
+                                    //window.history.pushState({"html":resp.data,"pageTitle":'TITLE 1'},"", '/interface/send-online');
                                     //window.location.replace("/send/online");
+
+                                    $('[data-widget="tree"]', $('body')).tree();
 
                                 } else if('DEMO' === resp.msg){
 
-                                    //document.body.innerHTML = resp.data;
+                                    document.body.innerHTML = resp.data;
 
-                                    //document.write(resp.data);
-                                    //document.open();
-
-                                    document.documentElement.innerHTML = resp.data;
+                                    //document.documentElement.innerHTML = resp.data;
 
                                     //window.history.pushState({"html":resp.data,"pageTitle":'TITLE 2'},"", '/interface/send-online');
                                     //window.location.replace("/send/online");
+
+                                    $('[data-widget="tree"]', $('body')).tree();
 
                                 } else {
                                     content.find('#message')
@@ -227,7 +225,7 @@ $(function() {
                 '<div class="col-md-1 hidden-xs">' +
                 '</div>' +
                 '<div class="col-md-10 col-xs-12 form-group">' +
-                '<input type="text" id="key" placeholder="Enter Private Key" class="form-control input-lg">' +
+                '<input type="text" id="key" placeholder="Enter Private Key" class="form-control input-lg" autocomplete="off">' +
                 '</div>' +
                 '<div class="col-md-1 hidden-xs">' +
                 '</div>' +

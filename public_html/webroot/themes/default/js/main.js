@@ -17,5 +17,10 @@ $(function () {
         $('.key').show();
     });
 
-    $('[data-toggle="popover"]').popover();
+    var popOverSettings = {
+        container: 'body',
+        selector: '[data-toggle="popover"]',
+        trigger: 'hover'
+    };
+    $('body').popover(popOverSettings);
 });

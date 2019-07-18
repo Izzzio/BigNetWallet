@@ -1,46 +1,3 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <title>iZ³ BigNet network. Home</title>
-    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
-    <meta name="description" content="iZ³ BigNet network"/>
-    <meta name="keywords" content="blockchain, network, izzzio"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-    <link rel="shortcut icon" href="https://izzz.io/favicon.ico">
-
-    <!-- Bootstrap 3.3.7 -->
-    <link rel="stylesheet" href="<?= URL_PREFIX . APP_THEME_BASE ?>/components/bootstrap/bootstrap.min.css">
-    <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css"
-          integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
-    <link rel="stylesheet" href="<?= URL_PREFIX . APP_THEME_BASE ?>/css/custom.css?_=<?= CORE_VERSION ?>">
-    <!-- Theme style -->
-    <link rel="stylesheet" href="<?= URL_PREFIX . APP_THEME_BASE ?>/lte/css/AdminLTE.min.css">
-    <!-- AdminLTE Skins. Choose a skin from the css/skins
-         folder instead of downloading all of them to reduce the load. -->
-    <link rel="stylesheet" href="<?= URL_PREFIX . APP_THEME_BASE ?>/lte/css/skins/all-skins.min.css">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-    <![endif]-->
-
-    <link rel="stylesheet" href="<?= URL_PREFIX . APP_THEME_BASE ?>/plugins/icheck/skins/flat/blue.css">
-    <link rel="stylesheet" href="<?= URL_PREFIX . APP_THEME_BASE ?>/plugins/bootstrap-toggle/css/bootstrap-toggle.min.css">
-
-    <script src="<?= URL_PREFIX . APP_THEME_BASE ?>/components/jquery/jquery.min.js"></script>
-    <script src="<?= URL_PREFIX . APP_THEME_BASE ?>/plugins/jquery-i18next/jquery-i18next.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/i18next/15.0.5/i18next.min.js"></script>
-
-    <!-- Google Font -->
-    <link rel="stylesheet"
-          href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic">
-
-</head>
-<body class="hold-transition skin-green sidebar-mini">
 <div class="wrapper">
 
     <header class="main-header">
@@ -180,19 +137,3 @@
     <div class="control-sidebar-bg"></div>
 
 </div>
-<!-- ./wrapper -->
-
-<script src="<?= URL_PREFIX . APP_THEME_BASE ?>/components/bootstrap/bootstrap.min.js"></script>
-<!-- FastClick -->
-<script src="<?= URL_PREFIX . APP_THEME_BASE ?>/components/fastclick/fastclick.js"></script>
-<!-- AdminLTE App -->
-<script src="<?= URL_PREFIX . APP_THEME_BASE ?>/lte/js/adminlte.min.js"></script>
-<!-- SlimScroll -->
-<script src="<?= URL_PREFIX . APP_THEME_BASE ?>/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
-<script src="<?= URL_PREFIX . APP_THEME_BASE ?>/js/langs.js?_=<?= CORE_VERSION ?>"></script>
-<script src="<?= URL_PREFIX . APP_THEME_BASE ?>/js/main.js?_=<?= CORE_VERSION ?>"></script>
-
-<script src="<?= URL_PREFIX . APP_THEME_BASE ?>/plugins/icheck/icheck.min.js"></script>
-<script src="<?= URL_PREFIX . APP_THEME_BASE ?>/plugins/bootstrap-toggle/js/bootstrap-toggle.min.js"></script>
-</body>
-</html>
