@@ -14,3 +14,12 @@
     border: 1px #00a65a solid;
     font-weight: 600;
 }
+
+.info-box-number{
+    font-size: 24px;
+    font-weight: normal;
+}
+
+.info-box-text{
+    font-size: 18px;
+}
