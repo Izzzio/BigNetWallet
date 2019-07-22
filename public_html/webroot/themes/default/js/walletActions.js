@@ -147,25 +147,22 @@ $(function() {
                             .done(function(resp) {
                                 if(resp.success){
 
-                                    document.body.innerHTML = resp.data;
-
-                                    //document.documentElement.innerHTML = resp.data;
+                                    $('section.sidebar', $('body')).html(resp.data.menu);
+                                    $('.content-wrapper', $('body')).html(resp.data.page);
+                                    dialogRef.close();
 
                                     //window.history.pushState({"html":resp.data,"pageTitle":'TITLE 1'},"", '/interface/send-online');
                                     //window.location.replace("/send/online");
 
-                                    $('[data-widget="tree"]', $('body')).tree();
-
                                 } else if('DEMO' === resp.msg){
 
-                                    document.body.innerHTML = resp.data;
-
-                                    //document.documentElement.innerHTML = resp.data;
+                                    //document.body.innerHTML = resp.data;
+                                    $('section.sidebar', $('body')).html(resp.data.menu);
+                                    $('.content-wrapper', $('body')).html(resp.data.page);
+                                    dialogRef.close();
 
                                     //window.history.pushState({"html":resp.data,"pageTitle":'TITLE 2'},"", '/interface/send-online');
                                     //window.location.replace("/send/online");
-
-                                    $('[data-widget="tree"]', $('body')).tree();
 
                                 } else {
                                     content.find('#message')

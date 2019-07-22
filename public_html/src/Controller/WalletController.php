@@ -124,9 +124,6 @@ class WalletController extends AppController
                 $result['msg'] = 'Enter your key, please';
             }
 
-            //$this->set('activeMenu', $this->_hilightActiveMenuItem());
-
-
             // you can have view variables.
             $data = 'A view variable';
 
@@ -136,31 +133,26 @@ class WalletController extends AppController
             // configure as needed
             $builder
                 //->layoutPath('Admin')
-                ->layout('interface')
+                ->layout('ajax')
                 ->templatePath('Interface')
-                ->template('login');
+                ->template('menu');
 
             // create a view instance
             $view = $builder->build(compact('data'));
-
             // render to a variable
-            $result['data'] = $view->render();
+            $result['data']['menu'] = $view->render();
+
+
+            $builder
+                ->template('login');
+            $view = $builder->build();
+            $result['data']['page'] = $view->render();
 
             $this->set([
                 'result' => $result,
                 '_serialize' => 'result',
             ]);
             $this->RequestHandler->renderAs($this, 'json');
-
-
-
-
-
-
-
-
-
-
         }
     }
 }

@@ -1,4 +1,4 @@
-<div class="wrapper">
+<div class="wrapper" style="height: 100%;">
 
     <header class="main-header">
 
@@ -26,7 +26,7 @@
         <section class="sidebar">
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header"></li>
-                <li class="treeview">
+                <li class="active treeview menu-open">
                     <a href="#">
                         <i class="fas fa-link"></i>
                         &nbsp;&nbsp;
@@ -36,7 +36,7 @@
                         </span>
                     </a>
                     <ul class="treeview-menu">
-                        <li>
+                        <li class="active">
                             <a href="#">
                                 <i class="far fa-sm fa-circle"></i>
                                 &nbsp;&nbsp;
