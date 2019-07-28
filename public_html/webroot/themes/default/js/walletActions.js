@@ -145,6 +145,10 @@ $(function() {
                         address = iz3BitcoreCrypto.private2address(key);
                         $.getJSON('login', {addr: address})
                             .done(function(resp) {
+
+                                //walletIZ3.transaction.online.checkReady();
+                                walletIZ3.setEventListeners();
+
                                 if(resp.success){
 
                                     $('section.sidebar', $('body')).html(resp.data.menu);
@@ -219,15 +223,163 @@ $(function() {
                 '<div id="message" class="row alert alert-danger" role="alert" style="border-radius: 0px; display: none;">' +
                 '</div>' +
                 '<div class="container-fluid">' +
-                '<div class="col-md-1 hidden-xs">' +
-                '</div>' +
-                '<div class="col-md-10 col-xs-12 form-group">' +
+                '<div class="row">' +
+                '<div class="col-md-12 col-xs-12 form-group">' +
                 '<input type="text" id="key" placeholder="Enter Private Key" class="form-control input-lg" autocomplete="off">' +
                 '</div>' +
-                '<div class="col-md-1 hidden-xs">' +
                 '</div>' +
                 '</div>';
         }
+
+        var walletIZ3 = {
+            setEventListeners: function(){
+
+
+                /*
+                TODO
+                add .validate on ajax loaded page
+                 */
+
+
+
+                $("#tnsn_online").validate({
+                    rules: {
+                        type: {
+                            required: true
+                        },
+                        amount: {
+                            required: true
+                        },
+                        payee: {
+                            required: true
+                        }
+                    },
+                    errorPlacement: function () {
+                        return false;
+                    },
+                    highlight: function (element) {
+                        $(element).addClass('error');
+                    }
+                });
+
+                /*
+                $('#amount', '#tnsn_online').on('change', function () {
+                    alert($(this).val());
+                });
+                $('#payee', '#tnsn_online').on('change', function () {
+                    alert($(this).val());
+                });
+                */
+
+            },
+            xmlHttpRequest: {
+                defaults: {
+                    method: 'GET'
+                },
+                settings: {},
+                data: '',
+                init: function (options) {
+                    options = options || false;
+                    if (options) {
+                        this.settings = walletIZ3.utility.extend(this.defaults, options);
+                    } else {
+                        this.settings = walletIZ3.utility.extend(this.defaults, this.defaults);
+                    }
+                },
+                send: function (callback) {
+                    var xmlHttp = new XMLHttpRequest();
+                    xmlHttp.onreadystatechange = function () {
+                        if (4 === xmlHttp.readyState) {
+                            if (200 === xmlHttp.status) {
+                                if (callback) {
+                                    callback(xmlHttp.responseText);
+                                }
+                            } else {
+                                console.log(xmlHttp);
+                            }
+                        }
+                    };
+                    xmlHttp.open(this.settings.method, this.settings.url, true);
+                    xmlHttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+                    xmlHttp.send(this.data);
+                },
+                collectData: function (wrapper_id) {
+                    var block = document.getElementById(wrapper_id) || false;
+                    if (block) {
+                        var element = '';
+                        var name = '';
+                        var value = '';
+                        var urlEncodedDataPairs = [];
+                        var elements = block.querySelectorAll("input, select, textarea");
+                        for (var i = 0; i < elements.length; ++i) {
+                            element = elements[i];
+                            if ('radio' === element.type) {
+                                name = element.name + '_' + element.value;
+                                value = 0;
+                                if (element.checked) {
+                                    value = 1;
+                                }
+                            } else {
+                                name = element.name;
+                                value = element.checked ? 1 : element.value;
+                            }
+                            urlEncodedDataPairs.push(encodeURIComponent(name) + '=' + encodeURIComponent(value));
+                        }
+                        this.data = urlEncodedDataPairs.join('&').replace(/%20/g, '+');
+                    }
+                },
+                parseResponse: function (response) {
+                    var result = JSON.parse(response);
+                    if (!result['success']) {
+                        var block = document.getElementById(PAW.form.fid).querySelector('#paw_message') || false;
+                        if (block) {
+                            var message = '';
+                            for (var i = 0; i < result['messages'].length; ++i) {
+                                message += '<div class="paw-text-row">' + result['messages'][i] + '</div>';
+                            }
+                            block.innerHTML = message;
+                        } else {
+                            alert(result['messages'].join("\r"));
+                        }
+                        return false;
+                    }
+                    if (result['data']) {
+                        var paw_div = document.createElement('div');
+                        paw_div.innerHTML = result['data'];
+                        var el = document.getElementById(PAW.form.fid).parentNode;
+                        el.appendChild(paw_div);
+                        el.querySelector('#paw_mnt_form').submit();
+                    }
+                }
+            },
+            utility: {
+                extend: function (defaults, options) {
+                    var extended = {};
+                    var prop;
+                    for (prop in defaults) {
+                        if (Object.prototype.hasOwnProperty.call(defaults, prop)) {
+                            extended[prop] = defaults[prop];
+                        }
+                    }
+                    for (prop in options) {
+                        if (Object.prototype.hasOwnProperty.call(options, prop)) {
+                            extended[prop] = options[prop];
+                        }
+                    }
+                    return extended;
+                }
+            },
+            transaction: {
+                online: {
+                    checkReady: function(){
+                        $('#amount').on('change', function () {
+                            alert($(this).val());
+                        })
+                    }
+                },
+                offline: {}
+            }
+        };
 
     })();
 

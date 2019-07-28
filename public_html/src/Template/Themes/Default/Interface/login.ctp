@@ -14,17 +14,17 @@
                         <span class="info-box-text">
                             <span data-container="body" data-toggle="popover" data-placement="top"
                                   data-content="Address in QRcode" data-trigger="hover">
-                                <i class="fas fa-qrcode"></i>
+                                <i class="fas fa-lg fa-qrcode"></i>
                             </span>
                             &nbsp;
                             <span data-container="body" data-toggle="popover" data-placement="top"
                                   data-content="Print" data-trigger="hover">
-                                <i class="fas fa-print"></i>
+                                <i class="fas fa-lg fa-print"></i>
                             </span>
                             &nbsp;
                             <span data-container="body" data-toggle="popover" data-placement="top"
                                   data-content="Copy" data-trigger="hover">
-                                <i class="far fa-copy"></i>
+                                <i class="far fa-lg fa-copy"></i>
                             </span>
                         </span>
                 </div>
@@ -32,7 +32,7 @@
         </div>
         <div class="col-md-4">
             <div class="info-box bg-blue">
-                <span class="info-box-icon" style="background: none;"><i class="fas fa-wallet fa-lg"></i></span>
+                <span class="info-box-icon" style="background: none;"><i class="fas fa-lg fa-wallet fa-lg"></i></span>
                 <div class="info-box-content" style="min-height: 95px;">
                     <span class="info-box-number">Balance</span>
                     <span class="info-box-text">0 ETH</span>
@@ -41,12 +41,12 @@
                         <span class="info-box-text">
                             <span data-container="body" data-toggle="popover" data-placement="top"
                                 data-content="Check Balance" data-trigger="hover">
-                                <i class="fab fa-creative-commons-nd"></i>
+                                <i class="fab fa-lg fa-creative-commons-nd"></i>
                             </span>
                             &nbsp;
                             <span data-container="body" data-toggle="popover" data-placement="top"
                                   data-content="Refresh Balance" data-trigger="hover">
-                                <i class="fas fa-sync-alt"></i>
+                                <i class="fas fa-lg fa-sync-alt"></i>
                             </span>
                         </span>
                 </div>
@@ -82,7 +82,7 @@
                     <h3 class="box-title"><strong>Send transaction</strong></h3>
                 </div>
                 <div class="box-body">
-                    <form>
+                    <form id="tnsn_online">
                         <div class="row col-md-12">
                             <div class="col-md-5">
                                 <div class="form-group form-group-lg">
@@ -95,7 +95,7 @@
                             <div class="col-md-7">
                                 <div class="form-group form-group-lg">
                                     <label for="amount">Amount</label>
-                                    <input type="text" class="form-control" id="amount">
+                                    <input type="text" class="form-control" name="amount" id="amount">
                                 </div>
                             </div>
                         </div>
@@ -107,7 +107,24 @@
                                 </div>
                             </div>
                         </div>
+
+                        <div class="col-md-12">
+                            <hr />
+                            <h4 style="font-weight: 600;">Advanced</h4>
+                        </div>
+
+                        <div class="row col-md-12">
+                            <div class="col-md-12">
+                                <div class="form-group form-group-lg">
+                                    <label for="data">Add data</label>
+                                    <input type="text" class="form-control" id="data" autocomplete="off">
+                                </div>
+                            </div>
+                        </div>
                     </form>
+                </div>
+                <div class="box-footer text-center">
+                    <button type="submit" class="btn btn-primary btn-lg disabled" disabled="disabled">Send Transaction</button>
                 </div>
             </div>
         </div>
