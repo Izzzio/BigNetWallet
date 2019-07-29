@@ -75,14 +75,14 @@
         </div>
     </div>
 
-    <div class="row col-md-12">
+    <div class="row col-md-12" id="tnsn_online">
         <div class="col-md-8">
             <div class="box box-success">
                 <div class="box-header with-border">
                     <h3 class="box-title"><strong>Send transaction</strong></h3>
                 </div>
                 <div class="box-body">
-                    <form id="tnsn_online">
+                    <form>
                         <div class="row col-md-12">
                             <div class="col-md-5">
                                 <div class="form-group form-group-lg">
@@ -103,7 +103,7 @@
                             <div class="col-md-12">
                                 <div class="form-group form-group-lg">
                                     <label for="payee">To address</label>
-                                    <input type="text" class="form-control" id="payee" autocomplete="off">
+                                    <input type="text" class="form-control" name="payee" id="payee" autocomplete="off">
                                 </div>
                             </div>
                         </div>
@@ -124,7 +124,7 @@
                     </form>
                 </div>
                 <div class="box-footer text-center">
-                    <button type="submit" class="btn btn-primary btn-lg disabled" disabled="disabled">Send Transaction</button>
+                    <button type="button" class="btn btn-primary btn-lg disabled send" disabled="disabled">Send Transaction</button>
                 </div>
             </div>
         </div>

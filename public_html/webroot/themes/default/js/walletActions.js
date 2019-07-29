@@ -145,10 +145,6 @@ $(function() {
                         address = iz3BitcoreCrypto.private2address(key);
                         $.getJSON('login', {addr: address})
                             .done(function(resp) {
-
-                                //walletIZ3.transaction.online.checkReady();
-                                walletIZ3.setEventListeners();
-
                                 if(resp.success){
 
                                     $('section.sidebar', $('body')).html(resp.data.menu);
@@ -159,11 +155,12 @@ $(function() {
                                     //window.location.replace("/send/online");
 
                                 } else if('DEMO' === resp.msg){
-
                                     //document.body.innerHTML = resp.data;
                                     $('section.sidebar', $('body')).html(resp.data.menu);
                                     $('.content-wrapper', $('body')).html(resp.data.page);
                                     dialogRef.close();
+
+                                    walletIZ3.setEventListeners();
 
                                     //window.history.pushState({"html":resp.data,"pageTitle":'TITLE 2'},"", '/interface/send-online');
                                     //window.location.replace("/send/online");
@@ -233,16 +230,7 @@ $(function() {
 
         var walletIZ3 = {
             setEventListeners: function(){
-
-
-                /*
-                TODO
-                add .validate on ajax loaded page
-                 */
-
-
-
-                $("#tnsn_online").validate({
+                $('#tnsn_online form', $('body')).validate({
                     rules: {
                         type: {
                             required: true
@@ -254,25 +242,77 @@ $(function() {
                             required: true
                         }
                     },
-                    errorPlacement: function () {
-                        return false;
+                    messages:{
+                        type: {
+                            required: 'This field is required'
+                        },
+                        amount: {
+                            required: 'This field is required'
+                        },
+                        payee: {
+                            required: 'This field is required'
+                        }
                     },
                     highlight: function (element) {
                         $(element).addClass('error');
+                    },
+                    onkeyup: function(element) {
+                        $(element).valid();
+                        if($('#tnsn_online form').valid()) {
+                            $('button', $('#tnsn_online'))
+                                .prop('disabled', false)
+                                .removeClass('disabled');
+                        } else {
+                            $('button', $('#tnsn_online'))
+                                .prop('disabled', true)
+                                .addClass('disabled');
+                        }
                     }
                 });
 
-                /*
-                $('#amount', '#tnsn_online').on('change', function () {
-                    alert($(this).val());
+                $('#tnsn_online .send').on('click', function () {
+                    walletIZ3.HTTPRequest.init({
+                        url: 'login',
+                        method: 'POST',
+                        data: $('#tnsn_online form').serialize()
+                    });
+                    walletIZ3.HTTPRequest.send('resTnsn');
                 });
-                $('#payee', '#tnsn_online').on('change', function () {
-                    alert($(this).val());
-                });
-                */
+
+                function resTnsn(resp) {
+
+
+                    
+                    console.log(resp);
+                    throw('callback getted.');
+
+
+
+
+                    if(resp.success){
+
+                        $('section.sidebar', $('body')).html(resp.data.menu);
+                        $('.content-wrapper', $('body')).html(resp.data.page);
+                        dialogRef.close();
+
+                        //window.history.pushState({"html":resp.data,"pageTitle":'TITLE 1'},"", '/interface/send-online');
+                        //window.location.replace("/send/online");
+
+                    } else if('DEMO' === resp.msg) {
+                        //document.body.innerHTML = resp.data;
+                        $('section.sidebar', $('body')).html(resp.data.menu);
+                        $('.content-wrapper', $('body')).html(resp.data.page);
+                        dialogRef.close();
+
+                        //window.history.pushState({"html":resp.data,"pageTitle":'TITLE 2'},"", '/interface/send-online');
+                        //window.location.replace("/send/online");
+                    } else {
+
+                    }
+                }
 
             },
-            xmlHttpRequest: {
+            HTTPRequest: {
                 defaults: {
                     method: 'GET'
                 },
@@ -287,21 +327,30 @@ $(function() {
                     }
                 },
                 send: function (callback) {
-                    var xmlHttp = new XMLHttpRequest();
-                    xmlHttp.onreadystatechange = function () {
-                        if (4 === xmlHttp.readyState) {
-                            if (200 === xmlHttp.status) {
-                                if (callback) {
-                                    callback(xmlHttp.responseText);
-                                }
-                            } else {
-                                console.log(xmlHttp);
-                            }
+                    $.ajax({
+                        url: this.settings.url,
+                        method: this.settings.method,
+                        data: this.settings.data,
+                        dataType: 'json',
+                    })
+                    .done(function(resp) {
+                        resp = jQuery.parseJSON(resp);
+                        if (callback) {
+                            callback(resp);
                         }
-                    };
-                    xmlHttp.open(this.settings.method, this.settings.url, true);
-                    xmlHttp.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
-                    xmlHttp.send(this.data);
+                    })
+                    .fail(function(r) {
+                        resp = jQuery.parseJSON(resp);
+                        if (callback) {
+                            callback(resp);
+                        }
+                    })
+                    .always(function(r) {
+                        resp = jQuery.parseJSON(resp);
+                        if (callback) {
+                            callback(resp);
+                        }
+                    });
                 },
                 collectData: function (wrapper_id) {
                     var block = document.getElementById(wrapper_id) || false;
