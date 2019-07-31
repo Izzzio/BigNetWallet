@@ -124,9 +124,6 @@ class WalletController extends AppController
                 $result['msg'] = 'Enter your key, please';
             }
 
-            // you can have view variables.
-            $data = 'A view variable';
-
             // create a builder (hint: new ViewBuilder() constructor works too)
             $builder = $this->viewBuilder();
 
@@ -138,14 +135,12 @@ class WalletController extends AppController
                 ->template('menu');
 
             // create a view instance
-            $view = $builder->build(compact('data'));
+            $view = $builder->build();
             // render to a variable
             $result['data']['menu'] = $view->render();
 
-
-            $builder
-                ->template('login');
-            $view = $builder->build();
+            $builder->template('login');
+            $view = $builder->build(compact('address'));
             $result['data']['page'] = $view->render();
 
             $this->set([

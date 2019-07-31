@@ -1,14 +1,14 @@
-$(function() {
-    (function(){
-        let wallet = {};
+$(function () {
+    (function () {
+        const wallet = {'address': false, 'main': {}};
         $('#create').on('click', function () {
-            wallet = iz3BitcoreCrypto.generateWallet();
+            wallet.main = iz3BitcoreCrypto.generateWallet();
         });
 
         $('#save_file').on('click', function () {
             download(
-                JSON.stringify({'address': wallet.keysPair.public}),
-                'UTC--' + ((new Date()).toISOString()) + '--' + wallet.keysPair.public,
+                JSON.stringify({'address': wallet.main.keysPair.public}),
+                'UTC--' + ((new Date()).toISOString()) + '--' + wallet.main.keysPair.public,
                 'text/plain'
             );
             $('#continue')
@@ -17,7 +17,7 @@ $(function() {
         });
 
         $('#continue').on('click', function () {
-            $('#s_key').val(wallet.keysPair.private);
+            $('#s_key').val(wallet.main.keysPair.private);
         });
 
         var selectLoginWayDlg = new BootstrapDialog({
@@ -32,7 +32,7 @@ $(function() {
                 id: 'setWaySeleted',
                 label: ' Continue',
                 cssClass: 'btn',
-                action: function(dialogRef){
+                action: function (dialogRef) {
                     dialogRef.enableButtons(false);
                     dialogRef.setClosable(false);
                     var $button = this;
@@ -50,20 +50,20 @@ $(function() {
                     }
                 }
             }],
-            onshow: function(dialogRef){
+            onshow: function (dialogRef) {
                 dialogRef.enableButtons(false);
                 dialogRef.getModalFooter().css('text-align', 'center')
             },
-            onshown: function(dialogRef){
+            onshown: function (dialogRef) {
                 $('.wallet-option').on('click', function () {
                     let alreadySelected = false;
                     let modalContent = dialogRef.getModalContent();
-                    if($(this).hasClass('selected')){
+                    if ($(this).hasClass('selected')) {
                         alreadySelected = true;
                     }
                     modalContent.find('.wallet-option').removeClass('selected');
                     modalContent.find('.sign-selected').addClass('hidden');
-                    if(alreadySelected){
+                    if (alreadySelected) {
                         modalContent.find('#setWaySeleted').removeClass('btn-success');
                         dialogRef.enableButtons(false);
                     } else {
@@ -77,7 +77,7 @@ $(function() {
             },
         });
 
-        if($('#login').length){
+        if ($('#login').length) {
             selectLoginWayDlg.open();
         }
 
@@ -131,21 +131,20 @@ $(function() {
                 id: 'login',
                 label: ' Access Wallet',
                 cssClass: 'btn',
-                action: function(dialogRef){
+                action: function (dialogRef) {
                     dialogRef
                         .enableButtons(false)
                         .setClosable(false);
                     let content = dialogRef.getModalContent();
                     let key = String(content.find('#key').val() || false);
-                    let address = false;
                     let $button = this;
                     $button.spin();
                     content.find('#message').hide();
                     try {
-                        address = iz3BitcoreCrypto.private2address(key);
-                        $.getJSON('login', {addr: address})
-                            .done(function(resp) {
-                                if(resp.success){
+                        wallet.address = iz3BitcoreCrypto.private2address(key);
+                        $.getJSON('login', {addr: wallet.address})
+                            .done(function (resp) {
+                                if (resp.success) {
 
                                     $('section.sidebar', $('body')).html(resp.data.menu);
                                     $('.content-wrapper', $('body')).html(resp.data.page);
@@ -154,7 +153,7 @@ $(function() {
                                     //window.history.pushState({"html":resp.data,"pageTitle":'TITLE 1'},"", '/interface/send-online');
                                     //window.location.replace("/send/online");
 
-                                } else if('DEMO' === resp.msg){
+                                } else if ('DEMO' === resp.msg) {
                                     //document.body.innerHTML = resp.data;
                                     $('section.sidebar', $('body')).html(resp.data.menu);
                                     $('.content-wrapper', $('body')).html(resp.data.page);
@@ -171,12 +170,12 @@ $(function() {
                                         .show();
                                 }
                             })
-                            .fail(function(resp) {
+                            .fail(function (resp) {
                                 content.find('#message')
                                     .html(resp.msg)
                                     .show();
                             })
-                            .always(function(resp) {
+                            .always(function (resp) {
                                 dialogRef
                                     .enableButtons(true)
                                     .setClosable(true);
@@ -193,16 +192,16 @@ $(function() {
                     }
                 }
             }],
-            onshow: function(dialogRef){
+            onshow: function (dialogRef) {
                 dialogRef.enableButtons(false);
                 dialogRef.getModalFooter().css('text-align', 'center')
             },
-            onshown: function(dialogRef){
+            onshown: function (dialogRef) {
                 let btn = dialogRef.getModalContent().find('#login') || false;
-                if(btn){
+                if (btn) {
                     $('#key').on('keyup', function () {
-                        if($(this).val().length >= 1){
-                            if(!btn.hasClass('btn-success')){
+                        if ($(this).val().length >= 1) {
+                            if (!btn.hasClass('btn-success')) {
                                 btn.addClass('btn-success');
                                 dialogRef.enableButtons(true);
                             }
@@ -229,7 +228,7 @@ $(function() {
         }
 
         var walletIZ3 = {
-            setEventListeners: function(){
+            setEventListeners: function () {
                 $('#tnsn_online form', $('body')).validate({
                     rules: {
                         type: {
@@ -242,7 +241,7 @@ $(function() {
                             required: true
                         }
                     },
-                    messages:{
+                    messages: {
                         type: {
                             required: 'This field is required'
                         },
@@ -256,9 +255,9 @@ $(function() {
                     highlight: function (element) {
                         $(element).addClass('error');
                     },
-                    onkeyup: function(element) {
+                    onkeyup: function (element) {
                         $(element).valid();
-                        if($('#tnsn_online form').valid()) {
+                        if ($('#tnsn_online form').valid()) {
                             $('button', $('#tnsn_online'))
                                 .prop('disabled', false)
                                 .removeClass('disabled');
@@ -272,45 +271,12 @@ $(function() {
 
                 $('#tnsn_online .send').on('click', function () {
                     walletIZ3.HTTPRequest.init({
-                        url: 'login',
+                        url: '/transaction/online',
                         method: 'POST',
-                        data: $('#tnsn_online form').serialize()
+                        data: $('#tnsn_online form').serialize() + '&addr=' + wallet.address
                     });
-                    walletIZ3.HTTPRequest.send('resTnsn');
+                    walletIZ3.HTTPRequest.send('resTnsnOnline');
                 });
-
-                function resTnsn(resp) {
-
-
-                    
-                    console.log(resp);
-                    throw('callback getted.');
-
-
-
-
-                    if(resp.success){
-
-                        $('section.sidebar', $('body')).html(resp.data.menu);
-                        $('.content-wrapper', $('body')).html(resp.data.page);
-                        dialogRef.close();
-
-                        //window.history.pushState({"html":resp.data,"pageTitle":'TITLE 1'},"", '/interface/send-online');
-                        //window.location.replace("/send/online");
-
-                    } else if('DEMO' === resp.msg) {
-                        //document.body.innerHTML = resp.data;
-                        $('section.sidebar', $('body')).html(resp.data.menu);
-                        $('.content-wrapper', $('body')).html(resp.data.page);
-                        dialogRef.close();
-
-                        //window.history.pushState({"html":resp.data,"pageTitle":'TITLE 2'},"", '/interface/send-online');
-                        //window.location.replace("/send/online");
-                    } else {
-
-                    }
-                }
-
             },
             HTTPRequest: {
                 defaults: {
@@ -333,24 +299,23 @@ $(function() {
                         data: this.settings.data,
                         dataType: 'json',
                     })
-                    .done(function(resp) {
-                        resp = jQuery.parseJSON(resp);
+                    /*
+                    .done(function (resp) {
                         if (callback) {
-                            callback(resp);
+                            walletIZ3.callbacks[callback](resp);
                         }
                     })
-                    .fail(function(r) {
-                        resp = jQuery.parseJSON(resp);
+                    .fail(function (resp) {
                         if (callback) {
-                            callback(resp);
+                            walletIZ3.callbacks[callback](resp);
                         }
                     })
-                    .always(function(r) {
-                        resp = jQuery.parseJSON(resp);
-                        if (callback) {
-                            callback(resp);
-                        }
-                    });
+                    */
+                        .always(function (resp) {
+                            if (callback) {
+                                walletIZ3.callbacks[callback](resp);
+                            }
+                        });
                 },
                 collectData: function (wrapper_id) {
                     var block = document.getElementById(wrapper_id) || false;
@@ -376,7 +341,8 @@ $(function() {
                         }
                         this.data = urlEncodedDataPairs.join('&').replace(/%20/g, '+');
                     }
-                },
+                }
+                /*
                 parseResponse: function (response) {
                     var result = JSON.parse(response);
                     if (!result['success']) {
@@ -400,6 +366,37 @@ $(function() {
                         el.querySelector('#paw_mnt_form').submit();
                     }
                 }
+                */
+            },
+            callbacks: {
+                resTnsnOnline: function (resp) {
+                    if (resp.success) {
+                        BootstrapDialog.alert({
+                            title: 'Result',
+                            message: 'Transaction succesfull created',
+                            type: BootstrapDialog.TYPE_INFO,
+                            size: BootstrapDialog.SIZE_LARGE,
+                            closable: true
+                        });
+                        $('button', $('#tnsn_online'))
+                            .prop('disabled', true)
+                            .addClass('disabled');
+                        $('input', $('#tnsn_online')).val('');
+                    } else if ('DEMO' === resp.msg) {
+                        BootstrapDialog.alert({
+                            title: 'Result',
+                            message: 'Transaction succesfull created',
+                            type: BootstrapDialog.TYPE_INFO,
+                            size: BootstrapDialog.SIZE_LARGE,
+                            closable: true
+                        });
+                        $('button', $('#tnsn_online'))
+                            .prop('disabled', true)
+                            .addClass('disabled');
+                        $('input', $('#tnsn_online')).val('');
+                    } else {
+                    }
+                }
             },
             utility: {
                 extend: function (defaults, options) {
@@ -420,7 +417,7 @@ $(function() {
             },
             transaction: {
                 online: {
-                    checkReady: function(){
+                    checkReady: function () {
                         $('#amount').on('change', function () {
                             alert($(this).val());
                         })

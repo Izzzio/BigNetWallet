@@ -6,8 +6,8 @@
                 <span class="info-box-icon" style="background: none;"><i class="fas fa-font fa-lg"></i></span>
                 <div class="info-box-content" style="min-height: 95px;">
                     <span class="info-box-number">Address</span>
-                    <span class="info-box-text" style="overflow-wrap: break-word;white-space: unset;">
-                        0x9f5457694611261B987EdD0763843ce3FC5A8dbe
+                    <span class="info-box-text" style="overflow-wrap: break-word;white-space: unset; text-transform: none;">
+                        <?= $address; ?>
                     </span>
                 </div>
                 <div class="info-box-content" style="margin-top: 6px;">
