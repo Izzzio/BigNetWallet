@@ -35,7 +35,7 @@
                 <span class="info-box-icon" style="background: none;"><i class="fas fa-lg fa-wallet fa-lg"></i></span>
                 <div class="info-box-content" style="min-height: 95px;">
                     <span class="info-box-number">Balance</span>
-                    <span class="info-box-text">0 ETH</span>
+                    <span class="info-box-text"><?= $balance; ?> IZ3</span>
                 </div>
                 <div class="info-box-content" style="margin-top: 6px;">
                         <span class="info-box-text">
@@ -60,7 +60,7 @@
 
                 <div class="info-box-content" style="min-height: 95px;">
                     <span class="info-box-number">Network</span>
-                    <div>bignet.izzz.io (ETH)</div>
+                    <div>bignet.izzz.io (IZ3)</div>
                     <div>Last block# : 7882452</div>
                 </div>
                 <div class="info-box-content" style="margin-top: 6px;">
@@ -75,7 +75,7 @@
         </div>
     </div>
 
-    <div class="row col-md-12" id="tnsn_online">
+    <div class="row col-md-12 box-wrapper" id="tnsn_online">
         <div class="col-md-8">
             <div class="box box-success">
                 <div class="box-header with-border">
@@ -88,7 +88,10 @@
                                 <div class="form-group form-group-lg">
                                     <label for="type">Type</label>
                                     <select class="form-control" name="type" id="type">
+                                        <option value="IZ3">IZ3 - IZZZIO main token</option>
+                                        <!--
                                         <option value="ETH">ETH - Ethereum</option>
+                                        -->
                                     </select>
                                 </div>
                             </div>
@@ -118,6 +121,70 @@
                                 <div class="form-group form-group-lg">
                                     <label for="data">Add data</label>
                                     <input type="text" class="form-control" id="data" autocomplete="off">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="box-footer text-center">
+                    <button type="button" class="btn btn-primary btn-lg disabled send" disabled="disabled">Send Transaction</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row col-md-12 box-wrapper" id="tnsn_offline" style="display: none;">
+        <div class="col-md-8">
+            <div class="box box-success">
+                <div class="box-header with-border">
+                    <h3 class="box-title"><strong>Send Offline</strong></h3>
+                </div>
+                <div class="box-body">
+                    <form>
+                        <div class="row col-md-12">
+                            <div class="col-md-5">
+                                <div class="form-group form-group-lg">
+                                    <label for="type">Type</label>
+                                    <select class="form-control" name="type" id="type">
+                                        <option value="IZ3">IZ3 - IZZZIO main token</option>
+                                    </select>
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="form-group form-group-lg">
+                                    <label for="amount">Amount</label>
+                                    <input type="text" class="form-control" name="amount" id="amount" placeholder="Deposit Amount">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row col-md-12">
+                            <div class="col-md-12">
+                                <div class="form-group form-group-lg">
+                                    <label for="payee">To address</label>
+                                    <textarea
+                                            class="form-control" name="payee" id="payee" autocomplete="off"
+                                            placeholder="Please Enter The Address" style="height: 115px;"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row col-md-12">
+                            <div class="col-md-12">
+                                <div class="form-group form-group-lg">
+                                    <label for="data">Data</label>
+                                    <input type="text" class="form-control" id="data" autocomplete="off" value="0x" disabled="disabled">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row col-md-12">
+                            <div class="col-md-12">
+                                <div class="form-group form-group-lg">
+                                    <label for="gas_limit">Gas limit</label>
+                                    &nbsp;&nbsp;
+                                    <span data-container="body" data-toggle="popover" data-placement="top"
+                                          data-content="This refers to the maximum allowance of gas you will give for a transaction. All excess gas will be refunded from successful transactions. This field should autogenerate based on network congestion." data-trigger="hover" class="mini">
+                                        <i class="fas fa-exclamation-circle sign-help sign-muted"></i>
+                                    </span>
+                                    <input type="text" class="form-control" id="gas_limit" autocomplete="off">
                                 </div>
                             </div>
                         </div>

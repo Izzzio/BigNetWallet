@@ -93,6 +93,7 @@ class WalletController extends AppController
         ];
         if ($this->request->is('get') && $this->request->is('ajax')) {
             $address = false;
+            $balance = 0;
             if(isset($this->request->query['addr'])){
                 $address = substr($this->request->query['addr'], 0, 70);
             }
@@ -126,8 +127,6 @@ class WalletController extends AppController
 
             // create a builder (hint: new ViewBuilder() constructor works too)
             $builder = $this->viewBuilder();
-
-            // configure as needed
             $builder
                 //->layoutPath('Admin')
                 ->layout('ajax')
@@ -136,11 +135,12 @@ class WalletController extends AppController
 
             // create a view instance
             $view = $builder->build();
+
             // render to a variable
             $result['data']['menu'] = $view->render();
 
             $builder->template('login');
-            $view = $builder->build(compact('address'));
+            $view = $builder->build(compact(['address', 'balance']));
             $result['data']['page'] = $view->render();
 
             $this->set([

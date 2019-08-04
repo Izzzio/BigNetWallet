@@ -20,7 +20,13 @@ $(function () {
     var popOverSettings = {
         container: 'body',
         selector: '[data-toggle="popover"]',
-        trigger: 'hover'
+        trigger: 'hover',
+        template: '<div class="popover"><div class="popover-content popover-custom"></div><div class="arrow"></div></div>'
     };
-    $('body').popover(popOverSettings);
+    let body = $('body');
+    body.popover(popOverSettings);
+
+    body.on('inserted.bs.popover', '.mini', function(){
+        body.find('.popover').addClass('popover-mini');
+    });
 });

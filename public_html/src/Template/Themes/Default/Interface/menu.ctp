@@ -10,14 +10,14 @@
                         </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li class="active">
+                    <li class="active" box="tnsn_online">
                         <a href="#">
                             <i class="far fa-sm fa-circle"></i>
                             &nbsp;&nbsp;
                             <span>Transaction ONline</span>
                         </a>
                     </li>
-                    <li>
+                    <li box="tnsn_offline">
                         <a href="#">
                             <i class="far fa-sm fa-circle"></i>
                             &nbsp;&nbsp;
