@@ -36,3 +36,14 @@ label.error {
 .popover-mini {
     font-size: 12px;
 }
+
+input.without-arrow::-webkit-outer-spin-button,
+input.without-arrow::-webkit-inner-spin-button {
+    /* display: none; <- Crashes Chrome on hover */
+    -webkit-appearance: none;
+    margin: 0; /* <-- Apparently some margin are still there even though it's hidden */
+}
+
+input[type=number].without-arrow {
+    -moz-appearance:textfield; /* Firefox */
+}

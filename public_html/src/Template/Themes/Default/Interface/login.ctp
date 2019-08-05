@@ -98,7 +98,7 @@
                             <div class="col-md-7">
                                 <div class="form-group form-group-lg">
                                     <label for="amount">Amount</label>
-                                    <input type="text" class="form-control" name="amount" id="amount">
+                                    <input type="number" step="any" class="form-control without-arrow" name="amount" id="amount">
                                 </div>
                             </div>
                         </div>
@@ -127,7 +127,15 @@
                     </form>
                 </div>
                 <div class="box-footer text-center">
-                    <button type="button" class="btn btn-primary btn-lg disabled send" disabled="disabled">Send Transaction</button>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-3 col-sm-3 hidden-xs">
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                            <button type="button" class="btn btn-success btn-lg btn-block disabled send" disabled="disabled">Send Transaction</button>
+                        </div>
+                        <div class="col-lg-4 col-md-3 col-sm-3 hidden-xs">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -153,7 +161,7 @@
                             <div class="col-md-7">
                                 <div class="form-group form-group-lg">
                                     <label for="amount">Amount</label>
-                                    <input type="text" class="form-control" name="amount" id="amount" placeholder="Deposit Amount">
+                                    <input type="number" step="any" class="form-control without-arrow" name="amount" id="amount" placeholder="Deposit Amount">
                                 </div>
                             </div>
                         </div>
@@ -175,23 +183,45 @@
                                 </div>
                             </div>
                         </div>
+                        <!--
                         <div class="row col-md-12">
                             <div class="col-md-12">
                                 <div class="form-group form-group-lg">
                                     <label for="gas_limit">Gas limit</label>
                                     &nbsp;&nbsp;
                                     <span data-container="body" data-toggle="popover" data-placement="top"
-                                          data-content="This refers to the maximum allowance of gas you will give for a transaction. All excess gas will be refunded from successful transactions. This field should autogenerate based on network congestion." data-trigger="hover" class="mini">
+                                          data-content="This refers to the maximum allowance of gas you will give
+                                          for a transaction. All excess gas will be refunded from successful transactions.
+                                          This field should autogenerate based on network congestion." data-trigger="hover" class="mini">
                                         <i class="fas fa-exclamation-circle sign-help sign-muted"></i>
                                     </span>
-                                    <input type="text" class="form-control" id="gas_limit" autocomplete="off">
+                                    <input type="number" step="any" class="form-control without-arrow" id="gas_limit" autocomplete="off">
                                 </div>
                             </div>
                         </div>
+                        -->
                     </form>
                 </div>
                 <div class="box-footer text-center">
-                    <button type="button" class="btn btn-primary btn-lg disabled send" disabled="disabled">Send Transaction</button>
+                    <div class="row">
+                        <div class="col-lg-4 col-md-3 col-sm-3 hidden-xs">
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                            <button type="button" class="btn btn-default btn-lg btn-block import">Import JSON</button>
+                        </div>
+                        <div class="col-lg-4 col-md-3 col-sm-3 hidden-xs">
+                        </div>
+                    </div>
+                    <br />
+                    <div class="row">
+                        <div class="col-lg-4 col-md-3 col-sm-3 hidden-xs">
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                            <button type="button" class="btn btn-success btn-lg btn-block disabled send" disabled="disabled">Generate Transaction</button>
+                        </div>
+                        <div class="col-lg-4 col-md-3 col-sm-3 hidden-xs">
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>

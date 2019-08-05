@@ -292,6 +292,50 @@ $(function () {
                     });
                     walletIZ3.HTTPRequest.send('resTnsnOnline');
                 });
+
+                $('#tnsn_offline form', $('body')).validate({
+                    rules: {
+                        type: {
+                            required: true
+                        },
+                        amount: {
+                            required: true
+                        },
+                        payee: {
+                            required: true
+                        }
+                    },
+                    messages: {
+                        type: {
+                            required: 'This field is required'
+                        },
+                        amount: {
+                            required: 'This field is required'
+                        },
+                        payee: {
+                            required: 'This field is required'
+                        }
+                    },
+                    highlight: function (element) {
+                        $(element).addClass('error');
+                    },
+                    onkeyup: function (element) {
+                        $(element).valid();
+                        if ($('#tnsn_offline form').valid()) {
+                            $('button', $('#tnsn_offline'))
+                                .prop('disabled', false)
+                                .removeClass('disabled');
+                        } else {
+                            $('button.send', $('#tnsn_offline'))
+                                .prop('disabled', true)
+                                .addClass('disabled');
+                        }
+                    }
+                });
+
+                $('#tnsn_offline .send').on('click', function () {
+                    showSendedOfflineTransaction.open();
+                });
             },
             HTTPRequest: {
                 defaults: {
@@ -441,6 +485,40 @@ $(function () {
                 offline: {}
             }
         };
+
+        var showSendedOfflineTransaction = new BootstrapDialog({
+            title: 'Signed Transaction',
+            closable: true,
+            closeByBackdrop: false,
+            closeByKeyboard: true,
+            size: BootstrapDialog.SIZE_LARGE,
+            message: getSendedOfflineTransactionDlgContent(),
+            buttons: [{
+                label: 'Copy and Continue',
+                cssClass: 'btn btn-success',
+                action: function (dialogRef) {
+                    dialogRef.close();
+                }
+            }],
+            onshow: function (dialogRef) {
+                dialogRef.getModalFooter().css('text-align', 'center')
+            },
+            onshown: function (dialogRef) {
+            },
+        });
+
+        function getSendedOfflineTransactionDlgContent() {
+            return '' +
+                '<div id="message" class="row alert alert-danger" role="alert" style="border-radius: 0px; display: none;">' +
+                '</div>' +
+                '<div class="container-fluid">' +
+                '<div class="row">' +
+                '<div class="col-md-12 col-xs-12 form-group">' +
+                '<input type="text" id="key" placeholder="Enter Private Key" class="form-control input-lg" autocomplete="off">' +
+                '</div>' +
+                '</div>' +
+                '</div>';
+        }
 
     })();
 
