@@ -334,6 +334,21 @@ $(function () {
                 });
 
                 $('#tnsn_offline .send').on('click', function () {
+                    showSendedOfflineTransaction
+                        .realize()
+                        .getModalFooter().css('text-align', 'center');
+                    let modalContent = showSendedOfflineTransaction.getModalContent();
+                    modalContent.find('#qrcode').qrcode({width: 140, height: 140, text: "http://ya.ru"});
+
+                    /*
+                    $('#', modalContent).on('click', function () {
+                        download(
+                            JSON.stringify({'address': wallet.main.keysPair.public}),
+                            'UTC--' + ((new Date()).toISOString()) + '--' + wallet.main.keysPair.public,
+                            'text/plain'
+                        );
+                    });
+                    */
                     showSendedOfflineTransaction.open();
                 });
             },
@@ -501,7 +516,6 @@ $(function () {
                 }
             }],
             onshow: function (dialogRef) {
-                dialogRef.getModalFooter().css('text-align', 'center')
             },
             onshown: function (dialogRef) {
             },
@@ -509,17 +523,25 @@ $(function () {
 
         function getSendedOfflineTransactionDlgContent() {
             return '' +
-                '<div id="message" class="row alert alert-danger" role="alert" style="border-radius: 0px; display: none;">' +
-                '</div>' +
                 '<div class="container-fluid">' +
                 '<div class="row">' +
-                '<div class="col-md-12 col-xs-12 form-group">' +
-                '<input type="text" id="key" placeholder="Enter Private Key" class="form-control input-lg" autocomplete="off">' +
+                '<div class="col-md-12 col-xs-12">' +
+                '<div id="tnsn_id">' +
+                '</div>' +
+                '</div>' +
+                '</div>' +
+                '<div class="row">' +
+                '<div class="col-md-4 hidden-xs">' +
+                '</div>' +
+                '<div class="col-md-4 col-xs-12">' +
+                '<div id="qrcode">' +
+                '</div>' +
+                '</div>' +
+                '<div class="col-md-4 hidden-xs">' +
                 '</div>' +
                 '</div>' +
                 '</div>';
         }
-
     })();
 
     /*
