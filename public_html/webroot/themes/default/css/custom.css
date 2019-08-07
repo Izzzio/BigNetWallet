@@ -47,3 +47,20 @@ input.without-arrow::-webkit-inner-spin-button {
 input[type=number].without-arrow {
     -moz-appearance:textfield; /* Firefox */
 }
+
+.tnsn-offline-result h4 {
+    font-weight: 600;
+}
+.tnsn-offline-result h4:not(:first-child) {
+    margin-top: 25px;
+}
+.tnsn-offline-result .tnsn_block {
+    background: #f9f9f9;
+    padding: 20px;
+    border-radius: 4px;
+    font-size: 15px;
+}
+
+code {
+    background: none;
+}

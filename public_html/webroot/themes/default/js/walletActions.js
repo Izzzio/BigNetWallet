@@ -523,21 +523,33 @@ $(function () {
 
         function getSendedOfflineTransactionDlgContent() {
             return '' +
-                '<div class="container-fluid">' +
+                '<div class="container-fluid tnsn-offline-result">' +
+                '<h4>Signed Transaction</h4>' +
                 '<div class="row">' +
                 '<div class="col-md-12 col-xs-12">' +
-                '<div id="tnsn_id">' +
+                '<div id="tnsn_id" class="tnsn_block" style="word-break: break-word;">' +
+                '<code>0xf86f808504a817c8008252089407109b568763546ad431f7d173526e3f74cc91a88912c1b6eed03d2800008082f31fa04d04fadd9e2006d0c3b54f94d622ccda30914e965594f0652050e165a031eb6fa0400a2c00cefcec6b9401d6195d2a9e112fba8848328a7f9df1892b88efdc30dd</code>' +
                 '</div>' +
                 '</div>' +
                 '</div>' +
+                '<h4>Scan QR code</h4>' +
                 '<div class="row">' +
                 '<div class="col-md-4 hidden-xs">' +
                 '</div>' +
-                '<div class="col-md-4 col-xs-12">' +
+                '<div class="col-md-4 col-xs-12 text-center">' +
                 '<div id="qrcode">' +
                 '</div>' +
+                '<div style="font-size: 15px; margin-top: 10px;">or<br /><a href="">Download JSON</a></div>' +
                 '</div>' +
                 '<div class="col-md-4 hidden-xs">' +
+                '</div>' +
+                '</div>' +
+                '<h4>Raw</h4>' +
+                '<div class="row">' +
+                '<div class="col-md-12 col-xs-12">' +
+                '<div id="tnsn_row" class="tnsn_block">' +
+                '<code style="color: darkgrey;">{"nonce": "0x00", "gasLimit": "0x5208", "gasPrice": "0x04a817c800", "to": "0x07109b568763546ad431f7d173526e3f74cc91a8", "value": "12c1b6eed03d280000", "data": "0x", "chainId": 31102}</code>' +
+                '</div>' +
                 '</div>' +
                 '</div>' +
                 '</div>';
