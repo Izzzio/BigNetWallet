@@ -1,6 +1,14 @@
 $(function () {
     (function () {
-        const wallet = {'address': false, 'main': {}};
+        const wallet = {
+            'address': false,
+            'main': {
+                'keysPair': {
+                    'public': '',
+                    'private': ''
+                }
+            }
+        };
         $('#create').on('click', function () {
             wallet.main = iz3BitcoreCrypto.generateWallet();
         });
@@ -157,6 +165,7 @@ $(function () {
                     content.find('#message').hide();
                     try {
                         wallet.address = iz3BitcoreCrypto.private2address(key);
+                        wallet.main.keysPair.private = key;
                         $.getJSON('login', {addr: wallet.address})
                             .done(function (resp) {
                                 if (resp.success) {
@@ -197,6 +206,9 @@ $(function () {
                                 $button.stopSpin();
                             });
                     } catch (e) {
+
+                        console.log(e);
+
                         content.find('#message')
                             .html('Wrong private key. Re-check key ant try again.')
                             .show();
@@ -338,17 +350,21 @@ $(function () {
                         .realize()
                         .getModalFooter().css('text-align', 'center');
                     let modalContent = showSendedOfflineTransaction.getModalContent();
-                    modalContent.find('#qrcode').qrcode({width: 140, height: 140, text: "http://ya.ru"});
+                    let tnsnData = JSON.stringify({'to': $('#tnsn_offline #payee').val(), 'amount': $('#tnsn_offline #amount').val()});
+                    let tnsnSign = iz3BitcoreCrypto.sign(tnsnData, wallet.main.keysPair.private);
 
-                    /*
-                    $('#', modalContent).on('click', function () {
+                    modalContent.find('#tnsn_id code').html(tnsnSign);
+                    modalContent.find('#qrcode').qrcode({width: 140, height: 140, text: tnsnSign});
+                    modalContent.find('#tnsn_row code').html(tnsnData);
+
+                    $('#download', modalContent).on('click', function () {
                         download(
-                            JSON.stringify({'address': wallet.main.keysPair.public}),
+                            tnsnData,
                             'UTC--' + ((new Date()).toISOString()) + '--' + wallet.main.keysPair.public,
                             'text/plain'
                         );
                     });
-                    */
+
                     showSendedOfflineTransaction.open();
                 });
             },
@@ -528,7 +544,7 @@ $(function () {
                 '<div class="row">' +
                 '<div class="col-md-12 col-xs-12">' +
                 '<div id="tnsn_id" class="tnsn_block" style="word-break: break-word;">' +
-                '<code>0xf86f808504a817c8008252089407109b568763546ad431f7d173526e3f74cc91a88912c1b6eed03d2800008082f31fa04d04fadd9e2006d0c3b54f94d622ccda30914e965594f0652050e165a031eb6fa0400a2c00cefcec6b9401d6195d2a9e112fba8848328a7f9df1892b88efdc30dd</code>' +
+                '<code></code>' +
                 '</div>' +
                 '</div>' +
                 '</div>' +
@@ -539,7 +555,7 @@ $(function () {
                 '<div class="col-md-4 col-xs-12 text-center">' +
                 '<div id="qrcode">' +
                 '</div>' +
-                '<div style="font-size: 15px; margin-top: 10px;">or<br /><a href="">Download JSON</a></div>' +
+                '<div style="font-size: 15px; margin-top: 10px;">or<br /><a href="#" id="download">Download JSON</a></div>' +
                 '</div>' +
                 '<div class="col-md-4 hidden-xs">' +
                 '</div>' +
@@ -547,8 +563,8 @@ $(function () {
                 '<h4>Raw</h4>' +
                 '<div class="row">' +
                 '<div class="col-md-12 col-xs-12">' +
-                '<div id="tnsn_row" class="tnsn_block">' +
-                '<code style="color: darkgrey;">{"nonce": "0x00", "gasLimit": "0x5208", "gasPrice": "0x04a817c800", "to": "0x07109b568763546ad431f7d173526e3f74cc91a8", "value": "12c1b6eed03d280000", "data": "0x", "chainId": 31102}</code>' +
+                '<div id="tnsn_row" class="tnsn_block" style="word-break: break-word;">' +
+                '<code style="color: darkgrey;"></code>' +
                 '</div>' +
                 '</div>' +
                 '</div>' +
