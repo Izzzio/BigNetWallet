@@ -207,7 +207,8 @@
                         <div class="col-lg-4 col-md-3 col-sm-3 hidden-xs">
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                            <button type="button" class="btn btn-default btn-lg btn-block import">Import JSON</button>
+                            <button type="button" class="btn btn-default btn-lg btn-block import" onclick="document.getElementById('tnsn_import').click();">Import JSON</button>
+                            <input id="tnsn_import" type="file" style="display: none;" />
                         </div>
                         <div class="col-lg-4 col-md-3 col-sm-3 hidden-xs">
                         </div>

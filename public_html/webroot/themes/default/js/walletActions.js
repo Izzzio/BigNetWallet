@@ -360,12 +360,20 @@ $(function () {
                     $('#download', modalContent).on('click', function () {
                         download(
                             tnsnData,
-                            'UTC--' + ((new Date()).toISOString()) + '--' + wallet.main.keysPair.public,
+                            'signetTransaction-' + (Date.now()) + '.json',
                             'text/plain'
                         );
                     });
 
                     showSendedOfflineTransaction.open();
+                });
+
+                $('#tnsn_import').on('change', function () {
+                    let file = this.files[0] || false;
+                    let fileSize = 0;
+                    if(file){
+                        fileSize = file.size;
+                    }
                 });
             },
             HTTPRequest: {

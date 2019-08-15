@@ -4,6 +4,10 @@ if(!String.prototype.trim) {
     };
 }
 
+if (!Date.now) {
+    Date.now = function() { return new Date().getTime(); }
+}
+
 $(function () {
     'use strict';
 
