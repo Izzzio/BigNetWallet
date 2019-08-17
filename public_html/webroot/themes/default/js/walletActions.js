@@ -265,7 +265,8 @@ $(function () {
                             required: true
                         },
                         payee: {
-                            required: true
+                            required: true,
+                            minlength: 30
                         }
                     },
                     messages: {
@@ -276,7 +277,8 @@ $(function () {
                             required: 'This field is required'
                         },
                         payee: {
-                            required: 'This field is required'
+                            required: 'This field is required',
+                            minlength: 'Wrong address'
                         }
                     },
                     highlight: function (element) {
@@ -314,7 +316,8 @@ $(function () {
                             required: true
                         },
                         payee: {
-                            required: true
+                            required: true,
+                            minlength: 30
                         }
                     },
                     messages: {
@@ -325,7 +328,8 @@ $(function () {
                             required: 'This field is required'
                         },
                         payee: {
-                            required: 'This field is required'
+                            required: 'This field is required',
+                            minlength: 'Wrong address'
                         }
                     },
                     highlight: function (element) {
@@ -350,16 +354,19 @@ $(function () {
                         .realize()
                         .getModalFooter().css('text-align', 'center');
                     let modalContent = showSendedOfflineTransaction.getModalContent();
-                    let tnsnData = JSON.stringify({'to': $('#tnsn_offline #payee').val(), 'amount': $('#tnsn_offline #amount').val()});
-                    let tnsnSign = iz3BitcoreCrypto.sign(tnsnData, wallet.main.keysPair.private);
+                    let tnsnData = {
+                        'to': $('#tnsn_offline #payee').val(),
+                        'amount': $('#tnsn_offline #amount').val()
+                    };
+                    let tnsnSign = iz3BitcoreCrypto.sign(JSON.stringify(tnsnData), wallet.main.keysPair.private);
 
                     modalContent.find('#tnsn_id code').html(tnsnSign);
                     modalContent.find('#qrcode').qrcode({width: 140, height: 140, text: tnsnSign});
-                    modalContent.find('#tnsn_row code').html(tnsnData);
+                    modalContent.find('#tnsn_row code').html(JSON.stringify(tnsnData));
 
                     $('#download', modalContent).on('click', function () {
                         download(
-                            tnsnData,
+                            JSON.stringify({'rawTransaction': tnsnSign, 'tx': tnsnData}),
                             'signetTransaction-' + (Date.now()) + '.json',
                             'text/plain'
                         );
@@ -370,9 +377,24 @@ $(function () {
 
                 $('#tnsn_import').on('change', function () {
                     let file = this.files[0] || false;
-                    let fileSize = 0;
-                    if(file){
-                        fileSize = file.size;
+                    let fileSize = file ? file.size : 0;
+                    if(fileSize > 5120){
+                        toastr['warning']('File size is too big. Import impossible');
+                    } else {
+                        let reader = new FileReader();
+                        reader.onload = (function () {
+                            return function (e) {
+                                try {
+                                    let tnsn = JSON.parse(e.target.result);
+                                    $('#amount', $('#tnsn_offline')).val((tnsn.amount || ''));
+                                    $('#payee', $('#tnsn_offline')).val((tnsn.to || ''));
+                                    toastr['success']('File successfull imported');
+                                } catch (ex) {
+                                    toastr['warning']('Error when trying to parse json: ' + ex);
+                                }
+                            }
+                        })();
+                        reader.readAsText(file);
                     }
                 });
             },
@@ -511,6 +533,17 @@ $(function () {
                         }
                     }
                     return extended;
+                },
+                copy: function (selector) {
+                    try {
+                        var copyText = document.querySelector(selector);
+                        copyText.select();
+                        document.execCommand("copy");
+                        toastr['info']('Copied');
+                    } catch (e) {
+                        toastr['warning']("Automatic copying is not supported in your browser. Update your browser to the latest version or select the text manually and copy it.");
+                        console.log(ex);
+                    }
                 }
             },
             transaction: {

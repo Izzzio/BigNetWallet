@@ -21,6 +21,7 @@
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="<?= URL_PREFIX . APP_THEME_BASE ?>/lte/css/skins/all-skins.min.css">
     <link rel="stylesheet" href="<?= URL_PREFIX . APP_THEME_BASE ?>/plugins/bootstrap-dialog/css/bootstrap-dialog.min.css">
+    <link rel="stylesheet" href="<?= URL_PREFIX . APP_THEME_BASE ?>/plugins/toastr/toastr.min.css">
     <link rel="stylesheet" href="<?= URL_PREFIX . APP_THEME_BASE ?>/css/custom.css?_=<?= CORE_VERSION ?>">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -118,6 +119,7 @@
 <script src="<?= URL_PREFIX . APP_THEME_BASE ?>/plugins/jquery-slimscroll/jquery.slimscroll.min.js"></script>
 <script src="<?= URL_PREFIX . APP_THEME_BASE ?>/plugins/bootstrap-dialog/js/bootstrap-dialog.min.js"></script>
 
+<script src="<?= URL_PREFIX . APP_THEME_BASE ?>/plugins/toastr/toastr.min.js"></script>
 <script src="<?= URL_PREFIX . APP_THEME_BASE ?>/plugins/jquery-validation/jquery.validate.min.js"></script>
 <script src="<?= URL_PREFIX . APP_THEME_BASE ?>/plugins/jquery-validation/additional-methods.min.js"></script>
 

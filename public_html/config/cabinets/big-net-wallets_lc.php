@@ -170,7 +170,7 @@ return [
      */
     'Api'   => [
         'host'  => 'http://localhost:3001/',
-        'pass'   => 'dazpjpobkpopefbfi',
+        'pass'   => 'dudmydsthvequoojll',
     ],
 
 
