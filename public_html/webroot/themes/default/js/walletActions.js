@@ -206,9 +206,7 @@ $(function () {
                                 $button.stopSpin();
                             });
                     } catch (e) {
-
                         console.log(e);
-
                         content.find('#message')
                             .html('Wrong private key. Re-check key ant try again.')
                             .show();
@@ -256,6 +254,8 @@ $(function () {
 
         var walletIZ3 = {
             setEventListeners: function () {
+                let tnsnOnlineForm = $('#tnsn_online');
+                let tnsnOfflineForm = $('#tnsn_offline');
                 $('#tnsn_online form', $('body')).validate({
                     rules: {
                         type: {
@@ -287,11 +287,11 @@ $(function () {
                     onkeyup: function (element) {
                         $(element).valid();
                         if ($('#tnsn_online form').valid()) {
-                            $('button', $('#tnsn_online'))
+                            $('button', tnsnOnlineForm)
                                 .prop('disabled', false)
                                 .removeClass('disabled');
                         } else {
-                            $('button', $('#tnsn_online'))
+                            $('button', tnsnOnlineForm)
                                 .prop('disabled', true)
                                 .addClass('disabled');
                         }
@@ -338,11 +338,11 @@ $(function () {
                     onkeyup: function (element) {
                         $(element).valid();
                         if ($('#tnsn_offline form').valid()) {
-                            $('button', $('#tnsn_offline'))
+                            $('button', tnsnOfflineForm)
                                 .prop('disabled', false)
                                 .removeClass('disabled');
                         } else {
-                            $('button.send', $('#tnsn_offline'))
+                            $('button.send', tnsnOfflineForm)
                                 .prop('disabled', true)
                                 .addClass('disabled');
                         }
@@ -372,6 +372,10 @@ $(function () {
                         );
                     });
 
+                    modalContent.find('#continue').on('click', function () {
+                        walletIZ3.utility.copy('#tnsn_id code');
+                    });
+
                     showSendedOfflineTransaction.open();
                 });
 
@@ -386,11 +390,24 @@ $(function () {
                             return function (e) {
                                 try {
                                     let tnsn = JSON.parse(e.target.result);
-                                    $('#amount', $('#tnsn_offline')).val((tnsn.amount || ''));
-                                    $('#payee', $('#tnsn_offline')).val((tnsn.to || ''));
+                                    $('#amount', tnsnOfflineForm).val((tnsn.tx.amount || ''));
+                                    $('#payee', tnsnOfflineForm).val((tnsn.tx.to || ''));
                                     toastr['success']('File successfull imported');
-                                } catch (ex) {
-                                    toastr['warning']('Error when trying to parse json: ' + ex);
+
+                                    if ($('#tnsn_offline form').valid()) {
+                                        $('button', tnsnOfflineForm)
+                                            .prop('disabled', false)
+                                            .removeClass('disabled');
+                                    } else {
+                                        $('button.send', tnsnOfflineForm)
+                                            .prop('disabled', true)
+                                            .addClass('disabled');
+                                    }
+                                } catch (e) {
+                                    toastr['warning']('Error when trying to parse json: ' + e);
+                                    $('button.send', tnsnOfflineForm)
+                                        .prop('disabled', true)
+                                        .addClass('disabled');
                                 }
                             }
                         })();
@@ -542,7 +559,7 @@ $(function () {
                         toastr['info']('Copied');
                     } catch (e) {
                         toastr['warning']("Automatic copying is not supported in your browser. Update your browser to the latest version or select the text manually and copy it.");
-                        console.log(ex);
+                        console.log(e);
                     }
                 }
             },
@@ -566,6 +583,7 @@ $(function () {
             size: BootstrapDialog.SIZE_LARGE,
             message: getSendedOfflineTransactionDlgContent(),
             buttons: [{
+                id: 'continue',
                 label: 'Copy and Continue',
                 cssClass: 'btn btn-success',
                 action: function (dialogRef) {
