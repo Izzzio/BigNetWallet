@@ -254,9 +254,10 @@ $(function () {
 
         var walletIZ3 = {
             setEventListeners: function () {
+                let body = $('body');
                 let tnsnOnlineForm = $('#tnsn_online');
                 let tnsnOfflineForm = $('#tnsn_offline');
-                $('#tnsn_online form', $('body')).validate({
+                $('#tnsn_online form', body).validate({
                     rules: {
                         type: {
                             required: true
@@ -307,7 +308,7 @@ $(function () {
                     walletIZ3.HTTPRequest.send('resTnsnOnline');
                 });
 
-                $('#tnsn_offline form', $('body')).validate({
+                $('#tnsn_offline form', body).validate({
                     rules: {
                         type: {
                             required: true
@@ -372,10 +373,6 @@ $(function () {
                         );
                     });
 
-                    modalContent.find('#continue').on('click', function () {
-                        walletIZ3.utility.copy('#tnsn_id code');
-                    });
-
                     showSendedOfflineTransaction.open();
                 });
 
@@ -413,6 +410,12 @@ $(function () {
                         })();
                         reader.readAsText(file);
                     }
+                });
+
+                body.off('click', '.autocopy');
+                body.on('click', '.autocopy', function () {
+                    let target = $(this).data('iz3-need-copy') || false;
+                    walletIZ3.utility.copy(target);
                 });
             },
             HTTPRequest: {
@@ -553,9 +556,25 @@ $(function () {
                 },
                 copy: function (selector) {
                     try {
-                        var copyText = document.querySelector(selector);
-                        copyText.select();
-                        document.execCommand("copy");
+                        var range, selection;
+                        if (document.body.createTextRange) {
+                            range = document.body.createTextRange();
+                            range.moveToElementText(selector);
+                            range.select();
+                        } else if (window.getSelection) {
+                            selection = window.getSelection();
+                            range = document.createRange();
+                            range.selectNodeContents(document.getElementById(selector));
+                            selection.removeAllRanges();
+                            selection.addRange(range);
+                        }
+                        document.execCommand('copy');
+
+                        if (window.getSelection) {
+                            window.getSelection().removeAllRanges();
+                        } else if (document.selection) {
+                            document.selection.empty();
+                        }
                         toastr['info']('Copied');
                     } catch (e) {
                         toastr['warning']("Automatic copying is not supported in your browser. Update your browser to the latest version or select the text manually and copy it.");
@@ -585,7 +604,8 @@ $(function () {
             buttons: [{
                 id: 'continue',
                 label: 'Copy and Continue',
-                cssClass: 'btn btn-success',
+                cssClass: 'btn btn-success autocopy',
+                data: {'iz3-need-copy': 'tnsn_id'},
                 action: function (dialogRef) {
                     dialogRef.close();
                 }

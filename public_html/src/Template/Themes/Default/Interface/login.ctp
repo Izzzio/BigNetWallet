@@ -6,7 +6,7 @@
                 <span class="info-box-icon" style="background: none;"><i class="fas fa-font fa-lg"></i></span>
                 <div class="info-box-content" style="min-height: 95px;">
                     <span class="info-box-number">Address</span>
-                    <span class="info-box-text" style="overflow-wrap: break-word;white-space: unset; text-transform: none;">
+                    <span class="info-box-text" id="payer" style="overflow-wrap: break-word;white-space: unset; text-transform: none;">
                         <?= $address; ?>
                     </span>
                 </div>
@@ -24,7 +24,7 @@
                             &nbsp;
                             <span data-container="body" data-toggle="popover" data-placement="top"
                                   data-content="Copy" data-trigger="hover">
-                                <i class="far fa-lg fa-copy"></i>
+                                <i class="far fa-lg fa-copy autocopy" data-iz3-need-copy="payer"></i>
                             </span>
                         </span>
                 </div>
