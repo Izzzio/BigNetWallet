@@ -26,14 +26,14 @@
                     </li>
                 </ul>
             </li>
-            <li>
+            <li box="exchange">
                 <a href="#">
                     <i class="fas fa-exchange-alt"></i>
                     &nbsp;&nbsp;
                     <span>Exchange</span>
                 </a>
             </li>
-            <li>
+            <li box="dapps">
                 <a href="#">
                     <i class="fas fa-shapes"></i>
                     &nbsp;&nbsp;
@@ -50,14 +50,14 @@
                         </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li>
+                    <li box="contract_read">
                         <a href="#">
                             <i class="far fa-sm fa-circle"></i>
                             &nbsp;&nbsp;
                             <span>Work with contract</span>
                         </a>
                     </li>
-                    <li>
+                    <li box="contract_deploy">
                         <a href="#">
                             <i class="far fa-sm fa-circle"></i>
                             &nbsp;&nbsp;
@@ -76,14 +76,14 @@
                         </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li>
+                    <li box="message_write">
                         <a href="#">
                             <i class="far fa-sm fa-circle"></i>
                             &nbsp;&nbsp;
                             <span>Sign message</span>
                         </a>
                     </li>
-                    <li>
+                    <li box="message_read">
                         <a href="#">
                             <i class="far fa-sm fa-circle"></i>
                             &nbsp;&nbsp;

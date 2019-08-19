@@ -33,6 +33,15 @@ label.error {
     color: darkgrey;
 }
 
+.box-footer {
+    padding-top: 45px;
+    padding-bottom: 45px;
+}
+
+textarea {
+    resize: none;
+}
+
 .popover-mini {
     font-size: 12px;
 }

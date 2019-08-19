@@ -227,4 +227,132 @@
             </div>
         </div>
     </div>
+
+    <div class="row col-md-12 box-wrapper" id="exchange" style="display: none;">
+        <div class="col-md-8">
+            <div class="box box-success">
+                <div class="box-header with-border">
+                    <h3 class="box-title"><strong>Exchange</strong></h3>
+                </div>
+                <div class="box-body">
+                    Coming soon...
+                </div>
+                <div class="box-footer text-center">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row col-md-12 box-wrapper" id="dapps" style="display: none;">
+        <div class="col-md-8">
+            <div class="box box-success">
+                <div class="box-header with-border">
+                    <h3 class="box-title"><strong>Dapps</strong></h3>
+                </div>
+                <div class="box-body">
+                    Coming soon...
+                </div>
+                <div class="box-footer text-center">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row col-md-12 box-wrapper" id="contract_read" style="display: none;">
+        <div class="col-md-8">
+            <div class="box box-success">
+                <div class="box-header with-border">
+                    <h3 class="box-title"><strong>Interact with deployed Contract</strong></h3>
+                </div>
+                <div class="box-body">
+                    Coming soon...
+                </div>
+                <div class="box-footer text-center">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row col-md-12 box-wrapper" id="contract_deploy" style="display: none;">
+        <div class="col-md-8">
+            <div class="box box-success">
+                <div class="box-header with-border">
+                    <h3 class="box-title"><strong>Deploy new contract</strong></h3>
+                </div>
+                <div class="box-body">
+                    <form>
+                        <div class="row col-md-12">
+                            <div class="col-md-12">
+                                <div class="form-group form-group-lg">
+                                    <label for="code-byte">Byte Code</label>
+                                    <textarea
+                                            class="form-control" name="code_byte" id="code-byte" autocomplete="off"
+                                            style="height: 75px;"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row col-md-12">
+                            <div class="col-md-12">
+                                <div class="form-group form-group-lg">
+                                    <label for="code-json">ABI/JSON Interface</label>
+                                    <textarea
+                                            class="form-control" name="code_json" id="code-json" autocomplete="off"
+                                            style="height: 225px;"></textarea>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row col-md-12">
+                            <div class="col-md-12">
+                                <div class="form-group form-group-lg">
+                                    <label for="contract-name">Contract Name</label>
+                                    <input type="text" class="form-control" id="contract-name" autocomplete="off" placeholder="Name for the contract">
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+                <div class="box-footer text-center">
+                    <div class="row">
+                        <div class="col-lg-4 col-md-3 col-sm-3 hidden-xs">
+                        </div>
+                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                            <button type="button" class="btn btn-success btn-lg btn-block disabled" disabled="disabled">Sign Transaction</button>
+                        </div>
+                        <div class="col-lg-4 col-md-3 col-sm-3 hidden-xs">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row col-md-12 box-wrapper" id="message_write" style="display: none;">
+        <div class="col-md-8">
+            <div class="box box-success">
+                <div class="box-header with-border">
+                    <h3 class="box-title"><strong>Sign message</strong></h3>
+                </div>
+                <div class="box-body">
+                    Coming soon...
+                </div>
+                <div class="box-footer text-center">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row col-md-12 box-wrapper" id="message_read" style="display: none;">
+        <div class="col-md-8">
+            <div class="box box-success">
+                <div class="box-header with-border">
+                    <h3 class="box-title"><strong>Verify message</strong></h3>
+                </div>
+                <div class="box-body">
+                    Coming soon...
+                </div>
+                <div class="box-footer text-center">
+                </div>
+            </div>
+        </div>
+    </div>
 </section>

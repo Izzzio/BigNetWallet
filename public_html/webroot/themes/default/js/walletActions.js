@@ -28,21 +28,6 @@ $(function () {
             $('#s_key').val(wallet.main.keysPair.private);
         });
 
-        $('body').on('click', 'ul.sidebar-menu li', function(e){
-            e.stopPropagation();
-            let $this = $(this);
-            $('ul.treeview-menu li').removeClass('active');
-            if(!$this.parent().hasClass('treeview-menu')){
-                $('ul.sidebar-menu li').removeClass('active');
-            }
-            $this.addClass('active');
-            $('.box-wrapper').hide();
-            let box = $this.attr('box') || false;
-            if(box){
-                $('#'+box).slideDown('normal');
-            }
-        });
-
         var selectLoginWayDlg = new BootstrapDialog({
             title: 'Access by Software',
             closable: true,
