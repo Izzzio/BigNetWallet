@@ -1,6 +1,5 @@
-<section>
-    <br/>
-    <div class="row col-md-12">
+<section class="content">
+    <div class="row">
         <div class="col-md-4">
             <div class="info-box bg-purple">
                 <span class="info-box-icon" style="background: none;"><i class="fas fa-font fa-lg"></i></span>
@@ -60,8 +59,8 @@
 
                 <div class="info-box-content" style="min-height: 95px;">
                     <span class="info-box-number">Network</span>
-                    <div>bignet.izzz.io (IZ3)</div>
-                    <div>Last block# : 7882452</div>
+                    <div><?= $network['name']; ?></div>
+                    <div>Last block# : <?= $network['lastBlock']; ?></div>
                 </div>
                 <div class="info-box-content" style="margin-top: 6px;">
                         <span class="info-box-text">
@@ -75,7 +74,7 @@
         </div>
     </div>
 
-    <div class="row col-md-12 box-wrapper" id="tnsn_online">
+    <div class="row box-wrapper" id="tnsn_online">
         <div class="col-md-8">
             <div class="box box-success">
                 <div class="box-header with-border">
@@ -141,7 +140,7 @@
         </div>
     </div>
 
-    <div class="row col-md-12 box-wrapper" id="tnsn_offline" style="display: none;">
+    <div class="row box-wrapper" id="tnsn_offline" style="display: none;">
         <div class="col-md-8">
             <div class="box box-success">
                 <div class="box-header with-border">
@@ -228,7 +227,7 @@
         </div>
     </div>
 
-    <div class="row col-md-12 box-wrapper" id="exchange" style="display: none;">
+    <div class="row box-wrapper" id="exchange" style="display: none;">
         <div class="col-md-8">
             <div class="box box-success">
                 <div class="box-header with-border">
@@ -243,7 +242,7 @@
         </div>
     </div>
 
-    <div class="row col-md-12 box-wrapper" id="dapps" style="display: none;">
+    <div class="row box-wrapper" id="dapps" style="display: none;">
         <div class="col-md-8">
             <div class="box box-success">
                 <div class="box-header with-border">
@@ -258,7 +257,7 @@
         </div>
     </div>
 
-    <div class="row col-md-12 box-wrapper" id="contract_read" style="display: none;">
+    <div class="row box-wrapper" id="contract_read" style="display: none;">
         <div class="col-md-8">
             <div class="box box-success">
                 <div class="box-header with-border">
@@ -273,7 +272,7 @@
         </div>
     </div>
 
-    <div class="row col-md-12 box-wrapper" id="contract_deploy" style="display: none;">
+    <div class="row box-wrapper" id="contract_deploy" style="display: none;">
         <div class="col-md-8">
             <div class="box box-success">
                 <div class="box-header with-border">
@@ -326,7 +325,7 @@
         </div>
     </div>
 
-    <div class="row col-md-12 box-wrapper" id="message_write" style="display: none;">
+    <div class="row box-wrapper" id="message_write" style="display: none;">
         <div class="col-md-8">
             <div class="box box-success">
                 <div class="box-header with-border">
@@ -341,7 +340,7 @@
         </div>
     </div>
 
-    <div class="row col-md-12 box-wrapper" id="message_read" style="display: none;">
+    <div class="row box-wrapper" id="message_read" style="display: none;">
         <div class="col-md-8">
             <div class="box box-success">
                 <div class="box-header with-border">

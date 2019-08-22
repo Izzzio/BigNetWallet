@@ -93,7 +93,12 @@ class WalletController extends AppController
         ];
         if ($this->request->is('get') && $this->request->is('ajax')) {
             $address = false;
+            $network = [
+                'name' => 'bignet.izzz.io (IZ3)',
+                'lastBlock' => 'undefined',
+            ];
             $balance = 0;
+
             if(isset($this->request->query['addr'])){
                 $address = substr($this->request->query['addr'], 0, 70);
             }
@@ -103,23 +108,24 @@ class WalletController extends AppController
 
                 try{
                     $izNode = new \EcmaSmartRPC(Configure::read('Api.host'), Configure::read('Api.pass'));
-                    $wallet = $izNode->ecmaCallMethod($address, 'balanceOf', []);
-                    if(isset($wallet['error']) && 1 == $wallet['error']){
 
-
-
-                        /*
-                         * TODO
-                         * Когда будет реализована возможность создавать кошелки по API(прямо на ноде, а не в браузере),
-                         * то переписать код получения баланса адреса.
-                         */
-                        $result['msg'] = 'DEMO';
-
-
-
+                    $networkInfo = $izNode->ecmaGetInfo();
+                    if(!isset($networkInfo['lastBlock'])) {
+                        throw new \Exception('Network is not ready. Please try again later');
                     }
-                } catch (\Exception $e){
-                    $result['msg'] = 'Unable connect to wallet';
+                    $network['lastBlock'] = $networkInfo['lastBlock'];
+
+                    $wallet = $izNode->ecmaCallMethod($network['lastBlock'], 'balanceOf', [$address]);
+                    if(isset($wallet['error']) && true == $wallet['error']){
+                        throw new \Exception($wallet['message']);
+                    } else {
+                        if(isset($wallet['result'])){
+                            $result['success'] = true;
+                            $balance = $wallet['result'];
+                        }
+                    }
+                } catch (\Exception $e) {
+                    $result['msg'] = $e->getMessage() . '<br />Access not granted';
                 }
             } else {
                 $result['msg'] = 'Enter your key, please';
@@ -140,7 +146,7 @@ class WalletController extends AppController
             $result['data']['menu'] = $view->render();
 
             $builder->template('login');
-            $view = $builder->build(compact(['address', 'balance']));
+            $view = $builder->build(compact(['address', 'balance', 'network']));
             $result['data']['page'] = $view->render();
 
             $this->set([
