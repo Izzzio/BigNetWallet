@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Candy Demo - Vitamin Blockchain driven Web Application</title>
+
+    <style>
+        body {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+            background-color: #0f0f0f;
+            text-align: center;
+            color: white;
+        }
+    </style>
+</head>
+<body>
+
+<div style="text-align: center">
+    <img src="logo.png">
+</div>
+
+<h2>Image from blockchain:</h2>
+<img id="demoImage">
+
+<p style="font-weight: 500">Current blockchain info:</p>
+<b>Blockchain height: </b><span id="height">0</span> <br>
+<b>Active connections: </b><span id="connections">0</span> <br>
+
+<script src="candy.js"></script>
+<script>
+    var candy = new Candy(['ws://testnode.izzz.io:6001','wss://izzz.io/blockchain/', 'ws://127.0.0.1:6001']).start();
+    candy.onready = function () {
+        candy.request('candy://block/14', null, function (err, data) {
+            document.getElementById('demoImage').src = data;
+        });
+    };
+
+    candy.onmessage = function (message) {
+        alert('Message recived: ' + JSON.stringify(message));
+    };
+
+    setInterval(function () {
+        document.getElementById('height').innerHTML = candy.blockHeight;
+        document.getElementById('connections').innerHTML = candy.getActiveConnections().length;
+    }, 1000);
+
+</script>
+</body>
+</html>

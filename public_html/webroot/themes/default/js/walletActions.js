@@ -237,7 +237,9 @@ $(function () {
                             required: true
                         },
                         amount: {
-                            required: true
+                            required: true,
+                            number: true,
+                            min: 0.00000000000000000001,
                         },
                         payee: {
                             required: true,
@@ -249,7 +251,9 @@ $(function () {
                             required: 'This field is required'
                         },
                         amount: {
-                            required: 'This field is required'
+                            required: 'This field is required',
+                            number: "Please enter numbers only",
+                            min: "Minimum value 0.00000000000000000001"
                         },
                         payee: {
                             required: 'This field is required',
@@ -274,10 +278,17 @@ $(function () {
                 });
 
                 $('#tnsn_online .send').on('click', function () {
+                    let block = new ecmaContractCallBlock(wallet.address, 'transfer', ['1', 'to_address'], {});
+                    block.pubkey = wallet.address;
+                    block.sign = iz3BitcoreCrypto.sign(block.data, wallet.main.keysPair.private);
+
+                    $(this)
+                        .prop('disabled', true)
+                        .addClass('disabled');
                     walletIZ3.HTTPRequest.init({
                         url: '/transaction/online',
                         method: 'POST',
-                        data: $('#tnsn_online form').serialize() + '&addr=' + wallet.address
+                        data: block
                     });
                     walletIZ3.HTTPRequest.send('resTnsnOnline');
                 });
@@ -486,29 +497,24 @@ $(function () {
                 resTnsnOnline: function (resp) {
                     if (resp.success) {
                         BootstrapDialog.alert({
-                            title: 'Result',
-                            message: 'Transaction succesfull created',
+                            title: 'Success',
+                            message: resp.msg,
                             type: BootstrapDialog.TYPE_INFO,
                             size: BootstrapDialog.SIZE_LARGE,
                             closable: true
                         });
-                        $('button', $('#tnsn_online'))
-                            .prop('disabled', true)
-                            .addClass('disabled');
-                        $('input', $('#tnsn_online')).val('');
-                    } else if ('DEMO' === resp.msg) {
-                        BootstrapDialog.alert({
-                            title: 'Result',
-                            message: 'Transaction succesfull created',
-                            type: BootstrapDialog.TYPE_INFO,
-                            size: BootstrapDialog.SIZE_LARGE,
-                            closable: true
-                        });
-                        $('button', $('#tnsn_online'))
-                            .prop('disabled', true)
-                            .addClass('disabled');
                         $('input', $('#tnsn_online')).val('');
                     } else {
+                        BootstrapDialog.alert({
+                            title: 'Error',
+                            message: resp.msg,
+                            type: BootstrapDialog.TYPE_DANGER,
+                            size: BootstrapDialog.SIZE_LARGE,
+                            closable: true
+                        });
+                        $('button', $('#tnsn_online'))
+                            .prop('disabled', false)
+                            .removeClass('disabled');
                     }
                 }
             },

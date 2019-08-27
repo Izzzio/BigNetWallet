@@ -111,7 +111,7 @@ class WalletController extends AppController
 
                     $networkInfo = $izNode->ecmaGetInfo();
                     if(!isset($networkInfo['lastBlock'])) {
-                        throw new \Exception('Network is not ready. Please try again later');
+                        throw new \Exception('Network is not ready. Please try again later.');
                     }
                     $network['lastBlock'] = $networkInfo['lastBlock'];
 

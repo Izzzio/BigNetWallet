@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Candy Demo - Vitamin Blockchain driven Web Application</title>
+
+    <style>
+        body {
+            font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+        }
+    </style>
+</head>
+<body>
+
+
+<div id="phpRes">
+    <div style="text-align: center">
+        <img src="logo.png">
+    </div>
+</div>
+
+
+<script
+        src="https://code.jquery.com/jquery-3.2.1.min.js"
+        integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+        crossorigin="anonymous"></script>
+<script src="candy.js"></script>
+<script src="candy-autoloader.js"></script>
+<script>
+    var candy = new Candy(['wss://xn--90absg.xn--p1ai/vitamin/', 'ws://twister-vl.ru:6001', 'ws://localhost:6001']).start();
+    var candyAutoloader = new CandyAutoloader(candy);
+
+    candy.onready = function () {
+        candy.loadResource(432, function (err, data) {
+            document.getElementById('demoImage').src = data.candyData;
+        });
+
+        candy.request('candy://php/helloworld.php?get=parameter&inquery=string&z=123321', {
+            structured: 'data',
+            'in': 'JSON'
+        }, function (err, data) {
+            if(!err) {
+                $('#phpRes').html(data);
+            } else {
+                console.log(err);
+            }
+        });
+    };
+
+    candy.onmessage = function (message) {
+        alert('Message recived: ' + JSON.stringify(message));
+    };
+
+
+</script>
+</body>
+</html>

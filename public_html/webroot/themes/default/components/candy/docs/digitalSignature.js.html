@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>JSDoc: Source: digitalSignature.js</title>
+
+    <script src="scripts/prettify/prettify.js"> </script>
+    <script src="scripts/prettify/lang-css.js"> </script>
+    <!--[if lt IE 9]>
+      <script src="//html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+    <![endif]-->
+    <link type="text/css" rel="stylesheet" href="styles/prettify-tomorrow.css">
+    <link type="text/css" rel="stylesheet" href="styles/jsdoc-default.css">
+</head>
+
+<body>
+
+<div id="main">
+
+    <h1 class="page-title">Source: digitalSignature.js</h1>
+
+    
+
+
+
+    
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/**
+ * Digital Signature for Candy
+ * uses SHA256withRSA algorithm
+ * required forge.min.js
+ * https://github.com/digitalbazaar/forge
+ */
+
+'use strict';
+
+//unify browser and node
+if(typeof _this === 'undefined') {
+    var _this = this;
+}
+
+/**
+ * Crypto signs methods
+ * @param {string} dataToSign Optional: data for sign
+ * @return {DigitalSignature}
+ * @constructor
+ */
+function DigitalSignature(dataToSign) { //data in string format
+    if(_this.window === undefined) {
+        this.forge = require('node-forge');
+    } else {
+        this.forge = forge;
+    }
+
+    /**
+     * RSA keys for sign
+     */
+    this.keysPair = {};
+
+    /**
+     * Sign
+     */
+    this.sign = '';
+
+    /**
+     * Data format as presented in 'block data'
+     */
+    this.signedData = {
+        data: dataToSign,     //incoming data
+        sign: '',              //sign in HEX format
+        pubkey: ''             //Public key in pem PKCS#1
+    };
+
+    /**
+     * Generate pair of keys for signing
+     * @param {number} len Length of the key
+     */
+    this.generate = (len = 2048) => {
+
+        let rsa = this.forge.pki.rsa;
+        let keypair = this.forge.rsa.generateKeyPair({len});
+        keypair = {
+            public: repairKey(fix(this.forge.pki.publicKeyToRSAPublicKeyPem(keypair.publicKey, 72))),
+            private: repairKey(fix(this.forge.pki.privateKeyToPem(keypair.privateKey, 72)))
+        };
+        this.keysPair = keypair;
+        console.log('Info: Keypair generated');
+        return keypair;
+    };
+
+
+    /**
+     * PEM key fixing
+     * @param str
+     * @return {string}
+     */
+    function fix(str) {
+        return str.replace(/\r/g, '') + '\n'
+    }
+
+    /**
+     * Repair bad generated key
+     * @param key
+     * @return {string}
+     */
+    function repairKey(key) {
+        if(key[key.length - 1] !== "\n") {
+            key += "\n";
+        }
+        return key.replace(new RegExp("\n\n", 'g'), "\n");
+    }
+
+    /**
+     * Signs data
+     * @param {data} data for signing
+     * @param {key} key
+     */
+
+
+    /**
+     * Sign data
+     * @param {string} data Data
+     * @param {string} key Private key
+     * @return {{data: {string}, sign:{string}}} Data - signable data, sign - Sign
+     */
+    this.signData = (data = dataToSign, key = this.keysPair.private) => {
+        if(!data) {
+            console.log('No data to sign');
+            return '';
+        }
+        let md = this.forge.md.sha256.create();
+        md.update(data, 'utf8');
+        let privateKey = this.forge.pki.privateKeyFromPem(key);
+        this.sign = privateKey.sign(md);
+        console.log('Info: Data signed');
+        return {data: data, sign: this.forge.util.bytesToHex(this.sign)};
+    };
+
+
+    /**
+     * Signs data
+     * @param {string} data Signed data for verify
+     * @param {string} sign Sign
+     * @param {string} key Public key
+     */
+    this.verifyData = (data = this.signedData, sign = this.signedData.sign, key = this.signedData.pubkey) => {
+        if(typeof data === 'object') {
+            sign = data.sign;
+            data = data.data;
+        }
+        try {
+            let publicKey = this.forge.pki.publicKeyFromPem(repairKey(fix(key)));
+            let md = this.forge.md.sha256.create();
+            md.update(data, 'utf8');
+            return publicKey.verify(md.digest().bytes(), this.forge.util.hexToBytes(sign)); //verifying only in bytes format
+        } catch (e) {
+            console.log(e);
+            return false;
+        }
+    };
+
+    if(dataToSign !== undefined) {
+        this.keysPair = this.generate();
+        this.signedData.pubkey = this.keysPair.public;
+        this.signedData.sign = this.signData().sign;
+        if(this.verifyData() === false) {
+            console.log('Sign self-validation error! Invalid key or sign checking');
+        }
+    }
+
+    return this;
+}
+
+//unify browser and node
+if(this.window === undefined) {
+    module.exports = DigitalSignature;
+}</code></pre>
+        </article>
+    </section>
+
+
+
+
+</div>
+
+<nav>
+    <h2><a href="index.html">Home</a></h2><h3>Classes</h3><ul><li><a href="DigitalSignature.html">DigitalSignature</a></li><li><a href="StarwaveCrypto.html">StarwaveCrypto</a></li><li><a href="starwaveProtocol.html">starwaveProtocol</a></li></ul><h3>Global</h3><ul><li><a href="global.html#allowMultiplySocketsOnBus">allowMultiplySocketsOnBus</a></li><li><a href="global.html#autoconnect">autoconnect</a></li><li><a href="global.html#block">block</a></li><li><a href="global.html#blockHeight">blockHeight</a></li><li><a href="global.html#broadcast">broadcast</a></li><li><a href="global.html#broadcastMessage">broadcastMessage</a></li><li><a href="global.html#checkForLoad">checkForLoad</a></li><li><a href="global.html#connectPeer">connectPeer</a></li><li><a href="global.html#getid">getid</a></li><li><a href="global.html#imgAutoLoad">imgAutoLoad</a></li><li><a href="global.html#loadResource">loadResource</a></li><li><a href="global.html#maxConnections">maxConnections</a></li><li><a href="global.html#messagesHandlers">messagesHandlers</a></li><li><a href="global.html#nodeList">nodeList</a></li><li><a href="global.html#ondata">ondata</a></li><li><a href="global.html#onmessage">onmessage</a></li><li><a href="global.html#onready">onready</a></li><li><a href="global.html#recieverAddress">recieverAddress</a></li><li><a href="global.html#registerMessageHandler">registerMessageHandler</a></li><li><a href="global.html#request">request</a></li><li><a href="global.html#requestApp">requestApp</a></li><li><a href="global.html#routes">routes</a></li><li><a href="global.html#secretKeys">secretKeys</a></li><li><a href="global.html#sockets">sockets</a></li><li><a href="global.html#start">start</a></li></ul>
+</nav>
+
+<br class="clear">
+
+<footer>
+    Documentation generated by <a href="https://github.com/jsdoc3/jsdoc">JSDoc 3.5.5</a> on Fri Oct 19 2018 19:14:54 GMT+0300 (RTZ 2 (зима))
+</footer>
+
+<script> prettyPrint(); </script>
+<script src="scripts/linenumber.js"> </script>
+</body>
+</html>
