@@ -278,9 +278,9 @@ $(function () {
                 });
 
                 $('#tnsn_online .send').on('click', function () {
-                    let block = new ecmaContractCallBlock(wallet.address, 'transfer', ['1', 'to_address'], {});
-                    block.pubkey = wallet.address;
+                    let block = new ecmaContractCallBlock('1', 'transfer', ['lksahalkhlkh', '0.001'], {'from': wallet.address, 'contractAddress': '1'});
                     block.sign = iz3BitcoreCrypto.sign(block.data, wallet.main.keysPair.private);
+                    block.pubkey = wallet.address;
 
                     $(this)
                         .prop('disabled', true)

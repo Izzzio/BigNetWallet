@@ -169,8 +169,8 @@ return [
      * API config
      */
     'Api'   => [
-        'host'  => 'http://localhost:3001/',
-        'pass'   => 'rlagvdkoklrmaf',
+        'host'  => 'http://localhost:3015/',
+        'pass'   => '',
     ],
 
 

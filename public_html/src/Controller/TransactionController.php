@@ -76,7 +76,9 @@ class TransactionController extends AppController
                 }
                 */
 
-                $wallet = $izNode->ecmaDeployMethodSignedBLock($block['address'], $block);
+                $contractAddress = 1;
+
+                $wallet = $izNode->ecmaDeployMethodSignedBLock($contractAddress, $block);
 
                 /*
                 $networkInfo2 = $izNode->getInfo();
