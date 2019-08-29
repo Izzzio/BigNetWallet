@@ -173,6 +173,17 @@ return [
         'pass'   => '',
     ],
 
+    /*
+     * Networks settings
+     */
+    'Networks' => [
+        [
+            'name' => 'bignet.izzz.io',
+            'ticker' => 'iZ3',
+            'masterContract' => '1',
+            'lastBlock' => 'undefined',
+        ],
+    ],
 
     /**
      * Security and encryption configuration

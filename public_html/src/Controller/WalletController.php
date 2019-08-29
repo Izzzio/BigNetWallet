@@ -93,11 +93,9 @@ class WalletController extends AppController
         ];
         if ($this->request->is('get') && $this->request->is('ajax')) {
             $address = false;
-            $network = [
-                'name' => 'bignet.izzz.io (IZ3)',
-                'lastBlock' => 'undefined',
-            ];
             $balance = 0;
+            $network = Configure::read('Networks')[0];
+            $network['name'] .= ' ('.$network['ticker'].')';
 
             if(isset($this->request->query['addr'])){
                 $address = substr($this->request->query['addr'], 0, 70);
@@ -109,9 +107,13 @@ class WalletController extends AppController
                 try{
                     $izNode = new \EcmaSmartRPC(Configure::read('Api.host'), Configure::read('Api.pass'));
 
-                    $network['lastBlock'] = 1;
+                    $networkInfo = $izNode->ecmaGetInfo();
+                    if(!isset($networkInfo['lastBlock'])) {
+                        throw new \Exception('Network is not ready. Please try again later.');
+                    }
+                    $network['lastBlock'] = $networkInfo['lastBlock'];
 
-                    $wallet = $izNode->ecmaCallMethod($network['lastBlock'], 'balanceOf', [$address]);
+                    $wallet = $izNode->ecmaCallMethod($network['masterContract'], 'balanceOf', [$address]);
                     if(isset($wallet['error']) && true == $wallet['error']){
                         throw new \Exception($wallet['message']);
                     } else {

@@ -34,7 +34,7 @@
                 <span class="info-box-icon" style="background: none;"><i class="fas fa-lg fa-wallet fa-lg"></i></span>
                 <div class="info-box-content" style="min-height: 95px;">
                     <span class="info-box-number">Balance</span>
-                    <span class="info-box-text"><?= $balance; ?> IZ3</span>
+                    <span class="info-box-text" style="text-transform: none;"><?= $balance; ?> <?= $network['ticker']; ?></span>
                 </div>
                 <div class="info-box-content" style="margin-top: 6px;">
                         <span class="info-box-text">
@@ -73,6 +73,8 @@
             </div>
         </div>
     </div>
+
+    <input type="hidden" id="masterContract" value="<?= $network['masterContract']; ?>">
 
     <div class="row box-wrapper" id="tnsn_online">
         <div class="col-md-8">
@@ -135,6 +137,9 @@
                         <div class="col-lg-4 col-md-3 col-sm-3 hidden-xs">
                         </div>
                     </div>
+                </div>
+                <div class="overlay" style="display: none; text-align: center;">
+                    <i class="fas fa-spinner fa-pulse fa-3x" style="top: 50%; position: sticky;"></i>
                 </div>
             </div>
         </div>

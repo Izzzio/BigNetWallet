@@ -227,9 +227,9 @@ $(function () {
         }
 
         var walletIZ3 = {
+            tnsnOnlineForm: $('#tnsn_online'),
             setEventListeners: function () {
                 let body = $('body');
-                let tnsnOnlineForm = $('#tnsn_online');
                 let tnsnOfflineForm = $('#tnsn_offline');
                 $('#tnsn_online form', body).validate({
                     rules: {
@@ -243,7 +243,8 @@ $(function () {
                         },
                         payee: {
                             required: true,
-                            minlength: 30
+                            minlength: 30,
+                            alphanumeric: true
                         }
                     },
                     messages: {
@@ -257,7 +258,8 @@ $(function () {
                         },
                         payee: {
                             required: 'This field is required',
-                            minlength: 'Wrong address'
+                            minlength: 'Wrong address: too short',
+                            alphanumeric: 'Only alpah and numeric symbols allowed'
                         }
                     },
                     highlight: function (element) {
@@ -266,11 +268,11 @@ $(function () {
                     onkeyup: function (element) {
                         $(element).valid();
                         if ($('#tnsn_online form').valid()) {
-                            $('button', tnsnOnlineForm)
+                            $('button', this.tnsnOnlineForm)
                                 .prop('disabled', false)
                                 .removeClass('disabled');
                         } else {
-                            $('button', tnsnOnlineForm)
+                            $('button', this.tnsnOnlineForm)
                                 .prop('disabled', true)
                                 .addClass('disabled');
                         }
@@ -278,13 +280,26 @@ $(function () {
                 });
 
                 $('#tnsn_online .send').on('click', function () {
-                    let block = new ecmaContractCallBlock('1', 'transfer', ['lksahalkhlkh', '0.001'], {'from': wallet.address, 'contractAddress': '1'});
+                    let block = new ecmaContractCallBlock(
+                            String($('#masterContract').val() || false),
+                            'transfer',
+                            [
+                                String($('#payee', this.tnsnOnlineForm).val() || false),
+                                String($('#amount', this.tnsnOnlineForm).val() || false),
+                            ],
+                            {
+                                'from': wallet.address,
+                                'contractAddress': String($('#masterContract').val() || false)
+                            }
+                        );
                     block.sign = iz3BitcoreCrypto.sign(block.data, wallet.main.keysPair.private);
                     block.pubkey = wallet.address;
 
                     $(this)
                         .prop('disabled', true)
                         .addClass('disabled');
+                    $('.overlay', this.tnsnOnlineForm).show();
+
                     walletIZ3.HTTPRequest.init({
                         url: '/transaction/online',
                         method: 'POST',
@@ -516,6 +531,7 @@ $(function () {
                             .prop('disabled', false)
                             .removeClass('disabled');
                     }
+                    $('.overlay', this.tnsnOnlineForm).hide();
                 }
             },
             utility: {
