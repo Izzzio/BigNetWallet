@@ -126,7 +126,9 @@
 <script src="<?= URL_PREFIX . APP_THEME_BASE ?>/js/langs.js?_=<?= CORE_VERSION ?>"></script>
 <script src="<?= URL_PREFIX . APP_THEME_BASE ?>/js/main.js?_=<?= CORE_VERSION ?>"></script>
 <script src="<?= URL_PREFIX . APP_THEME_BASE ?>/js/walletActions.js?_=<?= CORE_VERSION ?>"></script>
+<script src="<?= URL_PREFIX . APP_THEME_BASE ?>/js/signable.js?_=<?= CORE_VERSION ?>"></script>
 <script src="<?= URL_PREFIX . APP_THEME_BASE ?>/js/ecmaContractCallBlock.js?_=<?= CORE_VERSION ?>"></script>
+<script src="<?= URL_PREFIX . APP_THEME_BASE ?>/js/ecmaContractDeployBlock.js?_=<?= CORE_VERSION ?>"></script>
 <script src="<?= URL_PREFIX . APP_THEME_BASE ?>/components/candy/crypto-js/crypto-js.js"></script>
 <script src="<?= URL_PREFIX . APP_THEME_BASE ?>/plugins/jquery.qrcode.min.js"></script>
 

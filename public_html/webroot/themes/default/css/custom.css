@@ -38,6 +38,11 @@ label.error {
     padding-bottom: 45px;
 }
 
+.modal-footer {
+    padding-top: 45px;
+    padding-bottom: 45px;
+}
+
 textarea {
     resize: none;
 }
@@ -54,15 +59,17 @@ input.without-arrow::-webkit-inner-spin-button {
 }
 
 input[type=number].without-arrow {
-    -moz-appearance:textfield; /* Firefox */
+    -moz-appearance: textfield; /* Firefox */
 }
 
 .tnsn-offline-result h4 {
     font-weight: 600;
 }
+
 .tnsn-offline-result h4:not(:first-child) {
     margin-top: 25px;
 }
+
 .tnsn-offline-result .tnsn_block {
     background: #f9f9f9;
     padding: 20px;
@@ -72,4 +79,30 @@ input[type=number].without-arrow {
 
 code {
     background: none;
+}
+
+.overlay {
+    text-align: center;
+}
+
+.overlay i {
+    top: 45%;
+    position: relative;
+}
+
+.confirmation-contract-deploy {
+    background-color: #f2fafa;
+    border-radius: 4px;
+    color: #506175;
+    padding: 18px 24px;
+    width: 248px;
+    word-break: break-word;
+}
+
+.confirmation-contract-deploy .icon-matcher {
+    width: 45px;
+}
+
+.confirmation-contract-deploy .amount {
+    font-size: 20px;
 }

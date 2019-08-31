@@ -226,8 +226,13 @@ $(function () {
                 '</div>';
         }
 
+
+
+
+
         var walletIZ3 = {
             tnsnOnlineForm: $('#tnsn_online'),
+            contractDeployForm: $('#contract_deploy'),
             setEventListeners: function () {
                 let body = $('body');
                 let tnsnOfflineForm = $('#tnsn_offline');
@@ -411,6 +416,187 @@ $(function () {
                         reader.readAsText(file);
                     }
                 });
+
+
+
+                $('#contract_deploy form', body).validate({
+                    rules: {
+                        contract_code: {
+                            required: true
+                        },
+                        contract_rent: {
+                            required: true,
+                            number: true,
+                            min: 0.00000000000000000001,
+                        }
+                    },
+                    messages: {
+                        contract_code: {
+                            required: 'This field is required'
+                        },
+                        contract_rent: {
+                            required: 'This field is required',
+                            number: "Please enter numbers only",
+                            min: "Minimum value 0.00000000000000000001"
+                        }
+                    },
+                    highlight: function (element) {
+                        $(element).addClass('error');
+                    },
+                    onkeyup: function (element) {
+                        $(element).valid();
+                        if ($('#contract_deploy form').valid()) {
+                            $('button', this.contractDeployForm)
+                                .prop('disabled', false)
+                                .removeClass('disabled');
+                        } else {
+                            $('button', this.contractDeployForm)
+                                .prop('disabled', true)
+                                .addClass('disabled');
+                        }
+                    }
+                });
+
+
+                let block = '';
+                $('#contract_deploy .sign').on('click', function () {
+                        block = new ecmaContractDeployBlock(
+                        String($('#contract_code', this.contractDeployForm).val() || false),
+                        {
+                            'from': wallet.address,
+                            'contractAddress': String($('#masterContract').val() || false)
+                        }
+                    );
+                    block.sign = iz3BitcoreCrypto.sign(block.data, wallet.main.keysPair.private);
+                    block.pubkey = wallet.address;
+                    if(block.isSigned()){
+                        confirmContractDeployDlg
+                            .realize()
+                            .getModalFooter().css('text-align', 'center');
+                        let modalContent = confirmContractDeployDlg.getModalContent();
+
+                        $('#download', modalContent).on('click', function () {
+                            download(
+                                JSON.stringify({'rawTransaction': tnsnSign, 'tx': tnsnData}),
+                                'signetTransaction-' + (Date.now()) + '.json',
+                                'text/plain'
+                            );
+                        });
+                        confirmContractDeployDlg.open();
+                    } else {
+                        BootstrapDialog.alert({
+                            title: 'Error',
+                            message: 'Error create signature for transaction. Please, check contract code and try again',
+                            type: BootstrapDialog.TYPE_DANGER,
+                            size: BootstrapDialog.SIZE_LARGE,
+                            closable: true
+                        });
+                    }
+                });
+
+                let confirmContractDeployDlg = new BootstrapDialog({
+                    title: 'Confirmation',
+                    closable: true,
+                    closeByBackdrop: false,
+                    size: BootstrapDialog.SIZE_LARGE,
+                    spinicon: 'fas fa-spinner fa-pulse',
+                    message: getConfirmContractDeployDlgContent(),
+                    buttons: [{
+                        label: ' Confirm and Send',
+                        cssClass: 'btn btn-success',
+                        action: function (dialogRef) {
+                            dialogRef
+                                .enableButtons(false)
+                                .setClosable(false);
+                            let content = dialogRef.getModalContent();
+                            let $button = this;
+                            $button.spin();
+                            content.find('#message').hide();
+                            try {
+                                $.post('/transaction/contractDeploy', {
+                                    'block': block,
+                                    'rent': $('#contract_rent', this.contractDeployForm).val() || false
+                                })
+                                    .done(function (resp) {
+                                        if (resp.success) {
+                                            dialogRef.close();
+                                            BootstrapDialog.alert({
+                                                title: '',
+                                                message: 'Success',
+                                                type: BootstrapDialog.TYPE_SUCCESS,
+                                                size: BootstrapDialog.SIZE_LARGE,
+                                                closable: true
+                                            });
+                                        } else {
+                                            content.find('#message')
+                                                .html(resp.msg)
+                                                .show();
+                                        }
+                                    })
+                                    .fail(function (resp) {
+                                        content.find('#message')
+                                            .html(resp.msg)
+                                            .show();
+                                    })
+                                    .always(function (resp) {
+                                        dialogRef
+                                            .enableButtons(true)
+                                            .setClosable(true);
+                                        $button.stopSpin();
+                                    });
+                            } catch (e) {
+                                console.log(e);
+                                content.find('#message')
+                                    .html('Error sending transaction. Please try again later')
+                                    .show();
+                                dialogRef
+                                    .enableButtons(true)
+                                    .setClosable(true);
+                                $button.stopSpin();
+                            }
+                        }
+                    }]
+                });
+
+                function getConfirmContractDeployDlgContent() {
+                    return '' +
+                        '<div id="message" class="row alert alert-danger" role="alert" style="border-radius: 0px; display: none;">' +
+                        '</div>' +
+                        '<div class="container-fluid">' +
+                        '<div class="row">' +
+                        '<div class="col-md-6 col-xs-12 confirmation-contract-deploy">' +
+                        '<div class="">' +
+                        '<div class="icon-matcher"><img src="https://bignet.izzz.io/img/logo.svg"></div>' +
+                        '<p>' +
+                        '<span class="amount">- 0 </span>' +
+                        '<span class="currency">ETH</span>' +
+                        '</p>' +
+                        '</div>' +
+                        '<div class="identicon-container"><p>From Address</p></div>' +
+                        '<div class="address">0x07109B568763546Ad431f7D173526e3f74cC91A8</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>';
+                }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
                 body.off('click', '.autocopy');
                 body.on('click', '.autocopy', function () {

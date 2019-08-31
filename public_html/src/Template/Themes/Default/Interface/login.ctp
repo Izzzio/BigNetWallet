@@ -5,7 +5,8 @@
                 <span class="info-box-icon" style="background: none;"><i class="fas fa-font fa-lg"></i></span>
                 <div class="info-box-content" style="min-height: 95px;">
                     <span class="info-box-number">Address</span>
-                    <span class="info-box-text" id="payer" style="overflow-wrap: break-word;white-space: unset; text-transform: none;">
+                    <span class="info-box-text" id="payer"
+                          style="overflow-wrap: break-word;white-space: unset; text-transform: none;">
                         <?= $address; ?>
                     </span>
                 </div>
@@ -34,12 +35,13 @@
                 <span class="info-box-icon" style="background: none;"><i class="fas fa-lg fa-wallet fa-lg"></i></span>
                 <div class="info-box-content" style="min-height: 95px;">
                     <span class="info-box-number">Balance</span>
-                    <span class="info-box-text" style="text-transform: none;"><?= $balance; ?> <?= $network['ticker']; ?></span>
+                    <span class="info-box-text"
+                          style="text-transform: none;"><?= $balance; ?> <?= $network['ticker']; ?></span>
                 </div>
                 <div class="info-box-content" style="margin-top: 6px;">
                         <span class="info-box-text">
                             <span data-container="body" data-toggle="popover" data-placement="top"
-                                data-content="Check Balance" data-trigger="hover">
+                                  data-content="Check Balance" data-trigger="hover">
                                 <i class="fab fa-lg fa-creative-commons-nd"></i>
                             </span>
                             &nbsp;
@@ -99,7 +101,8 @@
                             <div class="col-md-7">
                                 <div class="form-group form-group-lg">
                                     <label for="amount">Amount</label>
-                                    <input type="number" step="any" class="form-control without-arrow" name="amount" id="amount">
+                                    <input type="number" step="any" class="form-control without-arrow" name="amount"
+                                           id="amount">
                                 </div>
                             </div>
                         </div>
@@ -113,7 +116,7 @@
                         </div>
 
                         <div class="col-md-12">
-                            <hr />
+                            <hr/>
                             <h4 style="font-weight: 600;">Advanced</h4>
                         </div>
 
@@ -132,14 +135,16 @@
                         <div class="col-lg-4 col-md-3 col-sm-3 hidden-xs">
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                            <button type="button" class="btn btn-success btn-lg btn-block disabled send" disabled="disabled">Send Transaction</button>
+                            <button type="button" class="btn btn-success btn-lg btn-block disabled send"
+                                    disabled="disabled">Send Transaction
+                            </button>
                         </div>
                         <div class="col-lg-4 col-md-3 col-sm-3 hidden-xs">
                         </div>
                     </div>
                 </div>
-                <div class="overlay" style="display: none; text-align: center;">
-                    <i class="fas fa-spinner fa-pulse fa-3x" style="top: 50%; position: sticky;"></i>
+                <div class="overlay" style="display: none;">
+                    <i class="fas fa-spinner fa-pulse fa-3x"></i>
                 </div>
             </div>
         </div>
@@ -165,7 +170,8 @@
                             <div class="col-md-7">
                                 <div class="form-group form-group-lg">
                                     <label for="amount">Amount</label>
-                                    <input type="number" step="any" class="form-control without-arrow" name="amount" id="amount" placeholder="Deposit Amount">
+                                    <input type="number" step="any" class="form-control without-arrow" name="amount"
+                                           id="amount" placeholder="Deposit Amount">
                                 </div>
                             </div>
                         </div>
@@ -183,7 +189,8 @@
                             <div class="col-md-12">
                                 <div class="form-group form-group-lg">
                                     <label for="data">Data</label>
-                                    <input type="text" class="form-control" id="data" autocomplete="off" value="0x" disabled="disabled">
+                                    <input type="text" class="form-control" id="data" autocomplete="off" value="0x"
+                                           disabled="disabled">
                                 </div>
                             </div>
                         </div>
@@ -211,18 +218,22 @@
                         <div class="col-lg-4 col-md-3 col-sm-3 hidden-xs">
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                            <button type="button" class="btn btn-default btn-lg btn-block import" onclick="document.getElementById('tnsn_import').click();">Import JSON</button>
-                            <input id="tnsn_import" type="file" style="display: none;" />
+                            <button type="button" class="btn btn-default btn-lg btn-block import"
+                                    onclick="document.getElementById('tnsn_import').click();">Import JSON
+                            </button>
+                            <input id="tnsn_import" type="file" style="display: none;"/>
                         </div>
                         <div class="col-lg-4 col-md-3 col-sm-3 hidden-xs">
                         </div>
                     </div>
-                    <br />
+                    <br/>
                     <div class="row">
                         <div class="col-lg-4 col-md-3 col-sm-3 hidden-xs">
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                            <button type="button" class="btn btn-success btn-lg btn-block disabled send" disabled="disabled">Generate Transaction</button>
+                            <button type="button" class="btn btn-success btn-lg btn-block disabled send"
+                                    disabled="disabled">Generate Transaction
+                            </button>
                         </div>
                         <div class="col-lg-4 col-md-3 col-sm-3 hidden-xs">
                         </div>
@@ -288,19 +299,10 @@
                         <div class="row col-md-12">
                             <div class="col-md-12">
                                 <div class="form-group form-group-lg">
-                                    <label for="code-byte">Byte Code</label>
+                                    <label for="contract_code">Contract code</label>
                                     <textarea
-                                            class="form-control" name="code_byte" id="code-byte" autocomplete="off"
-                                            style="height: 75px;"></textarea>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="row col-md-12">
-                            <div class="col-md-12">
-                                <div class="form-group form-group-lg">
-                                    <label for="code-json">ABI/JSON Interface</label>
-                                    <textarea
-                                            class="form-control" name="code_json" id="code-json" autocomplete="off"
+                                            class="form-control" name="contract_code" id="contract_code"
+                                            autocomplete="off"
                                             style="height: 225px;"></textarea>
                                 </div>
                             </div>
@@ -308,8 +310,10 @@
                         <div class="row col-md-12">
                             <div class="col-md-12">
                                 <div class="form-group form-group-lg">
-                                    <label for="contract-name">Contract Name</label>
-                                    <input type="text" class="form-control" id="contract-name" autocomplete="off" placeholder="Name for the contract">
+                                    <label for="contract_rent">Resource rent</label>
+                                    <input type="number" step="any" class="form-control without-arrow"
+                                           name="contract_rent" id="contract_rent" autocomplete="off"
+                                           placeholder="Amount resources for deploy contract">
                                 </div>
                             </div>
                         </div>
@@ -320,7 +324,9 @@
                         <div class="col-lg-4 col-md-3 col-sm-3 hidden-xs">
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                            <button type="button" class="btn btn-success btn-lg btn-block disabled" disabled="disabled">Sign Transaction</button>
+                            <button type="button" class="btn btn-success btn-lg btn-block disabled sign" disabled="disabled">
+                                Sign Transaction
+                            </button>
                         </div>
                         <div class="col-lg-4 col-md-3 col-sm-3 hidden-xs">
                         </div>
