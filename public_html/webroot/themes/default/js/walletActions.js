@@ -566,15 +566,22 @@ $(function () {
                         '<div class="row">' +
                         '<div class="col-md-6 col-xs-12 confirmation-contract-deploy">' +
                         '<div class="">' +
-                        '<div class="icon-matcher"><img src="https://bignet.izzz.io/img/logo.svg"></div>' +
+                        '<div class="icon-bg"><img src="https://bignet.izzz.io/img/logo.svg"></div>' +
                         '<p>' +
-                        '<span class="amount">- 0 </span>' +
-                        '<span class="currency">ETH</span>' +
+                        '<span class="amount">- 0</span>' +
+                        '<span class="currency"> ETH</span>' +
                         '</p>' +
                         '</div>' +
-                        '<div class="identicon-container"><p>From Address</p></div>' +
+                        '<div class="address-label">From Address</div>' +
                         '<div class="address">0x07109B568763546Ad431f7D173526e3f74cC91A8</div>' +
                         '</div>' +
+                        '</div>' +
+                        '<div class="row">' +
+                        '<div class="col-md-12 col-xs-12"><h4 style="font-size: 18px; font-weight: 600;">Detail Information</h4></div>' +
+                        '</div>' +
+                        '<div class="row">' +
+                        '<div class="col-md-6 text-left">Network</div>' +
+                        '<div class="col-md-6 text-right">bignet.izzz.io</div>' +
                         '</div>' +
                         '</div>';
                 }

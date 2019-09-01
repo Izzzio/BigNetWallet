@@ -99,10 +99,35 @@ code {
     word-break: break-word;
 }
 
-.confirmation-contract-deploy .icon-matcher {
-    width: 45px;
+.confirmation-contract-deploy .icon-bg {
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    background-color: #497391;
+    border-radius: 50%;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    height: 40px;
+    width: 40px;
 }
 
-.confirmation-contract-deploy .amount {
+.confirmation-contract-deploy .icon-bg img {
+    height: 20px !important;
+    width: auto !important;
+}
+
+.confirmation-contract-deploy .amount,
+.confirmation-contract-deploy .currency {
+    color: #536d8b;
     font-size: 20px;
+    font-weight: 600;
+}
+
+.confirmation-contract-deploy .address-label {
+    color: #506175;
+    font-weight: 600;
 }
