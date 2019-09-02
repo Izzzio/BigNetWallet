@@ -61,7 +61,7 @@
 
                 <div class="info-box-content" style="min-height: 95px;">
                     <span class="info-box-number">Network</span>
-                    <div><?= $network['name']; ?></div>
+                    <div><?= $network['name'].' ('.$network['ticker'].')'; ?></div>
                     <div>Last block# : <?= $network['lastBlock']; ?></div>
                 </div>
                 <div class="info-box-content" style="margin-top: 6px;">
@@ -76,7 +76,9 @@
         </div>
     </div>
 
+    <input type="hidden" id="network" value="<?= $network['name']; ?>">
     <input type="hidden" id="masterContract" value="<?= $network['masterContract']; ?>">
+    <input type="hidden" id="ticker" value="<?= $network['ticker']; ?>">
 
     <div class="row box-wrapper" id="tnsn_online">
         <div class="col-md-8">

@@ -95,7 +95,6 @@ class WalletController extends AppController
             $address = false;
             $balance = 0;
             $network = Configure::read('Networks')[0];
-            $network['name'] .= ' ('.$network['ticker'].')';
 
             if(isset($this->request->query['addr'])){
                 $address = substr($this->request->query['addr'], 0, 70);

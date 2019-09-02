@@ -90,7 +90,7 @@ code {
     position: relative;
 }
 
-.confirmation-contract-deploy {
+.confirmation-contract-deploy .main{
     background-color: #f2fafa;
     border-radius: 4px;
     color: #506175;
@@ -130,4 +130,23 @@ code {
 .confirmation-contract-deploy .address-label {
     color: #506175;
     font-weight: 600;
+}
+
+.confirmation-contract-deploy .detail-header {
+    margin-top: 35px;
+    margin-bottom: 15px;
+}
+
+.confirmation-contract-deploy .detail-header h4 {
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.confirmation-contract-deploy .detail-item {
+    color: #506175;
+    font-size: 17px;
+}
+
+.confirmation-contract-deploy .detail-item dt {
+    font-weight: 400;
 }

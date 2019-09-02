@@ -157,6 +157,7 @@ $(function () {
                                     $('section.sidebar', $('body')).html(resp.data.menu);
                                     $('.content-wrapper', $('body')).html(resp.data.page);
                                     dialogRef.close();
+                                    walletIZ3.setCurrentNetwork();
                                     walletIZ3.setEventListeners();
 
                                     //window.history.pushState({"html":resp.data,"pageTitle":'TITLE 1'},"", '/interface/send-online');
@@ -233,6 +234,16 @@ $(function () {
         var walletIZ3 = {
             tnsnOnlineForm: $('#tnsn_online'),
             contractDeployForm: $('#contract_deploy'),
+            network: {
+                name: '',
+                ticker: '',
+                masterContract: false,
+            },
+            setCurrentNetwork: function(){
+                this.network.name = $('#network').val() || '';
+                this.network.ticker = $('#ticker').val() || '';
+                this.network.masterContract = String($('#masterContract').val() || false);
+            },
             setEventListeners: function () {
                 let body = $('body');
                 let tnsnOfflineForm = $('#tnsn_offline');
@@ -286,7 +297,7 @@ $(function () {
 
                 $('#tnsn_online .send').on('click', function () {
                     let block = new ecmaContractCallBlock(
-                            String($('#masterContract').val() || false),
+                            walletIZ3.network.masterContract,
                             'transfer',
                             [
                                 String($('#payee', this.tnsnOnlineForm).val() || false),
@@ -294,7 +305,7 @@ $(function () {
                             ],
                             {
                                 'from': wallet.address,
-                                'contractAddress': String($('#masterContract').val() || false)
+                                'contractAddress': walletIZ3.network.masterContract
                             }
                         );
                     block.sign = iz3BitcoreCrypto.sign(block.data, wallet.main.keysPair.private);
@@ -464,7 +475,7 @@ $(function () {
                         String($('#contract_code', this.contractDeployForm).val() || false),
                         {
                             'from': wallet.address,
-                            'contractAddress': String($('#masterContract').val() || false)
+                            'contractAddress': walletIZ3.network.masterContract
                         }
                     );
                     block.sign = iz3BitcoreCrypto.sign(block.data, wallet.main.keysPair.private);
@@ -474,6 +485,12 @@ $(function () {
                             .realize()
                             .getModalFooter().css('text-align', 'center');
                         let modalContent = confirmContractDeployDlg.getModalContent();
+
+                        modalContent.find('img').attr('src', 'https://bignet.izzz.io/img/logo.svg');
+                        modalContent.find('.amount').html('- ' + $('#contract_rent', this.contractDeployForm).val() || false);
+                        modalContent.find('.currency').html(' ' + walletIZ3.network.ticker);
+                        modalContent.find('.network').html(' ' + walletIZ3.network.ticker + ' by ' + walletIZ3.network.name);
+                        modalContent.find('.address').html(($('#payer').html() || ''));
 
                         $('#download', modalContent).on('click', function () {
                             download(
@@ -562,27 +579,29 @@ $(function () {
                     return '' +
                         '<div id="message" class="row alert alert-danger" role="alert" style="border-radius: 0px; display: none;">' +
                         '</div>' +
-                        '<div class="container-fluid">' +
+                        '<div class="container-fluid confirmation-contract-deploy">' +
                         '<div class="row">' +
-                        '<div class="col-md-6 col-xs-12 confirmation-contract-deploy">' +
-                        '<div class="">' +
-                        '<div class="icon-bg"><img src="https://bignet.izzz.io/img/logo.svg"></div>' +
+                        '<div class="col-md-6 col-xs-12 main">' +
+                        '<div class="icon-bg"><img></div>' +
                         '<p>' +
-                        '<span class="amount">- 0</span>' +
-                        '<span class="currency"> ETH</span>' +
+                        '<span class="amount"></span>' +
+                        '<span class="currency"></span>' +
                         '</p>' +
-                        '</div>' +
                         '<div class="address-label">From Address</div>' +
-                        '<div class="address">0x07109B568763546Ad431f7D173526e3f74cC91A8</div>' +
+                        '<div class="address"></div>' +
                         '</div>' +
                         '</div>' +
-                        '<div class="row">' +
-                        '<div class="col-md-12 col-xs-12"><h4 style="font-size: 18px; font-weight: 600;">Detail Information</h4></div>' +
+                        '<hr style=" position: fixed; width: 100%; left: 0px; ">' +
+                        '<div class="row detail-header">' +
+                        '<div class="col-md-12 col-xs-12"><h4>Detail Information</h4></div>' +
                         '</div>' +
-                        '<div class="row">' +
-                        '<div class="col-md-6 text-left">Network</div>' +
-                        '<div class="col-md-6 text-right">bignet.izzz.io</div>' +
-                        '</div>' +
+                        '<div class="row detail-item">' +
+                            '<div class="col-md-6 col-sm-6 hidden-xs text-left">Network</div>' +
+                            '<div class="col-md-6 col-sm-6 hidden-xs text-right network"></div>' +
+                                '<div class="hidden-lg hidden-md hidden-sm col-xs-12">' +
+                                    '<dl><dt>Network</dt><dd class="network"></dd></dl>'
+                                '</div>' +
+                            '</div>' +
                         '</div>';
                 }
 
