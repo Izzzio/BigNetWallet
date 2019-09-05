@@ -28,7 +28,7 @@ class TransactionController extends AppController
         parent::beforeFilter($event);
 
         //$this->viewBuilder()->layout('main');
-        $this->IndianAuth->allow(['online'], $this->IndianAuth::PERMISSION_ALL);
+        $this->IndianAuth->allow(['online', 'contractDeploy'], $this->IndianAuth::PERMISSION_ALL);
     }
 
     /**
@@ -67,6 +67,56 @@ class TransactionController extends AppController
                     if (isset($wallet['result'])) {
                         $result['success'] = true;
                         $result['msg'] = 'Transaction succesfull created';
+                    }
+                }
+            } catch (\Exception $e) {
+                $result['msg'] = $e->getMessage();
+            }
+
+            return $this->sendJsonResponse($result);
+        }
+    }
+
+    public function contractDeploy()
+    {
+        $result = [
+            'success' => false,
+            'msg' => '',
+            'data' => [],
+        ];
+        if ($this->request->is('post') && $this->request->is('ajax')) {
+            $block = isset($this->request->data['block']) ? $this->request->data['block'] : [];
+            $rent = isset($this->request->data['rent']) ? intval($this->request->data['rent']) : 0;
+
+            $blockChecked = [];
+            if(isset($block['data'])){
+                $blockChecked['data'] = true;
+            }
+            if(isset($block['sign'])){
+                $blockChecked['sign'] = true;
+            }
+            if(isset($block['pubkey'])){
+                $blockChecked['pubkey'] = true;
+            }
+            if(isset($block['state']) && is_array($block['state']) && count($block['state']) > 0){
+                $blockChecked['state'] = true;
+            }
+            if(4 != count($blockChecked) || $rent < 0){
+                $result['msg'] = 'Not possible: no data needed';
+                return $this->sendJsonResponse($result);
+            }
+
+            require_once('Api/V1/php/NodeRPC.php');
+            require_once('Api/V1/php/EcmaSmartRPC.php');
+            try {
+                $izNode = new \EcmaSmartRPC(Configure::read('Api.host'), Configure::read('Api.pass'));
+                $deployContract = $izNode->ecmaDeployContractSignedBlock($block, $rent);
+                if (isset($deployContract['error']) && true == $deployContract['error']) {
+                    throw new \Exception($deployContract['message']);
+                } else {
+                    if (isset($deployContract['result'])) {
+                        $result['success'] = true;
+                        $result['msg'] = 'Transaction sent to network';
                     }
                 }
             } catch (\Exception $e) {

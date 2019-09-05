@@ -79,6 +79,7 @@
     <input type="hidden" id="network" value="<?= $network['name']; ?>">
     <input type="hidden" id="masterContract" value="<?= $network['masterContract']; ?>">
     <input type="hidden" id="ticker" value="<?= $network['ticker']; ?>">
+    <input type="hidden" id="icon" value="<?= $network['icon']; ?>">
 
     <div class="row box-wrapper" id="tnsn_online">
         <div class="col-md-8">

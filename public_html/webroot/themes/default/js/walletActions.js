@@ -233,20 +233,22 @@ $(function () {
 
         var walletIZ3 = {
             tnsnOnlineForm: $('#tnsn_online'),
+            tnsnOfflineForm: $('#tnsn_offline'),
             contractDeployForm: $('#contract_deploy'),
             network: {
                 name: '',
                 ticker: '',
                 masterContract: false,
+                icon: ''
             },
             setCurrentNetwork: function(){
                 this.network.name = $('#network').val() || '';
                 this.network.ticker = $('#ticker').val() || '';
                 this.network.masterContract = String($('#masterContract').val() || false);
+                this.network.icon = $('#icon').val() || '';
             },
             setEventListeners: function () {
                 let body = $('body');
-                let tnsnOfflineForm = $('#tnsn_offline');
                 $('#tnsn_online form', body).validate({
                     rules: {
                         type: {
@@ -355,11 +357,11 @@ $(function () {
                     onkeyup: function (element) {
                         $(element).valid();
                         if ($('#tnsn_offline form').valid()) {
-                            $('button', tnsnOfflineForm)
+                            $('button', this.tnsnOfflineForm)
                                 .prop('disabled', false)
                                 .removeClass('disabled');
                         } else {
-                            $('button.send', tnsnOfflineForm)
+                            $('button.send', this.tnsnOfflineForm)
                                 .prop('disabled', true)
                                 .addClass('disabled');
                         }
@@ -403,22 +405,22 @@ $(function () {
                             return function (e) {
                                 try {
                                     let tnsn = JSON.parse(e.target.result);
-                                    $('#amount', tnsnOfflineForm).val((tnsn.tx.amount || ''));
-                                    $('#payee', tnsnOfflineForm).val((tnsn.tx.to || ''));
+                                    $('#amount', this.tnsnOfflineForm).val((tnsn.tx.amount || ''));
+                                    $('#payee', this.tnsnOfflineForm).val((tnsn.tx.to || ''));
                                     toastr['success']('File successfull imported');
 
                                     if ($('#tnsn_offline form').valid()) {
-                                        $('button', tnsnOfflineForm)
+                                        $('button', this.tnsnOfflineForm)
                                             .prop('disabled', false)
                                             .removeClass('disabled');
                                     } else {
-                                        $('button.send', tnsnOfflineForm)
+                                        $('button.send', this.tnsnOfflineForm)
                                             .prop('disabled', true)
                                             .addClass('disabled');
                                     }
                                 } catch (e) {
                                     toastr['warning']('Error when trying to parse json: ' + e);
-                                    $('button.send', tnsnOfflineForm)
+                                    $('button.send', this.tnsnOfflineForm)
                                         .prop('disabled', true)
                                         .addClass('disabled');
                                 }
@@ -436,9 +438,9 @@ $(function () {
                             required: true
                         },
                         contract_rent: {
-                            required: true,
+                            required: false,
                             number: true,
-                            min: 0.00000000000000000001,
+                            min: 0,
                         }
                     },
                     messages: {
@@ -448,7 +450,7 @@ $(function () {
                         contract_rent: {
                             required: 'This field is required',
                             number: "Please enter numbers only",
-                            min: "Minimum value 0.00000000000000000001"
+                            min: "Minimum value 0"
                         }
                     },
                     highlight: function (element) {
@@ -468,14 +470,17 @@ $(function () {
                     }
                 });
 
-
                 let block = '';
+                let resourceRent = '';
                 $('#contract_deploy .sign').on('click', function () {
+                        resourceRent = ($('#contract_rent', this.contractDeployForm).val() || 0);
                         block = new ecmaContractDeployBlock(
-                        String($('#contract_code', this.contractDeployForm).val() || false),
+                        String(($('#contract_code', this.contractDeployForm).val() || false)),
                         {
+                            'resourceRent': resourceRent,
                             'from': wallet.address,
-                            'contractAddress': walletIZ3.network.masterContract
+                            'contractAddress': walletIZ3.network.masterContract,
+                            'randomSeed': walletIZ3.utility.getRandomInt()
                         }
                     );
                     block.sign = iz3BitcoreCrypto.sign(block.data, wallet.main.keysPair.private);
@@ -485,20 +490,11 @@ $(function () {
                             .realize()
                             .getModalFooter().css('text-align', 'center');
                         let modalContent = confirmContractDeployDlg.getModalContent();
-
-                        modalContent.find('img').attr('src', 'https://bignet.izzz.io/img/logo.svg');
-                        modalContent.find('.amount').html('- ' + $('#contract_rent', this.contractDeployForm).val() || false);
+                        modalContent.find('img').attr('src', walletIZ3.network.icon);
+                        modalContent.find('.amount').html('- ' + resourceRent);
                         modalContent.find('.currency').html(' ' + walletIZ3.network.ticker);
                         modalContent.find('.network').html(' ' + walletIZ3.network.ticker + ' by ' + walletIZ3.network.name);
                         modalContent.find('.address').html(($('#payer').html() || ''));
-
-                        $('#download', modalContent).on('click', function () {
-                            download(
-                                JSON.stringify({'rawTransaction': tnsnSign, 'tx': tnsnData}),
-                                'signetTransaction-' + (Date.now()) + '.json',
-                                'text/plain'
-                            );
-                        });
                         confirmContractDeployDlg.open();
                     } else {
                         BootstrapDialog.alert({
@@ -530,20 +526,50 @@ $(function () {
                             $button.spin();
                             content.find('#message').hide();
                             try {
-                                $.post('/transaction/contractDeploy', {
+                                $.post(
+                                    '/transaction/contractDeploy',
+                                    {
                                     'block': block,
-                                    'rent': $('#contract_rent', this.contractDeployForm).val() || false
-                                })
+                                    'rent': resourceRent
+                                    },
+                                    "json")
                                     .done(function (resp) {
                                         if (resp.success) {
                                             dialogRef.close();
-                                            BootstrapDialog.alert({
-                                                title: '',
-                                                message: 'Success',
-                                                type: BootstrapDialog.TYPE_SUCCESS,
+
+                                            var dialog = new BootstrapDialog({
+                                                message: function(dialogRef){
+                                                    let message = '' +
+                                                        '<div class="container-fluid text-center">' +
+                                                        '<div class="row">' +
+                                                        '<i class="far fa-check-circle fa-7x text-success"></i>' +
+                                                        '</div>' +
+                                                        '<div class="row">' +
+                                                        '<h2 style=" font-weight: 700; color: #003945; ">Success</h2>'+
+                                                        '</div>' +
+                                                        '<div class="row" style=" color: #506175; font-size: 16px; margin-top: 15px; margin-bottom: 40px;">' +
+                                                        resp.msg +
+                                                        '</div>' +
+                                                        '</div>'
+                                                    ;
+                                                    message = $(message);
+                                                    let $btnCheck = $('<div class="row"><button class="btn btn-default btn-lg btn-block disabled" disabled>Check Status</button></div>');
+                                                    let $btnOk = $('<div class="row"><button class="btn btn-success btn-lg btn-block">Okay</button></div>');
+                                                    $btnOk.on('click', {dialogRef: dialogRef}, function(event){
+                                                        event.data.dialogRef.close();
+                                                    });
+                                                    message.append($btnCheck);
+                                                    message.append($btnOk);
+
+                                                    return message;
+                                                },
                                                 size: BootstrapDialog.SIZE_LARGE,
                                                 closable: true
                                             });
+                                            dialog.realize();
+                                            dialog.getModalHeader().hide();
+                                            dialog.getModalFooter().hide();
+                                            dialog.open();
                                         } else {
                                             content.find('#message')
                                                 .html(resp.msg)
@@ -604,25 +630,6 @@ $(function () {
                             '</div>' +
                         '</div>';
                 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                 body.off('click', '.autocopy');
                 body.on('click', '.autocopy', function () {
@@ -788,8 +795,13 @@ $(function () {
                         toastr['warning']("Automatic copying is not supported in your browser. Update your browser to the latest version or select the text manually and copy it.");
                         console.log(e);
                     }
+                },
+                getRandomInt: function(min, max) {
+                    min = min || 100;
+                    max = max || 1000000;
+                    return Math.floor(Math.random() * (max - min + 1)) + min;
                 }
-            },
+    },
             transaction: {
                 online: {
                     checkReady: function () {

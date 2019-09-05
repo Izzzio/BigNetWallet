@@ -182,6 +182,7 @@ return [
             'ticker' => 'iZ3',
             'masterContract' => '1',
             'lastBlock' => 'undefined',
+            'icon'  => 'https://bignet.izzz.io/img/logo.svg',
         ],
     ],
 
