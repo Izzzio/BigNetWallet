@@ -507,6 +507,13 @@ $(function () {
                     }
                 });
 
+                let successContractDeployDlg = new BootstrapDialog({
+                    closable: true,
+                    closeByBackdrop: false,
+                    size: BootstrapDialog.SIZE_LARGE,
+                    message: getSuccessContractDeployDlgContent()
+                });
+
                 let confirmContractDeployDlg = new BootstrapDialog({
                     title: 'Confirmation',
                     closable: true,
@@ -537,39 +544,21 @@ $(function () {
                                         if (resp.success) {
                                             dialogRef.close();
 
-                                            var dialog = new BootstrapDialog({
-                                                message: function(dialogRef){
-                                                    let message = '' +
-                                                        '<div class="container-fluid text-center">' +
-                                                        '<div class="row">' +
-                                                        '<i class="far fa-check-circle fa-7x text-success"></i>' +
-                                                        '</div>' +
-                                                        '<div class="row">' +
-                                                        '<h2 style=" font-weight: 700; color: #003945; ">Success</h2>'+
-                                                        '</div>' +
-                                                        '<div class="row" style=" color: #506175; font-size: 16px; margin-top: 15px; margin-bottom: 40px;">' +
-                                                        resp.msg +
-                                                        '</div>' +
-                                                        '</div>'
-                                                    ;
-                                                    message = $(message);
-                                                    let $btnCheck = $('<div class="row"><button class="btn btn-default btn-lg btn-block disabled" disabled>Check Status</button></div>');
-                                                    let $btnOk = $('<div class="row"><button class="btn btn-success btn-lg btn-block">Okay</button></div>');
-                                                    $btnOk.on('click', {dialogRef: dialogRef}, function(event){
-                                                        event.data.dialogRef.close();
-                                                    });
-                                                    message.append($btnCheck);
-                                                    message.append($btnOk);
-
-                                                    return message;
-                                                },
-                                                size: BootstrapDialog.SIZE_LARGE,
-                                                closable: true
+                                            successContractDeployDlg.realize();
+                                            successContractDeployDlg.getModalHeader().hide();
+                                            successContractDeployDlg.getModalFooter().hide();
+                                            let modalContent = successContractDeployDlg.getModalContent();
+                                            $('#tnsn-check-status', modalContent).on('click', function () {
+                                                alert('Open new window');
                                             });
-                                            dialog.realize();
-                                            dialog.getModalHeader().hide();
-                                            dialog.getModalFooter().hide();
-                                            dialog.open();
+                                            $('#close', modalContent).on('click', {dialogRef: successContractDeployDlg}, function (event) {
+                                                $('#contract_code', this.contractDeployForm).val('');
+                                                $('.sign', this.contractDeployForm)
+                                                    .addClass('disabled')
+                                                    .prop('disabled', true);
+                                                event.data.dialogRef.close();
+                                            });
+                                            successContractDeployDlg.open();
                                         } else {
                                             content.find('#message')
                                                 .html(resp.msg)
@@ -630,6 +619,46 @@ $(function () {
                             '</div>' +
                         '</div>';
                 }
+
+                function getSuccessContractDeployDlgContent() {
+                    return '' +
+                        '<div class="container-fluid text-center">' +
+                        '<div class="row">' +
+                        '<i class="far fa-check-circle fa-7x text-success"></i>' +
+                        '</div>' +
+                        '<div class="row">' +
+                        '<h2 style=" font-weight: 700; color: #003945; ">Success</h2>'+
+                        '</div>' +
+                        '<div class="row" style=" color: #506175; font-size: 16px; margin-top: 15px; margin-bottom: 40px;">' +
+                        'Transaction sent to network' +
+                        '</div>' +
+                        '<div class="row">' +
+                        '<div class="col-md-12">' +
+                        '<div class="col-lg-2 col-md-2 col-sm-1 hidden-xs">' +
+                        '</div>' +
+                        '<div class="col-lg-8 col-md-8 col-sm-10 col-xs-12">' +
+                        '<button class="btn btn-default btn-lg btn-block disabled" disabled id="tnsn-check-status">Check Status</button>' +
+                        '</div>' +
+                        '<div class="col-lg-2 col-md-2 col-sm-1 hidden-xs">' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '<br />' +
+                        '<div class="row">' +
+                        '<div class="col-md-12">' +
+                        '<div class="col-lg-2 col-md-2 col-sm-1 hidden-xs">' +
+                        '</div>' +
+                        '<div class="col-lg-8 col-md-8 col-sm-10 col-xs-12">' +
+                        '<button class="btn btn-success btn-lg btn-block" id="close">Okay</button>' +
+                        '</div>' +
+                        '<div class="col-lg-2 col-md-2 col-sm-1 hidden-xs">' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>'
+                    ;
+                }
+
 
                 body.off('click', '.autocopy');
                 body.on('click', '.autocopy', function () {

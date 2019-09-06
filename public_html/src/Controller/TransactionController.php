@@ -116,7 +116,6 @@ class TransactionController extends AppController
                 } else {
                     if (isset($deployContract['result'])) {
                         $result['success'] = true;
-                        $result['msg'] = 'Transaction sent to network';
                     }
                 }
             } catch (\Exception $e) {
