@@ -326,6 +326,7 @@ $(function () {
                     walletIZ3.HTTPRequest.send('resTnsnOnline');
                 });
 
+
                 $('#tnsn_offline form', body).validate({
                     rules: {
                         type: {
@@ -431,6 +432,51 @@ $(function () {
                 });
 
 
+                $('#contract_interact form', body).validate({
+                    rules: {
+                        deployed_contract_name: {
+                            required: true
+                        },
+                        interact_who: {
+                            required: true,
+                        }
+                    },
+                    messages: {
+                        deployed_contract_name: {
+                            required: 'This field is required'
+                        },
+                        interact_who: {
+                            required: 'This field is required'
+                        }
+                    },
+                    highlight: function (element) {
+                        $(element).addClass('error');
+                    },
+                    onkeyup: function (element) {
+                        $(element).valid();
+                        if ($('#contract_interact form').valid()) {
+                            $('button', $('#contract_interact'))
+                                .prop('disabled', false)
+                                .removeClass('disabled');
+                        } else {
+                            $('button', $('#contract_interact'))
+                                .prop('disabled', true)
+                                .addClass('disabled');
+                        }
+                    },
+                    onclick: function (element) {
+                        $(element).valid();
+                        if ($('#contract_interact form').valid()) {
+                            $('button', $('#contract_interact'))
+                                .prop('disabled', false)
+                                .removeClass('disabled');
+                        } else {
+                            $('button', $('#contract_interact'))
+                                .prop('disabled', true)
+                                .addClass('disabled');
+                        }
+                    }
+                });
 
                 $('#contract_deploy form', body).validate({
                     rules: {

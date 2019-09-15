@@ -106,11 +106,12 @@ class WalletController extends AppController
                 try{
                     $izNode = new \EcmaSmartRPC(Configure::read('Api.host'), Configure::read('Api.pass'));
 
-                    $networkInfo = $izNode->ecmaGetInfo();
-                    if(!isset($networkInfo['lastBlock'])) {
+                    $networkInfo = $izNode->getInfo();
+
+                    if(!isset($networkInfo['maxBlock'])) {
                         throw new \Exception('Network is not ready. Please try again later.');
                     }
-                    $network['lastBlock'] = $networkInfo['lastBlock'];
+                    $network['lastBlock'] = $networkInfo['maxBlock'];
 
                     $wallet = $izNode->ecmaCallMethod($network['masterContract'], 'balanceOf', [$address]);
                     if(isset($wallet['error']) && true == $wallet['error']){

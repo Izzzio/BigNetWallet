@@ -50,7 +50,7 @@
                         </span>
                 </a>
                 <ul class="treeview-menu">
-                    <li box="contract_read">
+                    <li box="contract_interact">
                         <a href="#">
                             <i class="far fa-sm fa-circle"></i>
                             &nbsp;&nbsp;

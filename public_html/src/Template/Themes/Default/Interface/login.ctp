@@ -276,16 +276,88 @@
         </div>
     </div>
 
-    <div class="row box-wrapper" id="contract_read" style="display: none;">
+    <div class="row box-wrapper" id="contract_interact" style="display: none;">
         <div class="col-md-8">
             <div class="box box-success">
                 <div class="box-header with-border">
                     <h3 class="box-title"><strong>Interact with deployed Contract</strong></h3>
                 </div>
-                <div class="box-body">
-                    Coming soon...
+                <div id="step1">
+                    <div class="box-body">
+                        <form>
+                            <div class="row col-md-12">
+                                <div class="col-md-6">
+                                    <div class="form-group form-group-lg">
+                                        <label for="deployed_contract_name">Contract name</label>
+                                        <select class="form-control" name="deployed_contract_name" id="deployed_contract_name">
+                                            <option value=""></option>
+                                            <option value="main">Main Contract</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row col-md-12">
+                                <div class="col-md-12">
+                                    <div class="form-group form-group-lg">
+                                        <label for="interact_who">Contract Address</label>
+                                        <input type="text" class="form-control" name="interact_who" id="interact_who" placeholder="Enter Contract Address">
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="box-footer text-center">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-3 col-sm-3 hidden-xs">
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                                <button type="button" class="btn btn-success btn-lg btn-block disabled continue" disabled="disabled">
+                                    Continue
+                                </button>
+                            </div>
+                            <div class="col-lg-4 col-md-3 col-sm-3 hidden-xs">
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="box-footer text-center">
+                <div id="step2" style="display: none;">
+                    <div class="box-body">
+                        <form>
+                            <div class="row col-md-12">
+                                <div class="col-md-12">
+                                    <div class="form-group form-group-lg">
+                                        <label for="interacting">Read/Write Contract</label>
+                                        <input class="form-control" name="interacting" id="interacting"
+                                               value="Contract Address: " readonly="readonly" disabled="disabled">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row col-md-12">
+                                <div class="col-md-6">
+                                    <div class="form-group form-group-lg">
+                                        <label for="deployed_contract_action">Execute action</label>
+                                        <select class="form-control" name="deployed_contract_action" id="deployed_contract_action">
+                                            <option value=""></option>
+                                            <option value="">totalSupply</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="box-footer text-center">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-3 col-sm-3 hidden-xs">
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                                <button type="button" class="btn btn-default btn-lg btn-block back">
+                                    Back
+                                </button>
+                            </div>
+                            <div class="col-lg-4 col-md-3 col-sm-3 hidden-xs">
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
