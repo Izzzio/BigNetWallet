@@ -186,6 +186,22 @@ return [
         ],
     ],
 
+
+    /*
+     * Contract groups
+     */
+    'Contracts' => [
+        'popular' => [
+            [
+                'id' => 'main',
+                'name' => 'Main Contract',
+                'from' => 'izNUhVKtDpmgCnVycSMUPusX8sdnErzAD9T',
+                'address' => '1',
+            ],
+        ],
+    ],
+
+
     /**
      * Security and encryption configuration
      *

@@ -95,6 +95,7 @@ class WalletController extends AppController
             $address = false;
             $balance = 0;
             $network = Configure::read('Networks')[0];
+            $contractsPopular = Configure::read('Contracts.popular');
 
             if(isset($this->request->query['addr'])){
                 $address = substr($this->request->query['addr'], 0, 70);
@@ -144,7 +145,7 @@ class WalletController extends AppController
             $result['data']['menu'] = $view->render();
 
             $builder->template('login');
-            $view = $builder->build(compact(['address', 'balance', 'network']));
+            $view = $builder->build(compact(['address', 'balance', 'network', 'contractsPopular']));
             $result['data']['page'] = $view->render();
 
             $this->set([

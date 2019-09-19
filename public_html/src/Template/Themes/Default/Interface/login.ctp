@@ -291,7 +291,14 @@
                                         <label for="deployed_contract_name">Contract name</label>
                                         <select class="form-control" name="deployed_contract_name" id="deployed_contract_name">
                                             <option value=""></option>
-                                            <option value="main">Main Contract</option>
+                                            <?php
+                                                foreach($contractsPopular as $key => $contract){
+                                            ?>
+                                                    <option value="<?= $contract['id']; ?>" data-from="<?= $contract['from']; ?>"><?= $contract['name']; ?></option>
+                                            <?php
+                                                }
+                                            ?>
+
                                         </select>
                                     </div>
                                 </div>

@@ -98,11 +98,14 @@ class TransactionController extends AppController
             if(isset($block['pubkey'])){
                 $blockChecked['pubkey'] = true;
             }
+            if(isset($block['ecmaCode']) && !empty($block['ecmaCode'] && mb_strlen($block['ecmaCode']) > 100 )){
+                $blockChecked['ecmaCode'] = true;
+            }
             if(isset($block['state']) && is_array($block['state']) && count($block['state']) > 0){
                 $blockChecked['state'] = true;
             }
-            if(4 != count($blockChecked) || $rent < 0){
-                $result['msg'] = 'Not possible: no data needed';
+            if(5 != count($blockChecked) || $rent < 0){
+                $result['msg'] = 'Error: wrong contract code or wrong block';
                 return $this->sendJsonResponse($result);
             }
 

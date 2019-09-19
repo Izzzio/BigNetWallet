@@ -454,29 +454,40 @@ $(function () {
                     },
                     onkeyup: function (element) {
                         $(element).valid();
+                        let buttons = $('button', $('#contract_interact'));
                         if ($('#contract_interact form').valid()) {
-                            $('button', $('#contract_interact'))
+                            buttons
                                 .prop('disabled', false)
                                 .removeClass('disabled');
                         } else {
-                            $('button', $('#contract_interact'))
+                            buttons
                                 .prop('disabled', true)
                                 .addClass('disabled');
                         }
                     },
                     onclick: function (element) {
                         $(element).valid();
+                        let buttons = $('button', $('#contract_interact'));
                         if ($('#contract_interact form').valid()) {
-                            $('button', $('#contract_interact'))
+                            buttons
                                 .prop('disabled', false)
                                 .removeClass('disabled');
                         } else {
-                            $('button', $('#contract_interact'))
+                            buttons
                                 .prop('disabled', true)
                                 .addClass('disabled');
                         }
                     }
                 });
+
+                $('#deployed_contract_name', $('#contract_interact')).on('change', function () {
+                    let from = $(this).data('from') || '';
+                    $('#interact_who', $('#contract_interact')).val(from);
+                });
+                $('#contract_interact .continue').on('click', function () {
+
+                });
+
 
                 $('#contract_deploy form', body).validate({
                     rules: {
