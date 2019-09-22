@@ -28,7 +28,7 @@ class TransactionController extends AppController
         parent::beforeFilter($event);
 
         //$this->viewBuilder()->layout('main');
-        $this->IndianAuth->allow(['online', 'contractDeploy'], $this->IndianAuth::PERMISSION_ALL);
+        $this->IndianAuth->allow(['online', 'contractInteract', 'contractDeploy'], $this->IndianAuth::PERMISSION_ALL);
     }
 
     /**
@@ -67,6 +67,55 @@ class TransactionController extends AppController
                     if (isset($wallet['result'])) {
                         $result['success'] = true;
                         $result['msg'] = 'Transaction succesfull created';
+                    }
+                }
+            } catch (\Exception $e) {
+                $result['msg'] = $e->getMessage();
+            }
+
+            return $this->sendJsonResponse($result);
+        }
+    }
+
+    public function contractInteract()
+    {
+        $result = [
+            'success' => false,
+            'msg' => '',
+            'data' => [],
+        ];
+        if ($this->request->is('get') && $this->request->is('ajax')) {
+            $contractAddress = $this->request->query('addr') ? $this->request->query('addr') : '';
+            $contractAddress = 1;
+            $method = strval($this->request->query('method') ? $this->request->query('method') : '');
+
+            switch ($method){
+                case 'checkContractAddress':
+                    break;
+                default:
+                    $result['msg'] = 'Error: select action, please';
+                    break;
+            }
+
+            if(!empty($result['msg'])){
+                return $this->sendJsonResponse($result);
+            }
+
+            require_once('Api/V1/php/NodeRPC.php');
+            require_once('Api/V1/php/EcmaSmartRPC.php');
+            try {
+                $izNode = new \EcmaSmartRPC(Configure::read('Api.host'), Configure::read('Api.pass'));
+                $request = $izNode->ecmaCallMethod($contractAddress, $method, []);
+                if (isset($request['error']) && true == $request['error']) {
+                    throw new \Exception($request['message']);
+                } else {
+
+
+                    var_dump($request);
+
+
+                    if (isset($request['result'])) {
+                        $result['success'] = true;
                     }
                 }
             } catch (\Exception $e) {

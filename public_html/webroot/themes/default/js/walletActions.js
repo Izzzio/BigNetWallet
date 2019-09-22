@@ -481,12 +481,33 @@ $(function () {
                 });
 
                 $('#deployed_contract_name', $('#contract_interact')).on('change', function () {
-                    let from = $(this).data('from') || '';
+                    let from = $(this).find(':selected').data('from') || '';
                     $('#interact_who', $('#contract_interact')).val(from);
                 });
                 $('#contract_interact .continue').on('click', function () {
-
+                    $('#step1', $('#contract_interact')).hide();
+                    $('#step2', $('#contract_interact')).show();
                 });
+                $('#contract_interact .back').on('click', function () {
+                    $('#step2', $('#contract_interact')).hide();
+                    $('#step1', $('#contract_interact')).show();
+                });
+                $('#deployed_contract_action', $('#contract_interact')).on('change', function () {
+                    $('button', $('#contract_interact'))
+                        .prop('disabled', true)
+                        .addClass('disabled');
+                    $('.overlay', $('#contract_interact')).show();
+
+                    let action = $(this).val() || '';
+                    walletIZ3.HTTPRequest.init({
+                        url: '/transaction/contractInteract',
+                        method: 'GET',
+                        data: {'method': action}
+                    });
+                    walletIZ3.HTTPRequest.send('resInteractContract');
+                });
+
+
 
 
                 $('#contract_deploy form', body).validate({
@@ -837,6 +858,21 @@ $(function () {
                             .removeClass('disabled');
                     }
                     $('.overlay', this.tnsnOnlineForm).hide();
+                },
+                resInteractContract: function (resp) {
+                    if (resp.success) {
+
+                        alert('OK');
+
+                    } else {
+
+                        alert('ERROR');
+
+                    }
+                    $('button', $('#contract_interact'))
+                        .prop('disabled', false)
+                        .removeClass('disabled');
+                    $('.overlay', $('#contract_interact')).hide();
                 }
             },
             utility: {

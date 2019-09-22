@@ -345,7 +345,13 @@
                                         <label for="deployed_contract_action">Execute action</label>
                                         <select class="form-control" name="deployed_contract_action" id="deployed_contract_action">
                                             <option value=""></option>
+                                            <option value="checkContractAddress">checkContractAddress</option>
+                                            <option value="">calculateResources</option>
+                                            <option value="">checkContractLimits</option>
+                                            <option value="">getCurrentResources</option>
+                                            <option value="">balanceOf</option>
                                             <option value="">totalSupply</option>
+                                            <option value="">transfer</option>
                                         </select>
                                     </div>
                                 </div>
@@ -365,6 +371,9 @@
                             </div>
                         </div>
                     </div>
+                </div>
+                <div class="overlay" style="display: none;">
+                    <i class="fas fa-spinner fa-pulse fa-3x"></i>
                 </div>
             </div>
         </div>
