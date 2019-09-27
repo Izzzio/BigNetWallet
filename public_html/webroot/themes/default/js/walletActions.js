@@ -483,6 +483,21 @@ $(function () {
                 $('#deployed_contract_name', $('#contract_interact')).on('change', function () {
                     let from = $(this).find(':selected').data('from') || '';
                     $('#interact_who', $('#contract_interact')).val(from);
+
+                    let el = $('#deployed_contract_action', $('#contract_interact'));
+                    el
+                        .data('contract', '')
+                        .children('option:not(:first)').remove();
+
+                    let id = $(this).val() || '';
+                    if(id.length){
+                        $('.overlay', $('#contract_interact')).show();
+                        walletIZ3.HTTPRequest.init({
+                            url: '/contract/getMethods/'+id,
+                            method: 'GET',
+                        });
+                        walletIZ3.HTTPRequest.send('resGetContractMethods');
+                    }
                 });
                 $('#contract_interact .continue').on('click', function () {
                     $('#step1', $('#contract_interact')).hide();
@@ -498,11 +513,11 @@ $(function () {
                         .addClass('disabled');
                     $('.overlay', $('#contract_interact')).show();
 
-                    let action = $(this).val() || '';
+                    let method = $(this).val() || '';
                     walletIZ3.HTTPRequest.init({
                         url: '/transaction/contractInteract',
                         method: 'GET',
-                        data: {'method': action}
+                        data: {'method': method}
                     });
                     walletIZ3.HTTPRequest.send('resInteractContract');
                 });
@@ -859,6 +874,29 @@ $(function () {
                     }
                     $('.overlay', this.tnsnOnlineForm).hide();
                 },
+
+                resGetContractMethods: function (resp) {
+                    $('.overlay', $('#contract_interact')).hide();
+                    if (resp.success) {
+                        let el = $('#deployed_contract_action', $('#contract_interact'));
+                        el.data('contract', resp.data.contract.id);
+                        $.each(resp.data.contract.methods, function (key, value) {
+                        el
+                            .append($("<option></option>")
+                            .attr("value", value)
+                            .text(value));
+                        });
+                    } else {
+                        BootstrapDialog.alert({
+                            title: 'Error',
+                            message: resp.msg,
+                            type: BootstrapDialog.TYPE_DANGER,
+                            size: BootstrapDialog.SIZE_LARGE,
+                            closable: true
+                        });
+                    }
+                },
+
                 resInteractContract: function (resp) {
                     if (resp.success) {
 

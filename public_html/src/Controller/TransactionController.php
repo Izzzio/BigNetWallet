@@ -86,7 +86,7 @@ class TransactionController extends AppController
         ];
         if ($this->request->is('get') && $this->request->is('ajax')) {
             $contractAddress = $this->request->query('addr') ? $this->request->query('addr') : '';
-            $contractAddress = 1;
+            $contractAddress = '1';
             $method = strval($this->request->query('method') ? $this->request->query('method') : '');
 
             switch ($method){
@@ -105,7 +105,7 @@ class TransactionController extends AppController
             require_once('Api/V1/php/EcmaSmartRPC.php');
             try {
                 $izNode = new \EcmaSmartRPC(Configure::read('Api.host'), Configure::read('Api.pass'));
-                $request = $izNode->ecmaCallMethod($contractAddress, $method, []);
+                $request = $izNode->ecmaCallMethod($contractAddress, $method, ['1']);
                 if (isset($request['error']) && true == $request['error']) {
                     throw new \Exception($request['message']);
                 } else {

@@ -332,27 +332,37 @@
                         <form>
                             <div class="row col-md-12">
                                 <div class="col-md-12">
+                                    Read/Write Contract - Main Contract
                                     <div class="form-group form-group-lg">
-                                        <label for="interacting">Read/Write Contract</label>
+                                        <label for="interacting">Contract Address</label>
                                         <input class="form-control" name="interacting" id="interacting"
-                                               value="Contract Address: " readonly="readonly" disabled="disabled">
+                                               value="izNUhVKtDpmgCnVycSMUPusX8sdnErzAD9T" readonly="readonly" disabled="disabled">
                                     </div>
                                 </div>
                             </div>
                             <div class="row col-md-12">
-                                <div class="col-md-6">
+                                <div class="col-md-7">
                                     <div class="form-group form-group-lg">
                                         <label for="deployed_contract_action">Execute action</label>
                                         <select class="form-control" name="deployed_contract_action" id="deployed_contract_action">
                                             <option value=""></option>
-                                            <option value="checkContractAddress">checkContractAddress</option>
-                                            <option value="">calculateResources</option>
-                                            <option value="">checkContractLimits</option>
-                                            <option value="">getCurrentResources</option>
-                                            <option value="">balanceOf</option>
-                                            <option value="">totalSupply</option>
-                                            <option value="">transfer</option>
                                         </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row col-md-12" id="main-checkContractAddress" style="display: none;">
+                                <div class="col-md-7">
+                                    <div class="form-group form-group-lg">
+                                        <label for="interacting">Contract block number (address)</label>
+                                        <input class="form-control" name="block" id="block">
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="row col-md-12">
+                                <div class="col-md-12">
+                                    <div class="form-group form-group-lg">
+                                        <label for="interacting">Result</label>
+                                        <input class="form-control" value="valid" name="interacting_result" id="interacting_result" readonly="readonly" disabled="disabled">
                                     </div>
                                 </div>
                             </div>
@@ -360,14 +370,21 @@
                     </div>
                     <div class="box-footer text-center">
                         <div class="row">
-                            <div class="col-lg-4 col-md-3 col-sm-3 hidden-xs">
+                            <div class="col-lg-1 col-md-1 hidden-sm hidden-xs">
                             </div>
-                            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
                                 <button type="button" class="btn btn-default btn-lg btn-block back">
                                     Back
                                 </button>
                             </div>
-                            <div class="col-lg-4 col-md-3 col-sm-3 hidden-xs">
+                            <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
+                            </div>
+                            <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
+                                <button type="button" class="btn btn-default btn-lg btn-block read">
+                                    Read
+                                </button>
+                            </div>
+                            <div class="col-lg-1 col-md-1 hidden-sm hidden-xs">
                             </div>
                         </div>
                     </div>
