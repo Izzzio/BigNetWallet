@@ -332,7 +332,7 @@
                         <form>
                             <div class="row col-md-12">
                                 <div class="col-md-12">
-                                    Read/Write Contract - Main Contract
+                                    <span id="interact_with">Read/Write Contract</span>
                                     <div class="form-group form-group-lg">
                                         <label for="interacting">Contract Address</label>
                                         <input class="form-control" name="interacting" id="interacting"
@@ -350,11 +350,15 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="row col-md-12" id="main-checkContractAddress" style="display: none;">
+                            <div id="add_fields">
+                            </div>
+                            <div class="row col-md-12">
                                 <div class="col-md-7">
                                     <div class="form-group form-group-lg">
-                                        <label for="interacting">Contract block number (address)</label>
-                                        <input class="form-control" name="block" id="block">
+                                        <label for="resources">Value in ETH</label>
+                                        <input type="number" step="any" class="form-control without-arrow"
+                                               name="resources" id="resources" value="0" placeholder="ETH">
+
                                     </div>
                                 </div>
                             </div>

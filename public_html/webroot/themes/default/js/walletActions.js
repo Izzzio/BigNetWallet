@@ -247,6 +247,29 @@ $(function () {
                 this.network.masterContract = String($('#masterContract').val() || false);
                 this.network.icon = $('#icon').val() || '';
             },
+
+
+            rules: function(names = '') {
+
+                alert(names);
+
+                var rules = new Object();
+                var messages = new Object();
+                $('input[name^=qty]:text').each(function() {
+                    rules[this.name] = { required: true };
+                    messages[this.name] = { required: 'This field is required' };
+                });
+
+                var validator = $("#formName").validate({
+                    rules: rules,
+                    messages: messages,
+                    errorPlacement: function(error, element) {
+                        error.appendTo("#itemQuantityError");
+                    }
+                });
+            },
+
+
             setEventListeners: function () {
                 let body = $('body');
                 $('#tnsn_online form', body).validate({
@@ -432,7 +455,7 @@ $(function () {
                 });
 
 
-                $('#contract_interact form', body).validate({
+                $('#step1 form', $('#contract_interact')).validate({
                     rules: {
                         deployed_contract_name: {
                             required: true
@@ -481,12 +504,14 @@ $(function () {
                 });
 
                 $('#deployed_contract_name', $('#contract_interact')).on('change', function () {
-                    let from = $(this).find(':selected').data('from') || '';
+                    let selected = $(this).find(':selected');
+                    let from = selected.data('from') || '';
                     $('#interact_who', $('#contract_interact')).val(from);
+                    $('#interact_with', $('#contract_interact')).text('Read/Write Contract - '+selected.text());
 
                     let el = $('#deployed_contract_action', $('#contract_interact'));
                     el
-                        .data('contract', '')
+                        //.data('contract', '')
                         .children('option:not(:first)').remove();
 
                     let id = $(this).val() || '';
@@ -508,6 +533,52 @@ $(function () {
                     $('#step1', $('#contract_interact')).show();
                 });
                 $('#deployed_contract_action', $('#contract_interact')).on('change', function () {
+
+                    let contract = $('#deployed_contract_name', $('#contract_interact')).find(':selected').val();
+                    let method = $(this).find(':selected').val();
+
+                    let fields = {
+                        'main': {
+                            'checkContractAddress': {
+                                'fields': [
+                                    {
+                                        'id': 'block',
+                                        'label': 'Contract block number (address)',
+                                        'rules': ''
+                                    }
+                                ]
+                            }
+                        }
+                    };
+
+                    if(fields[contract]){
+                        let fieldsAdd = fields[contract][method] || false;
+                        if(fieldsAdd){
+                            for(let i = 0; i < fieldsAdd['fields'].length; i++){
+
+
+
+                                alert('Continue here...');
+
+
+
+
+                                let block = '                            <div class="row col-md-12">\n' +
+                                    '                                <div class="col-md-7">\n' +
+                                    '                                    <div class="form-group form-group-lg">\n' +
+                                    '                                        <label for="resources">Value in ETH</label>\n' +
+                                    '                                        <input type="number" step="any" class="form-control without-arrow"\n' +
+                                    '                                               name="resources" id="resources" value="0" placeholder="ETH">\n' +
+                                    '\n' +
+                                    '                                    </div>\n' +
+                                    '                                </div>\n' +
+                                    '                            </div>'
+                            }
+                        }
+                    }
+
+
+                    /*
                     $('button', $('#contract_interact'))
                         .prop('disabled', true)
                         .addClass('disabled');
@@ -520,6 +591,8 @@ $(function () {
                         data: {'method': method}
                     });
                     walletIZ3.HTTPRequest.send('resInteractContract');
+                    */
+
                 });
 
 
@@ -879,7 +952,7 @@ $(function () {
                     $('.overlay', $('#contract_interact')).hide();
                     if (resp.success) {
                         let el = $('#deployed_contract_action', $('#contract_interact'));
-                        el.data('contract', resp.data.contract.id);
+                        //el.data('contract', resp.data.contract.id);
                         $.each(resp.data.contract.methods, function (key, value) {
                         el
                             .append($("<option></option>")
