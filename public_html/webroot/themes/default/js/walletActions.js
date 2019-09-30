@@ -503,6 +503,58 @@ $(function () {
                     }
                 });
 
+                $('#step2 form', $('#contract_interact')).validate({
+                    rules: {
+                        deployed_contract_action: {
+                            required: true
+                        },
+                        resources: {
+                            required: true,
+                            number: true,
+                            min: 0,
+                        }
+                    },
+                    messages: {
+                        deployed_contract_action: {
+                            required: 'This field is required'
+                        },
+                        resources: {
+                            required: 'This field is required',
+                            number: "Please enter numbers only",
+                            min: "Minimum value 0"
+                        }
+                    },
+                    highlight: function (element) {
+                        $(element).addClass('error');
+                    },
+                    onkeyup: function (element) {
+                        $(element).valid();
+                        let buttons = $('button', $('#contract_interact'));
+                        if ($('#contract_interact form').valid()) {
+                            buttons
+                                .prop('disabled', false)
+                                .removeClass('disabled');
+                        } else {
+                            buttons
+                                .prop('disabled', true)
+                                .addClass('disabled');
+                        }
+                    },
+                    onclick: function (element) {
+                        $(element).valid();
+                        let buttons = $('button', $('#contract_interact'));
+                        if ($('#contract_interact form').valid()) {
+                            buttons
+                                .prop('disabled', false)
+                                .removeClass('disabled');
+                        } else {
+                            buttons
+                                .prop('disabled', true)
+                                .addClass('disabled');
+                        }
+                    }
+                });
+
                 $('#deployed_contract_name', $('#contract_interact')).on('change', function () {
                     let selected = $(this).find(':selected');
                     let from = selected.data('from') || '';
@@ -537,12 +589,13 @@ $(function () {
                     let contract = $('#deployed_contract_name', $('#contract_interact')).find(':selected').val();
                     let method = $(this).find(':selected').val();
 
-                    let fields = {
+                    const fields = {
                         'main': {
                             'checkContractAddress': {
                                 'fields': [
                                     {
                                         'id': 'block',
+                                        'type': 'number',
                                         'label': 'Contract block number (address)',
                                         'rules': ''
                                     }
@@ -551,32 +604,63 @@ $(function () {
                         }
                     };
 
-                    if(fields[contract]){
-                        let fieldsAdd = fields[contract][method] || false;
-                        if(fieldsAdd){
-                            for(let i = 0; i < fieldsAdd['fields'].length; i++){
+                    $('#add_fields', $('#contract_interact')).html('');
+
+                    let blockTpl = '<div class="row col-md-12">' +
+                        '<div class="col-md-7">' +
+                        '<div class="form-group form-group-lg">' +
+                        '<label for="%NAME%">%LABEL%</label>' +
+                        '<input type="%TYPE%" step="any" class="form-control without-arrow" name="%NAME%" id="%ID%" value="%VALUE%" placeholder="%PLACEHOLDER%">' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>';
 
 
 
-                                alert('Continue here...');
+                    for (var key in fields) {
+                        // check if the property/key is defined in the object itself, not in parent
+                        if (fields.hasOwnProperty(key)) {
+                            for (var key2 in fields[key]) {
 
-
-
-
-                                let block = '                            <div class="row col-md-12">\n' +
-                                    '                                <div class="col-md-7">\n' +
-                                    '                                    <div class="form-group form-group-lg">\n' +
-                                    '                                        <label for="resources">Value in ETH</label>\n' +
-                                    '                                        <input type="number" step="any" class="form-control without-arrow"\n' +
-                                    '                                               name="resources" id="resources" value="0" placeholder="ETH">\n' +
-                                    '\n' +
-                                    '                                    </div>\n' +
-                                    '                                </div>\n' +
-                                    '                            </div>'
                             }
+                            console.log(fields[key]['fields']);
+
+                        }
+                    }
+                    /*
+                    for (const [key, value] of Object.entries(fields)) {
+                        console.log(key, value);
+                    }
+                    */
+
+
+                    if(fields[contract]){
+                        let fieldsAdd = fields[contract][method] ? fields[contract][method]['fields'] : false;
+                        if(fieldsAdd){
+                            let blockNew = '';
+                            for(let i = 0; i < fieldsAdd.length; i++){
+                                blockNew = blockTpl;
+                                blockNew = blockNew.replace(/%LABEL%/g, fieldsAdd[i]['label']);
+                                blockNew = blockNew.replace(/%TYPE%/g, fieldsAdd[i]['type']);
+                                blockNew = blockNew.replace(/%NAME%/g, fieldsAdd[i]['id']);
+                                blockNew = blockNew.replace(/%ID%/g, fieldsAdd[i]['id']);
+                                blockNew = blockNew.replace(/%VALUE%/g, '');
+                                blockNew = blockNew.replace(/%PLACEHOLDER%/g, '');
+                                $('#add_fields', $('#contract_interact')).append(blockNew);
+                            }
+
+                            $( "#block", $('#contract_interact')).rules( "add", {
+                                required: true,
+                                number: true,
+                                messages: {
+                                    required: 'This field is required',
+                                    number: "Please enter numbers only",
+                                }
+                            });
                         }
                     }
 
+                    $( "#block", $('#contract_interact')).rules( "remove" );
 
                     /*
                     $('button', $('#contract_interact'))
