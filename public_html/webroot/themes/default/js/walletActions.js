@@ -248,28 +248,6 @@ $(function () {
                 this.network.icon = $('#icon').val() || '';
             },
 
-
-            rules: function(names = '') {
-
-                alert(names);
-
-                var rules = new Object();
-                var messages = new Object();
-                $('input[name^=qty]:text').each(function() {
-                    rules[this.name] = { required: true };
-                    messages[this.name] = { required: 'This field is required' };
-                });
-
-                var validator = $("#formName").validate({
-                    rules: rules,
-                    messages: messages,
-                    errorPlacement: function(error, element) {
-                        error.appendTo("#itemQuantityError");
-                    }
-                });
-            },
-
-
             setEventListeners: function () {
                 let body = $('body');
                 $('#tnsn_online form', body).validate({
@@ -584,83 +562,45 @@ $(function () {
                     $('#step2', $('#contract_interact')).hide();
                     $('#step1', $('#contract_interact')).show();
                 });
-                $('#deployed_contract_action', $('#contract_interact')).on('change', function () {
 
+                $('#deployed_contract_action', $('#contract_interact')).on('change', function () {
                     let contract = $('#deployed_contract_name', $('#contract_interact')).find(':selected').val();
                     let method = $(this).find(':selected').val();
 
-                    const fields = {
-                        'main': {
-                            'checkContractAddress': {
-                                'fields': [
-                                    {
-                                        'id': 'block',
-                                        'type': 'number',
-                                        'label': 'Contract block number (address)',
-                                        'rules': ''
-                                    }
-                                ]
-                            }
-                        }
-                    };
-
                     $('#add_fields', $('#contract_interact')).html('');
 
-                    let blockTpl = '<div class="row col-md-12">' +
-                        '<div class="col-md-7">' +
-                        '<div class="form-group form-group-lg">' +
-                        '<label for="%NAME%">%LABEL%</label>' +
-                        '<input type="%TYPE%" step="any" class="form-control without-arrow" name="%NAME%" id="%ID%" value="%VALUE%" placeholder="%PLACEHOLDER%">' +
-                        '</div>' +
-                        '</div>' +
-                        '</div>';
+                    let interactedContract = new interactContract();
+                    interactedContract.name = contract;
+                    interactedContract.methodName = method;
 
+                    (async function () {
+                        let blocksNew = await interactedContract.getHTMLBlocksWithAdditionalFields();
+                        for (let i = 0; i < blocksNew.length; i++) {
+                            $('#add_fields', $('#contract_interact')).append(blocksNew[i]);
+                        }
 
+                        let fields = await interactedContract.getFieldsForDelRulesValidation();
+                        for (let i = 0; i < fields.length; i++) {
+                            $("#" + fields[i], $('#contract_interact')).rules("remove");
+                        }
 
-                    for (var key in fields) {
-                        // check if the property/key is defined in the object itself, not in parent
-                        if (fields.hasOwnProperty(key)) {
-                            for (var key2 in fields[key]) {
-
-                            }
-                            console.log(fields[key]['fields']);
+                        fields = await interactedContract.getFieldsForAddRulesValidation();
+                        for (let i = 0; i < fields.length; i++) {
+                            $("#" + fields[i].id, $('#contract_interact')).rules("add", fields[i].rules);
+                        }
+                        if(fields.length){
 
                         }
-                    }
+                    })();
+
+
+
                     /*
                     for (const [key, value] of Object.entries(fields)) {
                         console.log(key, value);
                     }
                     */
 
-
-                    if(fields[contract]){
-                        let fieldsAdd = fields[contract][method] ? fields[contract][method]['fields'] : false;
-                        if(fieldsAdd){
-                            let blockNew = '';
-                            for(let i = 0; i < fieldsAdd.length; i++){
-                                blockNew = blockTpl;
-                                blockNew = blockNew.replace(/%LABEL%/g, fieldsAdd[i]['label']);
-                                blockNew = blockNew.replace(/%TYPE%/g, fieldsAdd[i]['type']);
-                                blockNew = blockNew.replace(/%NAME%/g, fieldsAdd[i]['id']);
-                                blockNew = blockNew.replace(/%ID%/g, fieldsAdd[i]['id']);
-                                blockNew = blockNew.replace(/%VALUE%/g, '');
-                                blockNew = blockNew.replace(/%PLACEHOLDER%/g, '');
-                                $('#add_fields', $('#contract_interact')).append(blockNew);
-                            }
-
-                            $( "#block", $('#contract_interact')).rules( "add", {
-                                required: true,
-                                number: true,
-                                messages: {
-                                    required: 'This field is required',
-                                    number: "Please enter numbers only",
-                                }
-                            });
-                        }
-                    }
-
-                    $( "#block", $('#contract_interact')).rules( "remove" );
 
                     /*
                     $('button', $('#contract_interact'))
