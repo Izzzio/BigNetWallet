@@ -455,8 +455,8 @@ $(function () {
                     },
                     onkeyup: function (element) {
                         $(element).valid();
-                        let buttons = $('button', $('#contract_interact'));
-                        if ($('#contract_interact form').valid()) {
+                        let buttons = $('#step1 button', $('#contract_interact'));
+                        if ($('#step1 form', $('#contract_interact')).valid()) {
                             buttons
                                 .prop('disabled', false)
                                 .removeClass('disabled');
@@ -468,8 +468,8 @@ $(function () {
                     },
                     onclick: function (element) {
                         $(element).valid();
-                        let buttons = $('button', $('#contract_interact'));
-                        if ($('#contract_interact form').valid()) {
+                        let buttons = $('#step1 button', $('#contract_interact'));
+                        if ($('#step1 form', $('#contract_interact')).valid()) {
                             buttons
                                 .prop('disabled', false)
                                 .removeClass('disabled');
@@ -507,8 +507,8 @@ $(function () {
                     },
                     onkeyup: function (element) {
                         $(element).valid();
-                        let buttons = $('button', $('#contract_interact'));
-                        if ($('#contract_interact form').valid()) {
+                        let buttons = $('#step2 button.do-interact', $('#contract_interact'));
+                        if ($('#step2 form', $('#contract_interact')).valid()) {
                             buttons
                                 .prop('disabled', false)
                                 .removeClass('disabled');
@@ -520,8 +520,8 @@ $(function () {
                     },
                     onclick: function (element) {
                         $(element).valid();
-                        let buttons = $('button', $('#contract_interact'));
-                        if ($('#contract_interact form').valid()) {
+                        let buttons = $('#step2 button.do-interact', $('#contract_interact'));
+                        if ($('#step2 form', $('#contract_interact')).valid()) {
                             buttons
                                 .prop('disabled', false)
                                 .removeClass('disabled');
@@ -538,11 +538,10 @@ $(function () {
                     let from = selected.data('from') || '';
                     $('#interact_who', $('#contract_interact')).val(from);
                     $('#interact_with', $('#contract_interact')).text('Read/Write Contract - '+selected.text());
+                    $('#add_fields', $('#contract_interact')).html('');
 
                     let el = $('#deployed_contract_action', $('#contract_interact'));
-                    el
-                        //.data('contract', '')
-                        .children('option:not(:first)').remove();
+                    el.children('option:not(:first)').remove();
 
                     let id = $(this).val() || '';
                     if(id.length){
@@ -557,6 +556,13 @@ $(function () {
                 $('#contract_interact .continue').on('click', function () {
                     $('#step1', $('#contract_interact')).hide();
                     $('#step2', $('#contract_interact')).show();
+                    $('#interacting', $('#contract_interact')).val($('#interact_who', $('#contract_interact')).val() || '');
+                    if (!$('#step2 form', $('#contract_interact')).valid()) {
+                        let buttons = $('#step2 button.do-interact', $('#contract_interact'));
+                        buttons
+                            .prop('disabled', true)
+                            .addClass('disabled');
+                    }
                 });
                 $('#contract_interact .back').on('click', function () {
                     $('#step2', $('#contract_interact')).hide();
@@ -589,7 +595,12 @@ $(function () {
                             $("#" + fields[i].id, $('#contract_interact')).rules("add", fields[i].rules);
                         }
                         if(fields.length){
-
+                            if (!$('#step2 form', $('#contract_interact')).valid()) {
+                                let buttons = $('#step2 button.do-interact', $('#contract_interact'));
+                                buttons
+                                    .prop('disabled', true)
+                                    .addClass('disabled');
+                            }
                         }
                     })();
 
@@ -976,7 +987,6 @@ $(function () {
                     $('.overlay', $('#contract_interact')).hide();
                     if (resp.success) {
                         let el = $('#deployed_contract_action', $('#contract_interact'));
-                        //el.data('contract', resp.data.contract.id);
                         $.each(resp.data.contract.methods, function (key, value) {
                         el
                             .append($("<option></option>")

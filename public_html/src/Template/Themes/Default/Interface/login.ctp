@@ -384,7 +384,7 @@
                             <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                                <button type="button" class="btn btn-default btn-lg btn-block read">
+                                <button type="button" class="btn btn-default btn-lg btn-block disabled do-interact" disabled="disabled">
                                     Read
                                 </button>
                             </div>
