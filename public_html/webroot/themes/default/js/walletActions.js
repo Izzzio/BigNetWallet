@@ -603,34 +603,25 @@ $(function () {
                             }
                         }
                     })();
+                });
 
-
-
-                    /*
-                    for (const [key, value] of Object.entries(fields)) {
-                        console.log(key, value);
-                    }
-                    */
-
-
-                    /*
+                $('.do-interact', $('#contract_interact')).on('click', function () {
                     $('button', $('#contract_interact'))
                         .prop('disabled', true)
                         .addClass('disabled');
                     $('.overlay', $('#contract_interact')).show();
 
-                    let method = $(this).val() || '';
                     walletIZ3.HTTPRequest.init({
                         url: '/transaction/contractInteract',
                         method: 'GET',
-                        data: {'method': method}
+                        data: {
+                            'contract': $('#deployed_contract_name', $('#contract_interact')).find(':selected').val(),
+                            'method': $('#deployed_contract_action', $('#contract_interact')).find(':selected').val(),
+                            'addr': $('#block', $('#contract_interact')).val()
+                        }
                     });
                     walletIZ3.HTTPRequest.send('resInteractContract');
-                    */
-
                 });
-
-
 
 
                 $('#contract_deploy form', body).validate({
