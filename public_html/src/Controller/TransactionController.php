@@ -85,17 +85,19 @@ class TransactionController extends AppController
             'data' => [],
         ];
         if ($this->request->is('get') && $this->request->is('ajax')) {
-            $method = strval($this->request->query('method') ? $this->request->query('method') : '');
+            $contractName = strval($this->request->query('contract') ? $this->request->query('contract') : '');
+            $methodName = strval($this->request->query('method') ? $this->request->query('method') : '');
             //number block in chain
-            $contractAddress = $this->request->query('addr') ? $this->request->query('addr') : '';
-            $numberBlockWithSelectedContract = '1';
+            $contractAddress = $this->request->query('addr') ? intval($this->request->query('addr')) : '';
 
-            switch ($method){
-                case 'checkContractAddress':
-                    break;
-                default:
+            $contractsPopular = Configure::read('Contracts.popular');
+            if(false === $key = array_search($contractName, array_column($contractsPopular, 'id'))){
+                $result['msg'] = 'Error: select contract, please';
+            } else {
+                $numberBlockWithSelectedContract = $contractsPopular[$key]['address'];
+                if(!in_array($methodName, $contractsPopular[$key]['methods'])){
                     $result['msg'] = 'Error: select action, please';
-                    break;
+                }
             }
 
             if(!empty($result['msg'])){
@@ -106,8 +108,7 @@ class TransactionController extends AppController
             require_once('Api/V1/php/EcmaSmartRPC.php');
             try {
                 $izNode = new \EcmaSmartRPC(Configure::read('Api.host'), Configure::read('Api.pass'));
-                //$request = $izNode->ecmaCallMethod($contractAddress, $method, ['1']);
-                $request = $izNode->ecmaCallMethod($numberBlockWithSelectedContract, $method, [$contractAddress]);
+                $request = $izNode->ecmaCallMethod($numberBlockWithSelectedContract, $methodName, [$contractAddress]);
                 if (isset($request['error']) && true == $request['error']) {
                     throw new \Exception($request['message']);
                 } else {
