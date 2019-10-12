@@ -350,7 +350,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div id="add_fields">
+                            <div class="row col-md-12" id="add_fields">
                             </div>
                             <div class="row col-md-12">
                                 <div class="col-md-7">
@@ -366,7 +366,7 @@
                                 <div class="col-md-12">
                                     <div class="form-group form-group-lg">
                                         <label for="interacting">Result</label>
-                                        <input class="form-control" value="valid" name="interacting_result" id="interacting_result" readonly="readonly" disabled="disabled">
+                                        <input class="form-control" name="interacting_result" id="interacting_result" readonly="readonly" disabled="disabled">
                                     </div>
                                 </div>
                             </div>

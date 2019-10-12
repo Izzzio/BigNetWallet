@@ -199,7 +199,6 @@ return [
                 'address' => '1',
                 'methods' => [
                     'checkContractAddress',
-                    'calculateResources',
                     'checkContractLimits',
                     'getCurrentResources',
                     'balanceOf',

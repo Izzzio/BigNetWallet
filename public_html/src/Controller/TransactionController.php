@@ -88,7 +88,7 @@ class TransactionController extends AppController
             $contractName = strval($this->request->query('contract') ? $this->request->query('contract') : '');
             $methodName = strval($this->request->query('method') ? $this->request->query('method') : '');
             //number block in chain
-            $contractAddress = $this->request->query('addr') ? intval($this->request->query('addr')) : '';
+            $contractAddress = $this->request->query('addr') ? strval($this->request->query('addr')) : '';
 
             $contractsPopular = Configure::read('Contracts.popular');
             if(false === $key = array_search($contractName, array_column($contractsPopular, 'id'))){
@@ -112,11 +112,6 @@ class TransactionController extends AppController
                 if (isset($request['error']) && true == $request['error']) {
                     throw new \Exception($request['message']);
                 } else {
-
-
-                    var_dump($request);
-
-
                     if (isset($request['result'])) {
                         $result['success'] = true;
                     }

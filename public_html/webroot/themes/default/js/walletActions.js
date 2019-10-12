@@ -574,6 +574,7 @@ $(function () {
                     let method = $(this).find(':selected').val();
 
                     $('#add_fields', $('#contract_interact')).html('');
+                    $('#interacting_result', $('#contract_interact')).val('');
 
                     let interactedContract = new interactContract();
                     interactedContract.name = contract;
@@ -611,14 +612,18 @@ $(function () {
                         .addClass('disabled');
                     $('.overlay', $('#contract_interact')).show();
 
+                    let data = {
+                        'contract': $('#deployed_contract_name', $('#contract_interact')).find(':selected').val(),
+                        'method': $('#deployed_contract_action', $('#contract_interact')).find(':selected').val()
+                    };
+                    $('#add_fields input', $('#contract_interact')).each(function (i, v) {
+                        data[$(this).attr('name')] = $(this).val();
+                    });
+
                     walletIZ3.HTTPRequest.init({
                         url: '/transaction/contractInteract',
                         method: 'GET',
-                        data: {
-                            'contract': $('#deployed_contract_name', $('#contract_interact')).find(':selected').val(),
-                            'method': $('#deployed_contract_action', $('#contract_interact')).find(':selected').val(),
-                            'addr': $('#block', $('#contract_interact')).val()
-                        }
+                        data: data
                     });
                     walletIZ3.HTTPRequest.send('resInteractContract');
                 });
@@ -997,13 +1002,15 @@ $(function () {
 
                 resInteractContract: function (resp) {
                     if (resp.success) {
-
-                        alert('OK');
-
+                        $('#interacting_result', $('#contract_interact')).val('good');
                     } else {
-
-                        alert('ERROR');
-
+                        BootstrapDialog.alert({
+                            title: 'Error',
+                            message: resp.msg,
+                            type: BootstrapDialog.TYPE_DANGER,
+                            size: BootstrapDialog.SIZE_LARGE,
+                            closable: true
+                        });
                     }
                     $('button', $('#contract_interact'))
                         .prop('disabled', false)

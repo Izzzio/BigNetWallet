@@ -5,7 +5,24 @@ const contractInteractFields = {
         'checkContractAddress': {
             'fields': [
                 {
-                    'id': 'block',
+                    'id': 'addr',
+                    'type': 'number',
+                    'label': 'Contract address (block number)',
+                    'rules': {
+                        required: true,
+                        number: true,
+                        messages: {
+                            required: 'This field is required',
+                            number: "Please enter numbers only",
+                        }
+                    }
+                }
+            ]
+        },
+        'checkContractLimits': {
+            'fields': [
+                {
+                    'id': 'addr',
                     'type': 'number',
                     'label': 'Contract address (block number)',
                     'rules': {
@@ -23,12 +40,10 @@ const contractInteractFields = {
 };
 
 const blockWithFieldTpl = '' +
-    '<div class="row col-md-12">' +
     '<div class="col-md-7">' +
     '<div class="form-group form-group-lg">' +
     '<label for="%NAME%">%LABEL%</label>' +
     '<input type="%TYPE%" step="any" class="form-control without-arrow" name="%NAME%" id="%ID%" value="%VALUE%" placeholder="%PLACEHOLDER%">' +
-    '</div>' +
     '</div>' +
     '</div>';
 
