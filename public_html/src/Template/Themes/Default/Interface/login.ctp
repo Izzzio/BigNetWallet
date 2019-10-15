@@ -311,6 +311,14 @@
                                     </div>
                                 </div>
                             </div>
+                            <div class="row col-md-12">
+                                <div class="col-md-12">
+                                    <div class="form-group form-group-lg">
+                                        <label for="contract_code">ABI/JSON Interface</label>
+                                        <textarea class="form-control" name="abi" id="abi" autocomplete="off" style="height: 225px;"></textarea>
+                                    </div>
+                                </div>
+                            </div>
                         </form>
                     </div>
                     <div class="box-footer text-center">

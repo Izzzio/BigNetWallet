@@ -440,6 +440,9 @@ $(function () {
                         },
                         interact_who: {
                             required: true,
+                        },
+                        abi: {
+                            required: true,
                         }
                     },
                     messages: {
@@ -447,6 +450,9 @@ $(function () {
                             required: 'This field is required'
                         },
                         interact_who: {
+                            required: 'This field is required'
+                        },
+                        abi: {
                             required: 'This field is required'
                         }
                     },
