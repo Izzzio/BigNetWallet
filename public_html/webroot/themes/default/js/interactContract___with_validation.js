@@ -48,7 +48,7 @@ const blockWithFieldTpl = '' +
     '</div>';
 
 
-class interactContract {
+class interactContract___with_validation {
 
     constructor() {
         //contract name

@@ -66,6 +66,15 @@ $(function () {
             "hideEasing": "linear",
             "showMethod": "fadeIn",
             "hideMethod": "fadeOut"
-        }
+        };
+
+        jQuery.validator.addMethod("validJSON", function(value, element) {
+            try{
+                JSON.parse(value);
+                return true;
+            } catch (e) {
+                return false;
+            }
+        }, "This field is required valid ABI/JSON");
     })();
 });

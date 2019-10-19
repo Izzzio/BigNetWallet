@@ -22,7 +22,7 @@ class ContractController extends AppController
         parent::beforeFilter($event);
 
         $this->viewBuilder()->layout('main');
-        $this->IndianAuth->allow(['getMethods'], $this->IndianAuth::PERMISSION_ALL);
+        $this->IndianAuth->allow(['getInfo'], $this->IndianAuth::PERMISSION_ALL);
     }
 
     /**
@@ -39,10 +39,10 @@ class ContractController extends AppController
     /**
      * Get allowed methods from contract
      */
-    public function getMethods($contractId = ''){
+    public function getInfo($contractId = ''){
         $result = [
             'success' => false,
-            'msg' => 'No methods found in the contract',
+            'msg' => 'Contract not found',
             'data' => [],
         ];
 
@@ -64,7 +64,8 @@ class ContractController extends AppController
                 $result['data'] = [
                     'contract' => [
                         'id' => $contracts[$key]['id'],
-                        'methods' => $contracts[$key]['methods'],
+                        //'methods' => $contracts[$key]['methods'],
+                        'abi' => json_encode(json_decode($contracts[$key]['abi'])),
                     ],
                 ];
             }

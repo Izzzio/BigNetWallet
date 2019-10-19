@@ -197,6 +197,7 @@ return [
                 'name' => 'Main Contract',
                 'from' => 'izNUhVKtDpmgCnVycSMUPusX8sdnErzAD9T',
                 'address' => '1',
+                /*
                 'methods' => [
                     'checkContractAddress',
                     'checkContractLimits',
@@ -205,9 +206,122 @@ return [
                     'totalSupply',
                     'transfer',
                 ],
+                */
+                'abi' => '
+                    [
+                        {
+                            "constant":false,
+                            "inputs":[
+                                {
+                                    "name":"addr",
+                                    "type":"number",
+                                    "label":"Contract address (block number)"
+                                }
+                            ],
+                            "name":"checkContractAddress",
+                            "outputs":[
+                                {
+                                    "name":"success",
+                                    "type":"bool"
+                                }
+                            ],
+                            "payable":false,
+                            "type":"function"
+                        },
+                        {
+                            "constant":false,
+                            "inputs":[
+                                {
+                                    "name":"addr",
+                                    "type":"number",
+                                    "label":"Contract address (block number)"
+                                }
+                            ],
+                            "name":"checkContractLimits",
+                            "outputs":[
+                                {
+                                    "name":"success",
+                                    "type":"bool"
+                                }
+                            ],
+                            "payable":false,
+                            "type":"function"
+                        },
+                        {
+                            "constant":true,
+                            "inputs":[],
+                            "name":"getCurrentResources",
+                            "outputs":[
+                                {
+                                    "name":"",
+                                    "type":"string"
+                                }
+                            ],
+                            "payable":false,
+                            "type":"function"
+                        },
+                        {
+                            "constant":true,
+                            "inputs":[
+                                {
+                                    "name":"",
+                                    "type":"address"
+                                }
+                            ],
+                            "name":"balanceOf",
+                            "outputs":[
+                                {
+                                    "name":"",
+                                    "type":"uint256"
+                                }
+                            ],
+                            "payable":false,
+                            "type":"function"
+                        },
+                        {
+                            "constant":true,
+                            "inputs":[],
+                            "name":"totalSupply",
+                            "outputs":[
+                                {
+                                    "name":"",
+                                    "type":"uint256"
+                                }
+                            ],
+                            "payable":false,
+                            "type":"function"
+                        },
+                        {
+                            "constant":false,
+                            "inputs":[
+                                {
+                                    "name":"to",
+                                    "type":"address"
+                                },
+                                {
+                                    "name":"tokens",
+                                    "type":"uint256"
+                                }
+                            ],
+                            "name":"transfer",
+                            "outputs":[
+                                {
+                                    "name":"success",
+                                    "type":"bool"
+                                }
+                            ],
+                            "payable":false,
+                            "type":"function"
+                        }
+                    ]
+                ',
             ],
         ],
     ],
+
+
+
+
 
 
     /**
