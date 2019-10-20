@@ -262,12 +262,7 @@ return [
                         },
                         {
                             "constant":true,
-                            "inputs":[
-                                {
-                                    "name":"",
-                                    "type":"address"
-                                }
-                            ],
+                            "inputs":[],
                             "name":"balanceOf",
                             "outputs":[
                                 {
@@ -296,11 +291,13 @@ return [
                             "inputs":[
                                 {
                                     "name":"to",
-                                    "type":"address"
+                                    "type":"text",
+                                    "label":"To"
                                 },
                                 {
                                     "name":"tokens",
-                                    "type":"uint256"
+                                    "type":"number",
+                                    "label":"Tokens count"
                                 }
                             ],
                             "name":"transfer",

@@ -578,36 +578,6 @@ $(function () {
                         .text(value));
                     });
 
-
-                    /*
-                    (async function () {
-                        let blocksNew = await interactedContract.getHTMLBlocksWithAdditionalFields();
-                        for (let i = 0; i < blocksNew.length; i++) {
-                            $('#add_fields', $('#contract_interact')).append(blocksNew[i]);
-                        }
-
-                        let fields = await interactedContract.getFieldsForDelRulesValidation();
-                        for (let i = 0; i < fields.length; i++) {
-                            $("#" + fields[i], $('#contract_interact')).rules("remove");
-                        }
-
-                        fields = await interactedContract.getFieldsForAddRulesValidation();
-                        for (let i = 0; i < fields.length; i++) {
-                            $("#" + fields[i].id, $('#contract_interact')).rules("add", fields[i].rules);
-                        }
-                        if(fields.length){
-                            if (!$('#step2 form', $('#contract_interact')).valid()) {
-                                let buttons = $('#step2 button.do-interact', $('#contract_interact'));
-                                buttons
-                                    .prop('disabled', true)
-                                    .addClass('disabled');
-                            }
-                        }
-                    })();
-                    */
-
-
-
                     if (!$('#step2 form', $('#contract_interact')).valid()) {
                         let buttons = $('#step2 button.do-interact', $('#contract_interact'));
                         buttons
@@ -620,45 +590,21 @@ $(function () {
                     $('#step1', $('#contract_interact')).show();
                 });
 
+                let method = '';
                 $('#deployed_contract_action', $('#contract_interact')).on('change', function () {
-                    let contract = $('#deployed_contract_name', $('#contract_interact')).find(':selected').val();
-                    let method = $(this).find(':selected').val();
+                    method = $(this).find(':selected').val();
 
                     $('#add_fields', $('#contract_interact')).html('');
                     $('#interacting_result', $('#contract_interact')).val('');
 
-                    /*
-                    let interactedContract = new interactContract___with_validation();
-                    interactedContract.name = contract;
-                    interactedContract.methodName = method;
-
                     (async function () {
-                        let blocksNew = await interactedContract.getHTMLBlocksWithAdditionalFields();
-                        for (let i = 0; i < blocksNew.length; i++) {
-                            $('#add_fields', $('#contract_interact')).append(blocksNew[i]);
-                        }
-
-                        let fields = await interactedContract.getFieldsForDelRulesValidation();
+                        let blockNew = '';
+                        let fields = interactedContract.getAdditionalFieldsOfMethod(method);
                         for (let i = 0; i < fields.length; i++) {
-                            $("#" + fields[i], $('#contract_interact')).rules("remove");
-                        }
-
-                        fields = await interactedContract.getFieldsForAddRulesValidation();
-                        for (let i = 0; i < fields.length; i++) {
-                            $("#" + fields[i].id, $('#contract_interact')).rules("add", fields[i].rules);
-                        }
-                        if(fields.length){
-                            if (!$('#step2 form', $('#contract_interact')).valid()) {
-                                let buttons = $('#step2 button.do-interact', $('#contract_interact'));
-                                buttons
-                                    .prop('disabled', true)
-                                    .addClass('disabled');
-                            }
+                            blockNew = await interactedContract.fieldToHTMLBlock(fields[i]);
+                            $('#add_fields', $('#contract_interact')).append(blockNew);
                         }
                     })();
-                    */
-
-
                 });
 
                 $('.do-interact', $('#contract_interact')).on('click', function () {
@@ -669,7 +615,7 @@ $(function () {
 
                     let data = {
                         'contract': $('#deployed_contract_name', $('#contract_interact')).find(':selected').val(),
-                        'method': $('#deployed_contract_action', $('#contract_interact')).find(':selected').val()
+                        'method': method
                     };
                     $('#add_fields input', $('#contract_interact')).each(function (i, v) {
                         data[$(this).attr('name')] = $(this).val();
@@ -680,7 +626,8 @@ $(function () {
                         method: 'GET',
                         data: data
                     });
-                    walletIZ3.HTTPRequest.send('resInteractContract');
+                    let res = '[{"name":"success","type":"bool"}]';
+                    walletIZ3.HTTPRequest.send('resInteractContract', res);
                 });
 
 
@@ -932,7 +879,7 @@ $(function () {
                         this.settings = walletIZ3.utility.extend(this.defaults, this.defaults);
                     }
                 },
-                send: function (callback) {
+                send: function (callback, waitingInResponse) {
                     $.ajax({
                         url: this.settings.url,
                         method: this.settings.method,
@@ -953,7 +900,7 @@ $(function () {
                     */
                         .always(function (resp) {
                             if (callback) {
-                                walletIZ3.callbacks[callback](resp);
+                                walletIZ3.callbacks[callback](resp, waitingInResponse);
                             }
                         });
                 },
@@ -1060,7 +1007,16 @@ $(function () {
                     $('.overlay', $('#contract_interact')).hide();
                 },
 
-                resInteractContract: function (resp) {
+                resInteractContract: function (resp, waitingInResponse) {
+
+
+
+
+                    console.log(waitingInResponse);
+                    
+
+
+
                     if (resp.success) {
                         $('#interacting_result', $('#contract_interact')).val('good');
                     } else {
