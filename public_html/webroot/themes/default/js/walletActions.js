@@ -620,14 +620,14 @@ $(function () {
                     $('#add_fields input', $('#contract_interact')).each(function (i, v) {
                         data[$(this).attr('name')] = $(this).val();
                     });
+                    data.waitingInResponse = '[{"name":"success","type":"bool"}]';
 
                     walletIZ3.HTTPRequest.init({
                         url: '/transaction/contractInteract',
                         method: 'GET',
                         data: data
                     });
-                    let res = '[{"name":"success","type":"bool"}]';
-                    walletIZ3.HTTPRequest.send('resInteractContract', res);
+                    walletIZ3.HTTPRequest.send('resInteractContract', data.waitingInResponse);
                 });
 
 
@@ -1011,14 +1011,14 @@ $(function () {
 
 
 
-
+                    console.log(resp);
                     console.log(waitingInResponse);
-                    
+
 
 
 
                     if (resp.success) {
-                        $('#interacting_result', $('#contract_interact')).val('good');
+                        $('#interacting_result', $('#contract_interact')).val(resp.data.origin);
                     } else {
                         BootstrapDialog.alert({
                             title: 'Error',

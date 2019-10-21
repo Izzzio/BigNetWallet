@@ -90,14 +90,19 @@ class TransactionController extends AppController
             //number block in chain
             $contractAddress = $this->request->query('addr') ? strval($this->request->query('addr')) : '';
 
+            $waitingInResponse = $this->request->query('waitingInResponse') ? $this->request->query('waitingInResponse') : '';
+            $waitingInResponse = json_decode($waitingInResponse, true);
+
             $contractsPopular = Configure::read('Contracts.popular');
             if(false === $key = array_search($contractName, array_column($contractsPopular, 'id'))){
                 $result['msg'] = 'Error: select contract, please';
             } else {
                 $numberBlockWithSelectedContract = $contractsPopular[$key]['address'];
+                /*
                 if(!in_array($methodName, $contractsPopular[$key]['methods'])){
                     $result['msg'] = 'Error: select action, please';
                 }
+                */
             }
 
             if(!empty($result['msg'])){
@@ -108,13 +113,34 @@ class TransactionController extends AppController
             require_once('Api/V1/php/EcmaSmartRPC.php');
             try {
                 $izNode = new \EcmaSmartRPC(Configure::read('Api.host'), Configure::read('Api.pass'));
-                $request = $izNode->ecmaCallMethod($numberBlockWithSelectedContract, $methodName, [$contractAddress]);
-                if (isset($request['error']) && true == $request['error']) {
-                    throw new \Exception($request['message']);
-                } else {
-                    if (isset($request['result'])) {
-                        $result['success'] = true;
+                $response = $izNode->ecmaCallMethod($numberBlockWithSelectedContract, $methodName, [$contractAddress]);
+
+                if (isset($response['error']) && true == $response['error']) {
+                    throw new \Exception($response['message']);
+                } else if(isset($response['result'])){
+                    $result['success'] = true;
+                    if(!$waitingInResponse){
+                        foreach ($waitingInResponse as $key => $outputField){
+                            $name = (isset($outputField['name']) && !empty($outputField['name'])) ? $outputField['name'] : false;
+                            $type = (isset($outputField['type']) && !empty($outputField['type'])) ? $outputField['type'] : false;
+                            switch ($type){
+                                case 'bool':
+                                    $value = is_bool($response['result']) ? $response['result'] : boolval($response['result']);
+                                    break;
+                                default:
+                                    $value = strval($response['result']);
+                            }
+                            if($name){
+                                $result['data'][$name] = $value;
+                            } else {
+                                $result['data'][] = $value;
+                            }
+                        }
+                    } else {
+                        $result['data']['origin'] = $response['result'];
                     }
+                } else {
+                    $result['msg'] = $response;
                 }
             } catch (\Exception $e) {
                 $result['msg'] = $e->getMessage();
