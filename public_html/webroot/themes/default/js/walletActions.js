@@ -1010,15 +1010,21 @@ $(function () {
                 resInteractContract: function (resp, waitingInResponse) {
 
 
-
-                    console.log(resp);
                     console.log(waitingInResponse);
+                    waitingInResponse = JSON.parse(waitingInResponse) || [];
+                    switch (waitingInResponse.length) {
+                        case 0:
+                            break;
+                        case 1:
+                            break;
+                        default:
+                            for(let i = 0; i < waitingInResponse.length; i ++){
 
-
-
+                            }
+                    }
 
                     if (resp.success) {
-                        $('#interacting_result', $('#contract_interact')).val(resp.data.origin);
+                        $('#interacting_result', $('#contract_interact')).val(resp.data);
                     } else {
                         BootstrapDialog.alert({
                             title: 'Error',

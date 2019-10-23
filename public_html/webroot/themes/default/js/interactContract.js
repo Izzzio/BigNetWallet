@@ -27,14 +27,6 @@ class interactContract {
             if (this._abi[i].hasOwnProperty('name')) {
                 methods.push(this._abi[i].name);
             }
-
-            /*
-            for (let [key, value] of Object.entries(this._abi[i])) {
-                name
-                console.log(`${key}: ${value}`);
-            }
-            */
-
         }
 
         return methods;

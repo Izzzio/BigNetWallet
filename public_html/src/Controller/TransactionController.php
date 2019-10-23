@@ -119,7 +119,8 @@ class TransactionController extends AppController
                     throw new \Exception($response['message']);
                 } else if(isset($response['result'])){
                     $result['success'] = true;
-                    if(!$waitingInResponse){
+                    if($waitingInResponse){
+                        $answer = new \stdClass;
                         foreach ($waitingInResponse as $key => $outputField){
                             $name = (isset($outputField['name']) && !empty($outputField['name'])) ? $outputField['name'] : false;
                             $type = (isset($outputField['type']) && !empty($outputField['type'])) ? $outputField['type'] : false;
@@ -131,11 +132,12 @@ class TransactionController extends AppController
                                     $value = strval($response['result']);
                             }
                             if($name){
-                                $result['data'][$name] = $value;
+                                $answer->{$name} = $value;
                             } else {
-                                $result['data'][] = $value;
+                                $result['data'] = $value;
                             }
                         }
+                        $result['data'] = $answer;
                     } else {
                         $result['data']['origin'] = $response['result'];
                     }
