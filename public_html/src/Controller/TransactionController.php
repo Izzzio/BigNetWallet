@@ -120,7 +120,8 @@ class TransactionController extends AppController
                 } else if(isset($response['result'])){
                     $result['success'] = true;
                     if($waitingInResponse){
-                        $answer = new \stdClass;
+                        $answerWithKeys = new \stdClass;
+                        $answerWithoutKeys = [];
                         foreach ($waitingInResponse as $key => $outputField){
                             $name = (isset($outputField['name']) && !empty($outputField['name'])) ? $outputField['name'] : false;
                             $type = (isset($outputField['type']) && !empty($outputField['type'])) ? $outputField['type'] : false;
@@ -128,18 +129,30 @@ class TransactionController extends AppController
                                 case 'bool':
                                     $value = is_bool($response['result']) ? $response['result'] : boolval($response['result']);
                                     break;
+                                case 'int':
+                                    $value = is_int($response['result']) ? $response['result'] : intval($response['result']);
+                                    break;
+                                case 'string':
+                                    //при типе string поле name может быть пустым
                                 default:
                                     $value = strval($response['result']);
                             }
                             if($name){
-                                $answer->{$name} = $value;
+                                $answerWithKeys->{$name} = $value;
                             } else {
-                                $result['data'] = $value;
+                                $answerWithoutKeys[] = $value;
                             }
                         }
-                        $result['data'] = $answer;
+
+                        var_dump($answerWithoutKeys);
+
+                        $result['data'] = $answerWithoutKeys;
+                        if(count($answerWithoutKeys) <= 0){
+                            $result['data'] = $answerWithKeys;
+                        }
+                        $result['data'] = json_encode($result['data'], JSON_UNESCAPED_UNICODE);
                     } else {
-                        $result['data']['origin'] = $response['result'];
+                        $result['data'] = $response['result'];
                     }
                 } else {
                     $result['msg'] = $response;

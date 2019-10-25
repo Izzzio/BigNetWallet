@@ -620,7 +620,7 @@ $(function () {
                     $('#add_fields input', $('#contract_interact')).each(function (i, v) {
                         data[$(this).attr('name')] = $(this).val();
                     });
-                    data.waitingInResponse = '[{"name":"success","type":"bool"}]';
+                    data.waitingInResponse = '[{"name":"","type":"string"}]';
 
                     walletIZ3.HTTPRequest.init({
                         url: '/transaction/contractInteract',
@@ -1008,23 +1008,59 @@ $(function () {
                 },
 
                 resInteractContract: function (resp, waitingInResponse) {
-
-
-                    console.log(waitingInResponse);
+                    let fieldName = '';
+                    let result = '';
                     waitingInResponse = JSON.parse(waitingInResponse) || [];
                     switch (waitingInResponse.length) {
                         case 0:
                             break;
                         case 1:
+                            resp.data = JSON.parse(resp.data) || [];
+                            for(let i = 0; i < waitingInResponse.length; i ++){
+                                fieldName = waitingInResponse[i].name || false;
+                                if(fieldName){
+                                    if(fieldName.length){
+                                        if (resp.data.hasOwnProperty(fieldName)) {
+                                            result = resp.data[fieldName];
+                                        }
+                                    } else {
+                                        result = resp.data;
+                                    }
+                                }
+                            }
                             break;
                         default:
-                            for(let i = 0; i < waitingInResponse.length; i ++){
+                            resp.data = JSON.parse(resp.data) || [];
 
+
+                            console.log(resp.data);
+
+
+                            for(let i = 0; i < waitingInResponse.length; i ++){
+                                fieldName = waitingInResponse[i].name || false;
+                                if(fieldName){
+
+                                    console.log('fieldName = '+fieldName);
+                                    console.log('fieldName length = '+fieldName.length);
+
+                                    if(fieldName.length){
+                                        if (resp.data.hasOwnProperty(fieldName)) {
+                                            result += fieldName+': '+resp.data[fieldName]+', ';
+
+
+                                            console.log(result);
+
+
+                                        }
+                                    } else {
+                                        console.log('Сюда заходить не должен; > 1.');
+                                    }
+                                }
                             }
                     }
 
                     if (resp.success) {
-                        $('#interacting_result', $('#contract_interact')).val(resp.data);
+                        $('#interacting_result', $('#contract_interact')).val(result);
                     } else {
                         BootstrapDialog.alert({
                             title: 'Error',
