@@ -565,7 +565,7 @@ $(function () {
                     $('#interacting', $('#contract_interact')).val($('#interact_who', $('#contract_interact')).val() || '');
 
                     $('#add_fields', $('#contract_interact')).html('');
-                    $('#interacting_result', $('#contract_interact')).val();
+                    $('#interacting_result', $('#contract_interact')).val('');
 
                     interactedContract.abi = $('#abi', $('#contract_interact')).val();
                     let methods = interactedContract.getMethods();
