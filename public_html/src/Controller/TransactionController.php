@@ -87,10 +87,26 @@ class TransactionController extends AppController
         if ($this->request->is('get') && $this->request->is('ajax')) {
             $contractName = strval($this->request->query('contract') ? $this->request->query('contract') : '');
             $methodName = strval($this->request->query('method') ? $this->request->query('method') : '');
-            //number block in chain
-            $contractAddress = $this->request->query('addr') ? strval($this->request->query('addr')) : '';
 
+            //номер блока в цепочке
+            $contractAddress = $this->request->query('addr') ? strval($this->request->query('addr')) : false;
+            //адрес получателя токенов
+            $to = $this->request->query('to') ? strval($this->request->query('to')) : false;
+            //количество пересылаемых токенов
+            $tokens = $this->request->query('tokens') ? strval($this->request->query('tokens')) : 0;
+            //формат ответа, к которому нужно привести ответ от ноды
             $waitingInResponse = $this->request->query('waitingInResponse') ? $this->request->query('waitingInResponse') : [];
+
+            $queryParams = [];
+            if($contractAddress){
+                $queryParams[] = $contractAddress;
+            }
+            if($to){
+                $queryParams[] = $to;
+            }
+            if($tokens){
+                $queryParams[] = $tokens;
+            }
 
             $contractsPopular = Configure::read('Contracts.popular');
             if(false === $key = array_search($contractName, array_column($contractsPopular, 'id'))){
@@ -112,7 +128,7 @@ class TransactionController extends AppController
             require_once('Api/V1/php/EcmaSmartRPC.php');
             try {
                 $izNode = new \EcmaSmartRPC(Configure::read('Api.host'), Configure::read('Api.pass'));
-                $response = $izNode->ecmaCallMethod($numberBlockWithSelectedContract, $methodName, [$contractAddress]);
+                $response = $izNode->ecmaCallMethod($numberBlockWithSelectedContract, $methodName, $queryParams);
 
                 if (isset($response['error']) && true == $response['error']) {
                     throw new \Exception($response['message']);
@@ -133,8 +149,6 @@ class TransactionController extends AppController
                                     break;
                                 case 'string':
                                     //при типе string поле name может быть пустым
-                                    $value = boolval($response['result']);
-                                    break;
                                 default:
                                     $value = strval($response['result']);
                             }
@@ -144,15 +158,14 @@ class TransactionController extends AppController
                                 $answerWithoutKeys[] = $value;
                             }
                         }
-
                         $result['data'] = $answerWithoutKeys;
                         if(count($answerWithoutKeys) <= 0){
                             $result['data'] = $answerWithKeys;
                         }
-                        $result['data'] = json_encode($result['data'], JSON_UNESCAPED_UNICODE);
                     } else {
                         $result['data'] = $response['result'];
                     }
+                    $result['data'] = json_encode($result['data'], JSON_UNESCAPED_UNICODE);
                 } else {
                     $result['msg'] = $response;
                 }

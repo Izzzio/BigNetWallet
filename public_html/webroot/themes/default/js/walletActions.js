@@ -565,6 +565,7 @@ $(function () {
                     $('#interacting', $('#contract_interact')).val($('#interact_who', $('#contract_interact')).val() || '');
 
                     $('#add_fields', $('#contract_interact')).html('');
+                    $('#interacting_result', $('#contract_interact')).val();
 
                     interactedContract.abi = $('#abi', $('#contract_interact')).val();
                     let methods = interactedContract.getMethods();
@@ -1014,66 +1015,37 @@ $(function () {
                 resInteractContract: function (resp, waitingInResponse) {
                     let fieldName = '';
                     let result = '';
-                    waitingInResponse = waitingInResponse || [];
-                    switch (waitingInResponse.length) {
-                        case 0:
-                            break;
-                        case 1:
-
-
-
-                            console.log(resp.data);
-
-                            resp.data = JSON.parse(resp.data) || [];
-
-                            console.log(resp.data);
-
-                            console.log(waitingInResponse);
-
-
-
-                            for(let i = 0; i < waitingInResponse.length; i ++){
-                                fieldName = waitingInResponse[i].name || false;
-                                if(fieldName){
-                                    if (resp.data.hasOwnProperty(fieldName)) {
-                                        result = resp.data[fieldName];
-                                    }
-                                } else {
-                                    result = resp.data[0];
-                                }
-                            }
-                            break;
-                        default:
-                            resp.data = JSON.parse(resp.data) || [];
-
-
-                            console.log(resp.data);
-
-
-                            for(let i = 0; i < waitingInResponse.length; i ++){
-                                fieldName = waitingInResponse[i].name || false;
-                                if(fieldName){
-
-                                    console.log('fieldName = '+fieldName);
-                                    console.log('fieldName length = '+fieldName.length);
-
-                                    if(fieldName.length){
+                    if (resp.success) {
+                        waitingInResponse = waitingInResponse || [];
+                        resp.data = JSON.parse(resp.data) || [];
+                        switch (waitingInResponse.length) {
+                            case 0:
+                                result = resp;
+                                break;
+                            case 1:
+                                for(let i = 0; i < waitingInResponse.length; i ++){
+                                    fieldName = waitingInResponse[i].name || false;
+                                    if(fieldName){
                                         if (resp.data.hasOwnProperty(fieldName)) {
-                                            result += fieldName+': '+resp.data[fieldName]+', ';
-
-
-                                            console.log(result);
-
-
+                                            result = resp.data[fieldName];
                                         }
                                     } else {
-                                        console.log('Сюда заходить не должен; > 1.');
+                                        result = resp.data[0];
                                     }
                                 }
-                            }
-                    }
-
-                    if (resp.success) {
+                                break;
+                            default:
+                                for(let i = 0; i < waitingInResponse.length; i ++){
+                                    fieldName = waitingInResponse[i].name || false;
+                                    if(fieldName){
+                                        if (resp.data.hasOwnProperty(fieldName)) {
+                                            result += fieldName+': '+resp.data[fieldName]+', ';
+                                        }
+                                    } else {
+                                        result = resp.data[0];
+                                    }
+                                }
+                        }
                         $('#interacting_result', $('#contract_interact')).val(result);
                     } else {
                         BootstrapDialog.alert({
