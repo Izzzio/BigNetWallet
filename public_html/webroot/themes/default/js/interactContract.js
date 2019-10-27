@@ -62,4 +62,20 @@ class interactContract {
 
         return HTMLblock;
     }
+
+    getOutputsFormat(methodName){
+        methodName = methodName || 'empty name method';
+        let outputsFormat = [];
+
+        for (let i = 0; i < this._abi.length; i++) {
+            if (this._abi[i].hasOwnProperty('name') && methodName === this._abi[i].name) {
+                if(this._abi[i].hasOwnProperty('outputs')){
+                    outputsFormat = (this._abi[i].outputs || []);
+                    break;
+                }
+            }
+        }
+
+        return outputsFormat;
+    }
 }

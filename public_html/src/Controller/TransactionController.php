@@ -90,8 +90,7 @@ class TransactionController extends AppController
             //number block in chain
             $contractAddress = $this->request->query('addr') ? strval($this->request->query('addr')) : '';
 
-            $waitingInResponse = $this->request->query('waitingInResponse') ? $this->request->query('waitingInResponse') : '';
-            $waitingInResponse = json_decode($waitingInResponse, true);
+            $waitingInResponse = $this->request->query('waitingInResponse') ? $this->request->query('waitingInResponse') : [];
 
             $contractsPopular = Configure::read('Contracts.popular');
             if(false === $key = array_search($contractName, array_column($contractsPopular, 'id'))){
@@ -134,6 +133,8 @@ class TransactionController extends AppController
                                     break;
                                 case 'string':
                                     //при типе string поле name может быть пустым
+                                    $value = boolval($response['result']);
+                                    break;
                                 default:
                                     $value = strval($response['result']);
                             }
@@ -143,8 +144,6 @@ class TransactionController extends AppController
                                 $answerWithoutKeys[] = $value;
                             }
                         }
-
-                        var_dump($answerWithoutKeys);
 
                         $result['data'] = $answerWithoutKeys;
                         if(count($answerWithoutKeys) <= 0){

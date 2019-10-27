@@ -620,7 +620,11 @@ $(function () {
                     $('#add_fields input', $('#contract_interact')).each(function (i, v) {
                         data[$(this).attr('name')] = $(this).val();
                     });
-                    data.waitingInResponse = '[{"name":"","type":"string"}]';
+
+                    data.waitingInResponse = interactedContract.getOutputsFormat(method);
+                    if(data.waitingInResponse.length <= 0){
+                        data.waitingInResponse = [{"name":"","type":"string"}];
+                    }
 
                     walletIZ3.HTTPRequest.init({
                         url: '/transaction/contractInteract',
@@ -1010,22 +1014,32 @@ $(function () {
                 resInteractContract: function (resp, waitingInResponse) {
                     let fieldName = '';
                     let result = '';
-                    waitingInResponse = JSON.parse(waitingInResponse) || [];
+                    waitingInResponse = waitingInResponse || [];
                     switch (waitingInResponse.length) {
                         case 0:
                             break;
                         case 1:
+
+
+
+                            console.log(resp.data);
+
                             resp.data = JSON.parse(resp.data) || [];
+
+                            console.log(resp.data);
+
+                            console.log(waitingInResponse);
+
+
+
                             for(let i = 0; i < waitingInResponse.length; i ++){
                                 fieldName = waitingInResponse[i].name || false;
                                 if(fieldName){
-                                    if(fieldName.length){
-                                        if (resp.data.hasOwnProperty(fieldName)) {
-                                            result = resp.data[fieldName];
-                                        }
-                                    } else {
-                                        result = resp.data;
+                                    if (resp.data.hasOwnProperty(fieldName)) {
+                                        result = resp.data[fieldName];
                                     }
+                                } else {
+                                    result = resp.data[0];
                                 }
                             }
                             break;
