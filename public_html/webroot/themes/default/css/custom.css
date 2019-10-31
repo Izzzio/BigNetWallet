@@ -90,7 +90,7 @@ code {
     position: relative;
 }
 
-.confirmation-contract-deploy .main{
+.confirmation-contract-deploy .main {
     background-color: #f2fafa;
     border-radius: 4px;
     color: #506175;
@@ -149,4 +149,8 @@ code {
 
 .confirmation-contract-deploy .detail-item dt {
     font-weight: 400;
+}
+
+.messages-menu ul.dropdown-menu {
+    max-width: 170px;
 }
