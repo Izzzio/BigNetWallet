@@ -152,5 +152,13 @@ code {
 }
 
 .messages-menu ul.dropdown-menu {
-    max-width: 170px;
+    max-width: 160px;
+}
+
+.iz3-flag-wrapper {
+    width: 24px;
+    background-color: lightgray;
+    text-align: center;
+    vertical-align: baseline;
+    border-radius: 3px;
 }

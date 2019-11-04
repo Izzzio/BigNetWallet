@@ -26,13 +26,6 @@
                     </li>
                 </ul>
             </li>
-            <li box="exchange">
-                <a href="#">
-                    <i class="fas fa-exchange-alt"></i>
-                    &nbsp;&nbsp;
-                    <span>Exchange</span>
-                </a>
-            </li>
             <li box="dapps">
                 <a href="#">
                     <i class="fas fa-shapes"></i>

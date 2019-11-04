@@ -23,6 +23,7 @@
     <link rel="stylesheet" href="<?= URL_PREFIX . APP_THEME_BASE ?>/plugins/bootstrap-dialog/css/bootstrap-dialog.min.css">
     <link rel="stylesheet" href="<?= URL_PREFIX . APP_THEME_BASE ?>/plugins/toastr/toastr.min.css">
     <link rel="stylesheet" href="<?= URL_PREFIX . APP_THEME_BASE ?>/css/custom.css?_=<?= CORE_VERSION ?>">
+    <link rel="stylesheet" href="<?= URL_PREFIX . APP_THEME_BASE ?>/css/flag-icon.min.css">
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
     <!--[if lt IE 9]>
@@ -77,7 +78,9 @@
                                     <li>
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="Country flag">
+                                                <div class="iz3-flag-wrapper">
+                                                    <span class="flag-icon flag-icon-ru iz3-flag-bordered"></span>
+                                                </div>
                                             </div>
                                             <h4>
                                                 Russian
@@ -87,10 +90,23 @@
                                     <li>
                                         <a href="#">
                                             <div class="pull-left">
-                                                <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="Country flag">
+                                                <div class="iz3-flag-wrapper">
+                                                    <span class="flag-icon flag-icon-de iz3-flag-bordered"></span>
+                                                </div>
                                             </div>
                                             <h4>
                                                 German
+                                            </h4>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#">
+                                            <div class="pull-left">
+                                                <div class="iz3-flag-wrapper">
+                                                    <span class="flag-icon flag-icon-gb iz3-flag-bordered"></span>
+                                                </div>
+                                            </div>
+                                            <h4>
                                             </h4>
                                         </a>
                                     </li>

@@ -246,21 +246,6 @@
         </div>
     </div>
 
-    <div class="row box-wrapper" id="exchange" style="display: none;">
-        <div class="col-md-8">
-            <div class="box box-success">
-                <div class="box-header with-border">
-                    <h3 class="box-title"><strong>Exchange</strong></h3>
-                </div>
-                <div class="box-body">
-                    Coming soon...
-                </div>
-                <div class="box-footer text-center">
-                </div>
-            </div>
-        </div>
-    </div>
-
     <div class="row box-wrapper" id="dapps" style="display: none;">
         <div class="col-md-8">
             <div class="box box-success">
