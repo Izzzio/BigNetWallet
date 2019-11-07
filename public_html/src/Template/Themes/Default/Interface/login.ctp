@@ -90,14 +90,38 @@
                 <div class="box-body">
                     <form>
                         <div class="row col-md-12">
+                            <div class="col-md-3">
+                                <div class="form-group form-group-lg">
+                                    <label for="type">Contract address</label>
+                                    <input type="number" step="any" class="form-control without-arrow" name="contract_address"
+                                           id="contract_address">
+                                </div>
+                            </div>
+                            <div class="col-md-2">
+                                <div class="form-group form-group-lg">
+                                    <label></label>
+                                    <button type="button"  class="btn btn-success btn-lg btn-block">Add</button>
+                                </div>
+                            </div>
+                            <div class="col-md-7">
+                                <div class="form-group form-group-lg">
+                                    <p>
+                                        Add new token  from contract from "Contract address" number
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-12">
+                            <hr>
+                        </div>
+
+                        <div class="row col-md-12">
                             <div class="col-md-5">
                                 <div class="form-group form-group-lg">
                                     <label for="type">Type</label>
                                     <select class="form-control" name="type" id="type">
                                         <option value="IZ3">IZ3 - IZZZIO main token</option>
-                                        <!--
-                                        <option value="ETH">ETH - Ethereum</option>
-                                        -->
                                     </select>
                                 </div>
                             </div>
