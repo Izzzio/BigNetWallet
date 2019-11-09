@@ -252,6 +252,9 @@ $(function () {
                 let body = $('body');
                 $('#tnsn_online form', body).validate({
                     rules: {
+                        contract_address: {
+                            digits: true
+                        },
                         type: {
                             required: true
                         },
@@ -287,15 +290,29 @@ $(function () {
                     onkeyup: function (element) {
                         $(element).valid();
                         if ($('#tnsn_online form').valid()) {
-                            $('button', this.tnsnOnlineForm)
+                            $('button.send', $('#tnsn_online'))
                                 .prop('disabled', false)
                                 .removeClass('disabled');
                         } else {
-                            $('button', this.tnsnOnlineForm)
+                            $('button.send', $('#tnsn_online'))
+                                .prop('disabled', true)
+                                .addClass('disabled');
+                        }
+
+                        if ($('#tnsn_online #contract_address').valid()) {
+                            $('button.find-tokens', $('#tnsn_online'))
+                                .prop('disabled', false)
+                                .removeClass('disabled');
+                        } else {
+                            $('button.find-tokens', $('#tnsn_online'))
                                 .prop('disabled', true)
                                 .addClass('disabled');
                         }
                     }
+                });
+
+                $('#tnsn_online .find-tokens').on('click', function () {
+                    alert(String($('#contract_address', $('#tnsn_online')).val() || false));
                 });
 
                 $('#tnsn_online .send').on('click', function () {
