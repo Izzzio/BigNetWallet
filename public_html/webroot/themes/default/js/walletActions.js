@@ -312,7 +312,13 @@ $(function () {
                 });
 
                 $('#tnsn_online .find-tokens').on('click', function () {
-                    alert(String($('#contract_address', $('#tnsn_online')).val() || false));
+                    let contractAddress = parseInt($('#contract_address', $('#tnsn_online')).val() || false);
+
+                    walletIZ3.HTTPRequest.init({
+                        url: '/contract/getInfo/' + contractAddress,
+                        method: 'GET'
+                    });
+                    walletIZ3.HTTPRequest.send('resFindTokens');
                 });
 
                 $('#tnsn_online .send').on('click', function () {
@@ -568,7 +574,7 @@ $(function () {
                     if(id.length){
                         $('.overlay', $('#contract_interact')).show();
                         walletIZ3.HTTPRequest.init({
-                            url: '/contract/getInfo/'+id,
+                            url: '/contract/getMethods/'+id,
                             method: 'GET',
                         });
                         walletIZ3.HTTPRequest.send('resGetContractInfo');
@@ -978,6 +984,35 @@ $(function () {
                 */
             },
             callbacks: {
+                resFindTokens: function(resp) {
+
+
+                    console.log(resp);
+
+
+                    if (resp.success) {
+                        BootstrapDialog.alert({
+                            title: 'Success',
+                            message: resp.msg,
+                            type: BootstrapDialog.TYPE_INFO,
+                            size: BootstrapDialog.SIZE_LARGE,
+                            closable: true
+                        });
+                        $('input', $('#tnsn_online')).val('');
+                    } else {
+                        BootstrapDialog.alert({
+                            title: 'Error',
+                            message: resp.msg,
+                            type: BootstrapDialog.TYPE_DANGER,
+                            size: BootstrapDialog.SIZE_LARGE,
+                            closable: true
+                        });
+                        $('button', $('#tnsn_online'))
+                            .prop('disabled', false)
+                            .removeClass('disabled');
+                    }
+                    $('.overlay', $('#tnsn_online')).hide();
+                },
                 resTnsnOnline: function (resp) {
                     if (resp.success) {
                         BootstrapDialog.alert({

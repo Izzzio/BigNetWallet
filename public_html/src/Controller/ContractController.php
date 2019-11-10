@@ -22,7 +22,7 @@ class ContractController extends AppController
         parent::beforeFilter($event);
 
         $this->viewBuilder()->layout('main');
-        $this->IndianAuth->allow(['getInfo'], $this->IndianAuth::PERMISSION_ALL);
+        $this->IndianAuth->allow(['getInfo', 'getMethods'], $this->IndianAuth::PERMISSION_ALL);
     }
 
     /**
@@ -39,7 +39,7 @@ class ContractController extends AppController
     /**
      * Get allowed methods from contract
      */
-    public function getInfo($contractId = ''){
+    public function getMethods($contractId = ''){
         $result = [
             'success' => false,
             'msg' => 'Contract not found',
@@ -68,6 +68,64 @@ class ContractController extends AppController
                         'abi' => json_encode(json_decode($contracts[$key]['abi'])),
                     ],
                 ];
+            }
+        }
+
+        return $this->sendJsonResponse($result);
+    }
+
+    /**
+     * Get main info about contract
+     * @param integer $address Contract address
+     * @return string json
+     */
+    public function getInfo($address = ''){
+        $result = [
+            'success' => false,
+            'msg' => 'Contract not found',
+            'data' => [],
+        ];
+
+        //$this->request->param('pass')[0]);
+        $address = intval($address);
+
+        if($address){
+            require_once ('Api/V1/php/NodeRPC.php');
+            require_once ('Api/V1/php/EcmaSmartRPC.php');
+
+            try{
+                $izNode = new \EcmaSmartRPC(Configure::read('Api.host'), Configure::read('Api.pass'));
+                $contractInfo = $izNode->ecmaGetContractProperty($address, 'contract');
+                if (isset($contractInfo['error']) && true == $contractInfo['error']) {
+                    throw new \Exception('Contract on address not exist or wrong');
+                } else {
+
+                    var_dump($contractInfo);
+
+                }
+
+                die(" --- ");
+
+
+                $networkInfo = $izNode->getInfo();
+                if(!isset($networkInfo['maxBlock'])) {
+                    throw new \Exception('Network is not ready. Please try again later.');
+                }
+                $network['lastBlock'] = $networkInfo['maxBlock'];
+
+
+
+                $wallet = $izNode->ecmaCallMethod($network['masterContract'], 'balanceOf', [$address]);
+                if(isset($wallet['error']) && true == $wallet['error']){
+                    throw new \Exception($wallet['message']);
+                } else {
+                    if(isset($wallet['result'])){
+                        $result['success'] = true;
+                        $balance = $wallet['result'];
+                    }
+                }
+            } catch (\Exception $e) {
+                $result['msg'] = $e->getMessage();
             }
         }
 
