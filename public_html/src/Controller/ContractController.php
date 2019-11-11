@@ -39,7 +39,8 @@ class ContractController extends AppController
     /**
      * Get allowed methods from contract
      */
-    public function getMethods($contractId = ''){
+    public function getMethods($contractId = '')
+    {
         $result = [
             'success' => false,
             'msg' => 'Contract not found',
@@ -56,9 +57,9 @@ class ContractController extends AppController
          * то получаем список методов данного контракта
          */
 
-        if(!empty($contractId)){
+        if (!empty($contractId)) {
             $contracts = Configure::read('Contracts.popular');
-            if(false !== $key = array_search($contractId, array_column($contracts, 'id'))){
+            if (false !== $key = array_search($contractId, array_column($contracts, 'id'))) {
                 $result['success'] = true;
                 $result['msg'] = '';
                 $result['data'] = [
@@ -79,49 +80,52 @@ class ContractController extends AppController
      * @param integer $address Contract address
      * @return string json
      */
-    public function getInfo($address = ''){
+    public function getInfo($contractAddress = '')
+    {
         $result = [
             'success' => false,
-            'msg' => 'Contract not found',
+            'msg' => 'Wrong contract address or public address',
             'data' => [],
         ];
 
+        $publicAddress = false;
         //$this->request->param('pass')[0]);
-        $address = intval($address);
+        $contractAddress = intval($contractAddress);
+        if (isset($this->request->query['addr'])) {
+            $publicAddress = substr($this->request->query['addr'], 0, 70);
+        }
 
-        if($address){
-            require_once ('Api/V1/php/NodeRPC.php');
-            require_once ('Api/V1/php/EcmaSmartRPC.php');
+        if ($contractAddress && $publicAddress) {
+            require_once('Api/V1/php/NodeRPC.php');
+            require_once('Api/V1/php/EcmaSmartRPC.php');
 
-            try{
+            try {
                 $izNode = new \EcmaSmartRPC(Configure::read('Api.host'), Configure::read('Api.pass'));
-                $contractInfo = $izNode->ecmaGetContractProperty($address, 'contract');
+                $contractInfo = $izNode->ecmaGetContractProperty($contractAddress, 'contract');
                 if (isset($contractInfo['error']) && true == $contractInfo['error']) {
                     throw new \Exception('Contract on address not exist or wrong');
                 } else {
+                    $tokenName = [];
+                    if (isset($contractInfo['result']['ticker']) && !empty($contractInfo['result']['ticker'])) {
+                        $tokenName[] = $contractInfo['result']['ticker'];
+                    }
+                    if (isset($contractInfo['result']['name']) && !empty($contractInfo['result']['name'])) {
+                        $tokenName[] = $contractInfo['result']['name'];
+                    }
 
-                    var_dump($contractInfo);
-
-                }
-
-                die(" --- ");
-
-
-                $networkInfo = $izNode->getInfo();
-                if(!isset($networkInfo['maxBlock'])) {
-                    throw new \Exception('Network is not ready. Please try again later.');
-                }
-                $network['lastBlock'] = $networkInfo['maxBlock'];
-
-
-
-                $wallet = $izNode->ecmaCallMethod($network['masterContract'], 'balanceOf', [$address]);
-                if(isset($wallet['error']) && true == $wallet['error']){
-                    throw new \Exception($wallet['message']);
-                } else {
-                    if(isset($wallet['result'])){
-                        $result['success'] = true;
-                        $balance = $wallet['result'];
+                    $balance = $izNode->ecmaCallMethod($contractAddress, 'balanceOf', [$publicAddress]);
+                    if (isset($balance['error']) && true == $balance['error']) {
+                        throw new \Exception($balance['message']);
+                    } else {
+                        if (isset($balance['result'])) {
+                            $result['success'] = true;
+                            $result['msg'] = '';
+                            $result['data']['balance'] = $balance['result'];
+                            $result['data']['token'] = [
+                                'name' => implode(' - ', $tokenName),
+                                'from_contract' => $contractAddress,
+                            ];
+                        }
                     }
                 }
             } catch (\Exception $e) {
@@ -131,5 +135,4 @@ class ContractController extends AppController
 
         return $this->sendJsonResponse($result);
     }
-
 }

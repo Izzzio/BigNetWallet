@@ -312,11 +312,12 @@ $(function () {
                 });
 
                 $('#tnsn_online .find-tokens').on('click', function () {
-                    let contractAddress = parseInt($('#contract_address', $('#tnsn_online')).val() || false);
+                    let contractAddress = parseInt($('#contract_address', $('#tnsn_online')).val() || 0);
 
                     walletIZ3.HTTPRequest.init({
                         url: '/contract/getInfo/' + contractAddress,
-                        method: 'GET'
+                        method: 'GET',
+                        data: {'addr': ($('#payer').html() || '').trim()}
                     });
                     walletIZ3.HTTPRequest.send('resFindTokens');
                 });
@@ -721,7 +722,7 @@ $(function () {
                         modalContent.find('.amount').html('- ' + resourceRent);
                         modalContent.find('.currency').html(' ' + walletIZ3.network.ticker);
                         modalContent.find('.network').html(' ' + walletIZ3.network.ticker + ' by ' + walletIZ3.network.name);
-                        modalContent.find('.address').html(($('#payer').html() || ''));
+                        modalContent.find('.address').html(($('#payer').html() || '').trim());
                         confirmContractDeployDlg.open();
                     } else {
                         BootstrapDialog.alert({

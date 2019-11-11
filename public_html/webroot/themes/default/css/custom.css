@@ -62,6 +62,11 @@ input[type=number].without-arrow {
     -moz-appearance: textfield; /* Firefox */
 }
 
+#tnsn_online #token-max {
+    font-size: 12px;
+    color: lightskyblue;
+}
+
 .tnsn-offline-result h4 {
     font-weight: 600;
 }

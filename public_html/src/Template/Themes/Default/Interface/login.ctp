@@ -115,7 +115,7 @@
                         </div>
 
                         <div class="row col-md-12">
-                            <div class="col-md-5">
+                            <div class="col-md-6 col-sm-7 col-xs-12">
                                 <div class="form-group form-group-lg">
                                     <label for="type">Type</label>
                                     <select class="form-control" name="type" id="type">
@@ -123,9 +123,14 @@
                                     </select>
                                 </div>
                             </div>
-                            <div class="col-md-7">
+                            <div class="col-md-6 col-sm-5 col-xs-12">
                                 <div class="form-group form-group-lg">
-                                    <label for="amount">Amount</label>
+                                    <label for="amount">
+                                        Amount
+                                        <span id="token-max">
+                                            (max: <span><?= $balance; ?></span>)
+                                        </span>
+                                    </label>
                                     <input type="number" step="any" class="form-control without-arrow" name="amount"
                                            id="amount">
                                 </div>
