@@ -311,6 +311,10 @@ $(function () {
                     }
                 });
 
+                $('#tnsn_online #type').on('change', function () {
+                    $('#tnsn_online #token-max span').html(($("option:selected", this).data('max') || 0));
+                });
+
                 $('#tnsn_online .find-tokens').on('click', function () {
                     let contractAddress = parseInt($('#contract_address', $('#tnsn_online')).val() || 0);
 
@@ -986,15 +990,17 @@ $(function () {
             },
             callbacks: {
                 resFindTokens: function(resp) {
-
-
-                    console.log(resp);
-
-
                     if (resp.success) {
+                        let msg = 'Token type already exist';
+                        let optionExists = ($('#type option[value=' + resp.data.token.from_contract + ']', $('#tnsn_online')).length > 0);
+                        if(!optionExists)
+                        {
+                            $('#type', $('#tnsn_online')).append("<option value='"+resp.data.token.from_contract+"' data-max='"+resp.data.balance+"'>"+resp.data.token.name+"</option>");
+                            msg = 'Token type succesfull added';
+                        }
                         BootstrapDialog.alert({
                             title: 'Success',
-                            message: resp.msg,
+                            message: msg,
                             type: BootstrapDialog.TYPE_INFO,
                             size: BootstrapDialog.SIZE_LARGE,
                             closable: true

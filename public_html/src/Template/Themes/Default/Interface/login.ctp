@@ -119,7 +119,7 @@
                                 <div class="form-group form-group-lg">
                                     <label for="type">Type</label>
                                     <select class="form-control" name="type" id="type">
-                                        <option value="IZ3">IZ3 - IZZZIO main token</option>
+                                        <option value="<?= $network['masterContract']; ?>" data-max="<?= $balance; ?>">IZ3 - IZZZIO main token</option>
                                     </select>
                                 </div>
                             </div>
@@ -127,8 +127,8 @@
                                 <div class="form-group form-group-lg">
                                     <label for="amount">
                                         Amount
-                                        <span id="token-max">
-                                            (max: <span><?= $balance; ?></span>)
+                                        <span id="token-max" class="label label-warning">
+                                            max: <span><?= $balance; ?></span>
                                         </span>
                                     </label>
                                     <input type="number" step="any" class="form-control without-arrow" name="amount"
