@@ -50,8 +50,8 @@ class TransactionController extends AppController
             'data' => [],
         ];
         if ($this->request->is('post') && $this->request->is('ajax')) {
-            $block = $this->request->data;
-
+            $contractAddress = strval($this->request->data('contractAddr') ? intval($this->request->data('contractAddr')) : 0);
+            $block = $this->request->data('block') ? $this->request->data('block') : [];
             if (isset($block['address'])) {
                 $block['address'] = substr($block['address'], 0, 70);
             }
@@ -60,7 +60,7 @@ class TransactionController extends AppController
             require_once('Api/V1/php/EcmaSmartRPC.php');
             try {
                 $izNode = new \EcmaSmartRPC(Configure::read('Api.host'), Configure::read('Api.pass'));
-                $wallet = $izNode->ecmaDeployMethodSignedBLock(Configure::read('Networks')[0]['masterContract'], $block);
+                $wallet = $izNode->ecmaDeployMethodSignedBLock($contractAddress, $block);
                 if (isset($wallet['error']) && true == $wallet['error']) {
                     throw new \Exception($wallet['message']);
                 } else {

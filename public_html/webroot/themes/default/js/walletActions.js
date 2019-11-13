@@ -327,8 +327,9 @@ $(function () {
                 });
 
                 $('#tnsn_online .send').on('click', function () {
+                    let contractAddress = String($('#type', $('#tnsn_online')).val() || 0);
                     let block = new ecmaContractCallBlock(
-                            walletIZ3.network.masterContract,
+                            contractAddress,
                             'transfer',
                             [
                                 String($('#payee', this.tnsnOnlineForm).val() || false),
@@ -336,7 +337,7 @@ $(function () {
                             ],
                             {
                                 'from': wallet.address,
-                                'contractAddress': walletIZ3.network.masterContract
+                                'contractAddress': contractAddress
                             }
                         );
                     block.sign = iz3BitcoreCrypto.sign(block.data, wallet.main.keysPair.private);
@@ -350,7 +351,7 @@ $(function () {
                     walletIZ3.HTTPRequest.init({
                         url: '/transaction/online',
                         method: 'POST',
-                        data: block
+                        data: {'block': block, 'contractAddr': contractAddress}
                     });
                     walletIZ3.HTTPRequest.send('resTnsnOnline');
                 });
