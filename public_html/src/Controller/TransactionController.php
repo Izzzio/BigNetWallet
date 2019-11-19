@@ -28,7 +28,7 @@ class TransactionController extends AppController
         parent::beforeFilter($event);
 
         //$this->viewBuilder()->layout('main');
-        $this->IndianAuth->allow(['online', 'contractInteract', 'contractDeploy'], $this->IndianAuth::PERMISSION_ALL);
+        $this->IndianAuth->allow(['online', 'contractInteract', 'calcDeployContractResource', 'deployContract'], $this->IndianAuth::PERMISSION_ALL);
     }
 
     /**
@@ -177,7 +177,39 @@ class TransactionController extends AppController
         }
     }
 
-    public function contractDeploy()
+    public function calcDeployContractResource($payment = 0)
+    {
+        $result = [
+            'success' => false,
+            'msg' => '',
+            'data' => [],
+        ];
+        if ($this->request->is('get') && $this->request->is('ajax')) {
+            $payment = intval($payment);
+
+            require_once('Api/V1/php/NodeRPC.php');
+            require_once('Api/V1/php/EcmaSmartRPC.php');
+            try {
+                $izNode = new \EcmaSmartRPC(Configure::read('Api.host'), Configure::read('Api.pass'));
+                $resources = $izNode->ecmaCallMethod('1','getCalculatedResources', [$payment]);
+
+                if (isset($resources['error']) && true == $resources['error']) {
+                    throw new \Exception($resources['message']);
+                } else {
+                    if (isset($resources['result'])) {
+                        $result['success'] = true;
+                        $result['data'] = $resources['result'];
+                    }
+                }
+            } catch (\Exception $e) {
+                $result['msg'] = $e->getMessage();
+            }
+
+            return $this->sendJsonResponse($result);
+        }
+    }
+
+    public function deployContract()
     {
         $result = [
             'success' => false,
@@ -227,16 +259,5 @@ class TransactionController extends AppController
 
             return $this->sendJsonResponse($result);
         }
-    }
-
-    protected function sendJsonResponse($dataForJSON)
-    {
-        $dataForJSON['_serialize'] = array_keys($dataForJSON);
-        $dataForJSON['_jsonOptions'] = JSON_UNESCAPED_UNICODE;
-
-        $this->set($dataForJSON);
-        $this->viewBuilder()->className('Json');
-
-        return null;
     }
 }

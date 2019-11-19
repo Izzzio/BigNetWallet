@@ -692,15 +692,25 @@ $(function () {
                     onkeyup: function (element) {
                         $(element).valid();
                         if ($('#contract_deploy form').valid()) {
-                            $('button', this.contractDeployForm)
+                            $('button.sign', this.contractDeployForm)
                                 .prop('disabled', false)
                                 .removeClass('disabled');
                         } else {
-                            $('button', this.contractDeployForm)
+                            $('button.sign', this.contractDeployForm)
                                 .prop('disabled', true)
                                 .addClass('disabled');
                         }
                     }
+                });
+
+                $('.calc-resource', $('#contract_deploy')).on('click', function () {
+                    $('.overlay', $('#contract_deploy')).show();
+
+                    walletIZ3.HTTPRequest.init({
+                        url: '/transaction/calcDeployContractResource/'+String(($('#contract_rent', $('#contract_deploy')).val() || 0)),
+                        method: 'GET'
+                    });
+                    walletIZ3.HTTPRequest.send('resCalcDeployContractResource');
                 });
 
                 let block = '';
@@ -767,7 +777,7 @@ $(function () {
                             content.find('#message').hide();
                             try {
                                 $.post(
-                                    '/transaction/contractDeploy',
+                                    '/transaction/deployContract',
                                     {
                                     'block': block,
                                     'rent': resourceRent
@@ -1120,6 +1130,21 @@ $(function () {
                         .prop('disabled', false)
                         .removeClass('disabled');
                     $('.overlay', $('#contract_interact')).hide();
+                },
+
+                resCalcDeployContractResource: function (resp) {
+                    if (resp.success) {
+                        $('#resources_calculated', $('#contract_deploy')).html(resp.data);
+                    } else {
+                        BootstrapDialog.alert({
+                            title: 'Error',
+                            message: resp.msg,
+                            type: BootstrapDialog.TYPE_DANGER,
+                            size: BootstrapDialog.SIZE_LARGE,
+                            closable: true
+                        });
+                    }
+                    $('.overlay', $('#contract_deploy')).hide();
                 }
             },
             utility: {

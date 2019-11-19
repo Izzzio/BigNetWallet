@@ -441,11 +441,22 @@
                         </div>
                         <div class="row col-md-12">
                             <div class="col-md-12">
-                                <div class="form-group form-group-lg">
-                                    <label for="contract_rent">Resource rent</label>
+                                <label for="contract_rent">Resource rent</label>
+                                <div class="input-group input-group-lg">
                                     <input type="number" step="any" class="form-control without-arrow"
                                            name="contract_rent" id="contract_rent" autocomplete="off"
-                                           placeholder="Amount resources for deploy contract">
+                                           placeholder="Cost resources for deploy contract">
+                                    <span class="input-group-btn">
+                                        <button type="button" class="btn btn-success calc-resource">Calculate</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row col-md-12">
+                            <div class="col-md-12">
+                                <div class="form-group form-group-lg" style="margin-top: 14px; line-height: 0.9;">
+                                    <label>Resource available</label>
+                                    <p class="text-muted" id="resources_calculated" style="font-size: 17px;">minimum amount of resources</p>
                                 </div>
                             </div>
                         </div>
@@ -463,6 +474,9 @@
                         <div class="col-lg-4 col-md-3 col-sm-3 hidden-xs">
                         </div>
                     </div>
+                </div>
+                <div class="overlay" style="display: none;">
+                    <i class="fas fa-spinner fa-pulse fa-3x"></i>
                 </div>
             </div>
         </div>
