@@ -49,7 +49,7 @@ $(function () {
                     dialogRef.close();
                     switch (loginWay) {
                         case 1:
-                            //askLoginFileDlg.open();
+                            askLoginFileDlg.open();
                             break;
                         case 2:
                             askLoginKeyDlg.open();
@@ -127,6 +127,171 @@ $(function () {
             link.click();
         }
 
+        var askLoginFileDlg = new BootstrapDialog({
+            title: 'Access by Keystore File',
+            closable: true,
+            closeByBackdrop: false,
+            closeByKeyboard: true,
+            size: BootstrapDialog.SIZE_LARGE,
+            spinicon: 'fas fa-spinner fa-pulse',
+            message: getLoginKeyDlgContent(false),
+            buttons: [
+                {
+                    id: 'file-select',
+                    label: 'Select file',
+                    cssClass: 'btn btn-info',
+                    action: function (dialogRef) {
+                        $('#key-file').click();
+                        dialogRef
+                            .setClosable(false);
+                        /*
+                        let content = dialogRef.getModalContent();
+                        let key = String(content.find('#key').val() || false);
+                        let $button = this;
+                        $button.spin();
+                        content.find('#message').hide();
+                        try {
+                            wallet.address = iz3BitcoreCrypto.private2address(key);
+                            wallet.main.keysPair.private = key;
+                            $.getJSON('/api/v1/wallet/login', {addr: wallet.address})
+                                .done(function (resp) {
+                                    if (resp.success) {
+                                        $('section.sidebar', $('body')).html(resp.data.menu);
+                                        $('.content-wrapper', $('body')).html(resp.data.page);
+                                        dialogRef.close();
+                                        walletIZ3.setCurrentNetwork();
+                                        walletIZ3.setEventListeners();
+
+                                        //window.history.pushState({"html":resp.data,"pageTitle":'TITLE 1'},"", '/interface/send-online');
+                                        //window.location.replace("/send/online");
+
+                                    } else {
+                                        content.find('#message')
+                                            .html(resp.msg)
+                                            .show();
+                                    }
+                                })
+                                .fail(function (resp) {
+                                    content.find('#message')
+                                        .html(resp.msg)
+                                        .show();
+                                })
+                                .always(function (resp) {
+                                    dialogRef
+                                        .enableButtons(true)
+                                        .setClosable(true);
+                                    $button.stopSpin();
+                                });
+                        } catch (e) {
+                            console.log(e);
+                            content.find('#message')
+                                .html('Wrong private key. Re-check key ant try again.')
+                                .show();
+                            dialogRef
+                                .enableButtons(true)
+                                .setClosable(true);
+                            $button.stopSpin();
+                        }
+                        */
+                    }
+                },
+                {
+                    id: 'login',
+                    label: ' Access Wallet',
+                    cssClass: 'btn',
+                    action: function (dialogRef) {
+                        dialogRef
+                            .enableButtons(false)
+                            .setClosable(false);
+                        let content = dialogRef.getModalContent();
+                        let key = String(content.find('#key').val() || false);
+                        let $button = this;
+                        $button.spin();
+                        content.find('#message').hide();
+                        try {
+                            wallet.address = iz3BitcoreCrypto.private2address(key);
+                            wallet.main.keysPair.private = key;
+                            $.getJSON('/api/v1/wallet/login', {addr: wallet.address})
+                                .done(function (resp) {
+                                    if (resp.success) {
+                                        $('section.sidebar', $('body')).html(resp.data.menu);
+                                        $('.content-wrapper', $('body')).html(resp.data.page);
+                                        dialogRef.close();
+                                        walletIZ3.setCurrentNetwork();
+                                        walletIZ3.setEventListeners();
+
+                                        //window.history.pushState({"html":resp.data,"pageTitle":'TITLE 1'},"", '/interface/send-online');
+                                        //window.location.replace("/send/online");
+
+                                    } else {
+                                        content.find('#message')
+                                            .html(resp.msg)
+                                            .show();
+                                    }
+                                })
+                                .fail(function (resp) {
+                                    content.find('#message')
+                                        .html(resp.msg)
+                                        .show();
+                                })
+                                .always(function (resp) {
+                                    dialogRef
+                                        .enableButtons(true)
+                                        .setClosable(true);
+                                    $button.stopSpin();
+                                });
+                        } catch (e) {
+                            console.log(e);
+                            content.find('#message')
+                                .html('Wrong private key. Re-check key ant try again.')
+                                .show();
+                            dialogRef
+                                .enableButtons(true)
+                                .setClosable(true);
+                            $button.stopSpin();
+                        }
+                    }
+                }
+            ],
+            onshow: function (dialogRef) {
+                dialogRef.getButton('login').disable();
+                dialogRef.getModalFooter().css('text-align', 'center');
+            },
+
+            onshown: function (dialogRef) {
+                let btn = dialogRef.getModalContent().find('#file-select') || false;
+                if (btn) {
+                    $('#key-file').click();
+                }
+                $("#key-file").change(function(){
+
+                    let all_files = this.files;
+                    if(0 == all_files.length) {
+                        alert('Error : No file selected');
+                        return;
+                    }
+
+                    let file = all_files[0];
+                    var json_str = JSON.parse(file);
+
+                    console.log(json_str);
+
+
+                    /*
+                    // files types allowed
+                    // we are reading text file in this example
+                    var allowed_types = [ 'text/plain' ];
+                    if(allowed_types.indexOf(file.type) == -1) {
+                        alert('Error : Incorrect file type');
+                        return;
+                    }
+                    */
+
+                    let reader = new FileReader();
+                });
+            },
+        });
+
         var askLoginKeyDlg = new BootstrapDialog({
             title: 'Access by Private Key',
             closable: true,
@@ -134,7 +299,7 @@ $(function () {
             closeByKeyboard: true,
             size: BootstrapDialog.SIZE_LARGE,
             spinicon: 'fas fa-spinner fa-pulse',
-            message: getLoginKeyDlgContent(),
+            message: getLoginKeyDlgContent(true),
             buttons: [{
                 id: 'login',
                 label: ' Access Wallet',
@@ -214,22 +379,24 @@ $(function () {
             },
         });
 
-        function getLoginKeyDlgContent() {
+        function getLoginKeyDlgContent(showFields) {
+            showFields = showFields || false;
             return '' +
                 '<div id="message" class="row alert alert-danger" role="alert" style="border-radius: 0px; display: none;">' +
                 '</div>' +
                 '<div class="container-fluid">' +
                 '<div class="row">' +
                 '<div class="col-md-12 col-xs-12 form-group">' +
-                '<input type="text" id="key" placeholder="Enter Private Key" class="form-control input-lg" autocomplete="off">' +
+                (showFields
+                    ?
+                    '<input type="text" id="key" placeholder="Enter Private Key" class="form-control input-lg" autocomplete="off">'
+                    :
+                    '<input type="file" id="key-file" style="display: none">'
+                ) +
                 '</div>' +
                 '</div>' +
                 '</div>';
         }
-
-
-
-
 
         var walletIZ3 = {
             tnsnOnlineForm: $('#tnsn_online'),
