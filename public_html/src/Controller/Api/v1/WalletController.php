@@ -1,19 +1,11 @@
 <?php
 
-namespace App\Controller;
-
-use App\Lib\Emails;
-use App\Lib\Sandbox;
-use App\Lib\KYC;
-use App\Lib\Misc;
+namespace App\Controller\Api\v1;
 
 use Cake\Event\Event;
-use Cake\Filesystem\Folder;
-
 use Cake\Core\Configure;
-use Cake\Log\Log;
 
-class WalletController extends AppController
+class WalletController extends ApiController
 {
     /**
      * beforeFilter callback.
@@ -23,8 +15,6 @@ class WalletController extends AppController
      */
     public function beforeFilter(Event $event)
     {
-        $langs = (new Folder(ROOT . '/src/Locale'))->read()[0];
-        $this->set('langs', $langs);
         parent::beforeFilter($event);
 
         $this->viewBuilder()->layout('main');
@@ -40,48 +30,6 @@ class WalletController extends AppController
     public function beforeRender(Event $event)
     {
         parent::beforeRender($event);
-    }
-
-    /**
-     * Create new wallet
-     */
-    public function create()
-    {
-        /*
-        require_once ('Api/V1/php/NodeRPC.php');
-        $izNode = new \NodeRPC(Configure::read('Api.host'), Configure::read('Api.pass'));
-
-        $wallet = $izNode->createWallet();
-
-        print("<pre>");
-        var_dump($wallet);
-        //$izNode->changeWallet($wallet);
-
-        print_r($izNode->getInfo());
-        die("STOP");
-
-
-        echo "New wallet address: " . $wallet['id'] . "\n";
-        //echo "New tiny address: " . \NodeRPC::getTinyAddress($wallet) . "\n";
-        echo "Current address: " . $izNode->getWallet() . "\n";
-        echo "\n";
-        echo "Info about master wallet: \n";
-
-        try {
-            $masterWallet = $izNode->getWalletInfo('BL_1');
-            echo "Full address: " . $masterWallet['id'] . "\n";
-            echo "Balance: " . \NodeRPC::mil2IZ($masterWallet['balance']) . "\n";
-        } catch (\ReturnException $e) {
-            echo "Address not found\n";
-        }
-
-        try {
-            var_dump($izNode->createTransaction('7a6545dbbfff0f4d9723d6f83bee85dc8b93cb47a9d178cbea9157eaffda3c09', \NodeRPC::IZ2Mil(1)));
-        } catch (\ReturnException $e) {
-            echo "Can't create transaction\n";
-        }
-        */
-
     }
 
     public function login()
@@ -101,20 +49,15 @@ class WalletController extends AppController
                 $address = substr($this->request->query['addr'], 0, 70);
             }
             if($address){
-                require_once ('Api/V1/php/NodeRPC.php');
-                require_once ('Api/V1/php/EcmaSmartRPC.php');
-
                 try{
-                    $izNode = new \EcmaSmartRPC(Configure::read('Api.host'), Configure::read('Api.pass'));
-
-                    $networkInfo = $izNode->getInfo();
+                    $networkInfo = $this->_iz3Node->getInfo();
 
                     if(!isset($networkInfo['maxBlock'])) {
                         throw new \Exception('Network is not ready. Please try again later.');
                     }
                     $network['lastBlock'] = $networkInfo['maxBlock'];
 
-                    $wallet = $izNode->ecmaCallMethod($network['masterContract'], 'balanceOf', [$address]);
+                    $wallet = $this->_iz3Node->ecmaCallMethod($network['masterContract'], 'balanceOf', [$address]);
                     if(isset($wallet['error']) && true == $wallet['error']){
                         throw new \Exception($wallet['message']);
                     } else {

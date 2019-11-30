@@ -16,21 +16,13 @@ use App\Controller\Component\IndianAuthComponent;
 use App\Controller\AclController as Acl;
 use App\Lib\Calculator;
 use App\Lib\CPA;
-use App\Lib\CoinMarketCap;
 use App\Lib\Crypt;
-use App\Lib\CsvWriter;
 use App\Lib\CurrentUser;
 use App\Lib\Email;
 use App\Lib\Emails;
 use App\Lib\FAQ;
-use App\Lib\GoogleAnalitycs;
 use App\Lib\KeyValue;
 use App\Lib\Misc;
-use App\Lib\Payments\CoinPayments;
-use App\Lib\Payments\EtherValve;
-use App\Lib\Payments\Payment;
-use App\Lib\Payments\Test;
-use App\Lib\Sandbox;
 
 use App\Model\Entity\User;
 use App\Model\Table\LogTable;
@@ -163,6 +155,16 @@ class AppController extends Controller
         $this->redirect(['action' => 'login']);
     }
 
+
+    protected function connectAPI(){
+        require_once('Api/V1/php/NodeRPC.php');
+        require_once('Api/V1/php/EcmaSmartRPC.php');
+        try {
+            $izNode = new \EcmaSmartRPC(Configure::read('Api.host'), Configure::read('Api.pass'));
+        } catch (\Exception $e) {
+            $result['msg'] = $e->getMessage();
+        }
+    }
     /**
      * Change selected language
      */
@@ -252,8 +254,6 @@ class AppController extends Controller
         $this->set('crmLeftMenu', $this->crmLeftMenu);
         $this->set('wikiHelpUrl', $this->wikiHelpUrl);
 
-        $this->set('activeMenu', $this->_hilightActiveMenuItem());
-
         parent::beforeRender($event);
 
         if (!empty($this->currentUser)) {
@@ -262,60 +262,6 @@ class AppController extends Controller
                 $this->redirect(['action' => 'login']);
 
                 return;
-            }
-        }
-        $this->_updateGa();
-    }
-
-
-
-    private function _hilightActiveMenuItem()
-    {
-        $allMenuItems = [
-            'index' => '',
-            'wallet_create'  => '',
-            'addresses'      => '',
-        ];
-
-        $action = $this->request->action;
-        switch ($action) {
-            case 'index':
-                $menuItem = 'index';
-                break;
-            case 'walletCreate':
-                $menuItem = 'wallet_create';
-                break;
-            case 'addresses':
-                $menuItem = 'addresses';
-                break;
-            default:
-                $menuItem = 'index';
-        }
-        $allMenuItems[$menuItem] = 'active';
-
-        return $allMenuItems;
-    }
-
-    private function _updateGa($userId = '')
-    {
-        if (empty($userId)) {
-            $userId = CurrentUser::get('id');
-        }
-        if (!empty($userId)) {
-            @$cookieGa = $_COOKIE['_ga'];
-            if (!empty($cookieGa)) {
-                $cookieGa = str_replace('GA1.2.', '', $cookieGa);
-                $cid = KeyValue::read($userId . '_cid');
-                if ($cid !== $cookieGa) {
-                    KeyValue::write($userId . '_cid', $cookieGa);
-                }
-            }
-            @$cookieUid = $_COOKIE['__cfduid'];
-            if (!empty($cookieUid)) {
-                $cfduid = KeyValue::read($userId . '_cfduid');
-                if ($cfduid !== $cookieUid) {
-                    KeyValue::write($userId . '_cfduid', $cookieUid);
-                }
             }
         }
     }
@@ -371,10 +317,6 @@ class AppController extends Controller
 
         $this->checkCsrf();
 
-        /*if (!$this->checkRefer()) {
-            return;
-        }*/
-
         $this->viewBuilder()->layout('ajax')->templatePath('App');
 
         $accessToken = $this->request->query('accessToken') ? $this->request->query('accessToken') : false;
@@ -421,9 +363,6 @@ class AppController extends Controller
 
                 if ($this->IndianAuth->isAuthDataCorrect($this->request->data['email'], $this->request->data['password'])) {
                     $userSettings = UsersSettingsTable::instance()->getAll($user->id);
-                    if (empty($userSettings)) {
-                        $this->_createUser2faData($user->id);
-                    }
                     if (!empty($userSettings) && $userSettings['2fa']['enable']) {
                         //записать в сессию уникальный хэш, показать страницу ввода 2f кода
                         $user->otp_hash = Crypt::ecrypt($user->id);
@@ -434,7 +373,6 @@ class AppController extends Controller
                         return $this->redirect(['controller' => 'required', 'action' => 'twoFactorCode']);
                     } else {
                         if ($this->IndianAuth->login($user->id)) {
-                            $this->_updateGa($user->id);
                             $this->_login_attempt($user->id, true);
                             $redirectUrl = URL_PREFIX . '/' . $this->request->url;
                             if (strstr($redirectUrl, 'login')) {
@@ -485,7 +423,6 @@ class AppController extends Controller
                             'SERVER'  => $_SERVER,
                         ]);*/
                     } else {
-                        $this->_updateGa($user->id);
                         $this->_login_attempt($user->id, false);
                     }
 
@@ -554,7 +491,6 @@ class AppController extends Controller
 
                 $this->Flash->success(__('Account verified. Use you login data for sign in'));
 
-                $this->_updateGa($userEntity->id);
                 CPA::confirm($userEntity->clickid, $userEntity->id, $userEntity->ref_user);
 
                 return $this->redirect(['action' => 'login']);
@@ -624,9 +560,6 @@ class AppController extends Controller
             if (!UsersTable::instance()->save($user)) {
                 throw new InternalErrorException(__('Saving error' . print_r($user, true)));
             }
-
-            $this->_createUser2faData($user->id);
-
 
             $this->request->session()->write('gtmOkRegister', true);
             CPA::register($this->clickId, $user->id);
@@ -776,27 +709,6 @@ class AppController extends Controller
         return true;
     }
 
-    private function _createUser2faData($userId)
-    {
-        $data = [
-            [
-                'user_id' => $userId,
-                'block'   => '2fa',
-                'name'    => 'enable',
-                'value'   => null,
-            ],
-            [
-                'user_id' => $userId,
-                'block'   => '2fa',
-                'name'    => 'code',
-                'value'   => null,
-            ],
-        ];
-        $usersSettingsModel = UsersSettingsTable::instance();
-        $entities = $usersSettingsModel->newEntities($data);
-        $result = $usersSettingsModel->saveMany($entities);
-    }
-
     /**
      * Save login attempts history
      *
@@ -832,10 +744,4 @@ class AppController extends Controller
 
         CPA::login($userEntity->clickid, $userEntity->id);
     }
-
-    public function test()
-    {
-        //Test::createDeposit(1, 'ETH', 123456, ['deposit' => false]);
-    }
-
 }

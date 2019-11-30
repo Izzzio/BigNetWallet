@@ -151,7 +151,7 @@ $(function () {
                     try {
                         wallet.address = iz3BitcoreCrypto.private2address(key);
                         wallet.main.keysPair.private = key;
-                        $.getJSON('login', {addr: wallet.address})
+                        $.getJSON('/api/v1/wallet/login', {addr: wallet.address})
                             .done(function (resp) {
                                 if (resp.success) {
                                     $('section.sidebar', $('body')).html(resp.data.menu);
@@ -319,7 +319,7 @@ $(function () {
                     let contractAddress = parseInt($('#contract_address', $('#tnsn_online')).val() || 0);
 
                     walletIZ3.HTTPRequest.init({
-                        url: '/contract/getInfo/' + contractAddress,
+                        url: '/api/v1/contract/getInfo/' + contractAddress,
                         method: 'GET',
                         data: {'addr': ($('#payer').html() || '').trim()}
                     });
@@ -349,7 +349,7 @@ $(function () {
                     $('.overlay', this.tnsnOnlineForm).show();
 
                     walletIZ3.HTTPRequest.init({
-                        url: '/transaction/online',
+                        url: '/api/v1/transaction/online',
                         method: 'POST',
                         data: {'block': block, 'contractAddr': contractAddress}
                     });
@@ -580,7 +580,7 @@ $(function () {
                     if(id.length){
                         $('.overlay', $('#contract_interact')).show();
                         walletIZ3.HTTPRequest.init({
-                            url: '/contract/getMethods/'+id,
+                            url: '/api/v1/contract/getMethods/'+id,
                             method: 'GET',
                         });
                         walletIZ3.HTTPRequest.send('resGetContractInfo');
@@ -657,7 +657,7 @@ $(function () {
                     }
 
                     walletIZ3.HTTPRequest.init({
-                        url: '/transaction/contractInteract',
+                        url: '/api/v1/transaction/contractInteract',
                         method: 'GET',
                         data: data
                     });
@@ -707,7 +707,7 @@ $(function () {
                     $('.overlay', $('#contract_deploy')).show();
 
                     walletIZ3.HTTPRequest.init({
-                        url: '/transaction/calcDeployContractResource/'+String(($('#contract_rent', $('#contract_deploy')).val() || 0)),
+                        url: '/api/v1/transaction/calcDeployContractResource/'+String(($('#contract_rent', $('#contract_deploy')).val() || 0)),
                         method: 'GET'
                     });
                     walletIZ3.HTTPRequest.send('resCalcDeployContractResource');
@@ -777,7 +777,7 @@ $(function () {
                             content.find('#message').hide();
                             try {
                                 $.post(
-                                    '/transaction/deployContract',
+                                    '/api/v1/transaction/deployContract',
                                     {
                                     'block': block,
                                     'rent': resourceRent

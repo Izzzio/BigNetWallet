@@ -200,7 +200,7 @@
             <ul class="sidebar-menu" data-widget="tree">
                 <li class="header"></li>
 
-                <li class="<?= $activeMenu['wallet_create'] ?>">
+                <li>
                     <a href="<?= URL_PREFIX ?>/wallet/create">
                         <i class="fas fa-wallet"></i>
                         &nbsp;
@@ -208,7 +208,7 @@
                     </a>
                 </li>
 
-                <li class="<?= $activeMenu['addresses'] ?>">
+                <li>
                     <a href="<?= URL_PREFIX ?>/wallet/login">
                         <i class="fas fa-money-check-alt"></i>
                         &nbsp;

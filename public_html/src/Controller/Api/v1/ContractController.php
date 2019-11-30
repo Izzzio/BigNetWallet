@@ -1,13 +1,11 @@
 <?php
 
-namespace App\Controller;
+namespace App\Controller\Api\v1;
 
 use Cake\Event\Event;
-use Cake\Filesystem\Folder;
-
 use Cake\Core\Configure;
 
-class ContractController extends AppController
+class ContractController extends ApiController
 {
     /**
      * beforeFilter callback.
@@ -17,10 +15,6 @@ class ContractController extends AppController
      */
     public function beforeFilter(Event $event)
     {
-        $langs = (new Folder(ROOT . '/src/Locale'))->read()[0];
-        $this->set('langs', $langs);
-        parent::beforeFilter($event);
-
         $this->viewBuilder()->layout('main');
         $this->IndianAuth->allow(['getInfo', 'getMethods'], $this->IndianAuth::PERMISSION_ALL);
     }
@@ -96,12 +90,8 @@ class ContractController extends AppController
         }
 
         if ($contractAddress && $publicAddress) {
-            require_once('Api/V1/php/NodeRPC.php');
-            require_once('Api/V1/php/EcmaSmartRPC.php');
-
             try {
-                $izNode = new \EcmaSmartRPC(Configure::read('Api.host'), Configure::read('Api.pass'));
-                $contractInfo = $izNode->ecmaGetContractProperty($contractAddress, 'contract');
+                $contractInfo = $this->_iz3Node->ecmaGetContractProperty($contractAddress, 'contract');
                 if (isset($contractInfo['error']) && true == $contractInfo['error']) {
                     throw new \Exception('Contract on address not exist or wrong');
                 } else {
@@ -113,7 +103,7 @@ class ContractController extends AppController
                         $tokenName[] = $contractInfo['result']['name'];
                     }
 
-                    $balance = $izNode->ecmaCallMethod($contractAddress, 'balanceOf', [$publicAddress]);
+                    $balance = $this->_iz3Node->ecmaCallMethod($contractAddress, 'balanceOf', [$publicAddress]);
                     if (isset($balance['error']) && true == $balance['error']) {
                         throw new \Exception($balance['message']);
                     } else {

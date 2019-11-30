@@ -1,19 +1,11 @@
 <?php
 
-namespace App\Controller;
-
-use App\Lib\Emails;
-use App\Lib\Sandbox;
-use App\Lib\KYC;
-use App\Lib\Misc;
+namespace App\Controller\Api\v1;
 
 use Cake\Event\Event;
-use Cake\Filesystem\Folder;
-
 use Cake\Core\Configure;
-use Cake\Log\Log;
 
-class TransactionController extends AppController
+class TransactionController extends ApiController
 {
     /**
      * beforeFilter callback.
@@ -23,8 +15,6 @@ class TransactionController extends AppController
      */
     public function beforeFilter(Event $event)
     {
-        $langs = (new Folder(ROOT . '/src/Locale'))->read()[0];
-        $this->set('langs', $langs);
         parent::beforeFilter($event);
 
         //$this->viewBuilder()->layout('main');
@@ -56,11 +46,8 @@ class TransactionController extends AppController
                 $block['address'] = substr($block['address'], 0, 70);
             }
 
-            require_once('Api/V1/php/NodeRPC.php');
-            require_once('Api/V1/php/EcmaSmartRPC.php');
             try {
-                $izNode = new \EcmaSmartRPC(Configure::read('Api.host'), Configure::read('Api.pass'));
-                $wallet = $izNode->ecmaDeployMethodSignedBLock($contractAddress, $block);
+                $wallet = $this->_iz3Node->ecmaDeployMethodSignedBLock($contractAddress, $block);
                 if (isset($wallet['error']) && true == $wallet['error']) {
                     throw new \Exception($wallet['message']);
                 } else {
@@ -124,11 +111,8 @@ class TransactionController extends AppController
                 return $this->sendJsonResponse($result);
             }
 
-            require_once('Api/V1/php/NodeRPC.php');
-            require_once('Api/V1/php/EcmaSmartRPC.php');
             try {
-                $izNode = new \EcmaSmartRPC(Configure::read('Api.host'), Configure::read('Api.pass'));
-                $response = $izNode->ecmaCallMethod($numberBlockWithSelectedContract, $methodName, $queryParams);
+                $response = $this->_iz3Node->ecmaCallMethod($numberBlockWithSelectedContract, $methodName, $queryParams);
 
                 if (isset($response['error']) && true == $response['error']) {
                     throw new \Exception($response['message']);
@@ -187,11 +171,8 @@ class TransactionController extends AppController
         if ($this->request->is('get') && $this->request->is('ajax')) {
             $payment = intval($payment);
 
-            require_once('Api/V1/php/NodeRPC.php');
-            require_once('Api/V1/php/EcmaSmartRPC.php');
             try {
-                $izNode = new \EcmaSmartRPC(Configure::read('Api.host'), Configure::read('Api.pass'));
-                $resources = $izNode->ecmaCallMethod('1','getCalculatedResources', [$payment]);
+                $resources = $this->_iz3Node->ecmaCallMethod('1','getCalculatedResources', [$payment]);
 
                 if (isset($resources['error']) && true == $resources['error']) {
                     throw new \Exception($resources['message']);
@@ -230,7 +211,7 @@ class TransactionController extends AppController
             if(isset($block['pubkey'])){
                 $blockChecked['pubkey'] = true;
             }
-            if(isset($block['ecmaCode']) && !empty($block['ecmaCode'] && mb_strlen($block['ecmaCode']) > 100 )){
+            if(isset($block['ecmaCode']) && !empty($block['ecmaCode'] && mb_strlen($block['ecmaCode']) > 100)){
                 $blockChecked['ecmaCode'] = true;
             }
             if(isset($block['state']) && is_array($block['state']) && count($block['state']) > 0){
@@ -241,11 +222,8 @@ class TransactionController extends AppController
                 return $this->sendJsonResponse($result);
             }
 
-            require_once('Api/V1/php/NodeRPC.php');
-            require_once('Api/V1/php/EcmaSmartRPC.php');
             try {
-                $izNode = new \EcmaSmartRPC(Configure::read('Api.host'), Configure::read('Api.pass'));
-                $deployContract = $izNode->ecmaDeployContractSignedBlock($block, $rent);
+                $deployContract = $this->_iz3Node->ecmaDeployContractSignedBlock($block, $rent);
                 if (isset($deployContract['error']) && true == $deployContract['error']) {
                     throw new \Exception($deployContract['message']);
                 } else {
