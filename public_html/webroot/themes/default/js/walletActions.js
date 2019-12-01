@@ -141,6 +141,8 @@ $(function () {
                     label: 'Select file',
                     cssClass: 'btn btn-info',
                     action: function (dialogRef) {
+                        let content = dialogRef.getModalContent();
+                        content.find('#message').hide();
                         $('#key-file').click();
                         dialogRef
                             .setClosable(false);
@@ -259,36 +261,42 @@ $(function () {
             },
 
             onshown: function (dialogRef) {
-                let btn = dialogRef.getModalContent().find('#file-select') || false;
+                let content = dialogRef.getModalContent() || false;
+                let btn = content.find('#file-select') || false;
                 if (btn) {
                     $('#key-file').click();
                 }
-                $("#key-file").change(function(){
 
-                    let all_files = this.files;
-                    if(0 == all_files.length) {
-                        alert('Error : No file selected');
-                        return;
+                (function(){
+                    function onChange(event) {
+                        var reader = new FileReader();
+                        reader.onload = onReaderLoad;
+
+                        let file = event.target.files[0] || false;
+                        if(file){
+                            let allowedTypes = ['application/json'];
+                            if(allowedTypes.indexOf(file.type) === -1) {
+                                content.find('#message')
+                                    .html('Incorrect file type. Only JSON allowed')
+                                    .show();
+
+                                return;
+                            }
+                            reader.readAsText(file);
+                        }
                     }
 
-                    let file = all_files[0];
-                    var json_str = JSON.parse(file);
-
-                    console.log(json_str);
-
-
-                    /*
-                    // files types allowed
-                    // we are reading text file in this example
-                    var allowed_types = [ 'text/plain' ];
-                    if(allowed_types.indexOf(file.type) == -1) {
-                        alert('Error : Incorrect file type');
-                        return;
+                    function onReaderLoad(event){
+                        var obj = JSON.parse(event.target.result);
+                        alert_data(obj.address);
                     }
-                    */
 
-                    let reader = new FileReader();
-                });
+                    function alert_data(address){
+                        alert('Addr : ' + address);
+                    }
+
+                    document.getElementById('key-file').addEventListener('change', onChange);
+                }());
             },
         });
 
@@ -379,23 +387,72 @@ $(function () {
             },
         });
 
+        function login(){
+            try {
+                wallet.address = iz3BitcoreCrypto.private2address(key);
+                wallet.main.keysPair.private = key;
+                $.getJSON('/api/v1/wallet/login', {addr: wallet.address})
+                    .done(function (resp) {
+                        if (resp.success) {
+                            $('section.sidebar', $('body')).html(resp.data.menu);
+                            $('.content-wrapper', $('body')).html(resp.data.page);
+                            dialogRef.close();
+                            walletIZ3.setCurrentNetwork();
+                            walletIZ3.setEventListeners();
+
+                            //window.history.pushState({"html":resp.data,"pageTitle":'TITLE 1'},"", '/interface/send-online');
+                            //window.location.replace("/send/online");
+
+                        } else {
+                            content.find('#message')
+                                .html(resp.msg)
+                                .show();
+                        }
+                    })
+                    .fail(function (resp) {
+                        content.find('#message')
+                            .html(resp.msg)
+                            .show();
+                    })
+                    .always(function (resp) {
+                        dialogRef
+                            .enableButtons(true)
+                            .setClosable(true);
+                        $button.stopSpin();
+                    });
+            } catch (e) {
+                console.log(e);
+                content.find('#message')
+                    .html('Wrong private key. Re-check key ant try again.')
+                    .show();
+                dialogRef
+                    .enableButtons(true)
+                    .setClosable(true);
+                $button.stopSpin();
+            }
+        }
+
         function getLoginKeyDlgContent(showFields) {
             showFields = showFields || false;
             return '' +
                 '<div id="message" class="row alert alert-danger" role="alert" style="border-radius: 0px; display: none;">' +
                 '</div>' +
-                '<div class="container-fluid">' +
-                '<div class="row">' +
-                '<div class="col-md-12 col-xs-12 form-group">' +
                 (showFields
                     ?
-                    '<input type="text" id="key" placeholder="Enter Private Key" class="form-control input-lg" autocomplete="off">'
+                    (
+                        '<div class="container-fluid">' +
+                        '<div class="row">' +
+                        '<div class="col-md-12 col-xs-12 form-group">' +
+                        '<input type="text" id="key" placeholder="Enter Private Key" class="form-control input-lg" autocomplete="off">' +
+                        '</div>' +
+                        '</div>' +
+                        '</div>'
+                    )
                     :
-                    '<input type="file" id="key-file" style="display: none">'
-                ) +
-                '</div>' +
-                '</div>' +
-                '</div>';
+                    (
+                        '<input type="file" id="key-file" style="display: none">'
+                    )
+                );
         }
 
         var walletIZ3 = {
