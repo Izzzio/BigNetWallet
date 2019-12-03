@@ -15,7 +15,7 @@ $(function () {
 
         $('#save_file').on('click', function () {
             download(
-                JSON.stringify({'address': wallet.main.keysPair.public}),
+                JSON.stringify({'address': wallet.main.keysPair.public, 'keysPair' : {'public': wallet.main.keysPair.public, 'private': wallet.main.keysPair.private}}),
                 'UTC--' + ((new Date()).toISOString()) + '--' + wallet.main.keysPair.public,
                 'text/plain'
             );
@@ -267,36 +267,41 @@ $(function () {
                     $('#key-file').click();
                 }
 
-                (function(){
+                (function(cb){
                     function onChange(event) {
                         var reader = new FileReader();
                         reader.onload = onReaderLoad;
-
                         let file = event.target.files[0] || false;
                         if(file){
-                            let allowedTypes = ['application/json'];
-                            if(allowedTypes.indexOf(file.type) === -1) {
-                                content.find('#message')
-                                    .html('Incorrect file type. Only JSON allowed')
-                                    .show();
-
-                                return;
-                            }
                             reader.readAsText(file);
                         }
                     }
-
-                    function onReaderLoad(event){
-                        var obj = JSON.parse(event.target.result);
-                        alert_data(obj.address);
-                    }
-
-                    function alert_data(address){
-                        alert('Addr : ' + address);
+                    async function onReaderLoad(event){
+                        try {
+                            let obj = await JSON.parse(event.target.result);
+                            if(!obj.keysPair || !obj.keysPair.private){
+                                throw new Error(' wrong JSON');
+                            }
+                            wallet.main.keysPair.private = obj.keysPair.private;
+                            wallet.address = iz3BitcoreCrypto.private2address(wallet.main.keysPair.private);
+                            cb(true);
+                        } catch (e) {
+                            cb('Keystore file error: ' + e.message);
+                        }
                     }
 
                     document.getElementById('key-file').addEventListener('change', onChange);
-                }());
+                }(resultUpload));
+
+                function resultUpload(msg){
+                    if(true === msg){
+                        login();
+                    } else {
+                        content.find('#message')
+                            .html(msg)
+                            .show();
+                    }
+                }
             },
         });
 
@@ -389,8 +394,6 @@ $(function () {
 
         function login(){
             try {
-                wallet.address = iz3BitcoreCrypto.private2address(key);
-                wallet.main.keysPair.private = key;
                 $.getJSON('/api/v1/wallet/login', {addr: wallet.address})
                     .done(function (resp) {
                         if (resp.success) {
