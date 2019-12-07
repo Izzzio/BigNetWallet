@@ -297,64 +297,19 @@ $(function () {
                         try{
                             wallet.address = iz3BitcoreCrypto.private2address(key);
                             wallet.main.keysPair.private = key;
-
-
-                            /*
-                            let logged = await login(async function (res) {
-                                await setTimeout(await function (res) {
-                                    console.log('TO 3');
-                                }, 3000);
-                            });
-
-                            await setTimeout(await function (res) {
-                                console.log('TO 2.7');
-                            }, 2700);
-
-                            await setTimeout(await function (res) {
-                                console.log('TO 2.5');
-                            }, 2500);
-
-                            logged = await login(async function (res) {
-                                await setTimeout(await function (res) {
-                                    console.log('TO 2');
-                                }, 2000);
-                            });
-
-                            console.log('AFTER TO');
-
-                            if(true !== logged){
-                                throw new Error('from CB: '+logged);
-                            }
-                            */
-
-                            let logged = await login();
-
-
-                            console.log(logged);
-
-
-                            if(true !== logged){
-                                /*
-                                console.log("ERROR: "+result);
-                                content.find('#message')
-                                    .html('Wrong private key. Re-check key ant try again.'+result)
-                                    .show();
-                                dialogRef
-                                    .enableButtons(true)
-                                    .setClosable(true);
-                                $button.stopSpin();
-                                */
-
-                                //throw 'from CB: '+result;
-                                throw new Error(logged);
-                                //console.log('from CB: '+result);
+                            let loggedIn = await login();
+                            if(true !== loggedIn){
+                                throw new LoginException(loggedIn);
                             }
                             dialogRef.close();
 
                         } catch (e) {
-                            console.dir("ERROR: "+e.message);
+                            if (!(e instanceof LoginException)) {
+                                console.log('Key error: '+e.message);
+                                e.message = 'Wrong private key. Re-check key ant try again.';
+                            }
                             content.find('#message')
-                                .html('Wrong private key. Re-check key ant try again.'+e.message)
+                                .html(e.message)
                                 .show();
                             dialogRef
                                 .enableButtons(true)
@@ -403,38 +358,22 @@ $(function () {
                             result = true;
                         } else {
                             result = resp.msg;
-                            /*
-                            content.find('#message')
-                                .html(resp.msg)
-                                .show();
-                            */
                         }
-                        //cb(result);
-
-                        console.log('DONE: '+result);
-
-                        return result;
                     })
                     .fail(function (resp) {
-                        //result = resp.responseJSON.message;
-                        //return result;
-                        //throw new Error(resp.responseJSON.message);
-                        //throw (resp.responseJSON.message);
-                        /*
-                        content.find('#message')
-                            .html(resp.msg)
-                            .show();
-                        */
+                        result = resp.responseJSON.message;
                     })
                     .always(function (resp) {
                     });
             } catch (e) {
                 result = e.responseJSON.message || e.message;
-                //result = e.message;
-
-                //cb(result);
-                return result;
             }
+            return result;
+        }
+
+        function LoginException(message) {
+            this.message = message;
+            this.name = "LoginException";
         }
 
         function getLoginKeyDlgContent(showFields) {
