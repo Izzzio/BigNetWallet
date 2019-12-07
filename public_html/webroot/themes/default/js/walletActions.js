@@ -155,56 +155,6 @@ $(function () {
                     label: ' Access Wallet',
                     cssClass: 'btn',
                     action: function (dialogRef) {
-                        dialogRef
-                            .enableButtons(false)
-                            .setClosable(false);
-                        let content = dialogRef.getModalContent();
-                        let key = String(content.find('#key').val() || false);
-                        let $button = this;
-                        $button.spin();
-                        content.find('#message').hide();
-                        try {
-                            wallet.address = iz3BitcoreCrypto.private2address(key);
-                            wallet.main.keysPair.private = key;
-                            $.getJSON('/api/v1/wallet/login', {addr: wallet.address})
-                                .done(function (resp) {
-                                    if (resp.success) {
-                                        $('section.sidebar', $('body')).html(resp.data.menu);
-                                        $('.content-wrapper', $('body')).html(resp.data.page);
-                                        dialogRef.close();
-                                        walletIZ3.setCurrentNetwork();
-                                        walletIZ3.setEventListeners();
-
-                                        //window.history.pushState({"html":resp.data,"pageTitle":'TITLE 1'},"", '/interface/send-online');
-                                        //window.location.replace("/send/online");
-
-                                    } else {
-                                        content.find('#message')
-                                            .html(resp.msg)
-                                            .show();
-                                    }
-                                })
-                                .fail(function (resp) {
-                                    content.find('#message')
-                                        .html(resp.msg)
-                                        .show();
-                                })
-                                .always(function (resp) {
-                                    dialogRef
-                                        .enableButtons(true)
-                                        .setClosable(true);
-                                    $button.stopSpin();
-                                });
-                        } catch (e) {
-                            console.log(e);
-                            content.find('#message')
-                                .html('Wrong private key. Re-check key ant try again.')
-                                .show();
-                            dialogRef
-                                .enableButtons(true)
-                                .setClosable(true);
-                            $button.stopSpin();
-                        }
                     }
                 }
             ],
@@ -237,27 +187,41 @@ $(function () {
                         }
                     }
                     async function onReaderLoad(event){
+                        let result = {'msg': '', 'data': ''};
                         try {
                             let obj = await JSON.parse(event.target.result);
-                            if(!obj.keysPair || !obj.keysPair.private){
-                                throw new Error(' wrong JSON');
-                            }
-                            wallet.main.keysPair.private = obj.keysPair.private;
-                            wallet.address = iz3BitcoreCrypto.private2address(wallet.main.keysPair.private);
-                            cb(true);
+                            result.data = obj;
                         } catch (e) {
-                            cb('Keystore file error: ' + e.message);
+                            result.msg = 'Keystore file error: ' + e.message;
                         }
+                        cb(result);
                     }
                     document.getElementById('key-file').addEventListener('change', onChange);
-                }(resultUpload));
+                }(afterUpload));
 
-                function resultUpload(msg){
-                    if(true === msg){
-                        login(dialogRef);
-                    } else {
+                async function afterUpload(resultUpload) {
+                    try{
+                        if(resultUpload.msg.length > 0) {
+                            throw new LoginException(resultUpload.msg);
+                        }
+                        if(!resultUpload.data.keysPair || !resultUpload.data.keysPair.private){
+                            throw new LoginException('wrong JSON structure in file');
+                        }
+                        wallet.main.keysPair.private = resultUpload.data.keysPair.private;
+                        wallet.address = iz3BitcoreCrypto.private2address(wallet.main.keysPair.private);
+                        let loggedIn = await login();
+                        if(true !== loggedIn){
+                            throw new LoginException(loggedIn);
+                        }
+                        dialogRef.close();
+
+                    } catch (e) {
+                        if (!(e instanceof LoginException)) {
+                            console.log('Key error: '+e.message);
+                            e.message = 'Wrong private key. Re-check file ant try again.';
+                        }
                         content.find('#message')
-                            .html(msg)
+                            .html(e.message)
                             .show();
                         dialogRef
                             .getButton('file-select')
