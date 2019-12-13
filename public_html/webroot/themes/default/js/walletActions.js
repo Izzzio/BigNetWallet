@@ -593,6 +593,44 @@ $(function () {
                     }
                 });
 
+                $('#dapps form', body).validate({
+                    rules: {
+                        dapp_contract_name: {
+                            required: true
+                        }
+                    },
+                    messages: {
+                        dapp_contract_name: {
+                            required: 'This field is required'
+                        }
+                    },
+                    highlight: function (element) {
+                        $(element).addClass('error');
+                    },
+                    onclick: function (element) {
+                        $(element).valid();
+                        let button = $('button', $('#dapps'));
+                        if ($('form', $('#dapps')).valid()) {
+                            button
+                                .prop('disabled', false)
+                                .removeClass('disabled');
+                        } else {
+                            button
+                                .prop('disabled', true)
+                                .addClass('disabled');
+                        }
+                    }
+                });
+
+                $('.load-app', $('#dapps')).on('click', function () {
+                    $('.overlay', $('#dapps')).show();
+                    walletIZ3.HTTPRequest.init({
+                        url: '/api/v1/dapps/getApp/'+String(($('#dapp_contract_name option:selected', $('#dapps')).data('addr') || 0)),
+                        method: 'GET'
+                    });
+                    walletIZ3.HTTPRequest.send('resGetApp');
+                });
+
 
                 $('#step1 form', $('#contract_interact')).validate({
                     rules: {
@@ -1277,7 +1315,23 @@ $(function () {
                         });
                     }
                     $('.overlay', $('#contract_deploy')).hide();
+                },
+
+                resGetApp: function (resp) {
+                    if (resp.success && false != resp.data) {
+                        $('#resources_calculated', $('#dapps')).html(resp.data);
+                    } else {
+                        BootstrapDialog.alert({
+                            title: 'Error',
+                            message: resp.msg.length ? resp.msg : 'Not found application in contract',
+                            type: BootstrapDialog.TYPE_DANGER,
+                            size: BootstrapDialog.SIZE_LARGE,
+                            closable: true
+                        });
+                    }
+                    $('.overlay', $('#dapps')).hide();
                 }
+
             },
             utility: {
                 extend: function (defaults, options) {
