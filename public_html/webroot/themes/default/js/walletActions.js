@@ -593,24 +593,24 @@ $(function () {
                     }
                 });
 
-                $('#dapps form', body).validate({
+                $('#dapps_select form', body).validate({
                     rules: {
-                        dapp_contract_name: {
+                        dapp_contract_addr: {
                             required: true
                         }
                     },
                     messages: {
-                        dapp_contract_name: {
+                        dapp_contract_addr: {
                             required: 'This field is required'
                         }
                     },
                     highlight: function (element) {
                         $(element).addClass('error');
                     },
-                    onclick: function (element) {
+                    onkeyup: function (element) {
                         $(element).valid();
-                        let button = $('button', $('#dapps'));
-                        if ($('form', $('#dapps')).valid()) {
+                        let button = $('button', $('#dapps_select'));
+                        if ($('form', $('#dapps_select')).valid()) {
                             button
                                 .prop('disabled', false)
                                 .removeClass('disabled');
@@ -622,10 +622,10 @@ $(function () {
                     }
                 });
 
-                $('.load-app', $('#dapps')).on('click', function () {
-                    $('.overlay', $('#dapps')).show();
+                $('.load-app', $('#dapps_select')).on('click', function () {
+                    $('.overlay', $('#dapps_select')).show();
                     walletIZ3.HTTPRequest.init({
-                        url: '/api/v1/dapps/getApp/'+String(($('#dapp_contract_name option:selected', $('#dapps')).data('addr') || 0)),
+                        url: '/api/v1/dapps/getApp/'+String(($('#dapp_contract_addr', $('#dapps_select')).val() || 0)),
                         method: 'GET'
                     });
                     walletIZ3.HTTPRequest.send('resGetApp');
@@ -1319,7 +1319,17 @@ $(function () {
 
                 resGetApp: function (resp) {
                     if (resp.success && false != resp.data) {
+
                         $('#resources_calculated', $('#dapps')).html(resp.data);
+
+
+
+                        /*
+                    <iframe id="idFrame" name="dapp" sandbox="allow-scripts" srcdoc="
+                    */
+                        
+
+
                     } else {
                         BootstrapDialog.alert({
                             title: 'Error',

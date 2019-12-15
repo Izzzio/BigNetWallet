@@ -274,48 +274,53 @@
     </div>
 
     <div class="row box-wrapper" id="dapps" style="display: none;">
-        <div class="col-md-8">
-            <div class="box box-success">
-                <div class="box-header with-border">
-                    <h3 class="box-title"><strong>Decentralized Applications</strong></h3>
-                </div>
-                <div class="box-body">
-                    <form>
-                        <div class="row col-md-12">
-                            <div class="col-md-6">
-                                <div class="form-group form-group-lg">
-                                    <label for="dapp_contract_name">Contract name</label>
-                                    <select class="form-control" name="dapp_contract_name" id="dapp_contract_name">
-                                        <option value=""></option>
-                                        <?php
-                                                foreach($contractsPopular as $key => $contract){
-                                        ?>
-                                        <option value="<?= $contract['id']; ?>" data-addr="<?= $contract['address']; ?>"><?= $contract['name']; ?></option>
-                                        <?php
-                                                }
-                                            ?>
-
-                                    </select>
+        <div id="dapps_select">
+            <div class="col-md-8">
+                <div class="box box-success">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"><strong>Decentralized Applications</strong></h3>
+                    </div>
+                    <div class="box-body">
+                        <form>
+                            <div class="row col-md-12">
+                                <div class="col-md-6">
+                                    <div class="form-group form-group-lg">
+                                        <label for="dapp_contract_addr">Block with Web contract</label>
+                                        <input type="number" step="any" class="form-control without-arrow" name="dapp_contract_addr" id="dapp_contract_addr" placeholder="Enter Contract Block">
+                                    </div>
                                 </div>
                             </div>
-                        </div>
-                    </form>
-                </div>
-                <div class="box-footer text-center">
-                    <div class="row">
-                        <div class="col-lg-4 col-md-3 col-sm-3 hidden-xs">
-                        </div>
-                        <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                            <button type="button" class="btn btn-success btn-lg btn-block disabled load-app" disabled="disabled">
-                                Get app
-                            </button>
-                        </div>
-                        <div class="col-lg-4 col-md-3 col-sm-3 hidden-xs">
+                        </form>
+                    </div>
+                    <div class="box-footer text-center">
+                        <div class="row">
+                            <div class="col-lg-4 col-md-3 col-sm-3 hidden-xs">
+                            </div>
+                            <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
+                                <button type="button" class="btn btn-success btn-lg btn-block disabled load-app" disabled="disabled">
+                                    Get app
+                                </button>
+                            </div>
+                            <div class="col-lg-4 col-md-3 col-sm-3 hidden-xs">
+                            </div>
                         </div>
                     </div>
+                    <div class="overlay" style="display: none;">
+                        <i class="fas fa-spinner fa-pulse fa-3x"></i>
+                    </div>
                 </div>
-                <div class="overlay" style="display: none;">
-                    <i class="fas fa-spinner fa-pulse fa-3x"></i>
+            </div>
+        </div>
+        <div id="dapps_view">
+            <div class="col-md-12">
+                <div class="box box-success">
+                    <div class="box-body">
+                        <iframe>
+                        </iframe>
+                    </div>
+                    <div class="overlay" style="display: none;">
+                        <i class="fas fa-spinner fa-pulse fa-3x"></i>
+                    </div>
                 </div>
             </div>
         </div>
