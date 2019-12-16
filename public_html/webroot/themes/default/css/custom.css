@@ -162,3 +162,8 @@ code {
     vertical-align: baseline;
     border-radius: 3px;
 }
+
+#dapps_content {
+    width: 100%;
+    height: 100%;
+}

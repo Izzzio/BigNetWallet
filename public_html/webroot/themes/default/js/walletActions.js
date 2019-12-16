@@ -1319,17 +1319,18 @@ $(function () {
 
                 resGetApp: function (resp) {
                     if (resp.success && false != resp.data) {
-
-                        $('#resources_calculated', $('#dapps')).html(resp.data);
-
-
-
-                        /*
-                    <iframe id="idFrame" name="dapp" sandbox="allow-scripts" srcdoc="
-                    */
-                        
-
-
+                        resp.data = JSON.parse(resp.data);
+                        $('#dapps_view', $('#dapps'))
+                            .find('.box-body')
+                            .html(
+                                $('<iframe>', {
+                                    srcdoc: resp.data.code,
+                                    sandbox: "allow-scripts",
+                                    frameborder: 0,
+                                    scrolling: 'no',
+                                    id: 'dapps_content'
+                                })
+                            );
                     } else {
                         BootstrapDialog.alert({
                             title: 'Error',

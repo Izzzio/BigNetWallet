@@ -313,10 +313,9 @@
         </div>
         <div id="dapps_view">
             <div class="col-md-12">
-                <div class="box box-success">
+                <div class="box">
                     <div class="box-body">
-                        <iframe>
-                        </iframe>
+                        Application will be shown here when you load it.
                     </div>
                     <div class="overlay" style="display: none;">
                         <i class="fas fa-spinner fa-pulse fa-3x"></i>
