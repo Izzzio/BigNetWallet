@@ -315,6 +315,7 @@ $(function () {
                             $('.content-wrapper', $('body')).html(resp.data.page);
                             walletIZ3.setCurrentNetwork();
                             walletIZ3.setEventListeners();
+                            $('#dapps_wrapper', $('#dapps')).html('Application will be shown here when you load it.');
 
                             //window.history.pushState({"html":resp.data,"pageTitle":'TITLE 1'},"", '/interface/send-online');
                             //window.location.replace("/send/online");
@@ -623,12 +624,14 @@ $(function () {
                 });
 
                 $('.load-app', $('#dapps_select')).on('click', function () {
+                    $('#dapps_wrapper', $('#dapps')).html('Application will be shown here when you load it.');
                     $('.overlay', $('#dapps_select')).show();
+                    let contractAddress = parseInt(($('#dapp_contract_addr', $('#dapps_select')).val() || 0));
                     walletIZ3.HTTPRequest.init({
-                        url: '/api/v1/dapps/getApp/'+String(($('#dapp_contract_addr', $('#dapps_select')).val() || 0)),
+                        url: '/api/v1/dapps/getApp/'+contractAddress,
                         method: 'GET'
                     });
-                    walletIZ3.HTTPRequest.send('resGetApp');
+                    walletIZ3.HTTPRequest.send('resGetApp', contractAddress);
                 });
 
 
@@ -1317,20 +1320,21 @@ $(function () {
                     $('.overlay', $('#contract_deploy')).hide();
                 },
 
-                resGetApp: function (resp) {
+                resGetApp: function (resp, contractAddress) {
                     if (resp.success && false != resp.data) {
                         resp.data = JSON.parse(resp.data);
-                        $('#dapps_view', $('#dapps'))
-                            .find('.box-body')
-                            .html(
-                                $('<iframe>', {
-                                    srcdoc: resp.data.code,
-                                    sandbox: "allow-scripts",
-                                    frameborder: 0,
-                                    scrolling: 'no',
-                                    id: 'dapps_content'
-                                })
-                            );
+                        let dapps = new dapps(contractAddress, resp.data);
+                        dapps.init();
+
+                    /*
+                        let a = $(resp.data.code).find('html');
+                        if(a.find('head').length) {
+                            a.find('head').append('<script type="text/javascript" src="../themes/default/js/dapps.js"></script>');
+                        } else {
+                            //a.prepend($('<head>').append('<script type="text/javascript" src="../themes/default/js/dapps.js"></script>'));
+                        }
+                    */
+
                     } else {
                         BootstrapDialog.alert({
                             title: 'Error',
