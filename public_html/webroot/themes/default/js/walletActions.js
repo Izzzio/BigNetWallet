@@ -1323,18 +1323,8 @@ $(function () {
                 resGetApp: function (resp, contractAddress) {
                     if (resp.success && false != resp.data) {
                         resp.data = JSON.parse(resp.data);
-                        let dapps = new dapps(contractAddress, resp.data);
-                        dapps.init();
-
-                    /*
-                        let a = $(resp.data.code).find('html');
-                        if(a.find('head').length) {
-                            a.find('head').append('<script type="text/javascript" src="../themes/default/js/dapps.js"></script>');
-                        } else {
-                            //a.prepend($('<head>').append('<script type="text/javascript" src="../themes/default/js/dapps.js"></script>'));
-                        }
-                    */
-
+                        let dappsHandler = new dapps(contractAddress, resp.data);
+                        dappsHandler.init();
                     } else {
                         BootstrapDialog.alert({
                             title: 'Error',
