@@ -1,0 +1,58 @@
+<html>
+    <head>
+        <script type="text/javascript">
+        </script>
+    </head>
+    <body>
+    <iframe srcdoc='<meta charset="utf-8">
+        <meta http-equiv="X-Frame-Options" value="sameorigin">
+        <script
+        src="https://code.jquery.com/jquery-3.4.1.min.js"
+        integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+        crossorigin="anonymous">
+        </script>
+        <script type="text/javascript">
+        $(function(){
+            var message = {
+                title: "Тестовое сообщение",
+                value: 5000
+            };
+
+            $("#start").on("click", function(){
+                window.parent.contentWindow.postMessage(message, document.location);
+            });
+
+        });
+        </script>
+        <button type="button" id="start">Start</button>'
+    sandbox="allow-scripts" referrerpolicy="same-origin" id="dapp_content" name="dapp_content">
+    </iframe>
+    </body>
+
+    <script type="text/javascript">
+        /*
+        window.frames.dapp_content.onload = function() {
+            // делаем с ним что угодно
+            window.frames.dapp_content.contentDocument.body.prepend("Привет, мир!");
+        };
+        */
+        window.addEventListener("message", function(event) {
+
+            console.log(event);
+
+            /*
+            if (event.origin != 'http://javascript.info') {
+                // что-то пришло с неизвестного домена. Давайте проигнорируем это
+                return;
+            }
+            */
+
+            alert( "received: " + event.data );
+
+            // can message back using event.source.postMessage(...)
+        });
+
+
+    </script>
+
+</html>
