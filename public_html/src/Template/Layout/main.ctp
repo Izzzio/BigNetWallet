@@ -254,7 +254,7 @@
 <script src="<?= URL_PREFIX . APP_THEME_BASE ?>/js/langs.js?_=<?= CORE_VERSION ?>"></script>
 <script src="<?= URL_PREFIX . APP_THEME_BASE ?>/js/main.js?_=<?= CORE_VERSION ?>"></script>
 <script src="<?= URL_PREFIX . APP_THEME_BASE ?>/js/walletActions.js?_=<?= CORE_VERSION ?>"></script>
-<script src="<?= URL_PREFIX . APP_THEME_BASE ?>/js/dapps.js?_=<?= CORE_VERSION ?>"></script>
+<script src="<?= URL_PREFIX . APP_THEME_BASE ?>/js/dappOuter.js?_=<?= CORE_VERSION ?>"></script>
 <script src="<?= URL_PREFIX . APP_THEME_BASE ?>/js/signable.js?_=<?= CORE_VERSION ?>"></script>
 <script src="<?= URL_PREFIX . APP_THEME_BASE ?>/js/ecmaContractCallBlock.js?_=<?= CORE_VERSION ?>"></script>
 <script src="<?= URL_PREFIX . APP_THEME_BASE ?>/js/ecmaContractDeployBlock.js?_=<?= CORE_VERSION ?>"></script>

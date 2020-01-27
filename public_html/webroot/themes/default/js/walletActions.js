@@ -1323,7 +1323,7 @@ $(function () {
                 resGetApp: function (resp, contractAddress) {
                     if (resp.success && false != resp.data) {
                         resp.data = JSON.parse(resp.data);
-                        let dappsHandler = new dapps(contractAddress, resp.data);
+                        let dappsHandler = new dappOuter(contractAddress, resp.data);
                         dappsHandler.init();
                     } else {
                         BootstrapDialog.alert({
