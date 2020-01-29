@@ -1,21 +1,16 @@
 (function () {
+    dappInnerInst = {};
     document.addEventListener("DOMContentLoaded", function () {
-        window.dappInner = {};
-        window.dappInner = new dappInner();
+        dappInnerInst = new dappInner();
+        test('methodTest', {'test': true, a: 3}, 'callbackFunctionTest');
     });
 
-
-
-
-    function test(methodName, params, f) {
+    function test(methodName, params, cb) {
         let data = {cmd: "test", methodName: methodName, params: params};
-        dappInner.sendData(data, f);
+        dappInnerInst.sendData(data, cb);
     }
-    test('methodTest', {'test': true, a: 3}, 'callbackFunction');
 
-
-
-
+    /*
     function call(methodName, params, f) {
         let data = {cmd: "DappStaticCall", methodName: methodName, params: params};
         dappInner.sendData(data, f);
@@ -30,12 +25,13 @@
         SendData(Data);
         return 1;
     }
-
+    */
 
     class dappInner {
-
         constructor() {
             this.init();
+            this.cbMap = {};
+            this.cbKey = 0;
         }
 
         init() {
@@ -53,18 +49,18 @@
             });
         }
 
-        static sendData(data, f) {
+        sendData(data, cb) {
             if (!window.parent)
                 return;
-            if (f) {
-                glKeyF++;
-                data.callId = glKeyF;
-                glMapF[glKeyF] = f;
+            if (cb) {
+                this.cbKey++;
+                data.callId = this.cbKey;
+                this.cbMap[this.cbKey] = cb;
             }
             window.parent.postMessage(data, "*");
         }
 
-        static listenerEvents(event) {
+        listenerEvents(event) {
             var data = event.data;
             if (!data || typeof data !== "object") {
                 return;

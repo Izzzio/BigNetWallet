@@ -40,6 +40,11 @@ class dappOuter {
 
         $('#dapps_wrapper', $('#dapps')).html(
             $('<iframe>', {
+
+
+                //onload: () => { alert('Iframe is loaded'); },
+
+
                 srcdoc: this.contract.code,
                 sandbox: 'allow-scripts',
                 referrerpolicy: 'same-origin',
@@ -49,7 +54,7 @@ class dappOuter {
         );
     }
 
-    static sendMessage(data) {
+    sendMessage(data) {
         let frame = window.frames.dapp_content;
         if (!frame) {
             setTimeout(function () {
@@ -60,7 +65,7 @@ class dappOuter {
         frame.postMessage(data, "*");
     }
 
-    static listenerEvents(event) {
+    listenerEvents(event) {
 
         console.log('------------------------------------');
         console.log(event);
@@ -87,7 +92,8 @@ class dappOuter {
             case 'test': {
                 data.resp = {'success': true, 'answer': 'tested'};
                 this.sendMessage(data);
-                return ;
+                break;
+                //return;
             }
             /*
             case "DappStaticCall":
