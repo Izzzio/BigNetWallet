@@ -54,18 +54,18 @@ class dappOuter {
         );
     }
 
-    sendMessage(data) {
-        let frame = window.frames.dapp_content;
-        if (!frame) {
-            setTimeout(function () {
-                frame.postMessage(data, "*");
-            }, 200);
-            return;
-        }
-        frame.postMessage(data, "*");
-    }
-
     listenerEvents(event) {
+
+        const sendMessage = (data) => {
+            let frame = window.frames.dapp_content;
+            if (!frame) {
+                setTimeout(function () {
+                    frame.postMessage(data, "*");
+                }, 200);
+                return;
+            }
+            frame.postMessage(data, "*");
+        };
 
         console.log('------------------------------------');
         console.log(event);
@@ -91,7 +91,8 @@ class dappOuter {
         switch (data.cmd) {
             case 'test': {
                 data.resp = {'success': true, 'answer': 'tested'};
-                this.sendMessage(data);
+
+                sendMessage(data);
                 break;
                 //return;
             }

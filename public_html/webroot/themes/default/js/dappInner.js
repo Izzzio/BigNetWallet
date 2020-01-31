@@ -1,14 +1,29 @@
+function callbackFunctionTest(resp) {
+    console.log('--- ANSWER ---');
+    console.log(resp);
+}
+
+window.addEventListener('load', function () {
+    deploy('methodTest', {'test': true, a: 3}, 'callbackFunctionTest');
+    /*
+    UpdateDappInfo();
+    setInterval(UpdateDappInfo, 1000);
+    InitTranslater();
+    */
+});
+
+
+
 (function () {
     dappInnerInst = {};
     document.addEventListener("DOMContentLoaded", function () {
         dappInnerInst = new dappInner();
-        test('methodTest', {'test': true, a: 3}, 'callbackFunctionTest');
-    });
 
-    function test(methodName, params, cb) {
-        let data = {cmd: "test", methodName: methodName, params: params};
-        dappInnerInst.sendData(data, cb);
-    }
+        deploy = (methodName, params, cb) => {
+            let data = {cmd: "test", methodName: methodName, params: params};
+            dappInner.sendData(data, cb);
+        }
+    });
 
     /*
     function call(methodName, params, f) {
@@ -26,12 +41,12 @@
         return 1;
     }
     */
+    let cbMap = {};
+    let cbKey = 0;
 
     class dappInner {
         constructor() {
             this.init();
-            this.cbMap = {};
-            this.cbKey = 0;
         }
 
         init() {
@@ -49,16 +64,16 @@
             });
         }
 
-        sendData(data, cb) {
+        static sendData = (data, cb) => {
             if (!window.parent)
                 return;
             if (cb) {
-                this.cbKey++;
-                data.callId = this.cbKey;
-                this.cbMap[this.cbKey] = cb;
+                cbKey++;
+                data.callId = cbKey;
+                cbMap[cbKey] = cb;
             }
             window.parent.postMessage(data, "*");
-        }
+        };
 
         listenerEvents(event) {
             var data = event.data;
@@ -68,11 +83,21 @@
             var callId = data.callId;
             var cmd = data.cmd;
             if (callId) {
-                var F = glMapF[callId];
-                if (F) {
+                let cb = cbMap[callId];
+
+
+                cbMap[callId](data.resp);
+
+
+                if (cb) {
                     delete data.callId;
                     delete data.cmd;
                     switch (cmd) {
+                        case "test":
+                            callbackFunctionTest(data.resp);
+                            cb(data.resp);
+                            break;
+                        /*
                         case "translate":
                             F(Data.Str, Data.Str2);
                             break;
@@ -100,12 +125,14 @@
                         case "ComputeSecret":
                             F(Data.Result);
                             break;
+                        */
                         default:
                             console.log("Error cmd: " + cmd);
                     }
-                    delete glMapF[CallID];
+                    delete cbMap[callId];
                 }
             } else {
+                /*
                 switch (cmd) {
                     case "History":
                         var eventEvent = new CustomEvent("History", {detail: Data});
@@ -118,6 +145,7 @@
                         var eventEvent = new CustomEvent("Event", {detail: Data});
                         window.dispatchEvent(eventEvent);
                 }
+                */
             }
         }
     }
