@@ -89,8 +89,14 @@ class dappOuter {
             CurSessionStorage = EmulateSessionStorage;
         */
         switch (data.cmd) {
-            case 'test': {
-                data.resp = {'success': true, 'answer': 'tested'};
+            case 'callMethod': {
+                walletIZ3.HTTPRequest.init({
+                    url: '/api/v1/contract/getInfo/' + contractAddress,
+                    method: 'GET',
+                    data: {'addr': ($('#payer').html() || '').trim()}
+                });
+                walletIZ3.HTTPRequest.send('resFindTokens');
+                data.resp = {'success': true, 'data': ''};
 
                 sendMessage(data);
                 break;

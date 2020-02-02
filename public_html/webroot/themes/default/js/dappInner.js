@@ -1,16 +1,16 @@
+/*
 function callbackFunctionTest(resp) {
-    console.log('--- ANSWER ---');
-    console.log(resp);
+    if(resp.success());
 }
 
 window.addEventListener('load', function () {
-    deploy('methodTest', {'test': true, a: 3}, 'callbackFunctionTest');
-    /*
-    UpdateDappInfo();
-    setInterval(UpdateDappInfo, 1000);
-    InitTranslater();
-    */
+    callMethod('print', {'str': 'YES'}, callbackFunctionTest);
+
+    //UpdateDappInfo();
+    //setInterval(UpdateDappInfo, 1000);
+    //InitTranslater();
 });
+*/
 
 
 
@@ -19,28 +19,17 @@ window.addEventListener('load', function () {
     document.addEventListener("DOMContentLoaded", function () {
         dappInnerInst = new dappInner();
 
-        deploy = (methodName, params, cb) => {
-            let data = {cmd: "test", methodName: methodName, params: params};
+        callMethod = (methodName, params, cb) => {
+            let data = {cmd: "callMethod", methodName: methodName, params: params};
+            dappInner.sendData(data, cb);
+        };
+
+        deployMethod = (methodName, params, cb) => {
+            let data = {cmd: "deployMethod", methodName: methodName, params: params};
             dappInner.sendData(data, cb);
         }
     });
 
-    /*
-    function call(methodName, params, f) {
-        let data = {cmd: "DappStaticCall", methodName: methodName, params: params};
-        dappInner.sendData(data, f);
-    }
-
-    function sendCall(Account, MethodName, Params, FromNum) {
-        if (!INFO.WalletCanSign) {
-            SetError("PLS, OPEN WALLET");
-            return 0;
-        }
-        var Data = {cmd: "DappSendCall", MethodName: MethodName, Params: Params, Account: Account, FromNum: FromNum};
-        SendData(Data);
-        return 1;
-    }
-    */
     let cbMap = {};
     let cbKey = 0;
 
@@ -84,17 +73,11 @@ window.addEventListener('load', function () {
             var cmd = data.cmd;
             if (callId) {
                 let cb = cbMap[callId];
-
-
-                cbMap[callId](data.resp);
-
-
                 if (cb) {
                     delete data.callId;
                     delete data.cmd;
                     switch (cmd) {
-                        case "test":
-                            callbackFunctionTest(data.resp);
+                        case "callMethod":
                             cb(data.resp);
                             break;
                         /*
