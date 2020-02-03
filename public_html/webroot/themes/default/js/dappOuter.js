@@ -55,7 +55,6 @@ class dappOuter {
     }
 
     listenerEvents(event) {
-
         const sendMessage = (data) => {
             let frame = window.frames.dapp_content;
             if (!frame) {
@@ -88,19 +87,20 @@ class dappOuter {
         if(EmulateSessionStorage)
             CurSessionStorage = EmulateSessionStorage;
         */
+
         switch (data.cmd) {
             case 'callMethod': {
-                walletIZ3.HTTPRequest.init({
-                    url: '/api/v1/contract/getInfo/' + contractAddress,
+                HTTPRequest.init({
+                    url: '/api/v1/dapps/callMethod/'                  +dappOuter.contract.addr,
                     method: 'GET',
-                    data: {'addr': ($('#payer').html() || '').trim()}
+                    data: {method: data.methodName, params: data.params},
+                    cbStandalone: true
                 });
-                walletIZ3.HTTPRequest.send('resFindTokens');
-                data.resp = {'success': true, 'data': ''};
-
-                sendMessage(data);
+                HTTPRequest.send(function(resp){
+                    data.resp = resp;
+                    sendMessage(data);
+                });
                 break;
-                //return;
             }
             /*
             case "DappStaticCall":

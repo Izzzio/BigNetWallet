@@ -1,19 +1,3 @@
-/*
-function callbackFunctionTest(resp) {
-    if(resp.success());
-}
-
-window.addEventListener('load', function () {
-    callMethod('print', {'str': 'YES'}, callbackFunctionTest);
-
-    //UpdateDappInfo();
-    //setInterval(UpdateDappInfo, 1000);
-    //InitTranslater();
-});
-*/
-
-
-
 (function () {
     dappInnerInst = {};
     document.addEventListener("DOMContentLoaded", function () {

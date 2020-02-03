@@ -1115,37 +1115,17 @@ $(function () {
                         }
                     })
                     */
-                        .always(function (resp) {
-                            if (callback) {
+
+                    .always(function (resp) {
+                        if (callback) {
+                            if(HTTPRequest.settings.cbStandalone){
+                                callback(resp, waitingInResponse);
+                            } else {
                                 walletIZ3.callbacks[callback](resp, waitingInResponse);
                             }
-                        });
-                },
-                collectData: function (wrapper_id) {
-                    var block = document.getElementById(wrapper_id) || false;
-                    if (block) {
-                        var element = '';
-                        var name = '';
-                        var value = '';
-                        var urlEncodedDataPairs = [];
-                        var elements = block.querySelectorAll("input, select, textarea");
-                        for (var i = 0; i < elements.length; ++i) {
-                            element = elements[i];
-                            if ('radio' === element.type) {
-                                name = element.name + '_' + element.value;
-                                value = 0;
-                                if (element.checked) {
-                                    value = 1;
-                                }
-                            } else {
-                                name = element.name;
-                                value = element.checked ? 1 : element.value;
-                            }
-                            urlEncodedDataPairs.push(encodeURIComponent(name) + '=' + encodeURIComponent(value));
                         }
-                        this.data = urlEncodedDataPairs.join('&').replace(/%20/g, '+');
-                    }
-                }
+                    });
+                },
                 /*
                 parseResponse: function (response) {
                     var result = JSON.parse(response);
@@ -1386,7 +1366,7 @@ $(function () {
                     max = max || 1000000;
                     return Math.floor(Math.random() * (max - min + 1)) + min;
                 }
-    },
+            },
             transaction: {
                 online: {
                     checkReady: function () {
@@ -1398,6 +1378,7 @@ $(function () {
                 offline: {}
             }
         };
+        window.HTTPRequest = walletIZ3.HTTPRequest;
 
         var showSendedOfflineTransaction = new BootstrapDialog({
             title: 'Signed Transaction',
