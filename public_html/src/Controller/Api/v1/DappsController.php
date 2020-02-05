@@ -18,7 +18,7 @@ class DappsController extends ApiController
         parent::beforeFilter($event);
 
         //$this->viewBuilder()->layout('main');
-        $this->IndianAuth->allow(['getApp'], $this->IndianAuth::PERMISSION_ALL);
+        $this->IndianAuth->allow(['getApp', 'callMethod', 'deployMethod'], $this->IndianAuth::PERMISSION_ALL);
     }
 
     /**

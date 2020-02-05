@@ -15,7 +15,10 @@ class dappOuter {
         let eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
         let eventer = window[eventMethod];
         let messageEvent = eventMethod === "attachEvent" ? "onmessage" : "message";
-        eventer(messageEvent, this.listenerEvents);
+        //eventer(messageEvent, this.listenerEvents(this.contract.addr));
+        eventer(messageEvent, () => {
+            this.listenerEvents(event, this.contract.addr);
+        });
 
         this.createFrame();
     }
@@ -40,13 +43,8 @@ class dappOuter {
 
         $('#dapps_wrapper', $('#dapps')).html(
             $('<iframe>', {
-
-
-                //onload: () => { alert('Iframe is loaded'); },
-
-
                 srcdoc: this.contract.code,
-                sandbox: 'allow-scripts',
+                sandbox: 'allow-scripts allow-modals',
                 referrerpolicy: 'same-origin',
                 id: 'dapp_content',
                 name: 'dapp_content'
@@ -54,7 +52,8 @@ class dappOuter {
         );
     }
 
-    listenerEvents(event) {
+    listenerEvents(event, contract) {
+        contract = parseInt(contract) || 0;
         const sendMessage = (data) => {
             let frame = window.frames.dapp_content;
             if (!frame) {
@@ -66,8 +65,12 @@ class dappOuter {
             frame.postMessage(data, "*");
         };
 
+
+
         console.log('------------------------------------');
         console.log(event);
+
+
 
         /*
         // if (event.origin !== 'http://the-trusted-iframe-origin.com') return;
@@ -91,7 +94,7 @@ class dappOuter {
         switch (data.cmd) {
             case 'callMethod': {
                 HTTPRequest.init({
-                    url: '/api/v1/dapps/callMethod/'                  +dappOuter.contract.addr,
+                    url: '/api/v1/dapps/callMethod/'+contract,
                     method: 'GET',
                     data: {method: data.methodName, params: data.params},
                     cbStandalone: true

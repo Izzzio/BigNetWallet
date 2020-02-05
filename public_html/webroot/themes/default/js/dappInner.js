@@ -9,8 +9,10 @@
         };
 
         deployMethod = (methodName, params, cb) => {
-            let data = {cmd: "deployMethod", methodName: methodName, params: params};
-            dappInner.sendData(data, cb);
+            if(confirm("Deploy will be performed.\nAre you sure?")){
+                let data = {cmd: "deployMethod", methodName: methodName, params: params};
+                dappInner.sendData(data, cb);
+            }
         }
     });
 
@@ -62,6 +64,9 @@
                     delete data.cmd;
                     switch (cmd) {
                         case "callMethod":
+                            cb(data.resp);
+                            break;
+                        case "deployMethod":
                             cb(data.resp);
                             break;
                         /*
