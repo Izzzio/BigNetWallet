@@ -66,7 +66,37 @@ class DappsController extends ApiController
             'msg' => '',
             'data' => [],
         ];
-        if ($this->request->is('get') && $this->request->is('ajax')) {
+        if ($this->request->is('post') && $this->request->is('ajax')) {
+            $contractAddr = intval($contractAddr);
+            $method = isset($this->request->data['method']) ? $this->request->data['method'] : false;
+            $params = (isset($this->request->data['params']) && is_array($this->request->data['params'])) ? $this->request->data['params'] : [];
+
+            try {
+                $res = $this->_iz3Node->ecmaCallMethod($contractAddr, $method, $params);
+                if (isset($res['error']) && true == $res['error']) {
+                    throw new \Exception($res['message']);
+                } else {
+                    if (isset($res['result'])) {
+                        $result['success'] = true;
+                        $result['data'] = $res['result'];
+                    }
+                }
+            } catch (\Exception $e) {
+                $result['msg'] = $e->getMessage();
+            }
+
+            return $this->sendJsonResponse($result);
+        }
+    }
+
+    public function deployMethod($contractAddr = 0)
+    {
+        $result = [
+            'success' => false,
+            'msg' => '',
+            'data' => [],
+        ];
+        if ($this->request->is('post') && $this->request->is('ajax')) {
             $contractAddr = intval($contractAddr);
             $method = isset($this->request->data['method']) ? $this->request->data['method'] : false;
             $params = (isset($this->request->data['params']) && is_array($this->request->data['params'])) ? $this->request->data['params'] : [];

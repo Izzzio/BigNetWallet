@@ -11,14 +11,15 @@ class dappOuter {
         };
     }
 
-    init() {
-        let eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
-        let eventer = window[eventMethod];
-        let messageEvent = eventMethod === "attachEvent" ? "onmessage" : "message";
-        //eventer(messageEvent, this.listenerEvents(this.contract.addr));
-        eventer(messageEvent, () => {
-            this.listenerEvents(event, this.contract.addr);
-        });
+    init(eventListenerAlreadyAdded) {
+        if(!eventListenerAlreadyAdded){
+            let eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
+            let eventer = window[eventMethod];
+            let messageEvent = eventMethod === "attachEvent" ? "onmessage" : "message";
+            eventer(messageEvent, () => {
+                this.listenerEvents(event);
+            });
+        }
 
         this.createFrame();
     }
@@ -52,8 +53,9 @@ class dappOuter {
         );
     }
 
-    listenerEvents(event, contract) {
-        contract = parseInt(contract) || 0;
+    listenerEvents(event) {
+        let contract = parseInt(sessionStorage.getItem('contractAddress')) || 0;
+
         const sendMessage = (data) => {
             let frame = window.frames.dapp_content;
             if (!frame) {
@@ -91,11 +93,28 @@ class dappOuter {
             CurSessionStorage = EmulateSessionStorage;
         */
 
+
+        console.log(data);
+
+
         switch (data.cmd) {
             case 'callMethod': {
                 HTTPRequest.init({
                     url: '/api/v1/dapps/callMethod/'+contract,
-                    method: 'GET',
+                    method: 'POST',
+                    data: {method: data.methodName, params: data.params},
+                    cbStandalone: true
+                });
+                HTTPRequest.send(function(resp){
+                    data.resp = resp;
+                    sendMessage(data);
+                });
+                break;
+            }
+            case 'deployMethod': {
+                HTTPRequest.init({
+                    url: '/api/v1/dapps/deployMethod/'+contract,
+                    method: 'POST',
                     data: {method: data.methodName, params: data.params},
                     cbStandalone: true
                 });

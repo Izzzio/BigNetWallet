@@ -368,6 +368,7 @@ $(function () {
             tnsnOnlineForm: $('#tnsn_online'),
             tnsnOfflineForm: $('#tnsn_offline'),
             contractDeployForm: $('#contract_deploy'),
+            DappContract: 0,
             network: {
                 name: '',
                 ticker: '',
@@ -1303,8 +1304,12 @@ $(function () {
                 resGetApp: function (resp, contractAddress) {
                     if (resp.success && false != resp.data) {
                         resp.data = JSON.parse(resp.data);
+
                         let dappsHandler = new dappOuter(contractAddress, resp.data);
-                        dappsHandler.init();
+                        dappsHandler.init(this.DappContract);
+                        sessionStorage.setItem('contractAddress', contractAddress);
+                        this.DappContract = contractAddress;
+
                     } else {
                         BootstrapDialog.alert({
                             title: 'Error',

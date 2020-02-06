@@ -13,7 +13,7 @@
                 let data = {cmd: "deployMethod", methodName: methodName, params: params};
                 dappInner.sendData(data, cb);
             }
-        }
+        };
     });
 
     let cbMap = {};
@@ -25,18 +25,18 @@
         }
 
         init() {
-            let eventMethod = window.addEventListener ? "addEventListener" : "attachEvent";
-            let eventer = window[eventMethod];
+            let eventMethod = document.addEventListener ? "addEventListener" : "attachEvent";
+            let eventer = document[eventMethod];
             let messageEvent = eventMethod === "attachEvent" ? "onmessage" : "message";
-            eventer(messageEvent, this.listenerEvents);
+            eventer(messageEvent, this.listenerEvents(event));
 
+            /*
             window.addEventListener('load', function () {
-                /*
                 UpdateDappInfo();
                 setInterval(UpdateDappInfo, 1000);
                 InitTranslater();
-                */
             });
+            */
         }
 
         static sendData = (data, cb) => {
@@ -69,35 +69,6 @@
                         case "deployMethod":
                             cb(data.resp);
                             break;
-                        /*
-                        case "translate":
-                            F(Data.Str, Data.Str2);
-                            break;
-                        case "getstorage":
-                        case "getcommon":
-                            F(Data.Key, Data.Value);
-                            break;
-                        case "DappStaticCall":
-                            F(Data.Err, Data.RetValue);
-                            break;
-                        case "DappInfo":
-                            F(Data.Err, Data);
-                            break;
-                        case "DappWalletList":
-                        case "DappAccountList":
-                        case "DappSmartList":
-                        case "DappBlockList":
-                        case "DappTransactionList":
-                            F(Data.Err, Data.arr);
-                            break;
-                        case "DappBlockFile":
-                        case "DappSmartHTMLFile":
-                            F(Data.Err, Data.Body);
-                            break;
-                        case "ComputeSecret":
-                            F(Data.Result);
-                            break;
-                        */
                         default:
                             console.log("Error cmd: " + cmd);
                     }
