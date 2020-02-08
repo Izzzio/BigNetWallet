@@ -67,12 +67,8 @@ class dappOuter {
             frame.postMessage(data, "*");
         };
 
-
-
-        console.log('------------------------------------');
-        console.log(event);
-
-
+        //console.log('------------------------------------');
+        //console.log(event);
 
         /*
         // if (event.origin !== 'http://the-trusted-iframe-origin.com') return;
@@ -84,18 +80,8 @@ class dappOuter {
         if (!data || typeof data !== "object") {
             return;
         }
-        /*
-        var CurStorage = Storage;
-        var CurSessionStorage = sessionStorage;
-        if(EmulateStorage)
-            CurStorage = EmulateStorage;
-        if(EmulateSessionStorage)
-            CurSessionStorage = EmulateSessionStorage;
-        */
 
-
-        console.log(data);
-
+        //console.log(data);
 
         switch (data.cmd) {
             case 'callMethod': {

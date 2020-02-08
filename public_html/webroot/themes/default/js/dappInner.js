@@ -1,7 +1,6 @@
 (function () {
-    dappInnerInst = {};
     document.addEventListener("DOMContentLoaded", function () {
-        dappInnerInst = new dappInner();
+        let dappInnerInst = new dappInner();
 
         callMethod = (methodName, params, cb) => {
             let data = {cmd: "callMethod", methodName: methodName, params: params};
@@ -28,7 +27,7 @@
             let eventMethod = document.addEventListener ? "addEventListener" : "attachEvent";
             let eventer = document[eventMethod];
             let messageEvent = eventMethod === "attachEvent" ? "onmessage" : "message";
-            eventer(messageEvent, this.listenerEvents(event));
+            eventer(messageEvent, this.listenerEvents);
 
             /*
             window.addEventListener('load', function () {

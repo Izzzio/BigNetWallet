@@ -1126,32 +1126,7 @@ $(function () {
                             }
                         }
                     });
-                },
-                /*
-                parseResponse: function (response) {
-                    var result = JSON.parse(response);
-                    if (!result['success']) {
-                        var block = document.getElementById(PAW.form.fid).querySelector('#paw_message') || false;
-                        if (block) {
-                            var message = '';
-                            for (var i = 0; i < result['messages'].length; ++i) {
-                                message += '<div class="paw-text-row">' + result['messages'][i] + '</div>';
-                            }
-                            block.innerHTML = message;
-                        } else {
-                            alert(result['messages'].join("\r"));
-                        }
-                        return false;
-                    }
-                    if (result['data']) {
-                        var paw_div = document.createElement('div');
-                        paw_div.innerHTML = result['data'];
-                        var el = document.getElementById(PAW.form.fid).parentNode;
-                        el.appendChild(paw_div);
-                        el.querySelector('#paw_mnt_form').submit();
-                    }
                 }
-                */
             },
             callbacks: {
                 resFindTokens: function(resp) {
