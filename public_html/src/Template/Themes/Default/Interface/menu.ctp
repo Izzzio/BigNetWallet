@@ -59,6 +59,7 @@
                     </li>
                 </ul>
             </li>
+            <!--
             <li class="treeview">
                 <a href="#">
                     <i class="far fa-comment-alt"></i>
@@ -85,4 +86,5 @@
                     </li>
                 </ul>
             </li>
+            -->
         </ul>

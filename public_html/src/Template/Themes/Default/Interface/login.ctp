@@ -12,6 +12,7 @@
                 </div>
                 <div class="info-box-content" style="margin-top: 6px;">
                         <span class="info-box-text">
+                            <!--
                             <span data-container="body" data-toggle="popover" data-placement="top"
                                   data-content="Address in QRcode" data-trigger="hover">
                                 <i class="fas fa-lg fa-qrcode"></i>
@@ -21,7 +22,7 @@
                                   data-content="Print" data-trigger="hover">
                                 <i class="fas fa-lg fa-print"></i>
                             </span>
-                            &nbsp;
+                            -->
                             <span data-container="body" data-toggle="popover" data-placement="top"
                                   data-content="Copy" data-trigger="hover">
                                 <i class="far fa-lg fa-copy autocopy" data-iz3-need-copy="payer"></i>
@@ -40,13 +41,14 @@
                 </div>
                 <div class="info-box-content" style="margin-top: 6px;">
                         <span class="info-box-text">
+                            <!--
                             <span data-container="body" data-toggle="popover" data-placement="top"
                                   data-content="Check Balance" data-trigger="hover">
                                 <i class="fab fa-lg fa-creative-commons-nd"></i>
                             </span>
-                            &nbsp;
+                            -->
                             <span data-container="body" data-toggle="popover" data-placement="top"
-                                  data-content="Refresh Balance" data-trigger="hover">
+                                  data-content="Refresh Balance" data-trigger="hover" id="balance_refresh">
                                 <i class="fas fa-lg fa-sync-alt"></i>
                             </span>
                         </span>

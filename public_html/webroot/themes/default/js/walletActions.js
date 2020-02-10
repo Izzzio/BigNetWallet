@@ -1082,6 +1082,22 @@ $(function () {
                     let target = $(this).data('iz3-need-copy') || false;
                     walletIZ3.utility.copy(target);
                 });
+
+                $('#balance_refresh').on('click', function () {
+                    let icon = $(this).find('i');
+                    if(icon.hasClass('fa-spin')){
+                        return false;
+                    }
+
+                    icon.addClass('fa-spin');
+                    let contractAddress = ($('#payer').html() || '').trim();
+                    walletIZ3.HTTPRequest.init({
+                        url: '/api/v1/wallet/balanceOf/'+contractAddress,
+                        method: 'GET'
+                    });
+                    walletIZ3.HTTPRequest.send('resBalanceRefresh');
+                });
+
             },
             HTTPRequest: {
                 defaults: {
@@ -1295,8 +1311,23 @@ $(function () {
                         });
                     }
                     $('.overlay', $('#dapps')).hide();
-                }
+                },
 
+                resBalanceRefresh: function (resp) {
+                    if (resp.success) {
+
+                        alert(resp.data.balance);
+
+                    } else {
+                        BootstrapDialog.alert({
+                            title: 'Error',
+                            message: resp.msg,
+                            type: BootstrapDialog.TYPE_DANGER,
+                            size: BootstrapDialog.SIZE_LARGE,
+                            closable: true
+                        });
+                    }
+                }
             },
             utility: {
                 extend: function (defaults, options) {
