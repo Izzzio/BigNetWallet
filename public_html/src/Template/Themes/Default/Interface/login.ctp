@@ -37,7 +37,7 @@
                 <div class="info-box-content" style="min-height: 95px;">
                     <span class="info-box-number">Balance</span>
                     <span class="info-box-text"
-                          style="text-transform: none;"><?= $balance; ?> <?= $network['ticker']; ?></span>
+                          style="text-transform: none;"><span id="balance"><?= $balance; ?></span> <?= $network['ticker']; ?></span>
                 </div>
                 <div class="info-box-content" style="margin-top: 6px;">
                         <span class="info-box-text">

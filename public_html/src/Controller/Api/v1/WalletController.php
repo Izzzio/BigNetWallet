@@ -111,9 +111,11 @@ class WalletController extends ApiController
                 $address = substr($address, 0, 70);
 
                 $contract = Configure::read('Networks')[0]['masterContract'];
+                /*
                 if (isset($this->request->query['contract'])) {
                     $contract = intval($this->request->query['contract']);
                 }
+                */
 
                 try {
                     $wallet = $this->_iz3Node->ecmaCallMethod($contract, 'balanceOf', [$address]);

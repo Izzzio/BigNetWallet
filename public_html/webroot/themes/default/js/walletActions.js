@@ -1088,7 +1088,6 @@ $(function () {
                     if(icon.hasClass('fa-spin')){
                         return false;
                     }
-
                     icon.addClass('fa-spin');
                     let contractAddress = ($('#payer').html() || '').trim();
                     walletIZ3.HTTPRequest.init({
@@ -1315,9 +1314,8 @@ $(function () {
 
                 resBalanceRefresh: function (resp) {
                     if (resp.success) {
-
-                        alert(resp.data.balance);
-
+                        $('#balance').html(resp.data.balance);
+                        $('#balance_refresh').find('i').removeClass('fa-spin');
                     } else {
                         BootstrapDialog.alert({
                             title: 'Error',
