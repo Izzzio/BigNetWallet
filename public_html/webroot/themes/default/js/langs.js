@@ -14,17 +14,45 @@ $(function () {
         debug: false,
         lng: 'en',
         ns: {
-            namespaces: ['wallet_create', 'wallet_manage'],
-            defaultNS: 'wallet_create'
+            namespaces: ['index', 'menu'],
+            //namespaces: ['wallet_create', 'wallet_manage'],
+            //defaultNS: 'wallet_create'
+            defaultNS: 'index'
         },
         resources: {
             en: {
-                page: {
-                    logo: {
-                        big: "<b>iZ³</b> BigNet Wallets"
+                main: {
+                    header: {
                     },
-                    copyrights: "All rights reserved."
+                    footer: {
+                        copyrights: "All rights reserved."
+                    },
+                    logo: {
+                        big: "<b>iZ³</b> BigNet Wallets",
+                        mini: "<b>iZ³</b>"
+                    }
                 },
+                index: {
+                    menu: {
+                        wallet_create: "Wallet create",
+                        wallet_login: "Address"
+                    },
+                    blocks: {
+                        wallet: {
+                            header: 'Wallets',
+                            btn: 'Create wallet'
+                        }
+                    }
+                },
+                logged_in: {
+                    menu: {
+                        tnsn_send: "Send",
+                        tnsn_online: "Transaction ONline",
+                        tnsn_offline: "Transaction OFFline"
+                    }
+                },
+
+
                 wallet_manage: {
                     block_main: {
                         header: 'Wallets',
@@ -144,19 +172,31 @@ $(function () {
                 },
             },
             ru: {
-                eth_tkn_contract: {
-                    menu: {
-                        create: "Создать контракт"
+                main: {
+                    header: {
                     },
-                }
+                    footer: {
+                        copyrights: "Все права защищены."
+                    },
+                    logo: {
+                        big: "<b>iZ³</b> BigNet Wallets",
+                        mini: "<b>iZ³</b>"
+                    }
+                },
+                index: {
+                    menu: {
+                        wallet_create: "Создать кошелёк",
+                        wallet_login: "Открыть кошелёк"
+                    }
+                },
             }
         }
     }, (err, t) => {
         jqueryI18next.init(i18next, $);
         updateContent();
 
-        $('.lang-select').click(function () {
-            i18next.changeLanguage(this.innerHTML);
+        $('.lang-item').on('click', function () {
+            i18next.changeLanguage(this.getAttribute('language'));
         });
 
         i18next.on('languageChanged', () => {
@@ -165,10 +205,14 @@ $(function () {
     });
 
     function updateContent() {
+        $('.wrapper').localize();
+
+        /*
         $('.main-header').localize();
         $('.sidebar').localize();
         $('.content-wrapper').localize();
         $('.main-footer').localize();
         $('#mint_new_tpl').localize();
+        */
     }
 });

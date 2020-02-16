@@ -51,9 +51,9 @@
         <!-- Logo -->
         <a href="<?= URL_PREFIX ?>/" class="logo">
             <!-- mini logo for sidebar mini 50x50 pixels -->
-            <span class="logo-mini"><b>iZ³</b></span>
+            <span class="logo-mini" data-i18n="[html]main:logo.mini"></span>
             <!-- logo for regular state and mobile devices -->
-            <span class="logo-lg" data-i18n="[html]page:logo.big"></span>
+            <span class="logo-lg" data-i18n="[html]main:logo.big"></span>
         </a>
 
         <!-- Header Navbar: style can be found in header.less -->
@@ -75,7 +75,7 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <ul class="menu">
-                                    <li>
+                                    <li class="lang-item" language="ru">
                                         <a href="#">
                                             <div class="pull-left">
                                                 <div class="iz3-flag-wrapper">
@@ -87,7 +87,7 @@
                                             </h4>
                                         </a>
                                     </li>
-                                    <li>
+                                    <li class="lang-item" language="ru">
                                         <a href="#">
                                             <div class="pull-left">
                                                 <div class="iz3-flag-wrapper">
@@ -99,7 +99,7 @@
                                             </h4>
                                         </a>
                                     </li>
-                                    <li>
+                                    <li class="lang-item" language="en">
                                         <a href="#">
                                             <div class="pull-left">
                                                 <div class="iz3-flag-wrapper">
@@ -204,7 +204,7 @@
                     <a href="<?= URL_PREFIX ?>/wallet/create">
                         <i class="fas fa-wallet"></i>
                         &nbsp;
-                        <span data-i18n="wallet_create:menu.create"></span>
+                        <span data-i18n="index:menu.wallet_create"></span>
                     </a>
                 </li>
 
@@ -212,7 +212,7 @@
                     <a href="<?= URL_PREFIX ?>/wallet/login">
                         <i class="fas fa-money-check-alt"></i>
                         &nbsp;
-                        <span data-i18n="addresses:menu.list"></span>
+                        <span data-i18n="index:menu.wallet_login"></span>
                     </a>
                 </li>
             </ul>
@@ -226,7 +226,7 @@
 
     <footer class="main-footer">
         <strong>Copyright &copy; <?= date('Y');?> <a href="//izzz.io">iZ³</a>.</strong>
-        <span data-i18n="page:copyrights"></span>
+        <span data-i18n="main:footer.copyrights"></span>
     </footer>
 
     <!-- Add the sidebar's background. This div must be placed

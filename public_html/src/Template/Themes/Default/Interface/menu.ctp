@@ -4,7 +4,7 @@
                 <a href="#">
                     <i class="fas fa-link"></i>
                     &nbsp;&nbsp;
-                    <span>Send</span>
+                    <span data-i18n="logged_in:menu.tnsn_send"></span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
                         </span>
@@ -14,14 +14,14 @@
                         <a href="#">
                             <i class="far fa-sm fa-circle"></i>
                             &nbsp;&nbsp;
-                            <span>Transaction ONline</span>
+                            <span data-i18n="logged_in:menu.tnsn_online"></span>
                         </a>
                     </li>
                     <li box="tnsn_offline">
                         <a href="#">
                             <i class="far fa-sm fa-circle"></i>
                             &nbsp;&nbsp;
-                            <span>Transaction OFFline</span>
+                            <span data-i18n="logged_in:menu.tnsn_offline"></span>
                         </a>
                     </li>
                 </ul>
