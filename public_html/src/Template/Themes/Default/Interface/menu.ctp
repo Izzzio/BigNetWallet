@@ -30,14 +30,14 @@
                 <a href="#">
                     <i class="fas fa-shapes"></i>
                     &nbsp;&nbsp;
-                    <span>Dapps</span>
+                    <span data-i18n="logged_in:menu.dapps"></span>
                 </a>
             </li>
             <li class="treeview">
                 <a href="#">
                     <i class="fas fa-code"></i>
                     &nbsp;&nbsp;
-                    <span>Contract</span>
+                    <span data-i18n="logged_in:menu.contract"></span>
                     <span class="pull-right-container">
                         <i class="fa fa-angle-left pull-right"></i>
                         </span>
@@ -47,14 +47,14 @@
                         <a href="#">
                             <i class="far fa-sm fa-circle"></i>
                             &nbsp;&nbsp;
-                            <span>Work with contract</span>
+                            <span data-i18n="logged_in:menu.contract_interact"></span>
                         </a>
                     </li>
                     <li box="contract_deploy">
                         <a href="#">
                             <i class="far fa-sm fa-circle"></i>
                             &nbsp;&nbsp;
-                            <span>Deploy contract</span>
+                            <span data-i18n="logged_in:menu.contract_deploy"></span>
                         </a>
                     </li>
                 </ul>

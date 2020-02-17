@@ -25,17 +25,17 @@ $(function () {
                     header: {
                     },
                     footer: {
-                        copyrights: "All rights reserved."
+                        copyrights: 'All rights reserved.'
                     },
                     logo: {
-                        big: "<b>iZ³</b> BigNet Wallets",
-                        mini: "<b>iZ³</b>"
+                        big: '<b>iZ³</b> BigNet Wallets',
+                        mini: '<b>iZ³</b>'
                     }
                 },
                 index: {
                     menu: {
-                        wallet_create: "Wallet create",
-                        wallet_login: "Address"
+                        wallet_create: 'Wallet create',
+                        wallet_login: 'Address'
                     },
                     blocks: {
                         wallet: {
@@ -46,10 +46,46 @@ $(function () {
                 },
                 logged_in: {
                     menu: {
-                        tnsn_send: "Send",
-                        tnsn_online: "Transaction ONline",
-                        tnsn_offline: "Transaction OFFline"
+                        tnsn_send: 'Send',
+                        tnsn_online: 'Transaction ONline',
+                        tnsn_offline: 'Transaction OFFline',
+                        dapps: 'Dapps',
+                        contract: 'Contract',
+                        contract_interact: 'Work with contract',
+                        contract_deploy: 'Deploy contract'
+                    },
+                    blocks: {
+                        address: {
+                            label: 'Address',
+                            icon_copy: 'Copy'
+                        },
+                        balance: {
+                            label: 'Balance',
+                            icon_refresh: 'Refresh Balance'
+                        },
+                        network: {
+                            label: 'Network',
+                            last_block: 'Last block# : ',
+                            title: 'Open Networks',
+                            btn_change: 'Change'
+                        }
                     }
+                },
+                tnsn_send_online: {
+                    header: '<strong>Send transaction</strong>',
+                    contract_addr_label: 'Contract address',
+                    contract_addr_placeholder: 'Contract address',
+                    btn_find_tokens: 'Find',
+                    dscr_find_tokens: "Find token and add it into field 'Type'. Token from contract. Contract from block with number 'Contract address'.",
+                    tkn_type_label: 'Type',
+                    tkn_amount_label: 'Amount',
+                    tkn_amount_max_label: 'max: ',
+                    tkn_to_addr_label: 'To address',
+                    sub_header: 'Advanced',
+                    data_add_label: 'Add data',
+                    btn_send: 'Send Transaction'
+                },
+                tnsn_send_offline: {
                 },
 
 

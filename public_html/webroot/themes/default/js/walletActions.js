@@ -316,6 +316,7 @@ $(function () {
                             walletIZ3.setCurrentNetwork();
                             walletIZ3.setEventListeners();
                             $('#dapps_wrapper', $('#dapps')).html('Application will be shown here when you load it.');
+                            $('.wrapper').localize();
 
                             //window.history.pushState({"html":resp.data,"pageTitle":'TITLE 1'},"", '/interface/send-online');
                             //window.location.replace("/send/online");

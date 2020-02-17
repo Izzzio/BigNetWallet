@@ -4,7 +4,7 @@
             <div class="info-box bg-purple">
                 <span class="info-box-icon" style="background: none;"><i class="fas fa-font fa-lg"></i></span>
                 <div class="info-box-content" style="min-height: 95px;">
-                    <span class="info-box-number">Address</span>
+                    <span class="info-box-number" data-i18n="logged_in:blocks.address.label"></span>
                     <span class="info-box-text" id="payer"
                           style="overflow-wrap: break-word;white-space: unset; text-transform: none;">
                         <?= $address; ?>
@@ -24,7 +24,7 @@
                             </span>
                             -->
                             <span data-container="body" data-toggle="popover" data-placement="top"
-                                  data-content="Copy" data-trigger="hover">
+                                  data-i18n="[data-content]logged_in:blocks.address.icon_copy" data-trigger="hover">
                                 <i class="far fa-lg fa-copy autocopy" data-iz3-need-copy="payer"></i>
                             </span>
                         </span>
@@ -35,7 +35,7 @@
             <div class="info-box bg-blue">
                 <span class="info-box-icon" style="background: none;"><i class="fas fa-lg fa-wallet fa-lg"></i></span>
                 <div class="info-box-content" style="min-height: 95px;">
-                    <span class="info-box-number">Balance</span>
+                    <span class="info-box-number" data-i18n="logged_in:blocks.balance.label"></span>
                     <span class="info-box-text"
                           style="text-transform: none;"><span id="balance"><?= $balance; ?></span> <?= $network['ticker']; ?></span>
                 </div>
@@ -48,7 +48,7 @@
                             </span>
                             -->
                             <span data-container="body" data-toggle="popover" data-placement="top"
-                                  data-content="Refresh Balance" data-trigger="hover" id="balance_refresh">
+                                  data-i18n="[data-content]logged_in:blocks.balance.icon_refresh" data-trigger="hover" id="balance_refresh">
                                 <i class="fas fa-lg fa-sync-alt"></i>
                             </span>
                         </span>
@@ -62,15 +62,15 @@
                             style="width: 82%; margin-bottom: 14px; margin-left: 10px;"></span>
 
                 <div class="info-box-content" style="min-height: 95px;">
-                    <span class="info-box-number">Network</span>
+                    <span class="info-box-number" data-i18n="logged_in:blocks.network.label"></span>
                     <div><?= $network['name'].' ('.$network['ticker'].')'; ?></div>
-                    <div>Last block# : <?= $network['lastBlock']; ?></div>
+                    <div><span data-i18n="logged_in:blocks.network.last_block"></span><?= $network['lastBlock']; ?></div>
                 </div>
                 <div class="info-box-content" style="margin-top: 6px;">
                         <span class="info-box-text">
                             <span data-container="body" data-toggle="popover" data-placement="top"
-                                  data-content="Open Networks" data-trigger="hover">
-                                <button type="button" class="btn btn-default btn-xs">Change</button>
+                                  data-i18n="[data-content]logged_in:blocks.network.title" data-trigger="hover">
+                                <button type="button" class="btn btn-default btn-xs" data-i18n="logged_in:blocks.network.btn_change"></button>
                             </span>
                         </span>
                 </div>
@@ -87,27 +87,25 @@
         <div class="col-md-8">
             <div class="box box-success">
                 <div class="box-header with-border">
-                    <h3 class="box-title"><strong>Send transaction</strong></h3>
+                    <h3 class="box-title" data-i18n="[html]tnsn_send_online:header"></h3>
                 </div>
                 <div class="box-body">
                     <form>
                         <div class="row col-md-12">
                             <div class="col-md-5 col-xs-7">
                                 <div class="form-group form-group-lg">
-                                    <label for="contract_address">Contract address</label>
+                                    <label for="contract_address" data-i18n="tnsn_send_online:contract_addr_label"></label>
                                     <input type="number" step="any" class="form-control without-arrow" name="contract_address"
-                                           id="contract_address" placeholder="Contract address">
+                                           id="contract_address" data-i18n="[placeholder]tnsn_send_online:contract_addr_placeholder">
                                 </div>
                             </div>
                             <div class="col-md-3 col-xs-5">
                                 <label>&nbsp;</label>
-                                <button type="button" class="btn btn-success btn-lg btn-block find-tokens">Find</button>
+                                <button type="button" class="btn btn-success btn-lg btn-block find-tokens" data-i18n="tnsn_send_online:btn_find_tokens"></button>
                             </div>
                             <div class="col-md-4 col-xs-12">
                                 <div class="form-group form-group-lg">
-                                    <p class="text-muted">
-                                        Find token and add it into field 'Type'. Token from contract. Contract from block with number 'Contract address'.
-                                    </p>
+                                    <p class="text-muted" data-i18n="tnsn_send_online:dscr_find_tokens"></p>
                                 </div>
                             </div>
                         </div>
@@ -119,7 +117,7 @@
                         <div class="row col-md-12">
                             <div class="col-md-6 col-sm-7 col-xs-12">
                                 <div class="form-group form-group-lg">
-                                    <label for="type">Type</label>
+                                    <label for="type" data-i18n="tnsn_send_online:tkn_type_label"></label>
                                     <select class="form-control" name="type" id="type">
                                         <option value="<?= $network['masterContract']; ?>" data-max="<?= $balance; ?>">IZ3 - IZZZIO main token</option>
                                     </select>
@@ -128,9 +126,10 @@
                             <div class="col-md-6 col-sm-5 col-xs-12">
                                 <div class="form-group form-group-lg">
                                     <label for="amount">
-                                        Amount
+                                        <span data-i18n="tnsn_send_online:tkn_amount_label"></span>
                                         <span id="token-max" class="label label-warning">
-                                            max: <span><?= $balance; ?></span>
+                                            <span data-i18n="tnsn_send_online:tkn_amount_max_label"></span>
+                                            <span><?= $balance; ?></span>
                                         </span>
                                     </label>
                                     <input type="number" step="any" class="form-control without-arrow" name="amount"
@@ -141,7 +140,7 @@
                         <div class="row col-md-12">
                             <div class="col-md-12">
                                 <div class="form-group form-group-lg">
-                                    <label for="payee">To address</label>
+                                    <label for="payee" data-i18n="tnsn_send_online:tkn_to_addr_label"></label>
                                     <input type="text" class="form-control" name="payee" id="payee" autocomplete="off">
                                 </div>
                             </div>
@@ -149,13 +148,13 @@
 
                         <div class="col-md-12">
                             <hr/>
-                            <h4 style="font-weight: 600;">Advanced</h4>
+                            <h4 style="font-weight: 600;" data-i18n="tnsn_send_online:sub_header"></h4>
                         </div>
 
                         <div class="row col-md-12">
                             <div class="col-md-12">
                                 <div class="form-group form-group-lg">
-                                    <label for="data">Add data</label>
+                                    <label for="data" data-i18n="tnsn_send_online:data_add_label"></label>
                                     <input type="text" class="form-control disabled" id="data" autocomplete="off" disabled="disabled" readonly="readonly">
                                 </div>
                             </div>
@@ -168,7 +167,7 @@
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                             <button type="button" class="btn btn-success btn-lg btn-block disabled send"
-                                    disabled="disabled">Send Transaction
+                                    disabled="disabled" data-i18n="tnsn_send_online:btn_send">
                             </button>
                         </div>
                         <div class="col-lg-4 col-md-3 col-sm-3 hidden-xs">
