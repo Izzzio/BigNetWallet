@@ -86,7 +86,24 @@ $(function () {
                     btn_send: 'Send Transaction'
                 },
                 tnsn_send_offline: {
+                    header: '<strong>Send Offline</strong>',
+                    tkn_type_label: 'Type',
+                    tkn_amount_label: 'Amount',
+                    tkn_amount_placeholder: 'Deposit Amount',
+                    tkn_to_addr_label: 'To address',
+                    tkn_to_addr_placeholder: 'Please Enter The Address',
+                    data_label: 'Data',
+                    btn_import_json: 'Import JSON',
+                    btn_generate_tnsn: 'Generate Transaction'
                 },
+                dapps: {
+                    header: '<strong>Decentralized Applications</strong>',
+                    contract_addr_label: 'Block with Web contract',
+                    contract_addr_placeholder: 'Enter Contract Block',
+                    app_content_info: 'Application will be shown here when you load it.',
+                },
+
+
 
 
                 wallet_manage: {

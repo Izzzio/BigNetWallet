@@ -185,14 +185,14 @@
         <div class="col-md-8">
             <div class="box box-success">
                 <div class="box-header with-border">
-                    <h3 class="box-title"><strong>Send Offline</strong></h3>
+                    <h3 class="box-title" data-i18n="[html]tnsn_send_offline:header"></h3>
                 </div>
                 <div class="box-body">
                     <form>
                         <div class="row col-md-12">
                             <div class="col-md-5">
                                 <div class="form-group form-group-lg">
-                                    <label for="type">Type</label>
+                                    <label for="type" data-i18n="tnsn_send_offline:tkn_type_label"></label>
                                     <select class="form-control" name="type" id="type">
                                         <option value="IZ3">IZ3 - IZZZIO main token</option>
                                     </select>
@@ -200,26 +200,26 @@
                             </div>
                             <div class="col-md-7">
                                 <div class="form-group form-group-lg">
-                                    <label for="amount">Amount</label>
+                                    <label for="amount" data-i18n="tnsn_send_offline:tkn_amount_label"></label>
                                     <input type="number" step="any" class="form-control without-arrow" name="amount"
-                                           id="amount" placeholder="Deposit Amount">
+                                           id="amount" data-i18n="[placeholder]tnsn_send_offline:tkn_amount_placeholder">
                                 </div>
                             </div>
                         </div>
                         <div class="row col-md-12">
                             <div class="col-md-12">
                                 <div class="form-group form-group-lg">
-                                    <label for="payee">To address</label>
+                                    <label for="payee" data-i18n="tnsn_send_offline:tkn_to_addr_label"></label>
                                     <textarea
                                             class="form-control" name="payee" id="payee" autocomplete="off"
-                                            placeholder="Please Enter The Address" style="height: 115px;"></textarea>
+                                            data-i18n="[placeholder]tnsn_send_offline:tkn_to_addr_placeholder" style="height: 115px;"></textarea>
                                 </div>
                             </div>
                         </div>
                         <div class="row col-md-12">
                             <div class="col-md-12">
                                 <div class="form-group form-group-lg">
-                                    <label for="data">Data</label>
+                                    <label for="data" data-i18n="tnsn_send_offline:data_label"></label>
                                     <input type="text" class="form-control" id="data" autocomplete="off" value="0x"
                                            disabled="disabled">
                                 </div>
@@ -250,7 +250,7 @@
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                             <button type="button" class="btn btn-default btn-lg btn-block import"
-                                    onclick="document.getElementById('tnsn_import').click();">Import JSON
+                                    onclick="document.getElementById('tnsn_import').click();" data-i18n="tnsn_send_offline:btn_import_json">
                             </button>
                             <input id="tnsn_import" type="file" style="display: none;"/>
                         </div>
@@ -263,7 +263,7 @@
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
                             <button type="button" class="btn btn-success btn-lg btn-block disabled send"
-                                    disabled="disabled">Generate Transaction
+                                    disabled="disabled" data-i18n="tnsn_send_offline:btn_generate_tnsn">
                             </button>
                         </div>
                         <div class="col-lg-4 col-md-3 col-sm-3 hidden-xs">
@@ -279,15 +279,15 @@
             <div class="col-md-8">
                 <div class="box box-success">
                     <div class="box-header with-border">
-                        <h3 class="box-title"><strong>Decentralized Applications</strong></h3>
+                        <h3 class="box-title" data-i18n="[html]dapps:header"></h3>
                     </div>
                     <div class="box-body">
                         <form>
                             <div class="row col-md-12">
                                 <div class="col-md-6">
                                     <div class="form-group form-group-lg">
-                                        <label for="dapp_contract_addr">Block with Web contract</label>
-                                        <input type="number" step="any" class="form-control without-arrow" name="dapp_contract_addr" id="dapp_contract_addr" placeholder="Enter Contract Block">
+                                        <label for="dapp_contract_addr" data-i18n="dapps:contract_addr_label"></label>
+                                        <input type="number" step="any" class="form-control without-arrow" name="dapp_contract_addr" id="dapp_contract_addr" data-i18n="[placeholder]dapps:contract_addr_placeholder">
                                     </div>
                                 </div>
                             </div>
@@ -298,8 +298,7 @@
                             <div class="col-lg-4 col-md-3 col-sm-3 hidden-xs">
                             </div>
                             <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                                <button type="button" class="btn btn-success btn-lg btn-block disabled load-app" disabled="disabled">
-                                    Get app
+                                <button type="button" class="btn btn-success btn-lg btn-block disabled load-app" disabled="disabled" data-i18n="dapps:btn_get_app">
                                 </button>
                             </div>
                             <div class="col-lg-4 col-md-3 col-sm-3 hidden-xs">
