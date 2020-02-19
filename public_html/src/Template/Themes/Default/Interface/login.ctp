@@ -328,7 +328,7 @@
         <div class="col-md-8">
             <div class="box box-success">
                 <div class="box-header with-border">
-                    <h3 class="box-title"><strong>Interact with deployed Contract</strong></h3>
+                    <h3 class="box-title" data-i18n="[html]contract_interact_s1:header"></h3>
                 </div>
                 <div id="step1">
                     <div class="box-body">
@@ -336,7 +336,7 @@
                             <div class="row col-md-12">
                                 <div class="col-md-6">
                                     <div class="form-group form-group-lg">
-                                        <label for="deployed_contract_name">Contract name</label>
+                                        <label for="deployed_contract_name" data-i18n="contract_interact_s1:contract_name_label"></label>
                                         <select class="form-control" name="deployed_contract_name" id="deployed_contract_name">
                                             <option value=""></option>
                                             <?php
@@ -354,15 +354,15 @@
                             <div class="row col-md-12">
                                 <div class="col-md-12">
                                     <div class="form-group form-group-lg">
-                                        <label for="interact_who">Contract Address</label>
-                                        <input type="text" class="form-control" name="interact_who" id="interact_who" placeholder="Enter Contract Address">
+                                        <label for="interact_who" data-i18n="contract_interact_s1:contract_addr_label"></label>
+                                        <input type="text" class="form-control" name="interact_who" id="interact_who" data-i18n="[placeholder]contract_interact_s1:contract_addr_placeholder">
                                     </div>
                                 </div>
                             </div>
                             <div class="row col-md-12">
                                 <div class="col-md-12">
                                     <div class="form-group form-group-lg">
-                                        <label for="contract_code">ABI/JSON Interface</label>
+                                        <label for="contract_code" data-i18n="contract_interact_s1:abi_interface_label"></label>
                                         <textarea class="form-control" name="abi" id="abi" autocomplete="off" style="height: 225px;"></textarea>
                                     </div>
                                 </div>
@@ -374,8 +374,7 @@
                             <div class="col-lg-4 col-md-3 col-sm-3 hidden-xs">
                             </div>
                             <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                                <button type="button" class="btn btn-success btn-lg btn-block disabled continue" disabled="disabled">
-                                    Continue
+                                <button type="button" class="btn btn-success btn-lg btn-block disabled continue" disabled="disabled" data-i18n="contract_interact_s1:btn_continue">
                                 </button>
                             </div>
                             <div class="col-lg-4 col-md-3 col-sm-3 hidden-xs">
@@ -388,9 +387,9 @@
                         <form>
                             <div class="row col-md-12">
                                 <div class="col-md-12">
-                                    <span id="interact_with">Read/Write Contract</span>
+                                    <span id="interact_with" data-i18n="contract_interact_s2:info"></span>
                                     <div class="form-group form-group-lg">
-                                        <label for="interacting">Contract Address</label>
+                                        <label for="interacting" data-i18n="contract_interact_s2:contract_addr_label"></label>
                                         <input class="form-control" name="interacting" id="interacting"
                                                value="izNUhVKtDpmgCnVycSMUPusX8sdnErzAD9T" readonly="readonly" disabled="disabled">
                                     </div>
@@ -399,7 +398,7 @@
                             <div class="row col-md-12">
                                 <div class="col-md-7">
                                     <div class="form-group form-group-lg">
-                                        <label for="deployed_contract_action">Execute action</label>
+                                        <label for="deployed_contract_action" data-i18n="contract_interact_s2:contract_action_label"></label>
                                         <select class="form-control" name="deployed_contract_action" id="deployed_contract_action">
                                             <option value=""></option>
                                         </select>
@@ -411,7 +410,7 @@
                             <div class="row col-md-12">
                                 <div class="col-md-7">
                                     <div class="form-group form-group-lg">
-                                        <label for="resources">Value in ETH</label>
+                                        <label for="resources" data-i18n="contract_interact_s2:resources_label"></label>
                                         <input type="number" step="any" class="form-control without-arrow"
                                                name="resources" id="resources" value="0" placeholder="ETH">
 
@@ -421,7 +420,7 @@
                             <div class="row col-md-12">
                                 <div class="col-md-12">
                                     <div class="form-group form-group-lg">
-                                        <label for="interacting">Result</label>
+                                        <label for="interacting" data-i18n="contract_interact_s2:result_label"></label>
                                         <input class="form-control" name="interacting_result" id="interacting_result" readonly="readonly" disabled="disabled">
                                     </div>
                                 </div>
@@ -433,15 +432,13 @@
                             <div class="col-lg-1 col-md-1 hidden-sm hidden-xs">
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                                <button type="button" class="btn btn-default btn-lg btn-block back">
-                                    Back
+                                <button type="button" class="btn btn-default btn-lg btn-block back" data-i18n="contract_interact_s2:btn_back">
                                 </button>
                             </div>
                             <div class="col-lg-2 col-md-2 col-sm-6 col-xs-12">
                             </div>
                             <div class="col-lg-4 col-md-4 col-sm-6 col-xs-12">
-                                <button type="button" class="btn btn-default btn-lg btn-block disabled do-interact" disabled="disabled">
-                                    Read
+                                <button type="button" class="btn btn-default btn-lg btn-block disabled do-interact" disabled="disabled" data-i18n="contract_interact_s2:btn_read">
                                 </button>
                             </div>
                             <div class="col-lg-1 col-md-1 hidden-sm hidden-xs">
@@ -460,14 +457,14 @@
         <div class="col-md-8">
             <div class="box box-success">
                 <div class="box-header with-border">
-                    <h3 class="box-title"><strong>Deploy new contract</strong></h3>
+                    <h3 class="box-title" data-i18n="[html]contract_deploy:header"></h3>
                 </div>
                 <div class="box-body">
                     <form>
                         <div class="row col-md-12">
                             <div class="col-md-12">
                                 <div class="form-group form-group-lg">
-                                    <label for="contract_code">Contract code</label>
+                                    <label for="contract_code" data-i18n="contract_deploy:contract_code_label"></label>
                                     <textarea
                                             class="form-control" name="contract_code" id="contract_code"
                                             autocomplete="off"
@@ -477,13 +474,13 @@
                         </div>
                         <div class="row col-md-12">
                             <div class="col-md-12">
-                                <label for="contract_rent">Resource rent</label>
+                                <label for="contract_rent" data-i18n="contract_deploy:contract_rent_label"></label>
                                 <div class="input-group input-group-lg">
                                     <input type="number" step="any" class="form-control without-arrow"
                                            name="contract_rent" id="contract_rent" autocomplete="off"
-                                           placeholder="Cost resources for deploy contract">
+                                           data-i18n="[placeholder]contract_deploy:contract_rent_placeholder">
                                     <span class="input-group-btn">
-                                        <button type="button" class="btn btn-success calc-resource">Calculate</button>
+                                        <button type="button" class="btn btn-success calc-resource" data-i18n="contract_deploy:btn_calc_resource"></button>
                                     </span>
                                 </div>
                             </div>
@@ -491,8 +488,8 @@
                         <div class="row col-md-12">
                             <div class="col-md-12">
                                 <div class="form-group form-group-lg" style="margin-top: 14px; line-height: 0.9;">
-                                    <label>Resource available</label>
-                                    <p class="text-muted" id="resources_calculated" style="font-size: 17px;">minimum amount of resources</p>
+                                    <label data-i18n="contract_deploy:contract_rent_available_label"></label>
+                                    <p class="text-muted" id="resources_calculated" style="font-size: 17px;" data-i18n="contract_deploy:contract_rent_available_min_label"></p>
                                 </div>
                             </div>
                         </div>
@@ -503,8 +500,7 @@
                         <div class="col-lg-4 col-md-3 col-sm-3 hidden-xs">
                         </div>
                         <div class="col-lg-4 col-md-6 col-sm-6 col-xs-12">
-                            <button type="button" class="btn btn-success btn-lg btn-block disabled sign" disabled="disabled">
-                                Sign Transaction
+                            <button type="button" class="btn btn-success btn-lg btn-block disabled sign" disabled="disabled" data-i18n="contract_deploy:btn_sign_tnsn">
                             </button>
                         </div>
                         <div class="col-lg-4 col-md-3 col-sm-3 hidden-xs">

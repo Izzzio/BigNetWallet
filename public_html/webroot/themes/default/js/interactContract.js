@@ -3,7 +3,7 @@
 const blockWithFieldTpl = '' +
     '<div class="col-md-7">' +
     '<div class="form-group form-group-lg">' +
-    '<label for="%NAME%">%LABEL%</label>' +
+    '<label for="%NAME%" data-i18n="contract_interact_s2:%NAME%"></label>' +
     '<input type="%TYPE%" step="any" class="form-control without-arrow" name="%NAME%" id="%ID%" value="%VALUE%" placeholder="%PLACEHOLDER%">' +
     '</div>' +
     '</div>';
@@ -49,11 +49,11 @@ class interactContract {
 
     fieldToHTMLBlock(field) {
         field = field || [];
-        field['label'] = field['label'] || field['name'] || '';
+        //field['label'] = field['label'] || field['name'] || '';
         field['type'] = field['type'] || 'text';
         field['name'] = field['name'] || '';
         let HTMLblock = blockWithFieldTpl;
-        HTMLblock = HTMLblock.replace(/%LABEL%/g, field['label']);
+        //HTMLblock = HTMLblock.replace(/%LABEL%/g, field['label']);
         HTMLblock = HTMLblock.replace(/%TYPE%/g, field['type']);
         HTMLblock = HTMLblock.replace(/%NAME%/g, field['name']);
         HTMLblock = HTMLblock.replace(/%ID%/g, field['name']);

@@ -315,7 +315,7 @@ $(function () {
                             $('.content-wrapper', $('body')).html(resp.data.page);
                             walletIZ3.setCurrentNetwork();
                             walletIZ3.setEventListeners();
-                            $('#dapps_wrapper', $('#dapps')).html(jqueryI18next.t('app_content_info'));
+                            $('#dapps_wrapper', $('#dapps')).html($.i18n.t('dapps:app_content_info'));
                             $('.wrapper').localize();
 
                             //window.history.pushState({"html":resp.data,"pageTitle":'TITLE 1'},"", '/interface/send-online');
@@ -626,7 +626,7 @@ $(function () {
                 });
 
                 $('.load-app', $('#dapps_select')).on('click', function () {
-                    $('#dapps_wrapper', $('#dapps')).html('Application will be shown here when you load it.');
+                    $('#dapps_wrapper', $('#dapps')).html($.i18n.t('dapps:app_content_info'));
                     $('.overlay', $('#dapps_select')).show();
                     let contractAddress = parseInt(($('#dapp_contract_addr', $('#dapps_select')).val() || 0));
                     walletIZ3.HTTPRequest.init({
@@ -808,6 +808,7 @@ $(function () {
                         for (let i = 0; i < fields.length; i++) {
                             blockNew = await interactedContract.fieldToHTMLBlock(fields[i]);
                             $('#add_fields', $('#contract_interact')).append(blockNew);
+                            $('.wrapper').localize();
                         }
                     })();
                 });

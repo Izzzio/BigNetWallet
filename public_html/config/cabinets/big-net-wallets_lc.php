@@ -214,8 +214,7 @@ return [
                             "inputs":[
                                 {
                                     "name":"addr",
-                                    "type":"number",
-                                    "label":"Contract address (block number)"
+                                    "type":"number"
                                 }
                             ],
                             "name":"checkContractAddress",
@@ -233,8 +232,7 @@ return [
                             "inputs":[
                                 {
                                     "name":"addr",
-                                    "type":"number",
-                                    "label":"Contract address (block number)"
+                                    "type":"number"
                                 }
                             ],
                             "name":"checkContractLimits",
@@ -291,13 +289,11 @@ return [
                             "inputs":[
                                 {
                                     "name":"to",
-                                    "type":"text",
-                                    "label":"To"
+                                    "type":"text"
                                 },
                                 {
                                     "name":"tokens",
-                                    "type":"number",
-                                    "label":"Tokens count"
+                                    "type":"number"
                                 }
                             ],
                             "name":"transfer",

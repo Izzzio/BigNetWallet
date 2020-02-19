@@ -100,10 +100,39 @@ $(function () {
                     header: '<strong>Decentralized Applications</strong>',
                     contract_addr_label: 'Block with Web contract',
                     contract_addr_placeholder: 'Enter Contract Block',
+                    btn_get_app: 'Get app',
                     app_content_info: 'Application will be shown here when you load it.',
                 },
-
-
+                contract_interact_s1: {
+                    header: '<strong>Interact with deployed Contract</strong>',
+                    contract_name_label: 'Contract name',
+                    contract_addr_label: 'Contract Address',
+                    contract_addr_placeholder: 'Enter Contract Address',
+                    abi_interface_label: 'ABI/JSON Interface',
+                    btn_continue: 'Continue',
+                },
+                contract_interact_s2: {
+                    info: 'Read/Write Contract',
+                    contract_addr_label: 'Contract Address',
+                    contract_action_label: 'Execute action',
+                    addr: 'Contract address (block number)',
+                    to: 'To',
+                    tokens: 'Tokens count',
+                    resources_label: 'Value in ETH',
+                    result_label: 'Result',
+                    btn_back: 'Back',
+                    btn_read: 'Read'
+                },
+                contract_deploy: {
+                    header: '<strong>Deploy new contract</strong>',
+                    contract_code_label: 'Contract code',
+                    contract_rent_label: 'Resource rent',
+                    contract_rent_placeholder: 'Cost resources for deploy contract',
+                    contract_rent_available_label: 'Resource available',
+                    contract_rent_available_min_label: 'minimum amount of resources',
+                    btn_calc_resource: 'Calculate',
+                    btn_sign_tnsn: 'Sign Transaction',
+                },
 
 
                 wallet_manage: {
@@ -241,6 +270,9 @@ $(function () {
                         wallet_create: "Создать кошелёк",
                         wallet_login: "Открыть кошелёк"
                     }
+                },
+                dapps: {
+                    app_content_info: 'Здесь будет показано приложение, когда вы загрузите его.',
                 },
             }
         }
