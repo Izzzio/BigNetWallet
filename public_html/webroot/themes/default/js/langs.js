@@ -14,7 +14,7 @@ $(function () {
         debug: false,
         lng: 'en',
         ns: {
-            namespaces: ['index', 'menu'],
+            namespaces: ['index', 'main', 'logged_in'],
             //namespaces: ['wallet_create', 'wallet_manage'],
             //defaultNS: 'wallet_create'
             defaultNS: 'index'
@@ -25,24 +25,46 @@ $(function () {
                     header: {
                     },
                     footer: {
-                        copyrights: 'All rights reserved.'
+                        copyrights: 'All rights reserved.',
                     },
                     logo: {
                         big: '<b>iZ³</b> BigNet Wallets',
-                        mini: '<b>iZ³</b>'
+                        mini: '<b>iZ³</b>',
                     }
                 },
                 index: {
                     menu: {
                         wallet_create: 'Wallet create',
-                        wallet_login: 'Address'
+                        wallet_login: 'Address',
                     },
                     blocks: {
                         wallet: {
                             header: 'Wallets',
-                            btn: 'Create wallet'
-                        }
-                    }
+                            btn: 'Create wallet',
+                        },
+                    },
+                },
+                login: {
+                    main: {
+                        header: 'Access by Software',
+                        by_file_text: 'Keystore File',
+                        by_key_text: 'Private Key',
+                        btn_continue: ' Continue',
+                    },
+                    by_file: {
+                        header: 'Access by Keystore File',
+                        btn_select_file: 'Select file',
+                        btn_login: ' Access Wallet',
+                        error_file: 'Keystore file error: ',
+                        error_wrong_json: 'wrong JSON structure in file',
+                        error_wrong_key: 'Wrong private key. Re-check file ant try again.',
+                    },
+                    by_key: {
+                        header: 'Access by Private Key',
+                        key_placeholder: 'Enter Private Key',
+                        btn_login: ' Access Wallet',
+                        error1: 'Wrong private key. Re-check key ant try again.',
+                    },
                 },
                 logged_in: {
                     menu: {
@@ -52,24 +74,24 @@ $(function () {
                         dapps: 'Dapps',
                         contract: 'Contract',
                         contract_interact: 'Work with contract',
-                        contract_deploy: 'Deploy contract'
+                        contract_deploy: 'Deploy contract',
                     },
                     blocks: {
                         address: {
                             label: 'Address',
-                            icon_copy: 'Copy'
+                            icon_copy: 'Copy',
                         },
                         balance: {
                             label: 'Balance',
-                            icon_refresh: 'Refresh Balance'
+                            icon_refresh: 'Refresh Balance',
                         },
                         network: {
                             label: 'Network',
                             last_block: 'Last block# : ',
                             title: 'Open Networks',
-                            btn_change: 'Change'
-                        }
-                    }
+                            btn_change: 'Change',
+                        },
+                    },
                 },
                 tnsn_send_online: {
                     header: '<strong>Send transaction</strong>',
@@ -83,7 +105,7 @@ $(function () {
                     tkn_to_addr_label: 'To address',
                     sub_header: 'Advanced',
                     data_add_label: 'Add data',
-                    btn_send: 'Send Transaction'
+                    btn_send: 'Send Transaction',
                 },
                 tnsn_send_offline: {
                     header: '<strong>Send Offline</strong>',
@@ -94,14 +116,14 @@ $(function () {
                     tkn_to_addr_placeholder: 'Please Enter The Address',
                     data_label: 'Data',
                     btn_import_json: 'Import JSON',
-                    btn_generate_tnsn: 'Generate Transaction'
+                    btn_generate_tnsn: 'Generate Transaction',
                 },
                 dapps: {
                     header: '<strong>Decentralized Applications</strong>',
                     contract_addr_label: 'Block with Web contract',
                     contract_addr_placeholder: 'Enter Contract Block',
                     btn_get_app: 'Get app',
-                    app_content_info: 'Application will be shown here when you load it.',
+                    app_content_info: '<strong>Application will be shown here when you load it.</strong>',
                 },
                 contract_interact_s1: {
                     header: '<strong>Interact with deployed Contract</strong>',
@@ -121,7 +143,7 @@ $(function () {
                     resources_label: 'Value in ETH',
                     result_label: 'Result',
                     btn_back: 'Back',
-                    btn_read: 'Read'
+                    btn_read: 'Read',
                 },
                 contract_deploy: {
                     header: '<strong>Deploy new contract</strong>',
@@ -132,112 +154,54 @@ $(function () {
                     contract_rent_available_min_label: 'minimum amount of resources',
                     btn_calc_resource: 'Calculate',
                     btn_sign_tnsn: 'Sign Transaction',
-                },
-
-
-                wallet_manage: {
-                    block_main: {
-                        header: 'Wallets',
-                        btn: 'Create wallet'
-                    }
+                    confirm: {
+                        header: 'Confirmation',
+                        addr_label: 'From Address',
+                        details_header: 'Detail Information',
+                        detail_network: 'Network',
+                        btn_send: ' Confirm and Send',
+                        error1: 'Error sending transaction. Please try again later',
+                    },
+                    success: {
+                        header: 'Success',
+                        description1: 'Transaction sent to network',
+                        btn_check_status: 'Check Status',
+                        btn_ok: 'Okay',
+                    },
                 },
                 wallet_create: {
-                    menu: {
-                        create: "Wallet create"
+                    main: {
+                        header: 'Create New Wallet',
+                        description1: 'A wallet will be created - to manage tokens',
+                        description2: 'and a key - to access the wallet.',
+                        btn_create: 'Create New Wallet',
                     },
-                    header: {
-                        main: "Create New Wallet",
-                        description1: "A wallet will be created - to manage tokens",
-                        description2: "and a key - to access the wallet."
+                    file: {
+                        header: 'Save file',
+                        description1: "Save your <span class='label label-danger'>Keystore</span> file.",
+                        btn_download: 'Download Keystore File (UTC / JSON)',
+                        btn_continue: 'I understand. Continue.',
+                        help1_header: 'Do not lose it',
+                        help1_text: 'It cannot be recovered if you lose it.',
+                        help2_header: 'Do not share it.',
+                        help2_text: 'Your funds will be stolen if you use this file on a malicious/phishing site.',
+                        help3_header: 'Make a backup.',
+                        help3_text: 'Secure it like the millions of dollars it may one day be worth.',
                     },
-                    header2: {
-                        main: "Save file",
-                        description1: "Save your <span class='label label-danger'>Keystore</span> file."
-                    },
-                    header3: {
-                        main: "Save key",
-                        description1: "Save your <span class='label label-danger'>Private Key</span>."
-                    },
-                    fields: {
-                        name: {
-                            label: "Token name:",
-                            placeholder: "MyToken",
-                            help: "Enter name of the project without spaces, usually 5-25 symbols. Lower and uppercase can be used"
-                        },
-                        symbol: {
-                            label: "Token symbol:",
-                            placeholder: "NEW",
-                            help: "Usually 3-4 Letters like ETH, BTC, NEO, WISH etc..."
-                        },
-                        decimals: {
-                            label: "Decimals:",
-                            help: "Defines the number of decimals for the token. 0-50 numerals are accepted. 18 as common practice"
-                        },
-                        type_1: {
-                            label: "ERC-20",
-                            help: "ERC-20 is recommended option. Accepted by the most exchanges."
-                        },
-                        type_2: {
-                            label: "ERC-223",
-                            help: "ERC-223 is almost the same as ERC-20. Provides extra safety during token transfers."
-                        },
-                        owner: {
-                            label: "Token Owner:",
-                            placeholder: "izM1Tr1nhKaeDMqUaZjHqaWzjZmCndnUhML",
-                            help: "Owner or smart contract address. This address will be owner of the token. Double check the address (and access to it) before submission"
-                        },
-                        mint: {
-                            label: "<i class='fas fa-plus-circle'></i>&nbsp;&nbsp;Mint tokens",
-                            help: "You can reserve the tokens for Team, Bonuses, Bounties - these tokens will be created, but can’t be sold until token sale completion."
-                        },
-                        mint_new: {
-                            label: "<i class='fas fa-plus-circle'></i>&nbsp;&nbsp;Mint tokens",
-                            help: "You can reserve the tokens for Team, Bonuses, Bounties - these tokens will be created, but can’t be sold until token sale completion."
-                        },
-                        future_minting: {
-                            label: "<i class='far fa-stop-circle text-primary'></i>&nbsp;&nbsp;Future Minting",
-                            help: "Yes - you can create more tokens in the future.<br />No - no more tokens will be created in the future."
-                        }
-                    },
-                    blocks: {
-                        mint_new: {
-                            address: {
-                                label: "Address",
-                                placeholder: "Enter address of the recipient's wallet"
-                            },
-                            name: {
-                                label: "Name"
-                            },
-                            amount: {
-                                label: "Token amount"
-                            },
-                            frozen: {
-                                label: "<i class='far fa-snowflake text-primary'></i>&nbsp;&nbsp;Frozen until date (UTC)"
-                            }
-                        },
-                    },
-                    tkn_type: {
-                        label: "Choose Type of Token",
-                    },
-                    mint_new: {
-                        label: "Define address for tokens (after minting it will be sent to this address)"
-                    },
-                    button: {
-                        create: "Create New Wallet",
-                        save: "Download Keystore File (UTC / JSON)",
-                        continue: "I understand. Continue.",
-                        print_wallet: "Print Paper Wallet",
-                        save_address: "View Your Address"
-                    },
-                    preview: {
-                        label: "Result: contract token code",
+                    key: {
+                        header: 'Save key',
+                        description1: "Save your <span class='label label-danger'>Private Key</span>.",
+                        btn_print: 'Print Paper Wallet',
+                        btn_login: 'View Your Address',
+                        help1_header: 'Do not lose it',
+                        help1_text: 'It cannot be recovered if you lose it.',
+                        help2_header: 'Do not share it.',
+                        help2_text: 'Your funds will be stolen if you use this file on a malicious/phishing site.',
+                        help3_header: 'Make a backup.',
+                        help3_text: 'Secure it like the millions of dollars it may one day be worth.',
                     },
                 },
-                addresses: {
-                    menu: {
-                        list: "Address"
-                    }
-                },
+                    /*
                 wallet_unlock: {
                     header: {
                         main: "Unlock your wallet",
@@ -249,9 +213,7 @@ $(function () {
                         select: "Select Wallet File",
                     },
                 },
-                interface: {
-
-                },
+                */
             },
             ru: {
                 main: {
@@ -262,17 +224,17 @@ $(function () {
                     },
                     logo: {
                         big: "<b>iZ³</b> BigNet Wallets",
-                        mini: "<b>iZ³</b>"
+                        mini: "<b>iZ³</b>",
                     }
                 },
                 index: {
                     menu: {
                         wallet_create: "Создать кошелёк",
-                        wallet_login: "Открыть кошелёк"
-                    }
+                        wallet_login: "Открыть кошелёк",
+                    },
                 },
                 dapps: {
-                    app_content_info: 'Здесь будет показано приложение, когда вы загрузите его.',
+                    app_content_info: '<strong>Здесь будет показано приложение, когда вы загрузите его.</strong>',
                 },
             }
         }
@@ -291,13 +253,5 @@ $(function () {
 
     function updateContent() {
         $('.wrapper').localize();
-
-        /*
-        $('.main-header').localize();
-        $('.sidebar').localize();
-        $('.content-wrapper').localize();
-        $('.main-footer').localize();
-        $('#mint_new_tpl').localize();
-        */
     }
 });

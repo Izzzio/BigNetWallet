@@ -314,6 +314,9 @@
         <div id="dapps_view">
             <div class="col-md-12">
                 <div class="box">
+                    <div class="box-header with-border">
+                        <h3 class="box-title" data-i18n="[html]dapps:app_content_info"></h3>
+                    </div>
                     <div class="box-body" id="dapps_wrapper">
                     </div>
                     <div class="overlay" style="display: none;">

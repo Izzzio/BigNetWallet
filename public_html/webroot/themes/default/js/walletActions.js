@@ -29,7 +29,7 @@ $(function () {
         });
 
         var selectLoginWayDlg = new BootstrapDialog({
-            title: 'Access by Software',
+            title: $.i18n.t('login:main.header'),
             closable: true,
             closeByBackdrop: false,
             closeByKeyboard: true,
@@ -38,7 +38,7 @@ $(function () {
             message: getLoginWayDlgContent(),
             buttons: [{
                 id: 'setWaySeleted',
-                label: ' Continue',
+                label: $.i18n.t('login:main.btn_continue'),
                 cssClass: 'btn',
                 action: function (dialogRef) {
                     dialogRef.enableButtons(false);
@@ -98,7 +98,7 @@ $(function () {
                 '<i class="far fa-file-code fa-2x" style="color: #00a65a;"></i>' +
                 '</div>' +
                 '<div class="col-md-8 col-xs-8" style="margin-top: 5px;">' +
-                'Keystore File' +
+                $.i18n.t('login:main.by_file_text') +
                 '</div>' +
                 '<div class="col-md-2 col-xs-2 sign-selected hidden" style="margin-top: 7px;">' +
                 '<i class="fas fa-check-circle" style="color: #00a65a;"></i>' +
@@ -109,7 +109,7 @@ $(function () {
                 '<i class="fas fa-key fa-2x" style="color: #00a65a;"></i>' +
                 '</div>' +
                 '<div class="col-md-8 col-xs-8" style="margin-top: 5px;">' +
-                'Private Key' +
+                $.i18n.t('login:main.by_key_text') +
                 '</div>' +
                 '<div class="col-md-2 col-xs-2 sign-selected hidden" style="margin-top: 7px;">' +
                 '<i class="fas fa-check-circle" style="color: #00a65a;"></i>' +
@@ -128,7 +128,7 @@ $(function () {
         }
 
         var askLoginFileDlg = new BootstrapDialog({
-            title: 'Access by Keystore File',
+            title: $.i18n.t('login:by_file.header'),
             closable: true,
             closeByBackdrop: false,
             closeByKeyboard: false,
@@ -138,7 +138,7 @@ $(function () {
             buttons: [
                 {
                     id: 'file-select',
-                    label: 'Select file',
+                    label: $.i18n.t('login:by_file.btn_select_file'),
                     cssClass: 'btn btn-info',
                     action: function (dialogRef) {
                         let content = dialogRef.getModalContent();
@@ -152,7 +152,7 @@ $(function () {
                 },
                 {
                     id: 'login',
-                    label: ' Access Wallet',
+                    label: $.i18n.t('login:by_file.btn_login'),
                     cssClass: 'btn',
                     action: function (dialogRef) {
                     }
@@ -192,7 +192,7 @@ $(function () {
                             let obj = await JSON.parse(event.target.result);
                             result.data = obj;
                         } catch (e) {
-                            result.msg = 'Keystore file error: ' + e.message;
+                            result.msg = $.i18n.t('login:by_file.error_file') + e.message;
                         }
                         cb(result);
                     }
@@ -205,7 +205,7 @@ $(function () {
                             throw new LoginException(resultUpload.msg);
                         }
                         if(!resultUpload.data.keysPair || !resultUpload.data.keysPair.private){
-                            throw new LoginException('wrong JSON structure in file');
+                            throw new LoginException($.i18n.t('login:by_file.error_wrong_json'));
                         }
                         wallet.main.keysPair.private = resultUpload.data.keysPair.private;
                         wallet.address = iz3BitcoreCrypto.private2address(wallet.main.keysPair.private);
@@ -218,7 +218,7 @@ $(function () {
                     } catch (e) {
                         if (!(e instanceof LoginException)) {
                             console.log('Key error: '+e.message);
-                            e.message = 'Wrong private key. Re-check file ant try again.';
+                            e.message = $.i18n.t('login:by_file.error_wrong_key');
                         }
                         content.find('#message')
                             .html(e.message)
@@ -236,7 +236,7 @@ $(function () {
         });
 
         var askLoginKeyDlg = new BootstrapDialog({
-            title: 'Access by Private Key',
+            title: $.i18n.t('login:by_key.header'),
             closable: true,
             closeByBackdrop: false,
             closeByKeyboard: true,
@@ -245,7 +245,7 @@ $(function () {
             message: getLoginKeyDlgContent(true),
             buttons: [{
                 id: 'login',
-                label: ' Access Wallet',
+                label: $.i18n.t('login:by_key.btn_login'),
                 cssClass: 'btn',
                 action: function (dialogRef) {
                     dialogRef
@@ -270,7 +270,7 @@ $(function () {
                         } catch (e) {
                             if (!(e instanceof LoginException)) {
                                 console.log('Key error: '+e.message);
-                                e.message = 'Wrong private key. Re-check key ant try again.';
+                                e.message = $.i18n.t('login:by_key.error1');
                             }
                             content.find('#message')
                                 .html(e.message)
@@ -315,7 +315,7 @@ $(function () {
                             $('.content-wrapper', $('body')).html(resp.data.page);
                             walletIZ3.setCurrentNetwork();
                             walletIZ3.setEventListeners();
-                            $('#dapps_wrapper', $('#dapps')).html($.i18n.t('dapps:app_content_info'));
+                            $('#dapps_wrapper', $('#dapps')).html('');
                             $('.wrapper').localize();
 
                             //window.history.pushState({"html":resp.data,"pageTitle":'TITLE 1'},"", '/interface/send-online');
@@ -353,7 +353,7 @@ $(function () {
                         '<div class="container-fluid">' +
                         '<div class="row">' +
                         '<div class="col-md-12 col-xs-12 form-group">' +
-                        '<input type="text" id="key" placeholder="Enter Private Key" class="form-control input-lg" autocomplete="off">' +
+                        '<input type="text" id="key" placeholder="'+$.i18n.t('login:by_key.key_placeholder')+'" class="form-control input-lg" autocomplete="off">' +
                         '</div>' +
                         '</div>' +
                         '</div>'
@@ -626,7 +626,7 @@ $(function () {
                 });
 
                 $('.load-app', $('#dapps_select')).on('click', function () {
-                    $('#dapps_wrapper', $('#dapps')).html($.i18n.t('dapps:app_content_info'));
+                    $('#dapps_wrapper', $('#dapps')).html('');
                     $('.overlay', $('#dapps_select')).show();
                     let contractAddress = parseInt(($('#dapp_contract_addr', $('#dapps_select')).val() || 0));
                     walletIZ3.HTTPRequest.init({
@@ -934,14 +934,14 @@ $(function () {
                 });
 
                 let confirmContractDeployDlg = new BootstrapDialog({
-                    title: 'Confirmation',
+                    title: $.i18n.t('contract_deploy:confirm:header'),
                     closable: true,
                     closeByBackdrop: false,
                     size: BootstrapDialog.SIZE_LARGE,
                     spinicon: 'fas fa-spinner fa-pulse',
                     message: getConfirmContractDeployDlgContent(),
                     buttons: [{
-                        label: ' Confirm and Send',
+                        label: $.i18n.t('contract_deploy:confirm:btn_send'),
                         cssClass: 'btn btn-success',
                         action: function (dialogRef) {
                             dialogRef
@@ -998,7 +998,7 @@ $(function () {
                             } catch (e) {
                                 console.log(e);
                                 content.find('#message')
-                                    .html('Error sending transaction. Please try again later')
+                                    .html($.i18n.t('contract_deploy:confirm:error1'))
                                     .show();
                                 dialogRef
                                     .enableButtons(true)
@@ -1021,19 +1021,19 @@ $(function () {
                         '<span class="amount"></span>' +
                         '<span class="currency"></span>' +
                         '</p>' +
-                        '<div class="address-label">From Address</div>' +
+                        '<div class="address-label">'+$.i18n.t('contract_deploy:confirm:addr_label')+'</div>' +
                         '<div class="address"></div>' +
                         '</div>' +
                         '</div>' +
                         '<hr style=" position: fixed; width: 100%; left: 0px; ">' +
                         '<div class="row detail-header">' +
-                        '<div class="col-md-12 col-xs-12"><h4>Detail Information</h4></div>' +
+                        '<div class="col-md-12 col-xs-12"><h4>'+$.i18n.t('contract_deploy:confirm:details_header')+'</h4></div>' +
                         '</div>' +
                         '<div class="row detail-item">' +
-                            '<div class="col-md-6 col-sm-6 hidden-xs text-left">Network</div>' +
+                            '<div class="col-md-6 col-sm-6 hidden-xs text-left">'+$.i18n.t('contract_deploy:confirm:detail_network')+'</div>' +
                             '<div class="col-md-6 col-sm-6 hidden-xs text-right network"></div>' +
                                 '<div class="hidden-lg hidden-md hidden-sm col-xs-12">' +
-                                    '<dl><dt>Network</dt><dd class="network"></dd></dl>'
+                                    '<dl><dt>'+$.i18n.t('contract_deploy:confirm:detail_network')+'</dt><dd class="network"></dd></dl>' +
                                 '</div>' +
                             '</div>' +
                         '</div>';
@@ -1046,17 +1046,17 @@ $(function () {
                         '<i class="far fa-check-circle fa-7x text-success"></i>' +
                         '</div>' +
                         '<div class="row">' +
-                        '<h2 style=" font-weight: 700; color: #003945; ">Success</h2>'+
+                        '<h2 style=" font-weight: 700; color: #003945; ">'+$.i18n.t('contract_deploy:success:header')+'</h2>'+
                         '</div>' +
                         '<div class="row" style=" color: #506175; font-size: 16px; margin-top: 15px; margin-bottom: 40px;">' +
-                        'Transaction sent to network' +
+                        $.i18n.t('contract_deploy:success:description1') +
                         '</div>' +
                         '<div class="row">' +
                         '<div class="col-md-12">' +
                         '<div class="col-lg-2 col-md-2 col-sm-1 hidden-xs">' +
                         '</div>' +
                         '<div class="col-lg-8 col-md-8 col-sm-10 col-xs-12">' +
-                        '<button class="btn btn-default btn-lg btn-block disabled" disabled id="tnsn-check-status">Check Status</button>' +
+                        '<button class="btn btn-default btn-lg btn-block disabled" disabled id="tnsn-check-status">'+$.i18n.t('contract_deploy:success:btn_check_status')+'</button>' +
                         '</div>' +
                         '<div class="col-lg-2 col-md-2 col-sm-1 hidden-xs">' +
                         '</div>' +
@@ -1068,7 +1068,7 @@ $(function () {
                         '<div class="col-lg-2 col-md-2 col-sm-1 hidden-xs">' +
                         '</div>' +
                         '<div class="col-lg-8 col-md-8 col-sm-10 col-xs-12">' +
-                        '<button class="btn btn-success btn-lg btn-block" id="close">Okay</button>' +
+                        '<button class="btn btn-success btn-lg btn-block" id="close">'+$.i18n.t('contract_deploy:success:btn_ok')+'</button>' +
                         '</div>' +
                         '<div class="col-lg-2 col-md-2 col-sm-1 hidden-xs">' +
                         '</div>' +

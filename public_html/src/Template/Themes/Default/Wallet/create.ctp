@@ -4,7 +4,7 @@
 
 <div class="content-wrapper wallet">
     <section class="content-header">
-        <h1 data-i18n="wallet_create:header.main"></h1>
+        <h1 data-i18n="wallet_create:main.header"></h1>
     </section>
     <section class="content">
         <div class="row">
@@ -12,10 +12,10 @@
                 <div class="box text-center">
                     <div class="box-body">
                         <form role="form">
-                            <h4 data-i18n="wallet_create:header.description1"></h4>
-                            <h4 data-i18n="wallet_create:header.description2"></h4>
+                            <h4 data-i18n="wallet_create:main.description1"></h4>
+                            <h4 data-i18n="wallet_create:main.description2"></h4>
                             <br />
-                            <button type="button" data-i18n="wallet_create:button.create" class="btn btn-lg btn-primary" id="create"></button>
+                            <button type="button" data-i18n="wallet_create:main.btn_create" class="btn btn-lg btn-primary" id="create"></button>
                         </form>
                     </div>
                 </div>
@@ -26,21 +26,21 @@
 
 <div class="content-wrapper file" style="display: none;">
     <section class="content-header">
-        <h1 data-i18n="wallet_create:header2.main"></h1>
+        <h1 data-i18n="wallet_create:file.header"></h1>
     </section>
     <section class="content">
         <div class="row">
             <div class="col-lg-8 col-md-10 col-sm-8 col-xs-12">
                 <div class="box text-center">
                     <div class="box-body">
-                        <h4 data-i18n="[html]wallet_create:header2.description1"></h4>
+                        <h4 data-i18n="[html]wallet_create:file.description1"></h4>
                         <br />
 
                         <div class="row">
                             <div class="col-md-2">
                             </div>
                             <div class="col-md-8">
-                                <button type="button" data-i18n="wallet_create:button.save" class="btn btn-lg btn-primary" id="save_file"></button>
+                                <button type="button" data-i18n="wallet_create:file.btn_download" class="btn btn-lg btn-primary" id="save_file"></button>
                             </div>
                             <div class="col-md-2">
                             </div>
@@ -55,8 +55,8 @@
                                     <i class="fas fa-shield-alt fa-3x fa-border"></i>
                                 </div>
                                 <div class="col-md-9 col-xs-9 text-left">
-                                    <h4>Do not lose it</h4>
-                                    <p class="text-muted">It cannot be recovered if you lose it.</p>
+                                    <h4 data-i18n="wallet_create:file.help1_header"></h4>
+                                    <p class="text-muted" data-i18n="wallet_create:file.help1_text"></p>
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -70,8 +70,8 @@
                                     <i class="fas fa-user-secret fa-3x fa-border"></i>
                                 </div>
                                 <div class="col-md-9 col-xs-9 text-left">
-                                    <h4>Do not share it.</h4>
-                                    <p class="text-muted">Your funds will be stolen if you use this file on a malicious/phishing site.</p>
+                                    <h4 data-i18n="wallet_create:file.help2_header"></h4>
+                                    <p class="text-muted" data-i18n="wallet_create:file.help2_text"></p>
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -85,8 +85,8 @@
                                     <i class="fas fa-archive fa-3x fa-border"></i>
                                 </div>
                                 <div class="col-md-9 col-xs-9 text-left">
-                                    <h4>Make a backup.</h4>
-                                    <p class="text-muted">Secure it like the millions of dollars it may one day be worth.</p>
+                                    <h4 data-i18n="wallet_create:file.help3_header"></h4>
+                                    <p class="text-muted" data-i18n="wallet_create:file.help3_text"></p>
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -99,7 +99,7 @@
                             <div class="col-md-4">
                             </div>
                             <div class="col-md-4">
-                                <button type="button" data-i18n="wallet_create:button.continue" class="btn btn-lg btn-danger disabled" disabled="disabled" id="continue"></button>
+                                <button type="button" data-i18n="wallet_create:file.btn_continue" class="btn btn-lg btn-danger disabled" disabled="disabled" id="continue"></button>
                             </div>
                             <div class="col-md-4">
                             </div>
@@ -114,14 +114,14 @@
 
 <div class="content-wrapper key" style="display: none;">
     <section class="content-header">
-        <h1 data-i18n="wallet_create:header3.main"></h1>
+        <h1 data-i18n="wallet_create:key.header"></h1>
     </section>
     <section class="content">
         <div class="row">
             <div class="col-lg-8 col-md-10 col-sm-8 col-xs-12">
                 <div class="box text-center">
                     <div class="box-body">
-                        <h4 data-i18n="[html]wallet_create:header3.description1"></h4>
+                        <h4 data-i18n="[html]wallet_create:key.description1"></h4>
                         <br />
 
                         <div class="row">
@@ -140,7 +140,7 @@
                             <div class="col-md-2">
                             </div>
                             <div class="col-md-8">
-                                <button type="button" data-i18n="wallet_create:button.print_wallet" class="btn btn-lg btn-primary" id="print_wallet"></button>
+                                <button type="button" data-i18n="wallet_create:key.btn_print" class="btn btn-lg btn-primary" id="print_wallet"></button>
                             </div>
                             <div class="col-md-2">
                             </div>
@@ -155,8 +155,8 @@
                                     <i class="fas fa-shield-alt fa-3x fa-border"></i>
                                 </div>
                                 <div class="col-md-9 col-xs-9 text-left">
-                                    <h4>Do not lose it</h4>
-                                    <p class="text-muted">It cannot be recovered if you lose it.</p>
+                                    <h4 data-i18n="wallet_create:key.help1_header"></h4>
+                                    <p class="text-muted" data-i18n="wallet_create:key.help1_text"></p>
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -170,8 +170,8 @@
                                     <i class="fas fa-user-secret fa-3x fa-border"></i>
                                 </div>
                                 <div class="col-md-9 col-xs-9 text-left">
-                                    <h4>Do not share it.</h4>
-                                    <p class="text-muted">Your funds will be stolen if you use this file on a malicious/phishing site.</p>
+                                    <h4 data-i18n="wallet_create:key.help2_header"></h4>
+                                    <p class="text-muted" data-i18n="wallet_create:key.help2_text"></p>
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -185,8 +185,8 @@
                                     <i class="fas fa-archive fa-3x fa-border"></i>
                                 </div>
                                 <div class="col-md-9 col-xs-9 text-left">
-                                    <h4>Make a backup.</h4>
-                                    <p class="text-muted">Secure it like the millions of dollars it may one day be worth.</p>
+                                    <h4 data-i18n="wallet_create:key.help3_header"></h4>
+                                    <p class="text-muted" data-i18n="wallet_create:key.help3_text"></p>
                                 </div>
                             </div>
                             <div class="col-md-3">
@@ -199,7 +199,7 @@
                             <div class="col-md-4">
                             </div>
                             <div class="col-md-4">
-                                <a href="<?= URL_PREFIX ?>/wallet/login" data-i18n="wallet_create:button.save_address" class="btn btn-lg btn-danger" id="save_address"></a>
+                                <a href="<?= URL_PREFIX ?>/wallet/login" data-i18n="wallet_create:key.btn_login" class="btn btn-lg btn-danger" id="save_address"></a>
                             </div>
                             <div class="col-md-4">
                             </div>
