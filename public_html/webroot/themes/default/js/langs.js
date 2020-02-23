@@ -106,6 +106,8 @@ $(function () {
                     sub_header: 'Advanced',
                     data_add_label: 'Add data',
                     btn_send: 'Send Transaction',
+                    tkn_type_exist: 'Token type already exist',
+                    tkn_type_added: 'Token type succesfull added',
                 },
                 tnsn_send_offline: {
                     header: '<strong>Send Offline</strong>',
@@ -117,6 +119,19 @@ $(function () {
                     data_label: 'Data',
                     btn_import_json: 'Import JSON',
                     btn_generate_tnsn: 'Generate Transaction',
+                    import_success: 'File successfull imported',
+                    error: {
+                        file_too_big: 'File size is too big. Import impossible',
+                        no_parsed: 'Error when trying to parse json: ',
+                    },
+                    tnsn_generated: {
+                        header: 'Signed Transaction',
+                        tnsn_signed_label: 'Signed Transaction',
+                        tnsn_qr_code_label: 'Scan QR code',
+                        tnsn_in_json: 'Download JSON',
+                        tnsn_raw_label: 'RAW',
+                        btn_continue: 'Copy and Continue',
+                    },
                 },
                 dapps: {
                     header: '<strong>Decentralized Applications</strong>',
@@ -124,6 +139,9 @@ $(function () {
                     contract_addr_placeholder: 'Enter Contract Block',
                     btn_get_app: 'Get app',
                     app_content_info: '<strong>Application will be shown here when you load it.</strong>',
+                    error: {
+                        not_found: 'Not found application in contract',
+                    },
                 },
                 contract_interact_s1: {
                     header: '<strong>Interact with deployed Contract</strong>',
@@ -134,7 +152,7 @@ $(function () {
                     btn_continue: 'Continue',
                 },
                 contract_interact_s2: {
-                    info: 'Read/Write Contract',
+                    info: 'Read/Write Contract - ',
                     contract_addr_label: 'Contract Address',
                     contract_action_label: 'Execute action',
                     addr: 'Contract address (block number)',
@@ -168,6 +186,9 @@ $(function () {
                         btn_check_status: 'Check Status',
                         btn_ok: 'Okay',
                     },
+                    error: {
+                        sign_create: 'Error create signature for transaction. Please, check contract code and try again',
+                    },
                 },
                 wallet_create: {
                     main: {
@@ -200,6 +221,14 @@ $(function () {
                         help3_header: 'Make a backup.',
                         help3_text: 'Secure it like the millions of dollars it may one day be worth.',
                     },
+                },
+                dialog_alerts: {
+                    header_error: 'Error',
+                    header_success: 'Success',
+                },
+                copy_alerts: {
+                    success: 'Copied',
+                    error: 'Automatic copying is not supported in your browser. Update your browser to the latest version or select the text manually and copy it.',
                 },
                     /*
                 wallet_unlock: {

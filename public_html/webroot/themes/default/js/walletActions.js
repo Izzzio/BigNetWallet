@@ -564,7 +564,7 @@ $(function () {
                     let file = this.files[0] || false;
                     let fileSize = file ? file.size : 0;
                     if(fileSize > 5120){
-                        toastr['warning']('File size is too big. Import impossible');
+                        toastr['warning']($.i18n.t('tnsn_send_offline:error.file_too_big'));
                     } else {
                         let reader = new FileReader();
                         reader.onload = (function () {
@@ -573,8 +573,7 @@ $(function () {
                                     let tnsn = JSON.parse(e.target.result);
                                     $('#amount', this.tnsnOfflineForm).val((tnsn.tx.amount || ''));
                                     $('#payee', this.tnsnOfflineForm).val((tnsn.tx.to || ''));
-                                    toastr['success']('File successfull imported');
-
+                                    toastr['success']($.i18n.t('tnsn_send_offline:import_success'));
                                     if ($('#tnsn_offline form').valid()) {
                                         $('button', this.tnsnOfflineForm)
                                             .prop('disabled', false)
@@ -585,7 +584,7 @@ $(function () {
                                             .addClass('disabled');
                                     }
                                 } catch (e) {
-                                    toastr['warning']('Error when trying to parse json: ' + e);
+                                    toastr['warning']($.i18n.t('tnsn_send_offline:error.no_parsed') + e);
                                     $('button.send', this.tnsnOfflineForm)
                                         .prop('disabled', true)
                                         .addClass('disabled');
@@ -749,7 +748,7 @@ $(function () {
                     let from = selected.data('from') || '';
                     $('#interact_who', $('#contract_interact')).val(from);
                     $('#abi', $('#contract_interact')).val('');
-                    $('#interact_with', $('#contract_interact')).text('Read/Write Contract - '+selected.text());
+                    $('#interact_with', $('#contract_interact')).text($.i18n.t('contract_interact_s2:info') + selected.text());
 
                     let id = $(this).val() || '';
                     if(id.length){
@@ -917,8 +916,8 @@ $(function () {
                         confirmContractDeployDlg.open();
                     } else {
                         BootstrapDialog.alert({
-                            title: 'Error',
-                            message: 'Error create signature for transaction. Please, check contract code and try again',
+                            title: $.i18n.t('dialog_alerts:header_error'),
+                            message: $.i18n.t('contract_deploy:error.sign_create'),
                             type: BootstrapDialog.TYPE_DANGER,
                             size: BootstrapDialog.SIZE_LARGE,
                             closable: true
@@ -1148,15 +1147,15 @@ $(function () {
             callbacks: {
                 resFindTokens: function(resp) {
                     if (resp.success) {
-                        let msg = 'Token type already exist';
+                        let msg = $.i18n.t('tnsn_send_online:tkn_type_exist');
                         let optionExists = ($('#type option[value=' + resp.data.token.from_contract + ']', $('#tnsn_online')).length > 0);
                         if(!optionExists)
                         {
                             $('#type', $('#tnsn_online')).append("<option value='"+resp.data.token.from_contract+"' data-max='"+resp.data.balance+"'>"+resp.data.token.name+"</option>");
-                            msg = 'Token type succesfull added';
+                            msg = $.i18n.t('tnsn_send_online:tkn_type_added');
                         }
                         BootstrapDialog.alert({
-                            title: 'Success',
+                            title: $.i18n.t('dialog_alerts:header_success'),
                             message: msg,
                             type: BootstrapDialog.TYPE_INFO,
                             size: BootstrapDialog.SIZE_LARGE,
@@ -1165,7 +1164,7 @@ $(function () {
                         $('input', $('#tnsn_online')).val('');
                     } else {
                         BootstrapDialog.alert({
-                            title: 'Error',
+                            title: $.i18n.t('dialog_alerts:header_error'),
                             message: resp.msg,
                             type: BootstrapDialog.TYPE_DANGER,
                             size: BootstrapDialog.SIZE_LARGE,
@@ -1180,7 +1179,7 @@ $(function () {
                 resTnsnOnline: function (resp) {
                     if (resp.success) {
                         BootstrapDialog.alert({
-                            title: 'Success',
+                            title: $.i18n.t('dialog_alerts:header_success'),
                             message: resp.msg,
                             type: BootstrapDialog.TYPE_INFO,
                             size: BootstrapDialog.SIZE_LARGE,
@@ -1189,7 +1188,7 @@ $(function () {
                         $('input', $('#tnsn_online')).val('');
                     } else {
                         BootstrapDialog.alert({
-                            title: 'Error',
+                            title: $.i18n.t('dialog_alerts:header_error'),
                             message: resp.msg,
                             type: BootstrapDialog.TYPE_DANGER,
                             size: BootstrapDialog.SIZE_LARGE,
@@ -1207,7 +1206,7 @@ $(function () {
                         $('#abi', $('#contract_interact')).val(resp.data.contract.abi);
                     } else {
                         BootstrapDialog.alert({
-                            title: 'Error',
+                            title: $.i18n.t('dialog_alerts:header_error'),
                             message: resp.msg,
                             type: BootstrapDialog.TYPE_DANGER,
                             size: BootstrapDialog.SIZE_LARGE,
@@ -1265,7 +1264,7 @@ $(function () {
                         $('#interacting_result', $('#contract_interact')).val(result);
                     } else {
                         BootstrapDialog.alert({
-                            title: 'Error',
+                            title: $.i18n.t('dialog_alerts:header_error'),
                             message: resp.msg,
                             type: BootstrapDialog.TYPE_DANGER,
                             size: BootstrapDialog.SIZE_LARGE,
@@ -1283,7 +1282,7 @@ $(function () {
                         $('#resources_calculated', $('#contract_deploy')).html(resp.data);
                     } else {
                         BootstrapDialog.alert({
-                            title: 'Error',
+                            title: $.i18n.t('dialog_alerts:header_error'),
                             message: resp.msg,
                             type: BootstrapDialog.TYPE_DANGER,
                             size: BootstrapDialog.SIZE_LARGE,
@@ -1304,8 +1303,8 @@ $(function () {
 
                     } else {
                         BootstrapDialog.alert({
-                            title: 'Error',
-                            message: resp.msg.length ? resp.msg : 'Not found application in contract',
+                            title: $.i18n.t('dialog_alerts:header_error'),
+                            message: resp.msg.length ? resp.msg : $.i18n.t('dapps:error.not_found'),
                             type: BootstrapDialog.TYPE_DANGER,
                             size: BootstrapDialog.SIZE_LARGE,
                             closable: true
@@ -1320,7 +1319,7 @@ $(function () {
                         $('#balance_refresh').find('i').removeClass('fa-spin');
                     } else {
                         BootstrapDialog.alert({
-                            title: 'Error',
+                            title: $.i18n.t('dialog_alerts:header_error'),
                             message: resp.msg,
                             type: BootstrapDialog.TYPE_DANGER,
                             size: BootstrapDialog.SIZE_LARGE,
@@ -1366,9 +1365,9 @@ $(function () {
                         } else if (document.selection) {
                             document.selection.empty();
                         }
-                        toastr['info']('Copied');
+                        toastr['info']($.i18n.t('copy_alerts:success'));
                     } catch (e) {
-                        toastr['warning']("Automatic copying is not supported in your browser. Update your browser to the latest version or select the text manually and copy it.");
+                        toastr['warning']($.i18n.t('copy_alerts:error'));
                         console.log(e);
                     }
                 },
@@ -1392,7 +1391,7 @@ $(function () {
         window.HTTPRequest = walletIZ3.HTTPRequest;
 
         var showSendedOfflineTransaction = new BootstrapDialog({
-            title: 'Signed Transaction',
+            title: $.i18n.t('tnsn_send_offline:tnsn_generated.header'),
             closable: true,
             closeByBackdrop: false,
             closeByKeyboard: true,
@@ -1400,7 +1399,7 @@ $(function () {
             message: getSendedOfflineTransactionDlgContent(),
             buttons: [{
                 id: 'continue',
-                label: 'Copy and Continue',
+                label: $.i18n.t('tnsn_send_offline:tnsn_generated.btn_continue'),
                 cssClass: 'btn btn-success autocopy',
                 data: {'iz3-need-copy': 'tnsn_id'},
                 action: function (dialogRef) {
@@ -1416,7 +1415,7 @@ $(function () {
         function getSendedOfflineTransactionDlgContent() {
             return '' +
                 '<div class="container-fluid tnsn-offline-result">' +
-                '<h4>Signed Transaction</h4>' +
+                '<h4>'+$.i18n.t('tnsn_send_offline:tnsn_generated.tnsn_signed_label')+'</h4>' +
                 '<div class="row">' +
                 '<div class="col-md-12 col-xs-12">' +
                 '<div id="tnsn_id" class="tnsn_block" style="word-break: break-word;">' +
@@ -1424,19 +1423,19 @@ $(function () {
                 '</div>' +
                 '</div>' +
                 '</div>' +
-                '<h4>Scan QR code</h4>' +
+                '<h4>'+$.i18n.t('tnsn_send_offline:tnsn_generated.tnsn_qr_code_label')+'</h4>' +
                 '<div class="row">' +
                 '<div class="col-md-4 hidden-xs">' +
                 '</div>' +
                 '<div class="col-md-4 col-xs-12 text-center">' +
                 '<div id="qrcode">' +
                 '</div>' +
-                '<div style="font-size: 15px; margin-top: 10px;">or<br /><a href="#" id="download">Download JSON</a></div>' +
+                '<div style="font-size: 15px; margin-top: 10px;">or<br /><a href="#" id="download">'+$.i18n.t('tnsn_send_offline:tnsn_generated.tnsn_in_json')+'</a></div>' +
                 '</div>' +
                 '<div class="col-md-4 hidden-xs">' +
                 '</div>' +
                 '</div>' +
-                '<h4>Raw</h4>' +
+                '<h4>'+$.i18n.t('tnsn_send_offline:tnsn_generated.tnsn_raw_label')+'</h4>' +
                 '<div class="row">' +
                 '<div class="col-md-12 col-xs-12">' +
                 '<div id="tnsn_row" class="tnsn_block" style="word-break: break-word;">' +
