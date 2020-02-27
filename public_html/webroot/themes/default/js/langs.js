@@ -15,8 +15,6 @@ $(function () {
         lng: 'en',
         ns: {
             namespaces: ['index', 'main', 'logged_in'],
-            //namespaces: ['wallet_create', 'wallet_manage'],
-            //defaultNS: 'wallet_create'
             defaultNS: 'index'
         },
         resources: {
@@ -36,6 +34,12 @@ $(function () {
                     menu: {
                         wallet_create: 'Wallet create',
                         wallet_login: 'Address',
+                    },
+                    menu_top: {
+                        lang_en: 'English',
+                        lang_ru: 'Russian',
+                        lang_en_short: 'EN',
+                        lang_ru_short: 'RU',
                     },
                     blocks: {
                         wallet: {
@@ -261,7 +265,47 @@ $(function () {
                         wallet_create: "Создать кошелёк",
                         wallet_login: "Открыть кошелёк",
                     },
+                    menu_top: {
+                        lang_en: 'Английский',
+                        lang_ru: 'Русский',
+                        lang_en_short: 'EN',
+                        lang_ru_short: 'RU',
+                    },
+                    blocks: {
+                        wallet: {
+                            header: 'Кошельки',
+                            btn: 'Создать кошелёк',
+                        },
+                    },
                 },
+                login: {
+                    main: {
+                        header: 'Программный доступ',
+                        by_file_text: 'Файл-хранилище ключа',
+                        by_key_text: 'Закрытый (приватный) ключ',
+                        btn_continue: ' Продолжить',
+                    },
+                    by_file: {
+                        header: 'Доступ по файлу-хранилищу ключа',
+                        btn_select_file: 'Выбрать файл',
+                        btn_login: ' Войти в кошелёк',
+                        error_file: 'Ошибка файла-хранилища: ',
+                        error_wrong_json: 'неверная структура JSON в файле',
+                        error_wrong_key: 'Неверный приватный ключ. Перепроверьте файл-хранилище и попробуйте снова.',
+                    },
+                    by_key: {
+                        header: 'Доступ по приватному ключу',
+                        key_placeholder: 'Введите приватный ключ',
+                        btn_login: ' Войти в кошелёк',
+                        error1: 'Неверный приватный ключ. Перепроверьте ключ и попробуйте снова.',
+                    },
+                },
+
+
+
+
+
+
                 dapps: {
                     app_content_info: '<strong>Здесь будет показано приложение, когда вы загрузите его.</strong>',
                 },
@@ -272,7 +316,12 @@ $(function () {
         updateContent();
 
         $('.lang-item').on('click', function () {
-            i18next.changeLanguage(this.getAttribute('language'));
+            let lang = this.getAttribute('language');
+            i18next.changeLanguage(lang);
+            $.extend($.validator.messages, languages[lang]);
+            $('li', $('ul.menu')).show();
+            $( "li[language='"+lang+"']", $('ul.menu')).hide();
+            $('#curr-language').text($.i18n.t('index:menu_top.lang_'+lang+'_short'));
         });
 
         i18next.on('languageChanged', () => {
@@ -283,4 +332,67 @@ $(function () {
     function updateContent() {
         $('.wrapper').localize();
     }
+
+    let languages = {
+        en: {
+            required: "This field is required",
+            number: "Please enter numbers only",
+            min: $.validator.format("Minimum value {0}."),
+            minlength: "Wrong address: too short",
+            alphanumeric: 'Only alpah and numeric symbols allowed',
+            digits: "Please enter only digits",
+            validJSON: "This field is required valid ABI/JSON",
+            /*
+            remote: "Please fix this field.",
+            email: "Please enter a valid email address.",
+            url: "Please enter a valid URL.",
+            date: "Please enter a valid date.",
+            dateISO: "Please enter a valid date ( ISO ).",
+            creditcard: "Please enter a valid credit card number.",
+            equalTo: "Please enter the same value again.",
+            maxlength: $.validator.format("Please enter no more than {0} characters."),
+            rangelength: $.validator.format("Please enter a value between {0} and {1} characters long."),
+            range: $.validator.format("Please enter a value between {0} and {1}."),
+            max: $.validator.format("Please enter a value less than or equal to {0}."),
+            integer: "Please enter a positive or negative integer.",
+            lettersonly: "Please enter only alphabetic characters.",
+            letterswithbasicpunc: "Please enter the letters or punctuation.",
+            dateRU: "Please type the date in the format 01.12.2014",
+            phoneRU: "Please enter a phone number in a format +38XXXXXXXXXX",
+            require_from_select: "Please select from the list value",
+            equal: "The value entered not match the required",
+            require_if_select: $.validator.format('This field must be filled, if selected "{0}".'),
+            edrpou: "Please enter the correct code EDRPOU",
+            cents_for_dollar: "Please enter the correct number of cents",
+            minlength_with_cleaning: $.validator.format("Please enter at least {0} characters."),
+            required_with_cleaning: "This field is required."
+            */
+        },
+        ru: {
+            required: "Это поле необходимо заполнить",
+            number: "Пожалуйста, введите число",
+            min: $.validator.format("Минимальное значение {0}."),
+            minlength: "Неверный адрес: очень короткий",
+            alphanumeric: "азрешены только буквы и цифры",
+            digits: "Пожалуйста, вводите только цифры",
+            validJSON: "Пожалуйста, введите корректный ABI/JSON",
+            /*
+            remote: "Пожалуйста, введите правильное значение.",
+            email: "Пожалуйста, введите корректный адрес электронной почты.",
+            url: "Пожалуйста, введите корректный URL.",
+            date: "Пожалуйста, введите корректную дату.",
+            dateISO: "Пожалуйста, введите корректную дату в формате ISO.",
+            creditcard: "Пожалуйста, введите правильный номер кредитной карты.",
+            equalTo: "Пожалуйста, введите такое же значение ещё раз.",
+            extension: "Пожалуйста, выберите файл с правильным расширением.",
+            maxlength: $.validator.format( "Пожалуйста, введите не больше {0} символов." ),
+            rangelength: $.validator.format( "Пожалуйста, введите значение длиной от {0} до {1} символов." ),
+            range: $.validator.format( "Пожалуйста, введите число от {0} до {1}." ),
+            max: $.validator.format( "Пожалуйста, введите число, меньшее или равное {0}." ),
+            */
+        },
+    };
+
+    $.extend($.validator.messages, languages.en);
+    $( "li[language='en']", $('ul.menu')).hide();
 });

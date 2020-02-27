@@ -396,27 +396,12 @@ $(function () {
                         amount: {
                             required: true,
                             number: true,
-                            min: 0.00000000000000000001,
+                            min: '0.00000000000000000001',
                         },
                         payee: {
                             required: true,
                             minlength: 30,
                             alphanumeric: true
-                        }
-                    },
-                    messages: {
-                        type: {
-                            required: 'This field is required'
-                        },
-                        amount: {
-                            required: 'This field is required',
-                            number: "Please enter numbers only",
-                            min: "Minimum value 0.00000000000000000001"
-                        },
-                        payee: {
-                            required: 'This field is required',
-                            minlength: 'Wrong address: too short',
-                            alphanumeric: 'Only alpah and numeric symbols allowed'
                         }
                     },
                     highlight: function (element) {
@@ -505,18 +490,6 @@ $(function () {
                             minlength: 30
                         }
                     },
-                    messages: {
-                        type: {
-                            required: 'This field is required'
-                        },
-                        amount: {
-                            required: 'This field is required'
-                        },
-                        payee: {
-                            required: 'This field is required',
-                            minlength: 'Wrong address'
-                        }
-                    },
                     highlight: function (element) {
                         $(element).addClass('error');
                     },
@@ -601,11 +574,6 @@ $(function () {
                             required: true
                         }
                     },
-                    messages: {
-                        dapp_contract_addr: {
-                            required: 'This field is required'
-                        }
-                    },
                     highlight: function (element) {
                         $(element).addClass('error');
                     },
@@ -649,17 +617,6 @@ $(function () {
                             validJSON: true
                         }
                     },
-                    messages: {
-                        deployed_contract_name: {
-                            required: 'This field is required'
-                        },
-                        interact_who: {
-                            required: 'This field is required'
-                        },
-                        abi: {
-                            required: 'This field is required'
-                        }
-                    },
                     highlight: function (element) {
                         $(element).addClass('error');
                     },
@@ -699,17 +656,7 @@ $(function () {
                         resources: {
                             required: true,
                             number: true,
-                            min: 0,
-                        }
-                    },
-                    messages: {
-                        deployed_contract_action: {
-                            required: 'This field is required'
-                        },
-                        resources: {
-                            required: 'This field is required',
-                            number: "Please enter numbers only",
-                            min: "Minimum value 0"
+                            min: '0',
                         }
                     },
                     highlight: function (element) {
@@ -848,17 +795,7 @@ $(function () {
                         contract_rent: {
                             required: false,
                             number: true,
-                            min: 0,
-                        }
-                    },
-                    messages: {
-                        contract_code: {
-                            required: 'This field is required'
-                        },
-                        contract_rent: {
-                            required: 'This field is required',
-                            number: "Please enter numbers only",
-                            min: "Minimum value 0"
+                            min: '0',
                         }
                     },
                     highlight: function (element) {

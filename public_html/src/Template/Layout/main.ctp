@@ -70,11 +70,22 @@
                     <li class="dropdown messages-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                             <i class="fas fa-language fa-lg"></i>
-                            <span class="label label-warning">EN</span>
+                            <span class="label label-warning" id="curr-language">EN</span>
                         </a>
                         <ul class="dropdown-menu">
                             <li>
                                 <ul class="menu">
+                                    <li class="lang-item" language="en">
+                                        <a href="#">
+                                            <div class="pull-left">
+                                                <div class="iz3-flag-wrapper">
+                                                    <span class="flag-icon flag-icon-gb iz3-flag-bordered"></span>
+                                                </div>
+                                            </div>
+                                            <h4 data-i18n="index:menu_top.lang_en">
+                                            </h4>
+                                        </a>
+                                    </li>
                                     <li class="lang-item" language="ru">
                                         <a href="#">
                                             <div class="pull-left">
@@ -82,12 +93,12 @@
                                                     <span class="flag-icon flag-icon-ru iz3-flag-bordered"></span>
                                                 </div>
                                             </div>
-                                            <h4>
-                                                Russian
+                                            <h4 data-i18n="index:menu_top.lang_ru">
                                             </h4>
                                         </a>
                                     </li>
-                                    <li class="lang-item" language="ru">
+                                    <!--
+                                    <li class="lang-item" language="de">
                                         <a href="#">
                                             <div class="pull-left">
                                                 <div class="iz3-flag-wrapper">
@@ -99,17 +110,7 @@
                                             </h4>
                                         </a>
                                     </li>
-                                    <li class="lang-item" language="en">
-                                        <a href="#">
-                                            <div class="pull-left">
-                                                <div class="iz3-flag-wrapper">
-                                                    <span class="flag-icon flag-icon-gb iz3-flag-bordered"></span>
-                                                </div>
-                                            </div>
-                                            <h4>
-                                            </h4>
-                                        </a>
-                                    </li>
+                                    -->
                                 </ul>
                             </li>
                         </ul>
