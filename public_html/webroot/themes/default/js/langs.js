@@ -1,6 +1,8 @@
 $(function () {
     'use strict';
 
+    let langActve = sessionStorage.getItem('language') || 'en';
+
     i18next.init({
         tName: 't', // --> appends $.t = i18next.t
         i18nName: 'i18n', // --> appends $.i18n = i18next
@@ -12,7 +14,7 @@ $(function () {
         parseDefaultValueFromContent: true, // parses default values from content ele.val or ele.text
 
         debug: false,
-        lng: 'en',
+        lng: langActve,
         ns: {
             namespaces: ['index', 'main', 'logged_in'],
             defaultNS: 'index'
@@ -280,7 +282,7 @@ $(function () {
                 },
                 login: {
                     main: {
-                        header: 'Программный доступ',
+                        header: 'Открытие кошелька',
                         by_file_text: 'Файл-хранилище ключа',
                         by_key_text: 'Закрытый (приватный) ключ',
                         btn_continue: ' Продолжить',
@@ -300,14 +302,137 @@ $(function () {
                         error1: 'Неверный приватный ключ. Перепроверьте ключ и попробуйте снова.',
                     },
                 },
-
-
-
-
-
-
+                logged_in: {
+                    menu: {
+                        tnsn_send: 'Транзакции',
+                        tnsn_online: 'ОНлайн',
+                        tnsn_offline: 'ОФлайн',
+                        dapps: 'Приложения (Dapps)',
+                        contract: 'Смарт-контракты',
+                        contract_interact: 'Работа с контрактом',
+                        contract_deploy: 'Добавить контракт в сеть',
+                    },
+                    blocks: {
+                        address: {
+                            label: 'Адрес',
+                            icon_copy: 'Копировать',
+                        },
+                        balance: {
+                            label: 'Баланс',
+                            icon_refresh: 'Обновить баланс',
+                        },
+                        network: {
+                            label: 'Сеть',
+                            last_block: 'Последний блок# : ',
+                            title: 'Открыть список сетей',
+                            btn_change: 'Изменить',
+                        },
+                    },
+                },
+                tnsn_send_online: {
+                    header: '<strong>Новая транзакция ОНлайн</strong>',
+                    contract_addr_label: 'Адрес контракта',
+                    contract_addr_placeholder: 'Введите адрес контракта',
+                    btn_find_tokens: 'Найти',
+                    dscr_find_tokens: "Найдёт токен и добавит его в поле 'Тип'. Токен из смарт-контракта. Контракт из блока с номером 'Адрес смарт-контракта'.",
+                    tkn_type_label: 'Тип',
+                    tkn_amount_label: 'Количество',
+                    tkn_amount_max_label: 'максимум: ',
+                    tkn_to_addr_label: 'Адрес получателя',
+                    sub_header: 'Расширенные параметры',
+                    data_add_label: 'Дополнительные данные',
+                    btn_send: 'Отправить транзакцию',
+                    tkn_type_exist: 'Тип токена уже существует',
+                    tkn_type_added: 'Тип токена успешно добавлен',
+                },
+                tnsn_send_offline: {
+                    header: '<strong>Новая транзакция ОФлайн</strong>',
+                    tkn_type_label: 'Тип',
+                    tkn_amount_label: 'Количество',
+                    tkn_amount_placeholder: 'Сколько токенов отправить',
+                    tkn_to_addr_label: 'Адрес получателя',
+                    tkn_to_addr_placeholder: 'Введите адрес пожалуйста',
+                    data_label: 'Данные',
+                    btn_import_json: 'Импорт из JSON',
+                    btn_generate_tnsn: 'Создать транзакцию',
+                    import_success: 'Файл успешно импортирован',
+                    error: {
+                        file_too_big: 'Слишком большой размер файла. Импорт невозможен.',
+                        no_parsed: 'Ошибка при разборе JSON: ',
+                    },
+                    tnsn_generated: {
+                        header: 'Подписанная транзакция',
+                        tnsn_signed_label: 'Подписанная транзакция',
+                        tnsn_qr_code_label: 'Сканировать QR код',
+                        tnsn_in_json: 'Скачать в формате JSON',
+                        tnsn_raw_label: 'Поля',
+                        btn_continue: 'Скопировать и продолжить',
+                    },
+                },
                 dapps: {
+                    header: '<strong>Децентрализованные приложения</strong>',
+                    contract_addr_label: 'Блок с веб-контрактом',
+                    contract_addr_placeholder: 'Введите номер блока',
+                    btn_get_app: 'Получить приложение',
                     app_content_info: '<strong>Здесь будет показано приложение, когда вы загрузите его.</strong>',
+                    error: {
+                        not_found: 'Не найдено приложение в контракте',
+                    },
+                },
+                contract_interact_s1: {
+                    header: '<strong>Взаимодействие с добавленным смарт-контрактом</strong>',
+                    contract_name_label: 'Имя контракта',
+                    contract_addr_label: 'Адрес контракта',
+                    contract_addr_placeholder: 'Введите адрес контракта',
+                    abi_interface_label: 'ABI/JSON интерфейс',
+                    btn_continue: 'Продолжить',
+                },
+                contract_interact_s2: {
+                    info: 'Чтение/Запись смарт-контракта - ',
+                    contract_addr_label: 'Адрес контракта',
+                    contract_action_label: 'Выполнить действие',
+                    addr: 'Адрес контракта (номер блока)',
+                    to: 'Адрес получателя',
+                    tokens: 'Количество токенов',
+                    resources_label: 'Значение в ETH',
+                    result_label: 'Результат',
+                    btn_back: 'Назад',
+                    btn_read: 'Читать',
+                },
+                contract_deploy: {
+                    header: '<strong>Добавление нового контракта в сеть</strong>',
+                    contract_code_label: 'Код смарт-контракта',
+                    contract_rent_label: 'Аренда вычислительных ресурсов',
+                    contract_rent_placeholder: 'Количество токенов за аренду ресурсов',
+                    contract_rent_available_label: 'Доступные ресурсы',
+                    contract_rent_available_min_label: 'минимальное количество ресурсов',
+                    btn_calc_resource: 'Рассчитать',
+                    btn_sign_tnsn: 'Подписать транзакцию',
+                    confirm: {
+                        header: 'Подтверждение',
+                        addr_label: 'С адреса',
+                        details_header: 'Детальная информация',
+                        detail_network: 'Сеть',
+                        btn_send: ' Подтвердить и отправить',
+                        error1: 'Ошибка добавления транзакции в сеть. Пожалуйста, повторите позднее.',
+                    },
+                    success: {
+                        header: 'Успешно',
+                        description1: 'Транзакция отправлена в сеть',
+                        btn_check_status: 'Проверить статус',
+                        btn_ok: 'Ок',
+                    },
+                    error: {
+                        sign_create: 'Ошибка создания подписи для транзакции. Пожалуйста, проверьте код контракта и повторите попытку.',
+                    },
+                },
+                dialog_alerts: {
+                    header_error: 'Ошибка',
+                    header_success: 'Успешно',
+                },
+                copy_alerts: {
+                    success: 'Скопировано',
+                    error: 'Автоматическое копирование не поддерживается вашим браузером. Обновите браузер до последней версии или выделите текст вручную и скопируйте его',
                 },
             }
         }
@@ -317,6 +442,7 @@ $(function () {
 
         $('.lang-item').on('click', function () {
             let lang = this.getAttribute('language');
+            sessionStorage.setItem('language', lang);
             i18next.changeLanguage(lang);
             $.extend($.validator.messages, languages[lang]);
             $('li', $('ul.menu')).show();
@@ -393,6 +519,8 @@ $(function () {
         },
     };
 
-    $.extend($.validator.messages, languages.en);
-    $( "li[language='en']", $('ul.menu')).hide();
+    $.extend($.validator.messages, languages[langActve]);
+    sessionStorage.setItem('language', langActve);
+    $( "li[language='"+langActve+"']", $('ul.menu')).hide();
+    $('#curr-language').text($.i18n.t('index:menu_top.lang_'+langActve+'_short'));
 });
