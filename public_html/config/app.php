@@ -50,10 +50,9 @@ return [
         'dir'               => 'src',
         'webroot'           => 'webroot',
         'wwwRoot'           => WWW_ROOT,
-        // 'baseUrl' => env('SCRIPT_NAME'),
-        'baseDomain'        => 'bignet.izzz.io',
-        'baseProtocol'      => 'https',
-        'fullBaseUrl'       => 'https://bignet.izzz.io',
+        //'baseDomain'        => 'bignet.izzz.io',
+        //'baseProtocol'      => 'https',
+        //'fullBaseUrl'       => 'https://bignet.izzz.io',
         'imageBaseUrl'      => 'img/',
         'cssBaseUrl'        => 'css/',
         'jsBaseUrl'         => 'js/',
@@ -69,7 +68,6 @@ return [
         'policyUrl'         => '',
         'internalCurrency'  => 'ETH',
         'enableDeposit'     => false,
-        'saleShowRatio'     => 1000,
         'Template'          => [
             'subpath'            => '/themes/',
             'logo'               => '',
@@ -79,28 +77,7 @@ return [
             'enableReferal'      => false,
             'periodsTemplate'    => 'periods',
         ],
-        'allowAutoverify'   => false,
-        'enableUserData'    => false,
-        'tokensaleActive'   => true,
         'timezone'          => 'UTC',
-        'payKassa'          => [
-            'merchant_id' => '',
-            'merchant_password'  => '',
-            //'api_id' => '',
-            //'api_password'  => '',
-        ],
-        'spreadsheet'       => [
-            'name' => 'Users spreadsheet',
-            'spreadsheetId' => '',
-            'client_email' => '',
-            'private_key' => '',
-        ],
-
-    ],
-
-    'Api' => [
-      'tokenLifeTime' => '300',
-      'key' => ''
     ],
 
     /**

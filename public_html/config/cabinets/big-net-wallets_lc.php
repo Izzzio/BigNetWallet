@@ -26,14 +26,13 @@ return [
         'dir'                   => 'src',
         'webroot'               => 'webroot',
         'wwwRoot'               => WWW_ROOT,
-        // 'baseUrl' => env('SCRIPT_NAME'),
         'baseDomain'            => 'big-net-wallets.lc',
         'baseProtocol'          => 'http',
         'fullBaseUrl'           => 'http://big-net-wallets.lc',
-        'appImageBaseUrl'       => '/icocabinet/img',
-        'appCssBaseUrl'         => '/icocabinet/css',
-        'appJsBaseUrl'          => '/icocabinet/js',
-        'uploadsPath'           => 'bitcoen/uploads',
+        //'appImageBaseUrl'       => '/icocabinet/img',
+        //'appCssBaseUrl'         => '/icocabinet/css',
+        //'appJsBaseUrl'          => '/icocabinet/js',
+        //'uploadsPath'           => 'bitcoen/uploads',
         'paths'                 => [
             'plugins'   => [ROOT . DS . 'plugins' . DS],
             'templates' => [APP . 'Template' . DS . 'Themes' . DS . TPL_THEME_NAME . DS],
@@ -47,11 +46,11 @@ return [
         'whitepaper'            => '',
         'policyUrl'             => '',
         'internalCurrency'      => 'USD',
-        'enableDeposit'         => false,
+        //'enableDeposit'         => false,
         'saleShowRatio'         => 100,
         'sandboxSqlitePath'     => TMP . '/sqlite',
-        'referalBonus'          => 10,
-        'enableSocial'          => true,
+        //'referalBonus'          => 10,
+        //'enableSocial'          => true,
         'Template'              => [
             'subpath'            => '/themes/',
             'logo'               => 'https://static.tildacdn.com/tild3761-3439-4666-a437-653763653136/logowhite.svg',
@@ -81,67 +80,7 @@ return [
             ],
             'currenciesTable' => true,
         ],
-        'enabledCurrencies'     => [
-            'BTC',
-            'ETH',
-            'DASH', //dash
-            'LTC', //litecoin
-            'XMR', //monero
-            'XRP', //ripple
-            'ZEC', //zcash
-            'USD',
-            'EUR',
-        ],
-        'paymentGates'       => [
-            'ETH' => 'CoinPayments',
-            'BTC' => 'BitcoinValve',
-        ],
-        'allowAutoverify'       => false,
-        'enableUserData'        => true,
-        'tokensaleActive'       => true,
         'timezone'              => 'UTC',
-        'coinPayments'          => [
-            'PRIVATE_KEY' => '726c260643D86E5f1B918F094380cc3e6DfA8155C74f3a306F375b4d794b666e',
-            'PUBLIC_KEY'  => '68a24a3d22d6958ffff68da55b70d93012afd32c5da9dbb970bf5f4b789ac434',
-            'MERCHANT_ID' => '14988af275db799e8a908fe0aaebb3f5',
-            'IPN_SECRET'  => 'e77dce04f46a6fba8fcf045676f5d06e',
-        ],
-        'payKassa'          => [
-            'merchant_id' => '2234',
-            'merchant_password'  => 'IzBQftqho9v50bs',
-            //'api_id' => '',
-            //'api_password'  => '',
-        ],
-        'emails'                => [
-            'sign' => "Sincerely yours,\nSKYFchain.io Team",
-        ],
-        'calculator'            => [
-            'tokenCurrencyPrice' => 0.05,
-            'periods'            => [
-                //'0' => ['start' => '2017-10-11 00:00', 'end' => '2018-11-31 23:59', 'name' => 'Pre-Sale'],
-                '0' => ['start' => '2018-09-09 00:00', 'end' => '2018-11-30 23:59', 'name' => 'Pre-Sale'],
-                '1' => ['start' => '2018-12-01 00:00', 'end' => '2019-03-30 23:59', 'name' => 'Token sale'],
-            ],
-            'periodSales'        => [
-                '0' => [
-                    '50' => ['min' => '1', 'max' => PHP_INT_MAX],
-                    //'55' => ['min' => 50 / 0.00003, 'max' => PHP_INT_MAX],
-                ],
-                '1' => [
-                    '35' => ['min' => '1', 'max' => '5000'],
-                    '40' => ['min' => '5001', 'max' => '50000'],
-                    '45' => ['min' => '50001', 'max' => '100000'],
-                    '50' => ['min' => '100001', 'max' => PHP_INT_MAX],
-                ],
-            ],
-            'maxVol'             => 20000000,
-        ],
-        'enableSaftDataFilling' => true,
-        'links'                 => [
-            'privacy' => '/skyfchain/Privacy_policy_SKYFchain.docx',
-            'terms'   => '/skyfchain/Terms_and_conditions_SKYFchain.docx',
-        ],
-
     ],
 
     'HybridAuth'     => [
@@ -149,15 +88,15 @@ return [
             'Google'   => [
                 'enabled' => true,
                 'keys'    => [
-                    'id'     => '831640190763-9m6m6fuk485d19q3ned85a3vd8ek9teh.apps.googleusercontent.com',
-                    'secret' => '5OUPMayHpOK0CUP_kkOukLN3',
+                    'id'     => '',
+                    'secret' => '',
                 ],
             ],
             'Facebook' => [
                 'enabled' => true,
                 'keys'    => [
-                    'id'     => '345838255902515',
-                    'secret' => 'b862b74a814130da176705aa6ed56e45',
+                    'id'     => '',
+                    'secret' => '',
                 ],
                 'scope'   => 'email, public_profile',
             ],
@@ -166,7 +105,7 @@ return [
     ],
 
     /**
-     * API config
+     * Config connection for node
      */
     'Api'   => [
         'host'  => 'http://localhost:3015/',
@@ -473,8 +412,8 @@ return [
             'host'      => 'smtp.gmail.com',
             'port'      => 587,
             'timeout'   => 30,
-            'username'  => 'noreply@skyfchain.io',
-            'password'  => 'f384g342gv*93',
+            'username'  => '',
+            'password'  => '',
             'client'    => null,
             'tls'       => true,
             'url'       => env('EMAIL_TRANSPORT_DEFAULT_URL', null),
